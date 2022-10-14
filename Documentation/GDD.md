@@ -2,19 +2,19 @@
 ## Game Design Document
 
 
-##Design History
+## Design History
 3/10/2022 - Andrea Passini - Game Concept 
 10/10/2022 - Team Meeting
 
-##Task Assignement 
+## Task Assignement 
 - GDD => Andrea Passini
 - Platform Logic => Luca
 - Platform UI => Luca
 - Action Logic => Andrea Taroni
 - ACtion UI => Carlo
 
-#Vision Statement
+# Vision Statement
 
-##Game Logline
+## Game Logline
 
-##Gameplay Synopsis
+## Gameplay Synopsis
