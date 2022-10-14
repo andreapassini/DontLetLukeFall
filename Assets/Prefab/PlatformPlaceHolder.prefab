@@ -89,5 +89,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e0f4017a6232bb4baef4d9571dd6f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RealPlatform: {fileID: 2553876992613342021, guid: 50891e43bef1a2c49be85bc5196f1701, type: 3}
-  canvas: {fileID: 0}
+  _realPlatform: {fileID: 2553876992613342021, guid: 50891e43bef1a2c49be85bc5196f1701, type: 3}
+  _canvas: {fileID: 0}

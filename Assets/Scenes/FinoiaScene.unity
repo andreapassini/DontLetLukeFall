@@ -159,7 +159,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -4.4019, y: -0.54318}
+  m_AnchoredPosition: {x: -4.4019165, y: -0.5431824}
   m_SizeDelta: {x: -370.5511, y: -23.047}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &379372133
@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0122247acd3d664187906bd407dc106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsEmpty: 1
+  isEmpty: 1
 --- !u!1 &469161320
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,7 +249,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -130.8122, y: -0.5431}
+  m_AnchoredPosition: {x: -130.8122, y: -0.54312134}
   m_SizeDelta: {x: -377.1772, y: -23.0471}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &469161322
@@ -302,7 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0122247acd3d664187906bd407dc106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsEmpty: 1
+  isEmpty: 1
 --- !u!1 &602150710
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,7 +407,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 128.5253, y: -0.54324}
+  m_AnchoredPosition: {x: 128.5253, y: -0.5432434}
   m_SizeDelta: {x: -365.0339, y: -23.047}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1004594508
@@ -460,7 +460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0122247acd3d664187906bd407dc106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsEmpty: 1
+  isEmpty: 1
 --- !u!1 &1114909162
 GameObject:
   m_ObjectHideFlags: 0
@@ -784,7 +784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62a2adcf8165a8f478b4859f59882330, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CooldownNewPlatform: 3
-  PlatformSlots: []
-  Platforms:
+  _cooldownNewPlatform: 3
+  _platformSlots: []
+  _platforms:
   - {fileID: 3143433978411200673, guid: 7218b3a5d96369e44bd0498c850bb875, type: 3}
