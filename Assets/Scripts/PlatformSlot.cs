@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlatformSlot : MonoBehaviour
+namespace DLLF
 {
-    [HideInInspector]
-    public bool isEmpty=true;
-    
-    public void GeneratePlatform(PlatformUI platform)
+    public class PlatformSlot : MonoBehaviour
     {
-        isEmpty = false;
-        Instantiate(platform.gameObject,this.gameObject.transform);
+        [HideInInspector]
+        public bool isEmpty = true;
+
+        public void GeneratePlatform(PlatformUI platform)
+        {
+            isEmpty = false;
+            Instantiate(platform.gameObject, this.gameObject.transform);
+        }
     }
 }
