@@ -37,7 +37,9 @@ After being positioned a new platform will appear in the slot with a slight deal
 #### Overlapping
 - **Character**
 Player will not be able to place platform over the character outline. In case the player will drop a platform on the siluette of the character this platform will endup at the feet of Luke.
-![enter image description here](!%5BOverlappingCharacter%5D%28https://user-images.githubusercontent.com/71270277/195995105-912bce40-45ad-48af-8963-d217952193c2.png%29)
+
+![OverlappingCharacter](https://user-images.githubusercontent.com/71270277/195995184-d583f2f0-a416-4294-8b86-85a1d1355461.png)
+
 - **Player Platform**
 Player will be able to place a platform over one or more player platforms causing a **Platform Combination**.
 - **Environmental Platform**
