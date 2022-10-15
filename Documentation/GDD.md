@@ -40,6 +40,8 @@ Player will not be able to place platform over the character outline. In case th
 
 ![OverlappingCharacter](https://user-images.githubusercontent.com/71270277/195995184-d583f2f0-a416-4294-8b86-85a1d1355461.png)
 
+![OverlappingCharacter-PlatformSnapping](https://user-images.githubusercontent.com/71270277/195995428-ce0da647-1e02-4a5d-9562-06ae12c64bb7.png)
+
 - **Player Platform**
 Player will be able to place a platform over one or more player platforms causing a **Platform Combination**.
 - **Environmental Platform**
