@@ -44,6 +44,9 @@ Player will not be able to place platform over the character outline. In case th
 
 - **Player Platform**
 Player will be able to place a platform over one or more player platforms causing a **Platform Combination**.
+
+![PlatfromCombination](https://user-images.githubusercontent.com/71270277/195996132-1011af5f-effb-4ee1-84ba-ca5c7c9e15a9.png)
+
 - **Environmental Platform**
 Player will be able to place a platform over one or more Environmental Platform
 
@@ -54,6 +57,8 @@ When the player will drop a platform (**trigger**) over a platform (or multiple 
  - **Outline** = **merge** of the outline of **trigger** and **base** 
  -  **Color** = **trigger** 
  - **Effect** = **trigger**
+
+![PlatfromCombination](https://user-images.githubusercontent.com/71270277/195996132-1011af5f-effb-4ee1-84ba-ca5c7c9e15a9.png)
 
 
 # Story
