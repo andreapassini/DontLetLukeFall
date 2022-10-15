@@ -53,6 +53,10 @@ When the player will drop a platform (**trigger**) over a platform (or multiple 
  -  **Color** = **trigger** 
  - **Effect** = **trigger**
 
+#### Envirnomental Platforms
+
+![OverlappingEnv](https://user-images.githubusercontent.com/71270277/195995800-dd9b43f0-089e-4ce8-8290-724690af79a2.png)
+
 
 # Story
 ## Synopsis
