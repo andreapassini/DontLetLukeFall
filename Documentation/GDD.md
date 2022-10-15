@@ -3,7 +3,7 @@
 ## Don't Let Luke Fall Team
 - Andrea Passini
 - Andrea Taroni
-- Luca Finoa
+- Luca Finoia
 - Carlo Ambrogi
 
 ## Design History
@@ -43,8 +43,8 @@ Player will be able to place a platform over one or more player platforms causin
 Player will be able to place a platform over one or more Environmental Platform
 
 #### Platform Combination
-When the player will drop a platform (**trigger**) over a platform (or multiple platforms) he previously placed (**base**), the 2 platform will combine toghter resulting in a platfrom characterized by:
- - **Outline** = merge of the 2 platforms
+When the player will drop a platform (**trigger**) over a platform (or multiple platforms) he previously placed (**base**), the platforms will combine toghter resulting in a platfrom characterized by:
+ - **Outline** = **merge** of the outline of **trigger** and **base** 
  -  **Color** = **trigger** 
  - **Effect** = **trigger**
 
