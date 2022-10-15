@@ -77,5 +77,11 @@ When the player will drop a platform (**trigger**) over a platform (or multiple 
 ![PlatfromCombination](https://user-images.githubusercontent.com/71270277/195996132-1011af5f-effb-4ee1-84ba-ca5c7c9e15a9.png)
 
 
+## Resources
+
+
+
+## Interfaces
+
 # Story
 ## Synopsis
