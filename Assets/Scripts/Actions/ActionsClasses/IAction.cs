@@ -6,6 +6,7 @@ namespace DLLF
     public interface IAction
     {
         void Invoke();
+        void SetController(CharacterController characterController);
     }
 
     public enum ActionType

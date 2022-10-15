@@ -1,15 +1,16 @@
 ﻿namespace DLLF
 {
-    public class WalkLeftAction : IAction
+    public class WalkLeftAction : AbstractAction
     {
         public WalkLeftAction(ActionParameters actionParameters)
         {
             
         }
         
-        public void Invoke()
+        public override void Invoke()
         {
             throw new System.NotImplementedException();
         }
+        
     }
 }

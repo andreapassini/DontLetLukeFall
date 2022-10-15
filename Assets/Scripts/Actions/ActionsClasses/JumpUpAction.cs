@@ -1,13 +1,13 @@
 ﻿namespace DLLF
 {
-    public class JumpUpAction : IAction
+    public class JumpUpAction : AbstractAction
     {
         public JumpUpAction(ActionParameters actionParameters)
         {
             
         }
         
-        public void Invoke()
+        public override void Invoke()
         {
             throw new System.NotImplementedException();
         }
