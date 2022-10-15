@@ -9,8 +9,9 @@
 - Carlo Ambrogi
 
 ## Design History
-03/10/2022 - Andrea Passini - Game Concept 
-10/10/2022 - Team Meeting
+ - 03/10/2022 - Andrea Passini - Game Concept 
+ - 10/10/2022 - Team Meeting
+
 
 ## Task Assignement 
 - GDD => Andrea Passini
