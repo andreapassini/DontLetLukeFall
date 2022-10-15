@@ -38,13 +38,16 @@ After being positioned a new platform will appear in the slot with a slight deal
 - **Character**
 Player will not be able to place platform over the character outline. In case the player will drop a platform on the siluette of the character this platform will endup at the feet of Luke.
 - **Player Platform**
-Player will be able to place a platform over one the other player he placed before causing a **Platform Combination**
-- **Environment Platform**
+Player will be able to place a platform over one or more player platforms causing a **Platform Combination**.
+- **Environmental Platform**
+Player will be able to place a platform over one or more Environmental Platform
 
-### Platform Combination
-When the player will drop a platform (**trigger**) over a platform he previously placed (**base**), the 2 platform will combin:
- - merging the 2 outlines
- - spreading the  **color** of **trigger** to the base
- - spreading the **effect** of **trigger** to the base
+#### Platform Combination
+When the player will drop a platform (**trigger**) over a platform (or multiple platforms) he previously placed (**base**), the 2 platform will combine toghter resulting in a platfrom characterized by:
+ - **Outline** = merge of the 2 platforms
+ -  **Color** = **trigger** 
+ - **Effect** = **trigger**
+
+
 # Story
 ## Synopsis
