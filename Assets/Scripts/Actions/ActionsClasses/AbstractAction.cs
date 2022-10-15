@@ -10,6 +10,7 @@
         {
             CharacterController = characterController;
         }
-        
+
+        public abstract ActionType GetActionType();
     }
 }

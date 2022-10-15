@@ -13,8 +13,12 @@ namespace DLLF
         
         public override void Invoke()
         {
-            throw new System.NotImplementedException();
+            CharacterController.Walk(-1 * _speed);
         }
-        
+
+        public override ActionType GetActionType()
+        {
+            return ActionType.WalkLeft;
+        }
     }
 }

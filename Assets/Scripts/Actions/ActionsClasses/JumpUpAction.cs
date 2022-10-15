@@ -20,7 +20,12 @@ namespace DLLF
         
         public override void Invoke()
         {
-            throw new System.NotImplementedException();
+            CharacterController.Jump(_intensity, _jumpAngle);
+        }
+
+        public override ActionType GetActionType()
+        {
+            return ActionType.JumpUp;
         }
     }
 }

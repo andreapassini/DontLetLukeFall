@@ -7,6 +7,7 @@ namespace DLLF
     {
         void Invoke();
         void SetController(CharacterController characterController);
+        ActionType GetActionType();
     }
 
     public enum ActionType
