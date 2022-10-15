@@ -47,15 +47,13 @@ Player will be able to place a platform over one or more player platforms causin
 - **Environmental Platform**
 Player will be able to place a platform over one or more Environmental Platform
 
+![OverlappingEnv](https://user-images.githubusercontent.com/71270277/195995800-dd9b43f0-089e-4ce8-8290-724690af79a2.png)
+
 #### Platform Combination
 When the player will drop a platform (**trigger**) over a platform (or multiple platforms) he previously placed (**base**), the platforms will combine toghter resulting in a platfrom characterized by:
  - **Outline** = **merge** of the outline of **trigger** and **base** 
  -  **Color** = **trigger** 
  - **Effect** = **trigger**
-
-#### Envirnomental Platforms
-
-![OverlappingEnv](https://user-images.githubusercontent.com/71270277/195995800-dd9b43f0-089e-4ce8-8290-724690af79a2.png)
 
 
 # Story
