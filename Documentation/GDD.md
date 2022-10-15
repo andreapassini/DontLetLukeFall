@@ -36,6 +36,9 @@ After being positioned a new platform will appear in the slot with a slight deal
 
 ### Platform Positioning
 
+![PlatformPositioning](https://user-images.githubusercontent.com/71270277/195996797-aa24964d-0fae-4eba-9165-95cf21fc0672.png)
+
+
 #### Overlapping
 - **Character**
 
