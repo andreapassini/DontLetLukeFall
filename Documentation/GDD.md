@@ -83,11 +83,24 @@ When the player will drop a platform (**trigger**) over a platform (or multiple 
 
 ### Character Actions
 
+- Run Right
+- Run Left
+- Jump
+- Crouch
+
 ### Platform Spawn
 
 
 ## Resources
 
+
+## Time Flow
+
+In-Game time will slowd down, in respect to real-time, in 2 circumstances:
+- Action Ending
+- Action Starting
+
+![TimeFlow](https://user-images.githubusercontent.com/71270277/196027441-b2986f34-ca2e-4f6f-ae69-4819dea4ae3b.png)
 
 
 ## Interfaces
