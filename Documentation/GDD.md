@@ -86,6 +86,13 @@ When the player will drop a platform (**trigger**) over a platform (or multiple 
 - Run Right
 - Run Left
 - Jump
+
+![Jump Icon](https://user-images.githubusercontent.com/71270277/196027801-910397d5-96d3-4e15-8a3a-81a052db424f.png)
+
+![Jump Function](https://user-images.githubusercontent.com/71270277/196027686-55adf096-b603-4296-ba9b-6c42fd2c8502.png)
+
+![JumpFunctionExt](https://user-images.githubusercontent.com/71270277/196027739-b21b2288-e77e-4c1f-9c37-4dddb9490cf8.png)
+
 - Crouch
 
 ### Platform Spawn
