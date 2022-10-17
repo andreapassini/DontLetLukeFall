@@ -248,6 +248,7 @@ Shake
 #### Deer
 #### Undefined Mass
 
+Mass of multiple bodies, they can be both humans or monsters
 
 ![images](https://user-images.githubusercontent.com/71270277/196251313-25297a39-449e-4a36-b92d-a98d8e3e5b36.jpg)
 
