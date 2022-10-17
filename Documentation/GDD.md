@@ -115,6 +115,8 @@ When the player will drop a platform (**trigger**) over a platform (or multiple 
 - Jump
 - Crouch
 
+#### Run Right
+#### Run Left
 #### **Jump**
 
 Luke will execute a **jump** if he is standing on a plarform.
@@ -150,10 +152,13 @@ When Luke is jumping and falling short to reach a platfrom for few inches, he wi
 
 
 
+
+#### Crouch
+
 ### Platform Spawn
 
 
-## Time Flow
+### Time Flow
 
 In-Game time will slowd down, in respect to real-time, in 2 circumstances:
 - Action Ending
