@@ -20,14 +20,14 @@
 - Action Logic => Andrea Taroni
 - Action UI => Carlo
 
-
-TODO:
+**TODO**:
 - Platform UI, Reposition in UI Platform => Luca
 - Platform UI, Start timer in End Drag => Luca
 - Platform UI, Calculate Sprite-Platfrom ratio => Luca
 - Integration
-- Background Music
-- SFX integration
+- Background Music => Carlo
+- SFX integration => Carlo
+- Character Controller
 
 # Vision Statement
 
