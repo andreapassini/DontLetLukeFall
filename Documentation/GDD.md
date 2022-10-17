@@ -247,6 +247,13 @@ Shake
 #### Crow
 #### Deer
 #### Undefined Mass
+
+
+![images](https://user-images.githubusercontent.com/71270277/196251313-25297a39-449e-4a36-b92d-a98d8e3e5b36.jpg)
+
+
+![images](https://user-images.githubusercontent.com/71270277/196251339-25e6e462-e2a2-40c6-badf-e338a00135d8.jpg)
+
 ## Player Platforms
 ## Environmental Platforms
 ## Harmful Obstacles
