@@ -36,6 +36,22 @@ After being positioned a new platform will appear in the slot with a slight deal
 ## Overview
 
 
+## Resources
+
+- Luke
+- Enemies
+  - Spider 
+  - Squid
+  - Dog
+  - "Gengar"
+  - Crows
+  - Undefined Mass (lik Inside)
+- Obstacles
+  - Spines (Maybe also animated)
+  - Mines/Bombs
+  - Waterfall (Maybe with a unique interaction rules for stopping water)
+  - Destroyable Platfroms 
+
 
 ## Core Mechanics
 
@@ -126,9 +142,6 @@ When Luke is jumping and falling short to reach a platfrom for few inches, he wi
 - Crouch
 
 ### Platform Spawn
-
-
-## Resources
 
 
 ## Time Flow
