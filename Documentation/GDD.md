@@ -162,6 +162,14 @@ In-Game time will slowd down, in respect to real-time, in 2 circumstances:
 ![TimeFlow](https://user-images.githubusercontent.com/71270277/196027441-b2986f34-ca2e-4f6f-ae69-4819dea4ae3b.png)
 
 
+
+
+
+
+## Camera
+
+
+
 ## Interfaces
 
 # Story
