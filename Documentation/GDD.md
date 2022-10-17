@@ -49,6 +49,7 @@ After being positioned a new platform will appear in the slot with a slight deal
 	- Dog
 	- "Gengar"
 	- Crows
+	- Deer
 	- Undefined Mass (like **Inside**)
 - **Harmful Obstacles**
 	- Spines (Maybe also animated)
@@ -226,10 +227,13 @@ Shake
 
 ## Luke
 ## Enemies
-	dwadwadawd
-	dawdawd
-	adwadwa
-	awdwadaw
+#### Spider
+#### Squid
+#### Dog
+#### Gengar
+#### Crow
+#### Deer
+#### Undefined Mass
 ## Player Platforms
 ## Environmental Platforms
 ## Harmful Obstacles
