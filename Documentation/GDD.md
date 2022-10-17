@@ -62,6 +62,9 @@ After being positioned a new platform will appear in the slot with a slight deal
 ### Platform Positioning
 
 The player will be able to drag a platform from the UI and drop it inside the game in real time.
+While moving:
+- **Platform's border** will become **dotted**
+- A **grid** will become visible helping the player positioning the platform
 
 ![PlatformPositioning](https://user-images.githubusercontent.com/71270277/195996797-aa24964d-0fae-4eba-9165-95cf21fc0672.png)
 
@@ -179,7 +182,7 @@ In-Game time will slowd down, in respect to real-time, in 2 circumstances:
 ![CameraPosition](https://user-images.githubusercontent.com/71270277/196216023-ede5f8e4-459e-43dc-bdb3-1ae66d221781.png)
 
 
-## Interfaces
+# Interfaces
 
 
 ![UI](https://user-images.githubusercontent.com/71270277/196240380-787152ab-e3e2-49a6-a55f-5653f49a73dd.png)
