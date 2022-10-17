@@ -20,6 +20,7 @@
 - Action Logic => Andrea Taroni
 - ACtion UI => Carlo
 
+
 # Vision Statement
 
 ## Game Logline
@@ -31,8 +32,8 @@ Luke has been trapped, by the Darkness, into one of his own nightmares, the only
 You will be able to forsee the next 3 moves of Luke, each will last for 5 seconds. Based on this information place one of the 3 platforms at your disposal in the right position.
 After being positioned a new platform will appear in the slot with a slight dealy.
 
-# Gameplay
 
+# Gameplay
 ## Overview
 
 
@@ -180,12 +181,16 @@ In-Game time will slowd down, in respect to real-time, in 2 circumstances:
 
 ## Interfaces
 
+
+
 # Story
 ## Synopsis
 
-# Media References
 
-## Limbo
+# Media
+
+## Artwork Refences
+### Limbo
 
 
 ![Artwork Ref](https://user-images.githubusercontent.com/71270277/196114665-fcd48778-a045-47a1-ae97-e81dfd8d7090.png)
@@ -194,7 +199,7 @@ In-Game time will slowd down, in respect to real-time, in 2 circumstances:
 ![ArtworkRefLimbo](https://user-images.githubusercontent.com/71270277/196114651-1f68731f-17dc-4469-9dc6-c961b4a458d4.png)
 
 
-## Inside
+### Inside
 
 
 ![ArtworkRefInside](https://user-images.githubusercontent.com/71270277/196114641-08b36b65-2708-441f-9c70-c38c68d00649.png)
@@ -205,3 +210,12 @@ In-Game time will slowd down, in respect to real-time, in 2 circumstances:
 
 
 
+
+## Luke
+## Enemies
+## Player Platforms
+## Environmental Platforms
+## Harmful Obstacles
+## Sound
+### Background Music
+### Sfx
