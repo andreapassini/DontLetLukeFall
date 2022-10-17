@@ -67,7 +67,7 @@ The player will be able to drag a platform from the UI and drop it inside the ga
 
 #### **Overlapping**
 
-- **Character**
+##### **Character**
 
 Player will not be able to place platform over the character outline. In case the player will drop a platform on the siluette of the character this platform will endup at the feet of Luke.
 
@@ -78,12 +78,12 @@ Player will not be able to place platform over the character outline. In case th
 ![OverlappingCharacter-PlatformSnapping](https://user-images.githubusercontent.com/71270277/195995428-ce0da647-1e02-4a5d-9562-06ae12c64bb7.png)
 
 
-- **Enemies**
+##### **Enemies**
 
 Player will not be able to place platform over enemy outline.
 
 
-- **Player Platform**
+##### **Player Platform**
 
 Player will be able to place a platform over one or more player platforms causing a **Platform Combination**.
 
@@ -91,7 +91,7 @@ Player will be able to place a platform over one or more player platforms causin
 ![PlatfromCombination](https://user-images.githubusercontent.com/71270277/195996132-1011af5f-effb-4ee1-84ba-ca5c7c9e15a9.png)
 
 
-- **Environmental Platform**
+##### **Environmental Platform**
 
 Player will be able to place a platform over one or more Environmental Platform
 
@@ -158,6 +158,7 @@ When Luke is jumping and falling short to reach a platfrom for few inches, he wi
 ### Platform Spawn
 
 
+### Action Spawn
 ### Time Flow
 
 In-Game time will slowd down, in respect to real-time, in 2 circumstances:
