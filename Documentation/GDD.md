@@ -17,9 +17,15 @@
 - GDD => Andrea Passini
 - Platform Logic => Luca
 - Platform UI => Luca
+- Platform UI, Reposition in UI Platform => Luca
+- Platform UI, Start timer in End Drag => Luca
+- Platform UI, Calculate Sprite-Platfrom ratio => Luca
 - Action Logic => Andrea Taroni
-- ACtion UI => Carlo
+- Action UI => Carlo
 
+- Integration
+- Background Music
+- SFX integration
 
 # Vision Statement
 
@@ -36,6 +42,15 @@ After being positioned a new platform will appear in the slot with a slight deal
 # Gameplay
 ## Overview
 
+## Specs Game
+
+### Res
+1920x1080
+16:9
+
+### Art Free
+
+https://opengameart.org/
 
 ## Resources
 
@@ -176,6 +191,8 @@ In-Game time will slowd down, in respect to real-time, in 2 circumstances:
 
 
 ## Camera
+
+Draggin PLatfrom will stop camera mov
 
 #### Run Right
 
