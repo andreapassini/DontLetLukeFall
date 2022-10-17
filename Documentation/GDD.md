@@ -181,7 +181,8 @@ In-Game time will slowd down, in respect to real-time, in 2 circumstances:
 
 ## Interfaces
 
-	![UI](https://user-images.githubusercontent.com/71270277/196240380-787152ab-e3e2-49a6-a55f-5653f49a73dd.png)
+
+![UI](https://user-images.githubusercontent.com/71270277/196240380-787152ab-e3e2-49a6-a55f-5653f49a73dd.png)
 
 
 # Story
