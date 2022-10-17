@@ -117,11 +117,6 @@ When the player will drop a platform (**trigger**) over a platform (or multiple 
 
 ### Character Actions
 
-- Run Right
-- Run Left
-- Jump
-- Crouch
-
 #### Run Right
 #### Run Left
 #### **Jump**
