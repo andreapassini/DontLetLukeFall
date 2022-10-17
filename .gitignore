@@ -60,6 +60,7 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+
 # Documentation
 Documentation/.obsidian/appearance.json
 Documentation/.obsidian/app.json
@@ -69,3 +70,6 @@ Documentation/.obsidian/workspace.json
 
 # .idea files
 .idea/
+
+
+
