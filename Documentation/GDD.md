@@ -229,6 +229,11 @@ Shake
 ## Enemies
 #### Spider
 #### Squid
+
+![chulhu-death-may-die-horror-board-game-box-artwork](https://user-images.githubusercontent.com/71270277/196246840-34984842-f394-491a-98f4-9c9c9e7c4169.jpg)
+
+![orfoia6fvsw21](https://user-images.githubusercontent.com/71270277/196246851-a6263089-0f1d-4169-9bba-109d560ec47f.jpg)
+
 #### Dog
 #### Gengar
 #### Crow
