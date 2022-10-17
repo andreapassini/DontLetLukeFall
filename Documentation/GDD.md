@@ -169,6 +169,8 @@ In-Game time will slowd down, in respect to real-time, in 2 circumstances:
 ## Camera
 
 
+![CameraPosition](https://user-images.githubusercontent.com/71270277/196216023-ede5f8e4-459e-43dc-bdb3-1ae66d221781.png)
+
 
 ## Interfaces
 
