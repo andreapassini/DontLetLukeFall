@@ -69,6 +69,7 @@ While moving:
 - **Platform's border** will become **dotted**
 - A **grid** will become visible helping the player positioning the platform
 
+![PLatformPos](https://user-images.githubusercontent.com/71270277/196242728-a760fb8f-19e9-49c9-b884-de1c4984ea95.png)
 
 
 #### **Overlapping**
