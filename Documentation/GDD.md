@@ -57,6 +57,12 @@ Player will not be able to place platform over the character outline. In case th
 
 ![OverlappingCharacter-PlatformSnapping](https://user-images.githubusercontent.com/71270277/195995428-ce0da647-1e02-4a5d-9562-06ae12c64bb7.png)
 
+
+- **Enemies**
+
+Player will not be able to place platform over enemy outline.
+
+
 - **Player Platform**
 
 Player will be able to place a platform over one or more player platforms causing a **Platform Combination**.
@@ -138,3 +144,26 @@ In-Game time will slowd down, in respect to real-time, in 2 circumstances:
 
 # Story
 ## Synopsis
+
+# Media References
+
+## Limbo
+
+
+![Artwork Ref](https://user-images.githubusercontent.com/71270277/196114665-fcd48778-a045-47a1-ae97-e81dfd8d7090.png)
+
+
+![ArtworkRefLimbo](https://user-images.githubusercontent.com/71270277/196114651-1f68731f-17dc-4469-9dc6-c961b4a458d4.png)
+
+
+## Inside
+
+
+![ArtworkRefInside](https://user-images.githubusercontent.com/71270277/196114641-08b36b65-2708-441f-9c70-c38c68d00649.png)
+
+
+![ArtworkRefInsideHumanBall](https://user-images.githubusercontent.com/71270277/196114630-a2dbb93a-1981-4ff5-8885-d15c155c9051.png)
+
+
+
+
