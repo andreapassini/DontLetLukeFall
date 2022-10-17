@@ -11,6 +11,8 @@ namespace DLLF
         [Tooltip("Angle between X-axis and jump direction in degrees")]
         [Range(0.001f, 180.0f)]
         private float _jumpAngle;
+
+        private bool _invoked = false;
         
         public JumpUpAction(ActionParameters actionParameters)
         {
@@ -20,7 +22,9 @@ namespace DLLF
         
         public override void Invoke()
         {
+            if (_invoked) return;
             CharacterController.Jump(_intensity, _jumpAngle);
+            _invoked = true;
         }
 
         public override ActionType GetActionType()

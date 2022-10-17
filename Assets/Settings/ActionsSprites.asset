@@ -9,6 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65d12a7f03d04f2393e87f6eb1d21f0f, type: 3}
-  m_Name: ActionParams
+  m_Script: {fileID: 11500000, guid: 3b530cdbf1d24119b3166715c8febb63, type: 3}
+  m_Name: ActionsSprites
   m_EditorClassIdentifier: 
+  _typedSprites: []
