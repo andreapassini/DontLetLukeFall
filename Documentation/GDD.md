@@ -39,6 +39,9 @@ After being positioned a new platform will appear in the slot with a slight deal
 ## Resources
 
 - Luke
+- Actions
+- Player Platforms
+- Enironmental Platforms
 - Enemies
   - Spider 
   - Squid
@@ -46,7 +49,7 @@ After being positioned a new platform will appear in the slot with a slight deal
   - "Gengar"
   - Crows
   - Undefined Mass (lik Inside)
-- Obstacles
+- Harmful Obstacles
   - Spines (Maybe also animated)
   - Mines/Bombs
   - Waterfall (Maybe with a unique interaction rules for stopping water)
