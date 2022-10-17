@@ -17,12 +17,14 @@
 - GDD => Andrea Passini
 - Platform Logic => Luca
 - Platform UI => Luca
-- Platform UI, Reposition in UI Platform => Luca
-- Platform UI, Start timer in End Drag => Luca
-- Platform UI, Calculate Sprite-Platfrom ratio => Luca
 - Action Logic => Andrea Taroni
 - Action UI => Carlo
 
+
+TODO:
+- Platform UI, Reposition in UI Platform => Luca
+- Platform UI, Start timer in End Drag => Luca
+- Platform UI, Calculate Sprite-Platfrom ratio => Luca
 - Integration
 - Background Music
 - SFX integration
