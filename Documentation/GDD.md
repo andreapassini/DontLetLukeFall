@@ -38,22 +38,22 @@ After being positioned a new platform will appear in the slot with a slight deal
 
 ## Resources
 
-- Luke
-- Actions
-- Player Platforms
-- Enironmental Platforms
-- Enemies
-  - Spider 
-  - Squid
-  - Dog
-  - "Gengar"
-  - Crows
-  - Undefined Mass (lik Inside)
-- Harmful Obstacles
-  - Spines (Maybe also animated)
-  - Mines/Bombs
-  - Waterfall (Maybe with a unique interaction rules for stopping water)
-  - Destroyable Platfroms 
+- **Luke**
+- **Actions**
+- **Player Platforms**
+- **Enironmental Platforms**
+- **Enemies**
+	- Spider 
+	- Squid
+	- Dog
+	- "Gengar"
+	- Crows
+	- Undefined Mass (like **Inside**)
+- **Harmful Obstacles**
+	- Spines (Maybe also animated)
+	- Mines/Bombs
+	- Waterfall (Maybe with a unique interaction rules for stopping water)
+	- Destroyable Platfroms 
 
 
 ## Core Mechanics
@@ -65,7 +65,8 @@ The player will be able to drag a platform from the UI and drop it inside the ga
 ![PlatformPositioning](https://user-images.githubusercontent.com/71270277/195996797-aa24964d-0fae-4eba-9165-95cf21fc0672.png)
 
 
-#### Overlapping
+#### **Overlapping**
+
 - **Character**
 
 Player will not be able to place platform over the character outline. In case the player will drop a platform on the siluette of the character this platform will endup at the feet of Luke.
@@ -98,6 +99,7 @@ Player will be able to place a platform over one or more Environmental Platform
 ![OverlappingEnv](https://user-images.githubusercontent.com/71270277/195995800-dd9b43f0-089e-4ce8-8290-724690af79a2.png)
 
 #### Platform Combination
+
 When the player will drop a platform (**trigger**) over a platform (or multiple platforms) he previously placed (**base**), the platforms will combine toghter resulting in a platfrom characterized by:
  - **Outline** = **merge** of the outline of **trigger** and **base** 
  -  **Color** = **trigger** 
@@ -111,6 +113,8 @@ When the player will drop a platform (**trigger**) over a platform (or multiple 
 - Run Right
 - Run Left
 - Jump
+
+#### **Jump**
 
 Luke will execute a **jump** if he is standing on a plarform.
 
