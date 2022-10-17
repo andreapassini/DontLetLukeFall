@@ -113,6 +113,7 @@ When the player will drop a platform (**trigger**) over a platform (or multiple 
 - Run Right
 - Run Left
 - Jump
+- Crouch
 
 #### **Jump**
 
@@ -122,17 +123,17 @@ Luke will execute a **jump** if he is standing on a plarform.
 
 ![Jump Function](https://user-images.githubusercontent.com/71270277/196027686-55adf096-b603-4296-ba9b-6c42fd2c8502.png)
 
-**Cayote Time**
+##### **Cayote Time**
 
 Luke will execute jump even if he left the platfrom where he was standing few istants before.
 
 ![JumpFunctionExt](https://user-images.githubusercontent.com/71270277/196027739-b21b2288-e77e-4c1f-9c37-4dddb9490cf8.png)
 
-**Jump Buffer**
+##### **Jump Buffer**
 
 When the jump action start and Luke is still in the air, if the charter land on a platfrom few istants after the action start Luke will execute a jump anyway.
 
-**Edge Detection**
+##### **Edge Detection**
 
 When Luke is jumping and hitting a platform on top, if the platform is only slightly over him, he will move slightly in the opposite direction of the platform allowing him to overcome the obstacle
 
@@ -140,13 +141,14 @@ When Luke is jumping and hitting a platform on top, if the platform is only slig
 ![Edge Jumping](https://user-images.githubusercontent.com/71270277/196028791-5c0069b7-c5be-49d6-a8b5-b3d7327616ee.png)
 
 
-**Ledge Catching**
+##### **Ledge Catching**
 
 When Luke is jumping and falling short to reach a platfrom for few inches, he will snap on top of the platforming.
 
 ![Ledge Catch](https://user-images.githubusercontent.com/71270277/196028788-ab0361c4-d2a6-4787-81ae-114d93b28d13.png)
 
-- Crouch
+
+
 
 ### Platform Spawn
 
