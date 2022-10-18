@@ -1,5 +1,6 @@
 # Game Design Document - Don't Let Luke Fall
 
+## Concept
 ![DontLetLukeFallConcept](https://user-images.githubusercontent.com/71270277/195996636-192c0d71-f488-4599-80b0-434929d5e3c7.png)
 
 ## Don't Let Luke Fall Team
@@ -7,6 +8,11 @@
 - Andrea Taroni
 - Luca Finoia
 - Carlo Ambrogi
+
+### External Helpers
+
+#### Artists
+#### Sound Designers
 
 ## Design History
  - 03/10/2022 - Andrea Passini - Game Concept 
@@ -294,3 +300,8 @@ Mass of multiple bodies, they can be both humans or monsters
 ## Sound
 ### Background Music
 ### Sfx
+#### Platform Positioning
+#### Action Triggering
+#### Luke Death
+
+### Environmental Effects
