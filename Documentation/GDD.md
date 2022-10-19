@@ -13,18 +13,27 @@ When Luke will land on a special platform, its effect will be triggered causing 
 - On top of the Head of Luke, with a small sign (Circle with inside the action, a colored bar around the circle dictating the remaining time)
 - On the ActionUI substituting the current Action
 
+
+<br>
 # Game Design Document - Don't Let Luke Fall
 
 ## Concept
 ![DontLetLukeFallConcept](https://user-images.githubusercontent.com/71270277/195996636-192c0d71-f488-4599-80b0-434929d5e3c7.png)
 
-## Don't Let Luke Fall Team
+## Team Members
 - Andrea Passini
 - Andrea Taroni
 - Luca Finoia
 - Carlo Ambrogi
 
-### External Helpers
+### External Collaborators
+
+#### Artists
+- Luca Staffoni
+- Irene Corioni
+
+#### Sound Designer
+- Matteo Bernardini
 
 #### Artists
 #### Sound Designers
