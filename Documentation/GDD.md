@@ -336,7 +336,7 @@ Dogs cannot jump.
 Will fly fast, following a specific path, looking to grab Luke.
 
 #### Undefined Mass
-Mass of multiple bodies, they can be both humans or monsters
+Mass of multiple bodies, they can be both humans or monsters.
 <br>
 # Story
 ## Synopsis
