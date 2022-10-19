@@ -45,11 +45,12 @@ Don't Let Luke Fall is a 2D Platformer game within a dark environment and a tens
 Luke has been trapped, by the Darkness, into one of his own nightmares, the only way for him to wake up is to reach the end of the level where a light will awake him.
 You will be able to forsee the next 3 moves of Luke, each will last for 5 seconds. Based on this information place one of the 3 platforms at your disposal in the right position.
 After being positioned a new platform will appear in the slot with a slight dealy.
-
-
+<br>
 # Gameplay
 ## Overview
 
+
+<br>
 ## Specs Game
 
 ### Res
@@ -62,27 +63,60 @@ https://opengameart.org/
 
 ## Resources
 
-- **Luke**
-- **Actions**
-- **Player Platforms**
-- **Enironmental Platforms**
-- **Enemies**
-	- Spider 
-	- Squid
-	- Dog
-	- "Gengar"
-	- Crows
-	- Deer
-	- Undefined Mass (like **Inside**)
-- **Harmful Obstacles**
-	- Spines (Maybe also animated)
-	- Mines/Bombs
-	- Waterfall (Maybe with a unique interaction rules for stopping water)
-	- Destroyable Platfroms 
+### Health of Luke
+
+### Luke 
+
+### Luke's Actions
+- Walk Left
+- Walk Right
+- Run Letf
+- Run Right
+- Stop Moving
+- Jump
+- Crouch
+
+### Player Platforms
+- #### *Main Platforms*
+	- Short Horizontal Platform
+	- Long Horizontal Platform
+	- Ramp
+	- Wall
+	- L - Shaped Platform
+	- T - Shaped Platform
+- #### *Special Platforms*
+	Shaped as Main Platform but when Luke will pass over this platforms they will trigger that specific action.
+	- Walk Left
+	- Walk Right
+	- Run Letf
+	- Run Right
+	- Stop Moving
+	- Jump
+	- Crouch
+### **Enironmental Platforms**
+- Horizontal Platforms
+- Ramps
+- Walls
+- Destroyable Platfroms 
+
+### **Harmful Obstacles**
+- Dark Flood
+- Spines
+- Mines/Bombs
+- Waterfalls
+
+### Enemies
+- #### Spider
+- #### Squid
+- #### Dog
+- #### Gengar
+- #### Crow
+- #### Deer
+- #### Undefined Mass
 
 
+<br>
 ## Core Mechanics
-
 ### Platform Positioning
 
 The player will be able to drag a platform from the UI and drop it inside the game in real time.
@@ -139,11 +173,10 @@ When the player will drop a platform (**trigger**) over a platform (or multiple 
 ![PlatfromCombination](https://user-images.githubusercontent.com/71270277/195996132-1011af5f-effb-4ee1-84ba-ca5c7c9e15a9.png)
 
 
-### Character Actions
-
-#### Run Right
-#### Run Left
-#### **Jump**
+### Luke's Actions
+- #### Run Right
+- #### Run Left
+- #### **Jump**
 
 Luke will execute a **jump** if he is standing on a plarform.
 
@@ -179,7 +212,7 @@ When Luke is jumping and falling short to reach a platfrom for few inches, he wi
 
 
 
-#### Crouch
+- #### Crouch
 
 ### Platform Spawn
 
@@ -198,6 +231,7 @@ In-Game time will slowd down, in respect to real-time, in 2 circumstances:
 
 
 
+<br>
 ## Camera
 
 Draggin PLatfrom will stop camera mov
@@ -215,16 +249,85 @@ Draggin PLatfrom will stop camera mov
 
 Shake
 
+
+<br>
+<br>
 # Interfaces
 
 
 ![UI](https://user-images.githubusercontent.com/71270277/196240380-787152ab-e3e2-49a6-a55f-5653f49a73dd.png)
 
 
+<br>
+# Characters
+## Luke
+
+**Luke is a young boy trapped in one of his nightmare.**
+
+He will appear:
+-   Scared
+-   Bewildered/Disoriented
+-   Helpless
+
+He will be able to perform this actions:
+
+- Walk Left
+- Walk Right
+- Run Letf
+- Run Right
+- Stop Moving
+- Jump
+- Crouch
+
+## Enemies
+#### Spider
+
+
+![screen-0](https://user-images.githubusercontent.com/71270277/196250343-6478a88d-5e4e-4a63-bd73-6cb3dd007732.jpg)
+
+
+![shelob_1](https://user-images.githubusercontent.com/71270277/196250578-9ad1adb7-ae79-4b6f-9d0a-f716e016bd43.jpg)
+
+
+#### Squid
+
+![chulhu-death-may-die-horror-board-game-box-artwork](https://user-images.githubusercontent.com/71270277/196246840-34984842-f394-491a-98f4-9c9c9e7c4169.jpg)
+
+
+![orfoia6fvsw21](https://user-images.githubusercontent.com/71270277/196246851-a6263089-0f1d-4169-9bba-109d560ec47f.jpg)
+
+![istockphoto-1169962994-170667a](https://user-images.githubusercontent.com/71270277/196252192-0d33d81e-8f36-4db9-8a0d-be110632c9d5.jpg)
+
+#### Dog
+
+![Monster-in-the-dark](https://user-images.githubusercontent.com/71270277/196252203-71b09a10-3398-44e9-a671-a25c4cb75e58.jpg)
+
+#### Gengar
+![images](https://user-images.githubusercontent.com/71270277/196252656-379e2a8e-089a-4af0-880c-4b56f4a53f8f.jpg)
+![dark-monsters](https://user-images.githubusercontent.com/71270277/196252173-fc5ec369-44f8-4069-b85c-b2e3e807a41e.gif)
+![HD-wallpaper-dragon-dark-creepers-dragon-artist-artwork-digital-art-deviantart](https://user-images.githubusercontent.com/71270277/196252599-bd06cfd9-818d-4e37-9222-af6648b8a3cd.jpg)
+![wp3302265](https://user-images.githubusercontent.com/71270277/196252568-6d3b09af-a9e0-45d4-9ae7-03cb56483b5a.jpg)
+
+#### Crow
+#### Deer
+#### Undefined Mass
+
+Mass of multiple bodies, they can be both humans or monsters
+
+![images](https://user-images.githubusercontent.com/71270277/196251313-25297a39-449e-4a36-b92d-a98d8e3e5b36.jpg)
+
+
+![images](https://user-images.githubusercontent.com/71270277/196251339-25e6e462-e2a2-40c6-badf-e338a00135d8.jpg)
+
+
+<br>
 # Story
 ## Synopsis
 
+Luke is young boy how got trapped into one of his own nightmare.
+Inside this scary and misterious world he will encounter his biggest fears and phobias.
 
+<br>
 # Media
 
 ## Artwork Refences
