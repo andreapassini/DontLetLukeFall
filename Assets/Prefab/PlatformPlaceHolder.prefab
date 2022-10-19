@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2501330036914088806}
   - component: {fileID: 2501330036914088805}
   - component: {fileID: 3143433978411200673}
+  - component: {fileID: 9151404051730031825}
   m_Layer: 5
   m_Name: PlatformPlaceHolder
   m_TagString: Untagged
@@ -91,3 +92,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _realPlatform: {fileID: 2553876992613342021, guid: 50891e43bef1a2c49be85bc5196f1701, type: 3}
   _canvas: {fileID: 0}
+--- !u!225 &9151404051730031825
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2501330036914088803}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0

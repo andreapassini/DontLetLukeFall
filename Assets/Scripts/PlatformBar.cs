@@ -39,6 +39,10 @@ namespace DLLF
                     _timer += Time.deltaTime;
                 }
             }
+            else
+            {
+                _timer = 0f;
+            }
         }
 
         private void CreateNewPlatform()
