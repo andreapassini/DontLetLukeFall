@@ -391,6 +391,10 @@ Inside this scary and misterious world he will encounter his biggest fears and p
 ![wp3302265](https://user-images.githubusercontent.com/71270277/196252568-6d3b09af-a9e0-45d4-9ae7-03cb56483b5a.jpg)
 
 #### Crow
+
+![cbaba606796e7c7bec6b6c51beb748a7](https://user-images.githubusercontent.com/71270277/196706504-9ff7ab84-0f3c-4dd3-ba3d-9179fc74a4c2.jpg)
+![dcm62qc-c65014bc-e98b-4f04-b806-66a57a69bd27](https://user-images.githubusercontent.com/71270277/196706680-44817fbd-77bb-4937-80be-cababf6a23cb.jpg)
+
 #### Deer
 #### Undefined Mass
 
