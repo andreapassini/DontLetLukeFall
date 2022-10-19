@@ -315,7 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -483,9 +483,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46b03649cfef54b0dab4c6117566e075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _someSprite1: {fileID: 21300000, guid: 47923c62385e84b8a90084ed8be43621, type: 3}
-  _someSprite2: {fileID: 21300000, guid: bab436e50b3f049fb870d166f13bd6c0, type: 3}
-  _someSprite3: {fileID: 21300000, guid: 730595975cd264a85a3bb29ef1da8b4f, type: 3}
   _displayActionImage:
   - {fileID: 2031971125}
   - {fileID: 1470503899}
