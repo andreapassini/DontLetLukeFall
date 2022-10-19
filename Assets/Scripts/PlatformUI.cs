@@ -40,6 +40,7 @@ namespace DLLF
             spawnPosition = new Vector3(spawnPosition.x, spawnPosition.y, 0);
             GameObject SpawnedPlatform = Instantiate<GameObject>(_realPlatform);
             SpawnedPlatform.transform.position = spawnPosition;
+            SpawnedPlatform.transform.localScale = new Vector3(_canvas.scaleFactor * 3, _canvas.scaleFactor * 3, 1);
         }
         public void OnBeginDrag(PointerEventData eventData)
         {
