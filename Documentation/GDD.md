@@ -234,7 +234,7 @@ In-Game time will slowd down, in respect to real-time, in 2 circumstances:
 <br>
 ## Camera
 
-Draggin PLatfrom will stop camera mov
+Draggin PLatfrom will stop camera movement
 
 #### Run Right
 
