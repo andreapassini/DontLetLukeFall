@@ -1,3 +1,18 @@
+# Questions
+
+## Platform Action
+
+When Luke will land on a special platform, its effect will be triggered causing Luke to perform the action specified by the platform.
+
+	How long the action will last?
+ - 5 seconds
+ - The remaining time of Luke's Action.
+ - Substituting the current action
+
+	Where it will be shown on the UI
+- On top of the Head of Luke, with a small sign (Circle with inside the action, a colored bar around the circle dictating the remaining time)
+- On the ActionUI substituting the current Action
+
 # Game Design Document - Don't Let Luke Fall
 
 ## Concept
@@ -174,50 +189,65 @@ When the player will drop a platform (**trigger**) over a platform (or multiple 
 
 
 ### Luke's Actions
+- #### Walk Right
+	Luke will **walk right** until another action will affect Luke's Horizontal axis
+- #### Walk Left
+	Luke will **walk left** until another action will affect Luke's Horizontal axis
 - #### Run Right
+	Luke will **run right**.
+	When this action is over Luke will **walk right**
 - #### Run Left
+	Luke will **run left**.
+	When this action is over Luke will **walk left**
 - #### **Jump**
-
-Luke will execute a **jump** if he is standing on a plarform.
-
-(https://www.youtube.com/watch?v=3sWTzMsmdx8)
-
-![Jump Function](https://user-images.githubusercontent.com/71270277/196027686-55adf096-b603-4296-ba9b-6c42fd2c8502.png)
-
-##### **Cayote Time**
-
-Luke will execute jump even if he left the platfrom where he was standing few istants before.
-
-![JumpFunctionExt](https://user-images.githubusercontent.com/71270277/196027739-b21b2288-e77e-4c1f-9c37-4dddb9490cf8.png)
-
-##### **Jump Buffer**
-
-When the jump action start and Luke is still in the air, if the charter land on a platfrom few istants after the action start Luke will execute a jump anyway.
-
-##### **Edge Detection**
-
-When Luke is jumping and hitting a platform on top, if the platform is only slightly over him, he will move slightly in the opposite direction of the platform allowing him to overcome the obstacle
-
-
-![Edge Jumping](https://user-images.githubusercontent.com/71270277/196028791-5c0069b7-c5be-49d6-a8b5-b3d7327616ee.png)
-
-
-##### **Ledge Catching**
-
-When Luke is jumping and falling short to reach a platfrom for few inches, he will snap on top of the platforming.
-
-![Ledge Catch](https://user-images.githubusercontent.com/71270277/196028788-ab0361c4-d2a6-4787-81ae-114d93b28d13.png)
-
-
-
-
+	
+	Luke will execute a **jump** if he is standing on a platform.
+	
+	(https://www.youtube.com/watch?v=3sWTzMsmdx8)
+	
+	![Jump Function](https://user-images.githubusercontent.com/71270277/196027686-55adf096-b603-4296-ba9b-6c42fd2c8502.png)
+	
+	##### **Cayote Time**
+	
+	Luke will execute jump even if he left the platfrom where he was standing few istants before.
+	
+	![JumpFunctionExt](https://user-images.githubusercontent.com/71270277/196027739-b21b2288-e77e-4c1f-9c37-4dddb9490cf8.png)
+	
+	##### **Jump Buffer**
+	
+	When the jump action start and Luke is still in the air, if the charter land on a platfrom few istants after the action start Luke will execute a jump anyway.
+	
+	##### **Edge Detection**
+	
+	When Luke is jumping and hitting a platform on top, if the platform is only slightly over him, he will move slightly in the opposite direction of the platform allowing him to overcome the obstacle
+	
+	
+	![Edge Jumping](https://user-images.githubusercontent.com/71270277/196028791-5c0069b7-c5be-49d6-a8b5-b3d7327616ee.png)
+	
+	
+	##### **Ledge Catching**
+	
+	When Luke is jumping and falling short to reach a platfrom for few inches, he will snap on top of the platforming.
+	
+	![Ledge Catch](https://user-images.githubusercontent.com/71270277/196028788-ab0361c4-d2a6-4787-81ae-114d93b28d13.png)
+	
+	
+	
+	
 
 - #### Crouch
+- #### Stop
+	Luke will stop moving until a new action will make him.
 
 ### Platform Spawn
 
 
 ### Action Spawn
+
+For each level there will be a fixed sequence of actions.
+At the start of the game the first action will be triggered.
+Every action will last for 5 seconds, then the next action in line will be triggered.
+
 ### Time Flow
 
 In-Game time will slowd down, in respect to real-time, in 2 circumstances:
@@ -375,7 +405,7 @@ Inside this scary and misterious world he will encounter his biggest fears and p
 ![katlego-motaung-hound01](https://user-images.githubusercontent.com/71270277/196712795-8d4eee18-9ec2-48a7-a68d-9f75662370d0.jpg)
 ![InsidePig2 0](https://user-images.githubusercontent.com/71270277/196712809-64e05f7f-613f-43d1-b8e1-eab390619f52.jpg)
 
-#### "Gengar"
+#### Gengar"
 
 ![images](https://user-images.githubusercontent.com/71270277/196252656-379e2a8e-089a-4af0-880c-4b56f4a53f8f.jpg)
 ![dark-monsters](https://user-images.githubusercontent.com/71270277/196252173-fc5ec369-44f8-4069-b85c-b2e3e807a41e.gif)
