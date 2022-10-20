@@ -15,6 +15,7 @@ namespace DLLF
 
         [SerializeField] private float _actionsDuration;
         [SerializeField] private CharacterController _characterController;
+        [SerializeField] private ActionUIController _actionUIController;
 
 
         [SerializeField] private bool _active = true;
@@ -35,6 +36,19 @@ namespace DLLF
 
         void Start()
         {
+            /*
+            // set the first n sprite in action ui sprite 
+            int nOfDisplayedActions = _actionUiController.GetNumberOfDisplayedActions();
+            if (_actionsSequence.Count < 3)
+            {
+                Debug.LogWarning("Beware: less than " + nOfDisplayedActions +"actions  in the sequence!");
+            }
+            for (int i = 0; i < nOfDisplayedActions; i++)
+            {
+                //retrieve action sprite using action type of i-th action
+                Sprite actionSprite = _actionsSprites.GetSprite(_actionsTypeSequence.actions[i]);
+                _actionUIController.AddActionSprite(actionSprite);
+            }*/
             StartActionsSequence();
         }
 
@@ -57,7 +71,6 @@ namespace DLLF
         {
             while (_active)
             {
-                Debug.Log("\n");
                 if (_actionsSequence.Count == 0)
                 {
                     _active = false;
@@ -68,7 +81,7 @@ namespace DLLF
                 _activeAction = _actionsSequence.Dequeue();
                 Debug.Log("Invoking action: " + _activeAction.GetActionType());
                 Sprite spriteToBeSentToUi = _actionsSprites.GetSprite(_activeAction.GetActionType());
-                // call to ActionsUI to display spriteToBeSentToUi
+                _actionUIController.AddActionSprite(spriteToBeSentToUi);
                 yield return new WaitForSeconds(_actionsDuration);
                 Debug.Log("Action terminated");
             }
