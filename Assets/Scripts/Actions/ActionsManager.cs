@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using Mono.Collections.Generic;
 using UnityEngine;
 
 namespace DLLF
@@ -27,9 +29,7 @@ namespace DLLF
             _actionsFactory = new ActionsFactory();
             foreach (var actionType in _actionsTypeSequence.actions)
             {
-                IAction action = _actionsFactory.CreateAction(actionType, _actionParameters);
-                action.SetController(_characterController);
-                _actionsSequence.Enqueue(action);
+                _actionsSequence.Enqueue(CreateAction(actionType));
             }
         }
 
@@ -57,6 +57,7 @@ namespace DLLF
         {
             while (_active)
             {
+                Debug.Log("\n");
                 if (_actionsSequence.Count == 0)
                 {
                     _active = false;
@@ -74,10 +75,41 @@ namespace DLLF
 
             yield return null;
         }
+        
+        public void SubstituteCurrentAction(ActionType actionType)
+        {
+            _activeAction = CreateAction(actionType);
+        }
+
+        public void InsertNewActionAsNextAction(ActionType actionType)
+        {
+            IAction newAction = CreateAction(actionType);
+            // if queue is empty, just add the new action
+            if (_actionsSequence.Count == 0)
+            {
+                _actionsSequence.Enqueue(newAction);
+                return;
+            }
+            // otherwise insert it before the actual queue head
+            IAction actionAtQueueHead = _actionsSequence.Dequeue();
+            var queueAsList = new List<IAction>(_actionsSequence.ToArray());
+            queueAsList.Insert(0, newAction);
+            queueAsList.Insert(0, actionAtQueueHead);
+            _actionsSequence = new Queue<IAction>(queueAsList);
+        }
+
+        private IAction CreateAction(ActionType actionType)
+        {
+            IAction newAction = _actionsFactory.CreateAction(actionType, _actionParameters);
+            newAction.SetController(_characterController);
+            return newAction;
+        }
+        
 
         private void Update()
         {
             _activeAction?.Invoke();
         }
+       
     }
 }
