@@ -410,8 +410,6 @@ Inside this scary and misterious world he will encounter his biggest fears and p
 
 ![Monster-in-the-dark](https://user-images.githubusercontent.com/71270277/196252203-71b09a10-3398-44e9-a671-a25c4cb75e58.jpg)
 
-#### "Gengar"
-
 ![693c03a94cfa1c4b8c2d12e01640b092](https://user-images.githubusercontent.com/71270277/196712794-1bb88868-209c-4496-afed-44b2b800847a.jpg)
 ![katlego-motaung-hound01](https://user-images.githubusercontent.com/71270277/196712795-8d4eee18-9ec2-48a7-a68d-9f75662370d0.jpg)
 ![InsidePig2 0](https://user-images.githubusercontent.com/71270277/196712809-64e05f7f-613f-43d1-b8e1-eab390619f52.jpg)
