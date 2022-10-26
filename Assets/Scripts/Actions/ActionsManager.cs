@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using Mono.Collections.Generic;
 using UnityEngine;
 
 namespace DLLF
@@ -23,7 +20,8 @@ namespace DLLF
         private Queue<IAction> _actionsSequence = new Queue<IAction>();
         private ActionsFactory _actionsFactory;
 
-        private IAction _activeAction;
+        private IAction _activeHorizontalAction;
+        private IAction _activeVerticalAction;
 
         private void Awake()
         {
@@ -62,11 +60,6 @@ namespace DLLF
             StopCoroutine(nameof(ActionsSequenceCoroutine));
         }
 
-        public void StopOngoingAction()
-        {
-            _activeAction = null;
-        }
-
         private IEnumerator ActionsSequenceCoroutine()
         {
             while (_active)
@@ -74,13 +67,22 @@ namespace DLLF
                 if (_actionsSequence.Count == 0)
                 {
                     _active = false;
-                    _activeAction = null;
+                    _activeHorizontalAction = null;
+                    _activeVerticalAction = null;
                     Debug.Log("No more actions to perform");
                     yield break;
                 }
-                _activeAction = _actionsSequence.Dequeue();
-                Debug.Log("Invoking action: " + _activeAction.GetActionType());
-                Sprite spriteToBeSentToUi = _actionsSprites.GetSprite(_activeAction.GetActionType());
+                IAction nextAction = _actionsSequence.Dequeue();
+                if (nextAction.IsHorizontal())
+                {
+                    _activeHorizontalAction = nextAction;
+                }
+                else
+                {
+                    _activeVerticalAction = nextAction;
+                }
+                Debug.Log("Invoking action: " + nextAction.GetActionType());
+                Sprite spriteToBeSentToUi = _actionsSprites.GetSprite(nextAction.GetActionType());
                 _actionUIController.AddActionSprite(spriteToBeSentToUi);
                 yield return new WaitForSeconds(_actionsDuration);
                 Debug.Log("Action terminated");
@@ -89,39 +91,22 @@ namespace DLLF
             yield return null;
         }
         
-        public void SubstituteCurrentAction(ActionType actionType)
+        public void SubstituteHorizontalAction(ActionType actionType)
         {
-            _activeAction = CreateAction(actionType);
-        }
-
-        public void InsertNewActionAsNextAction(ActionType actionType)
-        {
-            IAction newAction = CreateAction(actionType);
-            // if queue is empty, just add the new action
-            if (_actionsSequence.Count == 0)
-            {
-                _actionsSequence.Enqueue(newAction);
-                return;
-            }
-            // otherwise insert it before the actual queue head
-            IAction actionAtQueueHead = _actionsSequence.Dequeue();
-            var queueAsList = new List<IAction>(_actionsSequence.ToArray());
-            queueAsList.Insert(0, newAction);
-            queueAsList.Insert(0, actionAtQueueHead);
-            _actionsSequence = new Queue<IAction>(queueAsList);
+            _activeHorizontalAction = CreateAction(actionType);
         }
 
         private IAction CreateAction(ActionType actionType)
         {
-            IAction newAction = _actionsFactory.CreateAction(actionType, _actionParameters);
-            newAction.SetController(_characterController);
+            IAction newAction = _actionsFactory.CreateAction(actionType, _actionParameters, _characterController);
             return newAction;
         }
         
 
         private void Update()
         {
-            _activeAction?.Invoke();
+            _activeHorizontalAction?.Invoke();
+            _activeVerticalAction?.Invoke();
         }
        
     }
