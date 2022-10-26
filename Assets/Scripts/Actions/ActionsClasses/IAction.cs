@@ -6,7 +6,7 @@ namespace DLLF
     public interface IAction
     {
         void Invoke();
-        void SetController(CharacterController characterController);
+        bool IsHorizontal();
         ActionType GetActionType();
     }
 

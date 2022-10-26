@@ -2,7 +2,7 @@
 
 namespace DLLF
 {
-    public class JumpUpAction : AbstractAction
+    public class JumpUpAction : AbstractOneShotAction
     {
         [Tooltip("The intensity of the force applied to perform the jump")]
         [Range(0.001f, 100f)]
@@ -12,9 +12,9 @@ namespace DLLF
         [Range(0.001f, 180.0f)]
         private float _jumpAngle;
 
-        private bool _invoked = false;
         
-        public JumpUpAction(ActionParameters actionParameters)
+        public JumpUpAction(ActionParameters actionParameters, CharacterController characterController) 
+            : base(characterController)
         {
             _intensity = actionParameters.JumpIntensity;
             _jumpAngle = actionParameters.JumpAngle;
@@ -22,9 +22,14 @@ namespace DLLF
         
         public override void Invoke()
         {
-            if (_invoked) return;
+            base.Invoke();
+            if (Executed) return;
             CharacterController.Jump(_intensity, _jumpAngle);
-            _invoked = true;
+        }
+
+        public override bool IsHorizontal()
+        {
+            return false;
         }
 
         public override ActionType GetActionType()
