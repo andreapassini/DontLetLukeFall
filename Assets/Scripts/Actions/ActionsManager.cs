@@ -10,7 +10,7 @@ namespace DLLF
     public class ActionsManager : MonoBehaviour
     {
         [SerializeField] private ActionsSequence _actionsTypeSequence;
-        [SerializeField] private ActionParameters _actionParameters;
+        [SerializeField] private CharacterController2DParams characterController2DParams;
         [SerializeField] private ActionsSprites _actionsSprites;
 
         [SerializeField] private float _actionsDuration;
