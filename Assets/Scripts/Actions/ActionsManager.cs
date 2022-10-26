@@ -4,10 +4,13 @@ using UnityEngine;
 
 namespace DLLF
 {
+
+    public delegate void ActionDelegate();
+
     public class ActionsManager : MonoBehaviour
     {
         [SerializeField] private ActionsSequence _actionsTypeSequence;
-        [SerializeField] private ActionParameters _actionParameters;
+        [SerializeField] private CharacterController2DParams characterController2DParams;
         [SerializeField] private ActionsSprites _actionsSprites;
 
         [SerializeField] private float _actionsDuration;
@@ -15,99 +18,76 @@ namespace DLLF
         [SerializeField] private ActionUIController _actionUIController;
 
 
-        [SerializeField] private bool _active = true;
-        
-        private Queue<IAction> _actionsSequence = new Queue<IAction>();
-        private ActionsFactory _actionsFactory;
-
-        private IAction _activeHorizontalAction;
-        private IAction _activeVerticalAction;
+        private Queue<ActionType> _actionsSequence = new Queue<ActionType>();
+        private Dictionary<ActionType, ActionDelegate> _actionsMapping;
 
         private void Awake()
         {
-            _actionsFactory = new ActionsFactory();
             foreach (var actionType in _actionsTypeSequence.actions)
             {
-                _actionsSequence.Enqueue(CreateAction(actionType));
+                _actionsSequence.Enqueue(actionType);
             }
+
+            _actionsMapping = new Dictionary<ActionType, ActionDelegate>();
+            _actionsMapping[ActionType.Jump] = Jump;
+            _actionsMapping[ActionType.WalkRight] = WalkRight;
+            _actionsMapping[ActionType.WalkLeft] = WalkLeft;
         }
 
         void Start()
         {
-            /*
-            // set the first n sprite in action ui sprite 
-            int nOfDisplayedActions = _actionUiController.GetNumberOfDisplayedActions();
-            if (_actionsSequence.Count < 3)
-            {
-                Debug.LogWarning("Beware: less than " + nOfDisplayedActions +"actions  in the sequence!");
-            }
-            for (int i = 0; i < nOfDisplayedActions; i++)
-            {
-                //retrieve action sprite using action type of i-th action
-                Sprite actionSprite = _actionsSprites.GetSprite(_actionsTypeSequence.actions[i]);
-                _actionUIController.AddActionSprite(actionSprite);
-            }*/
-            StartActionsSequence();
+            StartCoroutine(StartActionSequence());
         }
 
-        public void StartActionsSequence()
+        private IEnumerator StartActionSequence()
         {
-            StartCoroutine(ActionsSequenceCoroutine());
-        }
-
-        public void StopActionsSequence()
-        {
-            StopCoroutine(nameof(ActionsSequenceCoroutine));
-        }
-
-        private IEnumerator ActionsSequenceCoroutine()
-        {
-            while (_active)
+            while (_actionsSequence.TryDequeue(out var actionToPerform))
             {
-                if (_actionsSequence.Count == 0)
-                {
-                    _active = false;
-                    _activeHorizontalAction = null;
-                    _activeVerticalAction = null;
-                    Debug.Log("No more actions to perform");
-                    yield break;
-                }
-                IAction nextAction = _actionsSequence.Dequeue();
-                if (nextAction.IsHorizontal())
-                {
-                    _activeHorizontalAction = nextAction;
-                }
-                else
-                {
-                    _activeVerticalAction = nextAction;
-                }
-                Debug.Log("Invoking action: " + nextAction.GetActionType());
-                Sprite spriteToBeSentToUi = _actionsSprites.GetSprite(nextAction.GetActionType());
-                _actionUIController.AddActionSprite(spriteToBeSentToUi);
+                ActionDelegate actionDelegate = _actionsMapping[actionToPerform];
+                //_actionUIController.AddActionSprite(_actionsSprites.GetSprite(actionToPerform));
+                actionDelegate.Invoke();
                 yield return new WaitForSeconds(_actionsDuration);
-                Debug.Log("Action terminated");
             }
+        }
 
-            yield return null;
+        private void Jump()
+        {
+            StartCoroutine(JumpCoroutine());
+        }
+
+        private IEnumerator JumpCoroutine()
+        {
+            //activate jump
+            Debug.Log("Activating jump");
+            yield return new WaitForSeconds(_actionsDuration);
+            //deactivate jump
+            Debug.Log("Deactivating jump");
         }
         
-        public void SubstituteHorizontalAction(ActionType actionType)
+        private void WalkRight()
         {
-            _activeHorizontalAction = CreateAction(actionType);
+            StartCoroutine(WalkRightCoroutine());
         }
 
-        private IAction CreateAction(ActionType actionType)
+        private IEnumerator WalkRightCoroutine()
         {
-            IAction newAction = _actionsFactory.CreateAction(actionType, _actionParameters, _characterController);
-            return newAction;
+            Debug.Log("Activating WR");
+            yield return new WaitForSeconds(_actionsDuration);
+            Debug.Log("Deactivating WR");
         }
         
-
-        private void Update()
+        private void WalkLeft()
         {
-            _activeHorizontalAction?.Invoke();
-            _activeVerticalAction?.Invoke();
+            StartCoroutine(WalkLeftCoroutine());
         }
-       
+
+        private IEnumerator WalkLeftCoroutine()
+        {
+            Debug.Log("Activating WL");
+            yield return new WaitForSeconds(_actionsDuration);
+            Debug.Log("Deactivating WL");
+        }
     }
+
+
 }

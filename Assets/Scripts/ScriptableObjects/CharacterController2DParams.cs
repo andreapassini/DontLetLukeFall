@@ -2,16 +2,15 @@
 
 namespace DLLF
 {
-    [CreateAssetMenu(fileName = "ActionParams", menuName = "Actions/ActionParameters", order = 1)]
-    public class ActionParameters : ScriptableObject
+    [CreateAssetMenu(fileName = "CharacterControllerParams", menuName = "Character/ControllerParams", order = 1)]
+    public class CharacterController2DParams : ScriptableObject
     {
         [Header("Jump")]
-        
         [Tooltip("The intensity of the force applied to perform the jump")]
         [Range(0.001f, 1000f)]
         [SerializeField] private float _jumpIntensity;
                 
-        [Tooltip("Angle between X-axis and jump direction in degrees")]
+        [Tooltip("Angle between horizontal movement direction and jump direction in degrees")]
         [Range(0.001f, 180.0f)]
         [SerializeField] private float _jumpAngle = 90f;
         
