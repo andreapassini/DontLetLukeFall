@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace DLLF
 {
+    //TODO: ciclo azioni da sequenze
+    //TODO: azioni piattaforme vengono aggiunte da sole e hanno una propria coroutine per terminarle
     public class ActionsManager : MonoBehaviour
     {
         [SerializeField] private ActionsSequence _actionsTypeSequence;
@@ -59,38 +61,44 @@ namespace DLLF
         {
             StopCoroutine(nameof(ActionsSequenceCoroutine));
         }
-
+        
+        //TODO: integrare con ActionUIController
         private IEnumerator ActionsSequenceCoroutine()
         {
             while (_active)
             {
-                if (_actionsSequence.Count == 0)
+                IAction nextAction;
+                if (_actionsSequence.TryDequeue(out nextAction))
                 {
-                    _active = false;
-                    _activeHorizontalAction = null;
-                    _activeVerticalAction = null;
-                    Debug.Log("No more actions to perform");
-                    yield break;
+                    //there is an action
+                    if (nextAction.IsHorizontal()) SubstituteHorizontalAction(nextAction);
+                    else SubstituteVerticalAction(nextAction);
+                    Sprite actionSprite = _actionsSprites.GetSprite(nextAction.GetActionType());
+                    //ActionsUIController.AddSprite(actionSprite)
                 }
-                IAction nextAction = _actionsSequence.Dequeue();
-                if (nextAction.IsHorizontal())
-                {
-                    _activeHorizontalAction = nextAction;
-                }
-                else
-                {
-                    _activeVerticalAction = nextAction;
-                }
-                Debug.Log("Invoking action: " + nextAction.GetActionType());
-                Sprite spriteToBeSentToUi = _actionsSprites.GetSprite(nextAction.GetActionType());
-                _actionUIController.AddActionSprite(spriteToBeSentToUi);
-                yield return new WaitForSeconds(_actionsDuration);
-                Debug.Log("Action terminated");
             }
 
             yield return null;
         }
-        
+
+        private void SubstituteVerticalAction(IAction nextAction)
+        {
+            Debug.Log("Stopping active vertical action: " + _activeVerticalAction.GetActionType());
+            _activeVerticalAction.End();
+            _activeVerticalAction = nextAction;
+            Debug.Log("Starting new vertical action: " + _activeVerticalAction.GetActionType());
+            _activeVerticalAction.Start();
+        }
+
+        private void SubstituteHorizontalAction(IAction nextAction)
+        {
+            Debug.Log("Stopping active horizontal action: " + _activeHorizontalAction.GetActionType());
+            _activeHorizontalAction.End();
+            _activeHorizontalAction = nextAction;
+            Debug.Log("Starting new horizontal action: " + _activeHorizontalAction.GetActionType());
+            _activeHorizontalAction.Start();
+        }
+
         public void SubstituteHorizontalAction(ActionType actionType)
         {
             _activeHorizontalAction = CreateAction(actionType);
@@ -101,12 +109,6 @@ namespace DLLF
             IAction newAction = _actionsFactory.CreateAction(actionType, _actionParameters, _characterController);
             return newAction;
         }
-        
 
-        private void Update()
-        {
-
-        }
-       
     }
 }
