@@ -16,9 +16,6 @@ namespace DLLF
         {
             ActionTypeMapping = new Dictionary<ActionType, Type>
             {
-                {ActionType.WalkRight, typeof(WalkRightAction)},
-                {ActionType.JumpUp, typeof(JumpUpAction)},
-                {ActionType.WalkLeft, typeof(WalkLeftAction)}
             };
         }
 

@@ -2,21 +2,23 @@
 {
     public abstract class AbstractContinuousAction : IAction
     {
+        
         protected CharacterController CharacterController;
 
         protected AbstractContinuousAction(CharacterController characterController)
         {
             CharacterController = characterController;
         }
-
-        public abstract void Invoke();
-        public abstract bool IsHorizontal();
-
-        public void SetController(CharacterController characterController)
+        
+        public abstract void Start();
+        public void End()
         {
-            CharacterController = characterController;
+            //does nothing because it is a continuous action
         }
 
+        public abstract bool IsHorizontal();
         public abstract ActionType GetActionType();
+        
+        
     }
 }

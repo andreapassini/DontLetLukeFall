@@ -105,8 +105,7 @@ namespace DLLF
 
         private void Update()
         {
-            _activeHorizontalAction?.Invoke();
-            _activeVerticalAction?.Invoke();
+
         }
        
     }

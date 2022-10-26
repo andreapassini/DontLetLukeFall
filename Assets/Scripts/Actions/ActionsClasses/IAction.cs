@@ -5,15 +5,19 @@ namespace DLLF
 {
     public interface IAction
     {
-        void Invoke();
+        void Start();
+        void End();
         bool IsHorizontal();
         ActionType GetActionType();
     }
 
     public enum ActionType
     {
-        JumpUp,
+        Jump,
         WalkRight,
-        WalkLeft
+        WalkLeft,
+        RunRight,
+        RunLeft,
+        Crouch
     }
 }
