@@ -1,21 +1,34 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace DLLF
 {
 
+    public struct MovementRequest
+    {
+        public float Speed;
+        public bool Jump;
+        public float JumpDuration;
+        public bool Crouch;
+        public float CrouchDamping;
+    }
+    
     public delegate void ActionDelegate();
 
     public class ActionsManager : MonoBehaviour
     {
         [SerializeField] private ActionsSequence _actionsTypeSequence;
-        [SerializeField] private CharacterController2DParams characterController2DParams;
         [SerializeField] private ActionsSprites _actionsSprites;
 
         [SerializeField] private float _actionsDuration;
-        [SerializeField] private CharacterController _characterController;
+        [SerializeField] private CharacterController2D _characterController;
         [SerializeField] private ActionUIController _actionUIController;
+
+
+        private bool _jump;
+        private float _speed;
 
 
         private Queue<ActionType> _actionsSequence = new Queue<ActionType>();
@@ -39,6 +52,18 @@ namespace DLLF
             StartCoroutine(StartActionSequence());
         }
 
+        private void FixedUpdate()
+        {
+            var movementRequest = new MovementRequest
+            {
+                Jump = _jump,
+                Speed = _speed,
+                JumpDuration = _actionsDuration
+            };
+            _characterController.Move(movementRequest);
+            if (_jump) _jump = false;
+        }
+
         private IEnumerator StartActionSequence()
         {
             while (_actionsSequence.TryDequeue(out var actionToPerform))
@@ -52,41 +77,24 @@ namespace DLLF
 
         private void Jump()
         {
-            StartCoroutine(JumpCoroutine());
-        }
-
-        private IEnumerator JumpCoroutine()
-        {
             //activate jump
             Debug.Log("Activating jump");
-            yield return new WaitForSeconds(_actionsDuration);
-            //deactivate jump
-            Debug.Log("Deactivating jump");
-        }
-        
-        private void WalkRight()
-        {
-            StartCoroutine(WalkRightCoroutine());
+            _jump = true;
         }
 
-        private IEnumerator WalkRightCoroutine()
+        private void WalkRight()
         {
             Debug.Log("Activating WR");
-            yield return new WaitForSeconds(_actionsDuration);
-            Debug.Log("Deactivating WR");
+            _speed = 1f;
         }
+        
         
         private void WalkLeft()
         {
-            StartCoroutine(WalkLeftCoroutine());
+            Debug.Log("Activating WL");
+            _speed = -1f;        
         }
 
-        private IEnumerator WalkLeftCoroutine()
-        {
-            Debug.Log("Activating WL");
-            yield return new WaitForSeconds(_actionsDuration);
-            Debug.Log("Deactivating WL");
-        }
     }
 
 
