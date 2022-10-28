@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace DLLF
 {
@@ -9,6 +11,7 @@ namespace DLLF
 
     public class ActionsManager : MonoBehaviour
     {
+
         [SerializeField] private MovementParams movementParams;
 
         [SerializeField] private ActionsSequence _actionsTypeSequence;
@@ -29,6 +32,7 @@ namespace DLLF
 
         private Queue<ActionType> _actionsSequence = new Queue<ActionType>();
         private Dictionary<ActionType, ActionDelegate> _actionsMapping;
+        private Dictionary<ActionType, ActionDelegate> _fallbackActionsMapping;
 
         private void Awake()
         {
@@ -38,13 +42,10 @@ namespace DLLF
             }
 
             _actionsMapping = new Dictionary<ActionType, ActionDelegate>();
-            _actionsMapping[ActionType.Jump] = Jump;
-            _actionsMapping[ActionType.WalkRight] = WalkRight;
-            _actionsMapping[ActionType.WalkLeft] = WalkLeft;
-            _actionsMapping[ActionType.RunRight] = RunRight;
-            _actionsMapping[ActionType.RunLeft] = RunLeft;
+            _fallbackActionsMapping = new Dictionary<ActionType, ActionDelegate>();
+            AutoLinkActionTypesToMethods();
         }
-
+        
         void Start()
         {
             StartCoroutine(StartActionSequence());
@@ -74,6 +75,7 @@ namespace DLLF
             }
         }
 
+        [ImmediateAction(ActionType.Jump)]
         private void Jump()
         {
             //activate jump
@@ -81,6 +83,7 @@ namespace DLLF
             _jump = true;
         }
 
+        [ContinuousAction(ActionType.WalkRight)]
         private void WalkRight()
         {
             Debug.Log("Activating WR");
@@ -88,6 +91,7 @@ namespace DLLF
         }
         
         
+        [ContinuousAction(ActionType.WalkLeft)]
         private void WalkLeft()
         {
             Debug.Log("Activating WL");
@@ -98,27 +102,29 @@ namespace DLLF
         // Time-bounded action that lets the player run to the right
         // Increase speed to RunSpeed value for X seconds
         // at the end, fallback to WalkRight action
+        [TimeBoundedAction(ActionType.RunRight, ActionType.WalkRight)]
         private void RunRight()
         {
             Debug.Log("Activating RunRight");
             _speed = movementParams.RunSpeed;
-            StartCoroutine(FallBackActionCoroutine(WalkRight));
+            StartCoroutine(FallBackActionCoroutine(ActionType.WalkRight));
         }
         
         // Time-bounded action that lets the player run to the left
         // Increase speed to RunSpeed value for X seconds
         // at the end, fallback to WalkLeft action
+        [TimeBoundedAction(ActionType.RunLeft,ActionType.WalkLeft)]
         private void RunLeft()
         {
             Debug.Log("Activating RunLeft");
             _speed = -movementParams.RunSpeed;
-            StartCoroutine(FallBackActionCoroutine(WalkLeft));
+            StartCoroutine(FallBackActionCoroutine(ActionType.WalkLeft));
         }
 
-        private IEnumerator FallBackActionCoroutine(ActionDelegate fallbackAction)
+        private IEnumerator FallBackActionCoroutine(ActionType fallbackActionType)
         {
             yield return new WaitForSeconds(_actionsDuration);
-            fallbackAction.Invoke();
+            _actionsMapping[fallbackActionType].Invoke();
         }
 
         
@@ -141,6 +147,51 @@ namespace DLLF
             public float CrouchDamping { get; set; }
             public float CrouchMultiplier { get; set; }
         }
+
+        #region AutoSetupWithReflection
+
+        private void AutoLinkActionTypesToMethods()
+        {
+            var methods = typeof(ActionsManager).GetMethods(BindingFlags.NonPublic | BindingFlags.Instance);
+            Debug.Log(methods.Length);
+            foreach (var method in methods)
+            {
+                Debug.Log(method.Name);
+                foreach (var customAttribute in method.CustomAttributes)
+                {
+                    var attributeType = customAttribute.AttributeType;
+                    if (attributeType == typeof(ImmediateAction) || attributeType == typeof(ContinuousAction) || attributeType == typeof(TimeBoundedAction))
+                    {
+                        Assert.IsNotNull(customAttribute.ConstructorArguments);
+                        Assert.IsTrue(customAttribute.ConstructorArguments.Count > 0);
+                        ActionType actionType = (ActionType) customAttribute.ConstructorArguments[0].Value;
+                        ActionDelegate actionDelegate = (ActionDelegate) Delegate.CreateDelegate(typeof(ActionDelegate), this, method.Name, false);
+                        _actionsMapping.Add(actionType, actionDelegate);
+                    }
+                }
+            }
+
+            // second for because a fallback might be a time bounded action too, so i need to have all the actions before setting fallbacks
+            foreach (var method in methods)
+            {
+                foreach (var customAttribute in method.CustomAttributes)
+                {
+                    var attributeType = customAttribute.AttributeType;
+                    if (attributeType == typeof(TimeBoundedAction))
+                    {
+                        Assert.IsNotNull(customAttribute.ConstructorArguments);
+                        Assert.IsTrue(customAttribute.ConstructorArguments.Count > 1);
+                        ActionType actionType = (ActionType) customAttribute.ConstructorArguments[0].Value;
+                        ActionType fallbackActionType = (ActionType) customAttribute.ConstructorArguments[1].Value;
+                        // fallback of action type (timebounded) is the delegate linked to fallbackActionType type
+                        _fallbackActionsMapping.Add(actionType, _actionsMapping[fallbackActionType]);
+                    }
+                }
+            }
+        }
+        
+
+        #endregion
 
     }
     
