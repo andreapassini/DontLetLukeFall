@@ -43,33 +43,31 @@ public class Scarf : MonoBehaviour
     private Vector3 _prevPos; //The previous position of luke on the previous fixedUpdate
     private bool _crouched = false; //To set if Luke is crouched or not
     
-    // Start is called before the first frame update
     void Start()
     {
-        _lineRend.positionCount = _lenght;
+        _lineRend.positionCount = _lenght; //Setting the lenght of the LineRender
         _segmentPoses = new Vector3[_lenght];
         _realSegmentPoses = new Vector3[_lenght];
         _segmentV = new Vector3[_lenght];
-        _lineRendTransform.transform.rotation = Quaternion.Euler(0,0,-90);
-        _prevPos = _targetDir.transform.position;
+        _lineRendTransform.transform.rotation = Quaternion.Euler(0,0,-90); //Normally the scarf will be in bottom (when Luke is stopped)
+        _prevPos = _targetDir.transform.position; //starting position of Luke
     }
 
-    // Update is called once per frame
     void Update()
     {
-        _segmentPoses[0] = _targetDir.position;
-        for (int i = 1; i < _segmentPoses.Length; i++)
+        _segmentPoses[0] = _targetDir.position; // setting the first position of the lineRender of the scarf
+        for (int i = 1; i < _segmentPoses.Length; i++) // setting the other positions of the lineRender of the scarf
         {
             _segmentPoses[i] = Vector3.SmoothDamp(_segmentPoses[i], _segmentPoses[i - 1] + _targetDir.right * _targetDist, ref _segmentV[i], _smoothSpeed);
         }
         for (int i = _segmentPoses.Length - 1; i >= 0; i--)
         {
-            float value = (float)(i+1) / (float)(_segmentPoses.Length);
+            float value = (float)(i+1) / (float)(_segmentPoses.Length); //value to adjust the position of the single points of the scarf based on the wind
             _realSegmentPoses[i] = _segmentPoses[i];
-            float phase = _phaseMultiplier * i;
+            float phase = _phaseMultiplier * i; //value witch determines the number of waves on the scarf due to the wind
             _realSegmentPoses[i].y = _segmentPoses[i].y + value * Mathf.Sin(Time.time * _wiggleSpeed + phase) * _wiggleMagnitude * _adjustment;
-            _realSegmentPoses[i].y += _scarfYAttachment;
-            if (_segmentPoses[1].x < _segmentPoses[0].x)
+            _realSegmentPoses[i].y += _scarfYAttachment; //scarf adjustment Y position (based on the scarf attachment position)
+            if (_segmentPoses[1].x < _segmentPoses[0].x) //scarf adjustment X position (based on witch direction Luke is going)
             {
                 _realSegmentPoses[i].x -= _scarfDistXFromCenter;
             }
@@ -79,7 +77,7 @@ public class Scarf : MonoBehaviour
             }
             if (_crouched)
             {
-                _realSegmentPoses[i].y -= _scarfYCrouched;
+                _realSegmentPoses[i].y -= _scarfYCrouched; //scarf adjustment Y position in case Luke is crouched
             }
         }
         _lineRend.SetPositions(_realSegmentPoses);
@@ -89,11 +87,11 @@ public class Scarf : MonoBehaviour
     {
         Vector3 newPos = _targetDir.transform.position;
         float distanceX = Mathf.Abs(newPos.x - _prevPos.x);
-        _adjustment = (float)(distanceX) * (float)(Time.fixedDeltaTime) * 500.0f;
+        _adjustment = (float)(distanceX) * (float)(Time.fixedDeltaTime) * 500.0f; //adjustment of waves's magnitude due to Luke's velocity
         _prevPos = newPos;
     }
 
-    public void SetCrouched(bool crouched)
+    public void SetCrouched(bool crouched) //Method to set if Luke is crouched or not and adjust the Y position of the scarf
     {
         this._crouched = crouched;
     }
