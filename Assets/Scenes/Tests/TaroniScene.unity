@@ -355,9 +355,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60702c54ff1a4560b1e903f088578ae5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementParams: {fileID: 0}
-  m_JumpForce: 400
-  m_CrouchSpeed: 0.36
   m_MovementSmoothing: 0.05
   m_AirControl: 0
   m_WhatIsGround:
@@ -479,7 +476,7 @@ Transform:
   m_GameObject: {fileID: 1434599149}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.1193, y: -4.2542, z: 0}
-  m_LocalScale: {x: 25.126303, y: 2.5842, z: 1}
+  m_LocalScale: {x: 276.59036, y: 2.5842, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -545,6 +542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12b3b256e05f4625a43f63f52f5278d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementParams: {fileID: 11400000, guid: 50dca298277c09c43abef4d868fc82b6, type: 2}
   _actionsTypeSequence: {fileID: 11400000, guid: 8b384fea4dd827e4bbf4ea05bfe99298, type: 2}
   _actionsSprites: {fileID: 11400000, guid: f497042f3b253d64eada687dc458e496, type: 2}
   _actionsDuration: 5

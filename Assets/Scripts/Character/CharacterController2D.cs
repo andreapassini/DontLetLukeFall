@@ -5,13 +5,6 @@ namespace DLLF
 {
     public class CharacterController2D : MonoBehaviour
     {
-        [SerializeField] private MovementParams movementParams;
-
-        [SerializeField] private float m_JumpForce = 400f; // Amount of force added when the player jumps.
-
-        [Range(0, 1)] [SerializeField]
-        private float m_CrouchSpeed = .36f; // Amount of maxSpeed applied to crouching movement. 1 = 100%
-
         [Range(0, .3f)] [SerializeField]
         private float m_MovementSmoothing = .05f; // How much to smooth out the movement
 
@@ -73,7 +66,7 @@ namespace DLLF
         }
 
 
-        public void Move(MovementRequest movementRequest)
+        public void Move(ActionsManager.IMovementRequest movementRequest)
         {
             bool mustCrouch = false;
             // If crouching, check to see if the character can stand up
@@ -100,7 +93,7 @@ namespace DLLF
                     }
 
                     // Reduce the speed by the crouchSpeed multiplier
-                    move *= m_CrouchSpeed;
+                    move *= movementRequest.CrouchMultiplier;
 
                     // Disable one of the colliders when crouching
                     if (m_CrouchDisableCollider != null)
@@ -144,15 +137,16 @@ namespace DLLF
             {
                 // Add a vertical force to the player.
                 m_Grounded = false;
-                m_Rigidbody2D.AddForce(new Vector2(0, ComputeJumpForce(movementRequest.JumpDuration)));
+                m_Rigidbody2D.AddForce(ComputeJumpForce(movementRequest.JumpDuration));
             }
         }
 
-        private float ComputeJumpForce(float jumpDuration)
+        // compute the force necessary to let the character jump for jumpDuration seconds
+        // y gravity is multiplied by minus one because it is already negative
+        private Vector2 ComputeJumpForce(float jumpDuration)
         {
             float desiredYSpeed = .5f * (-Physics2D.gravity.y * m_Rigidbody2D.gravityScale) * jumpDuration;
-            float desiredForce = m_Rigidbody2D.mass * (desiredYSpeed / Time.fixedDeltaTime);
-            return desiredForce;
+            return new Vector2(0, m_Rigidbody2D.mass * (desiredYSpeed / Time.fixedDeltaTime));
         }
 
 
