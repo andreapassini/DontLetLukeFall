@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 790597592}
   - component: {fileID: 790597593}
   m_Layer: 0
-  m_Name: Tentacle
+  m_Name: Scarf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -299,15 +299,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aea30068486e14fdd86f2b4218ead7f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lenght: 20
-  lineRend: {fileID: 790597592}
-  lineRendTransform: {fileID: 790597591}
-  targetDir: {fileID: 655513203}
-  targetDist: 0.05
-  smoothSpeed: 0.02
-  wiggleSpeed: 20
-  wiggleMagnitude: 0.35
-  phaseMultiplier: 0.25
+  _lenght: 20
+  _lineRend: {fileID: 790597592}
+  _lineRendTransform: {fileID: 790597591}
+  _targetDir: {fileID: 655513203}
+  _targetDist: 0.05
+  _smoothSpeed: 0.02
+  _wiggleSpeed: 20
+  _wiggleMagnitude: 0.35
+  _phaseMultiplier: 0.25
+  _scarfYAttachment: 0.3
+  _scarfDistXFromCenter: 0.3
+  _scarfYCrouched: 0.2
 --- !u!1 &2108637212
 GameObject:
   m_ObjectHideFlags: 0
