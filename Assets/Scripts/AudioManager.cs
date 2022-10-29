@@ -56,5 +56,30 @@ public class AudioManager : MonoBehaviour
         }
         s.source.Stop();
     }
+
+    public float getVolume(string name) // Method to obtain witch is the volume of a specific sound
+    {
+        Sound s = Array.Find(sounds.sounds, sound => sound.name == name);
+        if (s == null)
+        {
+            Debug.Log("Sound " + name + " not found!");
+            return 0.0f;
+        }
+        return s.volume;
+    }
+    
+    public void setVolume(string name, float volume) // Method to set the volume of a specific sound
+    {
+        Sound s = Array.Find(sounds.sounds, sound => sound.name == name);
+        if (s == null)
+        {
+            Debug.Log("Sound " + name + " not found!");
+            return;
+        }
+        s.source.Pause();
+        s.volume = volume; //Persist last saved volume (scriptableObject)
+        s.source.volume = volume;
+        s.source.UnPause();
+    }
     
 }
