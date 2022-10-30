@@ -1,13 +1,13 @@
 using UnityEngine.Audio;
 using System;
+using System.Linq;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
 
-    [SerializeField] private SoundsConfiguration _sounds; // A list of sounds as a scriptableObject
-    [SerializeField] private AudioMixerGroup _audioMixerGroup;
-    public AudioMixer mixer;
+    [SerializeField] private GeneralSoundsConfiguration _sounds; // A list of sounds as a scriptableObject
+    [SerializeField] private AudioMixerGroup _audioMixerGroup; // There are 2 main groups of the audio mixer: BackgroundMusic and SoundEffects
 
     public static AudioManager instance;
 
@@ -27,8 +27,9 @@ public class AudioManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         
         // This foreach adds AudioSource components: one for each sound
-        foreach (Sound s in _sounds.sounds)
+        foreach (SoundConfiguration ss in _sounds.sounds)
         {
+            Sound s = ss.sound;
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
             s.source.volume = s.volume;
@@ -45,7 +46,7 @@ public class AudioManager : MonoBehaviour
 
     public void Play(string name) // Method to play a music or a sound effect by its name
     {
-        Sound s = Array.Find(_sounds.sounds, sound => sound.name == name);
+        Sound s = Array.Find(_sounds.sounds.Select(el => el.sound).ToArray(), sound => sound.name == name);
         if (s == null)
         {
             Debug.Log("Sound " + name + " not found!");
@@ -56,7 +57,7 @@ public class AudioManager : MonoBehaviour
     
     public void Stop(string name) // Method to stop a (looped) music by its name
     {
-        Sound s = Array.Find(_sounds.sounds, sound => sound.name == name);
+        Sound s = Array.Find(_sounds.sounds.Select(el => el.sound).ToArray(), sound => sound.name == name);
         if (s == null)
         {
             Debug.Log("Sound " + name + " not found!");
@@ -67,7 +68,7 @@ public class AudioManager : MonoBehaviour
 
     public float getVolume(string name) // Method to obtain witch is the volume of a specific sound
     {
-        Sound s = Array.Find(_sounds.sounds, sound => sound.name == name);
+        Sound s = Array.Find(_sounds.sounds.Select(el => el.sound).ToArray(), sound => sound.name == name);
         if (s == null)
         {
             Debug.Log("Sound " + name + " not found!");
@@ -78,7 +79,7 @@ public class AudioManager : MonoBehaviour
     
     public void setVolume(string name, float volume) // Method to set the volume of a specific sound
     {
-        Sound s = Array.Find(_sounds.sounds, sound => sound.name == name);
+        Sound s = Array.Find(_sounds.sounds.Select(el => el.sound).ToArray(), sound => sound.name == name);
         if (s == null)
         {
             Debug.Log("Sound " + name + " not found!");
