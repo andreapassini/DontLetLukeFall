@@ -5,40 +5,37 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-public class VolumeSetting : MonoBehaviour
+public class VolumeSetting : MonoBehaviour // This script is to manage the volume settings
 {
 
-    [SerializeField] private AudioMixer mixer;
-    [SerializeField] private Slider _backgroundMusicSlider;
-    [SerializeField] private Slider _soundEffectsSlider;
+    [SerializeField] private AudioMixer mixer; // The audio mixer
 
+    // Names of exposed var of audio mixer groups
     public const string MIXER_BACKGROUNDMUSIC = "BackgroundMusicVolume";
     public const string MIXER_SOUNDEFFECTS = "SoundEffectsVolume";
+
+    public float GetBackgroundMusicVolume() // Method to get the background music volume from user pref
+    {
+        return PlayerPrefs.GetFloat(AudioManager.BACKGROUNDMUSIC_KEY, 1f);
+    }
     
-    private void Awake()
+    public float GetSoundEffectsVolume() // Method to get the sound effects volume from user pref
     {
-        _backgroundMusicSlider.onValueChanged.AddListener(setBackgroundMusicVolume);
-        _soundEffectsSlider.onValueChanged.AddListener(setSoundEffectsVolume);
+        return PlayerPrefs.GetFloat(AudioManager.SOUNDEFFECTS_KEY, 1f);
     }
 
-    private void Start()
+    public void OnDisableSaveLastSettings(float backgroundMusicValue, float soundEffectsValue) // Method to save settings of the volumes of background music and sound effects
     {
-        _backgroundMusicSlider.value = PlayerPrefs.GetFloat(AudioManager.BACKGROUNDMUSIC_KEY, 1f);
-        _soundEffectsSlider.value = PlayerPrefs.GetFloat(AudioManager.SOUNDEFFECTS_KEY, 1f);
+        PlayerPrefs.SetFloat(AudioManager.BACKGROUNDMUSIC_KEY, backgroundMusicValue);
+        PlayerPrefs.SetFloat(AudioManager.SOUNDEFFECTS_KEY, soundEffectsValue);
     }
 
-    private void OnDisable()
-    {
-        PlayerPrefs.SetFloat(AudioManager.BACKGROUNDMUSIC_KEY, _backgroundMusicSlider.value);
-        PlayerPrefs.SetFloat(AudioManager.SOUNDEFFECTS_KEY, _soundEffectsSlider.value);
-    }
-
-    private void setBackgroundMusicVolume(float value)
+    public void SetBackgroundMusicVolume(float value) // Method to change background music volume
     {
         mixer.SetFloat(MIXER_BACKGROUNDMUSIC, Mathf.Log10(value) * 20.0f);
     }
     
-    private void setSoundEffectsVolume(float value)
+    public void SetSoundEffectsVolume(float value) // Method to change sound effects volume
     {
         mixer.SetFloat(MIXER_SOUNDEFFECTS, Mathf.Log10(value) * 20.0f);
     }

@@ -6,16 +6,18 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
+// This is the Audio manager; this script is assigned to an empty game object witch has the task to be the audio manager
 {
 
-    [SerializeField] private AudioMixer _mixer;
-    [SerializeField] private GeneralSoundsConfiguration _sounds; // A list of sounds as a scriptableObject
+    [SerializeField] private AudioMixer _mixer; // The audio mixer
+    [SerializeField] private GeneralSoundsConfiguration _sounds; // A list of sounds as a scriptableObject witch contains the other sounds as a scriptableObject each one
     [SerializeField] private AudioMixerGroup _audioMixerGroup; // There are 2 main groups of the audio mixer: BackgroundMusic and SoundEffects
 
+    // Keys used to save user preferences with user pref
     public const string BACKGROUNDMUSIC_KEY = "backgroundMusicVolume";
     public const string SOUNDEFFECTS_KEY = "soundEffectsVolume";
     
-    public static AudioManager instance;
+    public static AudioManager instance; // There is only one audio manager
 
     public void Awake()
     {
@@ -48,7 +50,7 @@ public class AudioManager : MonoBehaviour
             {
                 outputMixer = "SoundEffects";
             }
-            s.source.outputAudioMixerGroup = _audioMixerGroup.audioMixer.FindMatchingGroups(outputMixer)[0];
+            s.source.outputAudioMixerGroup = _audioMixerGroup.audioMixer.FindMatchingGroups(outputMixer)[0]; // Assignment of the sound to an audio mixer group
         }
     }
 
@@ -74,7 +76,7 @@ public class AudioManager : MonoBehaviour
         s.source.Stop();
     }
 
-    public float GetVolume(string name) // Method to obtain witch is the volume of a specific sound
+    public float GetVolumeScriptableObject(string name) // Method to obtain witch is the volume of a specific sound in its scriptable object
     {
         Sound s = Array.Find(_sounds.sounds.Select(el => el.sound).ToArray(), sound => sound.name == name);
         if (s == null)
@@ -85,7 +87,7 @@ public class AudioManager : MonoBehaviour
         return s.volume;
     }
     
-    public void SetVolume(string name, float volume) // Method to set the volume of a specific sound
+    public void SetVolumeScriptableObject(string name, float volume) // Method to set the volume of a specific sound in its scriptable object
     {
         Sound s = Array.Find(_sounds.sounds.Select(el => el.sound).ToArray(), sound => sound.name == name);
         if (s == null)
@@ -100,6 +102,7 @@ public class AudioManager : MonoBehaviour
     }
 
     private void LoadVolume() // Volume is saved in VolumeSetting.cs
+    // Method to load volume setting from user pref and set them to the audio mixer
     {
         float backgroundMusicVolume = PlayerPrefs.GetFloat(BACKGROUNDMUSIC_KEY, 1f);
         float soundEffectsVolume = PlayerPrefs.GetFloat(SOUNDEFFECTS_KEY, 1f);

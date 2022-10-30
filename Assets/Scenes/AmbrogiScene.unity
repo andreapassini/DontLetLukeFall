@@ -440,6 +440,7 @@ GameObject:
   - component: {fileID: 488243857}
   - component: {fileID: 488243856}
   - component: {fileID: 488243860}
+  - component: {fileID: 488243861}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -543,6 +544,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mixer: {fileID: 24100000, guid: 802dbd0e3604c4cbcb26ce8f5e6a5aab, type: 2}
+--- !u!114 &488243861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 488243855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2845d5a1a1ed242f390068926cf0d422, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _volumeSetting: {fileID: 488243860}
   _backgroundMusicSlider: {fileID: 969090533}
   _soundEffectsSlider: {fileID: 1459495378}
 --- !u!1 &899465825
