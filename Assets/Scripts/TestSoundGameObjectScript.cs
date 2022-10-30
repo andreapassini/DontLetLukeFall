@@ -33,8 +33,8 @@ public class TestSoundGameObjectScript : MonoBehaviour
             firstTime = false;
             return;
         }
-        Debug.Log("The volume is: " + (FindObjectOfType<AudioManager>().getVolume("BackgroungMusic")));
-        FindObjectOfType<AudioManager>().setVolume("BackgroungMusic", 0.2f);
+        Debug.Log("The volume is: " + (FindObjectOfType<AudioManager>().GetVolume("BackgroungMusic")));
+        // FindObjectOfType<AudioManager>().SetVolume("BackgroungMusic", 0.2f);
         // To change the volume you have just to call this function passing the name of te sound to change the volume and the volume
         FindObjectOfType<AudioManager>().Stop("BackgroungMusic");
         // To stop a looped sound (such as the BackgroungMusic) you have just to call this function passing the name of the sound to stop

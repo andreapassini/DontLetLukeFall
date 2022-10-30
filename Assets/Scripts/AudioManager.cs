@@ -1,14 +1,20 @@
 using UnityEngine.Audio;
 using System;
 using System.Linq;
+using UnityEditor.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
 
+    [SerializeField] private AudioMixer _mixer;
     [SerializeField] private GeneralSoundsConfiguration _sounds; // A list of sounds as a scriptableObject
     [SerializeField] private AudioMixerGroup _audioMixerGroup; // There are 2 main groups of the audio mixer: BackgroundMusic and SoundEffects
 
+    public const string BACKGROUNDMUSIC_KEY = "backgroundMusicVolume";
+    public const string SOUNDEFFECTS_KEY = "soundEffectsVolume";
+    
     public static AudioManager instance;
 
     public void Awake()
@@ -25,6 +31,8 @@ public class AudioManager : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(gameObject);
+        
+        LoadVolume();
         
         // This foreach adds AudioSource components: one for each sound
         foreach (SoundConfiguration ss in _sounds.sounds)
@@ -66,7 +74,7 @@ public class AudioManager : MonoBehaviour
         s.source.Stop();
     }
 
-    public float getVolume(string name) // Method to obtain witch is the volume of a specific sound
+    public float GetVolume(string name) // Method to obtain witch is the volume of a specific sound
     {
         Sound s = Array.Find(_sounds.sounds.Select(el => el.sound).ToArray(), sound => sound.name == name);
         if (s == null)
@@ -77,7 +85,7 @@ public class AudioManager : MonoBehaviour
         return s.volume;
     }
     
-    public void setVolume(string name, float volume) // Method to set the volume of a specific sound
+    public void SetVolume(string name, float volume) // Method to set the volume of a specific sound
     {
         Sound s = Array.Find(_sounds.sounds.Select(el => el.sound).ToArray(), sound => sound.name == name);
         if (s == null)
@@ -89,6 +97,14 @@ public class AudioManager : MonoBehaviour
         s.volume = volume; //Persist last saved volume (scriptableObject)
         s.source.volume = volume;
         s.source.UnPause();
+    }
+
+    private void LoadVolume() // Volume is saved in VolumeSetting.cs
+    {
+        float backgroundMusicVolume = PlayerPrefs.GetFloat(BACKGROUNDMUSIC_KEY, 1f);
+        float soundEffectsVolume = PlayerPrefs.GetFloat(SOUNDEFFECTS_KEY, 1f);
+        _mixer.SetFloat(VolumeSetting.MIXER_BACKGROUNDMUSIC, Mathf.Log10(backgroundMusicVolume) * 20);
+        _mixer.SetFloat(VolumeSetting.MIXER_SOUNDEFFECTS, Mathf.Log10(soundEffectsVolume) * 20);
     }
     
 }
