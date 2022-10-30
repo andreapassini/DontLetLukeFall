@@ -20,7 +20,7 @@ public class TestSoundGameObjectScript : MonoBehaviour
 
     private void OnDisable()
     {
-        FindObjectOfType<AudioManager>().Play("BackgroungMusic");
+        AudioManager.instance.Play("BackgroungMusic");
         // To play a sound you have just to call this function passing the name of the sound to play
     }
 
@@ -34,7 +34,7 @@ public class TestSoundGameObjectScript : MonoBehaviour
             return;
         }
         Debug.Log("The volume is: " + (FindObjectOfType<AudioManager>().GetVolumeScriptableObject("BackgroungMusic")));
-        FindObjectOfType<AudioManager>().Stop("BackgroungMusic");
+        AudioManager.instance.Stop("BackgroungMusic");
         // To stop a looped sound (such as the BackgroungMusic) you have just to call this function passing the name of the sound to stop
     }
     
