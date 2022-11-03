@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a880e0140ff64f0383c3f604a794005d, type: 3}
-  m_Name: ActionsSequence
+  m_Script: {fileID: 11500000, guid: 65d12a7f03d04f2393e87f6eb1d21f0f, type: 3}
+  m_Name: MovementParams
   m_EditorClassIdentifier: 
-  actions: 01000000000000000200000000000000
+  _walkSpeed: 1
+  _runIncrement: 1.99
+  _crouchDecrement: 0.39
