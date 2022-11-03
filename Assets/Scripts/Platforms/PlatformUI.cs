@@ -15,6 +15,9 @@ namespace DLLF
 
         private RectTransform _rectTransform;
 
+        private PlatformSlot _slot;
+        private CanvasGroup _canvasGroup;
+
         private void Awake()
         {
             _rectTransform = GetComponent<RectTransform>();
@@ -27,6 +30,8 @@ namespace DLLF
         void Start()
         {
             _cam = Camera.main;
+            _slot = this.GetComponentInParent<PlatformSlot>();
+            _canvasGroup = this.GetComponent<CanvasGroup>();
         }
 
         public void SpawnInWorld()
@@ -35,12 +40,12 @@ namespace DLLF
             spawnPosition = new Vector3(spawnPosition.x, spawnPosition.y, 0);
             GameObject SpawnedPlatform = Instantiate<GameObject>(_realPlatform);
             SpawnedPlatform.transform.position = spawnPosition;
-
+            SpawnedPlatform.transform.localScale = new Vector3(_canvas.scaleFactor * 3, _canvas.scaleFactor * 3, 1);
         }
         public void OnBeginDrag(PointerEventData eventData)
         {
             Debug.Log("onBeginDrag");
-            this.GetComponentInParent<PlatformSlot>().isEmpty = true;
+            _canvasGroup.blocksRaycasts = false;
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -52,8 +57,17 @@ namespace DLLF
         public void OnEndDrag(PointerEventData eventData)
         {
             Debug.Log("OnEndDrag");
-            GetComponent<PlatformUI>().SpawnInWorld();
-            Destroy(this.gameObject);
+            if (!_slot.reselectedPlatform)
+            {
+                _slot.isEmpty = true;
+                SpawnInWorld();
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                _slot.reselectedPlatform = false;
+            }
+            _canvasGroup.blocksRaycasts = true;
         }
 
         public void OnPointerDown(PointerEventData eventData)

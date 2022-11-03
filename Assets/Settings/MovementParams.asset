@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65d12a7f03d04f2393e87f6eb1d21f0f, type: 3}
+  m_Name: MovementParams
+  m_EditorClassIdentifier: 
+  _walkSpeed: 1
+  _runIncrement: 1.99
+  _crouchDecrement: 0.39
