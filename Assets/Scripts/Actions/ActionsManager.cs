@@ -108,13 +108,7 @@ namespace DLLF
             _speed = -movementParams.RunSpeed;
         }
 
-        private IEnumerator FallBackActionCoroutine(ActionType fallbackActionType)
-        {
-            yield return new WaitForSeconds(_actionsDuration);
-            _actionsMapping[fallbackActionType].Invoke();
-        }
 
-        
         public interface IMovementRequest
         {
             public float Speed { get; }
