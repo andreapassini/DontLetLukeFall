@@ -25,9 +25,22 @@ namespace DLLF
 
         private bool _jump;
         private float _speed;
+        private bool _isRunning;
 
         private Queue<ActionType> _actionsSequence = new Queue<ActionType>();
         private Dictionary<ActionType, ActionDelegate> _actionsMapping;
+
+
+        private List<Vector3> actionsPosition = new List<Vector3>();
+        // DEBUG
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            foreach (var pos in actionsPosition)
+            {
+                Gizmos.DrawCube(pos, Vector3.one);
+            }
+        }
 
         private void Awake()
         {
@@ -50,6 +63,7 @@ namespace DLLF
             var movementRequest = new MovementRequest
             {
                 Jump = _jump,
+                UnitsToJump = _jump ? movementParams.GetUnitToCoverForJump(_isRunning) : 0,
                 Speed = _speed,
                 CrouchMultiplier = movementParams.CrouchDecrement
             };
@@ -64,6 +78,8 @@ namespace DLLF
                 ActionDelegate actionDelegate = _actionsMapping[actionToPerform];
                 //_actionUIController.AddActionSprite(_actionsSprites.GetSprite(actionToPerform));
                 float timeToComplete = actionDelegate.Invoke();
+                actionsPosition.Add(transform.position);
+                Debug.Log("Time to complete for action " + actionToPerform + " is  " + timeToComplete + " (current speed: " + _speed + ")");
                 yield return new WaitForSeconds(timeToComplete);
             }
         }
@@ -73,7 +89,8 @@ namespace DLLF
         {
             Debug.Log("Activating jump");
             _jump = true;
-            return 0.0f;
+            // if it is running it will cover more units
+            return GetTime(movementParams.GetUnitToCoverForJump(_isRunning), _speed);
         }
 
         [ContinuousAction(ActionType.WalkRight)]
@@ -81,7 +98,8 @@ namespace DLLF
         {
             Debug.Log("Activating WalkRight");
             _speed = movementParams.WalkSpeed;
-            return 0.0f;
+            _isRunning = false;
+            return GetTime(movementParams.UnitsCoveredPerAction, _speed);
 
         }
         
@@ -91,7 +109,8 @@ namespace DLLF
         {
             Debug.Log("Activating WalkLeft");
             _speed = -movementParams.WalkSpeed;
-            return 0.0f;
+            _isRunning = false;
+            return GetTime(movementParams.UnitsCoveredPerAction, _speed);
 
         }
         
@@ -102,7 +121,8 @@ namespace DLLF
         {
             Debug.Log("Activating RunRight");
             _speed = movementParams.RunSpeed;
-            return 0.0f;
+            _isRunning = true;
+            return GetTime(movementParams.UnitsCoveredPerAction, _speed);
 
         }
         
@@ -113,8 +133,15 @@ namespace DLLF
         {
             Debug.Log("Activating RunLeft");
             _speed = -movementParams.RunSpeed;
-            return 0.0f;
+            _isRunning = true;
+            return GetTime(movementParams.UnitsCoveredPerAction, _speed);
 
+        }
+        
+        // method to calculate time to cover the given space: spaceToCover, at a given speed: speed
+        private float GetTime(float spaceToCover, float speed)
+        {
+            return Mathf.Abs(spaceToCover / speed);
         }
 
 
@@ -122,7 +149,7 @@ namespace DLLF
         {
             public float Speed { get; }
             public bool Jump { get; }
-            public float JumpDuration { get; }
+            public int UnitsToJump { get; set; }
             public bool Crouch { get; }
             public float CrouchMultiplier { get; }
         }
@@ -131,7 +158,7 @@ namespace DLLF
         {
             public float Speed { get; set; }
             public bool Jump { get; set; }
-            public float JumpDuration { get; set; }
+            public int UnitsToJump { get; set; }
             public bool Crouch { get; set; }
             public float CrouchMultiplier { get; set; }
         }

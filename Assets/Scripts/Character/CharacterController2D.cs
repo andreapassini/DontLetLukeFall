@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace DLLF
@@ -18,11 +19,13 @@ namespace DLLF
         [SerializeField] private Collider2D m_CrouchDisableCollider; // A collider that will be disabled when crouching
 
         const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
-        [SerializeField] private bool m_Grounded; // Whether or not the player is grounded.
+        [SerializeField] private bool m_Grounded = true; // Whether or not the player is grounded.
         const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
         private Rigidbody2D m_Rigidbody2D;
         private bool m_FacingRight = true; // For determining which way the player is currently facing.
         private Vector3 m_Velocity = Vector3.zero;
+
+        private float _gravityScale;
 
         [Header("Events")] [Space] public UnityEvent OnLandEvent;
 
@@ -37,33 +40,14 @@ namespace DLLF
         private void Awake()
         {
             m_Rigidbody2D = GetComponent<Rigidbody2D>();
-
+            _gravityScale = m_Rigidbody2D.gravityScale;
             if (OnLandEvent == null)
                 OnLandEvent = new UnityEvent();
 
             if (OnCrouchEvent == null)
                 OnCrouchEvent = new BoolEvent();
         }
-
-        private void FixedUpdate()
-        {
-            bool wasGrounded = m_Grounded;
-            m_Grounded = false;
-
-            // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
-            // This can be done using layers instead but Sample Assets will not overwrite your project settings.
-            Collider2D[] colliders =
-                Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
-            for (int i = 0; i < colliders.Length; i++)
-            {
-                if (colliders[i].gameObject != gameObject)
-                {
-                    m_Grounded = true;
-                    if (!wasGrounded)
-                        OnLandEvent.Invoke();
-                }
-            }
-        }
+        
 
 
         public void Move(ActionsManager.IMovementRequest movementRequest)
@@ -112,12 +96,7 @@ namespace DLLF
                     }
                 }
 
-                // Move the character by finding the target velocity
-                Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
-                // And then smoothing it out and applying it to the character
-                m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity,
-                    m_MovementSmoothing);
-
+                m_Rigidbody2D.velocity = new Vector2(move, m_Rigidbody2D.velocity.y);
                 // If the input is moving the player right and the player is facing left...
                 if (move > 0 && !m_FacingRight)
                 {
@@ -137,15 +116,16 @@ namespace DLLF
             {
                 // Add a vertical force to the player.
                 m_Grounded = false;
-                m_Rigidbody2D.AddForce(ComputeJumpForce(movementRequest.JumpDuration));
+                m_Rigidbody2D.gravityScale = _gravityScale;
+                m_Rigidbody2D.AddForce(ComputeJumpForce(movementRequest.UnitsToJump, movementRequest.Speed));
             }
         }
 
         // compute the force necessary to let the character jump for jumpDuration seconds
         // y gravity is multiplied by minus one because it is already negative
-        private Vector2 ComputeJumpForce(float jumpDuration)
+        private Vector2 ComputeJumpForce(int unitsToCover, float currentSpeed)
         {
-            float desiredYSpeed = .5f * (-Physics2D.gravity.y * m_Rigidbody2D.gravityScale) * jumpDuration;
+            float desiredYSpeed = (unitsToCover * (Physics2D.gravity.magnitude * m_Rigidbody2D.gravityScale)) / (2 * Mathf.Abs(currentSpeed));
             return new Vector2(0, m_Rigidbody2D.mass * (desiredYSpeed / Time.fixedDeltaTime));
         }
 
@@ -159,6 +139,18 @@ namespace DLLF
             Vector3 theScale = transform.localScale;
             theScale.x *= -1;
             transform.localScale = theScale;
+        }
+
+
+        private void OnCollisionEnter2D(Collision2D col)
+        {
+            //TODO collisione con qualsiasi cosa fa atterrare
+            if (!m_Grounded)
+            {
+                //landed
+                m_Grounded = true;
+                m_Rigidbody2D.gravityScale = 0.0f;
+            }
         }
     }
 }
