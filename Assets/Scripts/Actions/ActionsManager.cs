@@ -7,7 +7,10 @@ using UnityEngine.Assertions;
 
 namespace DLLF
 {
-    public delegate void ActionDelegate();
+    // delegate that represents an action
+    // action method will change parameters in order to perform actions and will return the time in seconds needed to
+    // complete the action
+    public delegate float ActionDelegate();
 
     public class ActionsManager : MonoBehaviour
     {
@@ -17,7 +20,6 @@ namespace DLLF
         [SerializeField] private ActionsSequence _actionsTypeSequence;
         [SerializeField] private ActionsSprites _actionsSprites;
 
-        [SerializeField] private float _actionsDuration;
         [SerializeField] private CharacterController2D _characterController;
         [SerializeField] private ActionUIController _actionUIController;
 
@@ -49,7 +51,6 @@ namespace DLLF
             {
                 Jump = _jump,
                 Speed = _speed,
-                JumpDuration = _actionsDuration,
                 CrouchMultiplier = movementParams.CrouchDecrement
             };
             _characterController.Move(movementRequest);
@@ -62,50 +63,58 @@ namespace DLLF
             {
                 ActionDelegate actionDelegate = _actionsMapping[actionToPerform];
                 //_actionUIController.AddActionSprite(_actionsSprites.GetSprite(actionToPerform));
-                actionDelegate.Invoke();
-                yield return new WaitForSeconds(_actionsDuration);
+                float timeToComplete = actionDelegate.Invoke();
+                yield return new WaitForSeconds(timeToComplete);
             }
         }
 
         [ImmediateAction(ActionType.Jump)]
-        private void Jump()
+        private float Jump()
         {
-            //activate jump
             Debug.Log("Activating jump");
             _jump = true;
+            return 0.0f;
         }
 
         [ContinuousAction(ActionType.WalkRight)]
-        private void WalkRight()
+        private float WalkRight()
         {
             Debug.Log("Activating WalkRight");
             _speed = movementParams.WalkSpeed;
+            return 0.0f;
+
         }
         
         
         [ContinuousAction(ActionType.WalkLeft)]
-        private void WalkLeft()
+        private float WalkLeft()
         {
             Debug.Log("Activating WalkLeft");
             _speed = -movementParams.WalkSpeed;
+            return 0.0f;
+
         }
         
         // Continuous action that lets the player run to the right
         // Increase speed to RunSpeed value
         [ContinuousAction(ActionType.RunRight)]
-        private void RunRight()
+        private float RunRight()
         {
             Debug.Log("Activating RunRight");
             _speed = movementParams.RunSpeed;
+            return 0.0f;
+
         }
         
         // Continuous action that lets the player run to the left
         // Increase speed to RunSpeed value
         [ContinuousAction(ActionType.RunLeft)]
-        private void RunLeft()
+        private float RunLeft()
         {
             Debug.Log("Activating RunLeft");
             _speed = -movementParams.RunSpeed;
+            return 0.0f;
+
         }
 
 
