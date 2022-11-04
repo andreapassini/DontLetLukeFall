@@ -31,6 +31,7 @@ namespace DLLF
         private Dictionary<ActionType, ActionDelegate> _actionsMapping;
 
 
+#if UNITY_EDITOR
         private List<Vector3> actionsPosition = new List<Vector3>();
         // DEBUG
         private void OnDrawGizmos()
@@ -41,6 +42,7 @@ namespace DLLF
                 Gizmos.DrawCube(pos, Vector3.one);
             }
         }
+#endif
 
         private void Awake()
         {
@@ -78,7 +80,9 @@ namespace DLLF
                 ActionDelegate actionDelegate = _actionsMapping[actionToPerform];
                 //_actionUIController.AddActionSprite(_actionsSprites.GetSprite(actionToPerform));
                 float timeToComplete = actionDelegate.Invoke();
+                #if UNITY_EDITOR
                 actionsPosition.Add(transform.position);
+                #endif
                 Debug.Log("Time to complete for action " + actionToPerform + " is  " + timeToComplete + " (current speed: " + _speed + ")");
                 yield return new WaitForSeconds(timeToComplete);
             }
@@ -168,10 +172,8 @@ namespace DLLF
         private void AutoLinkActionTypesToMethods()
         {
             var methods = typeof(ActionsManager).GetMethods(BindingFlags.NonPublic | BindingFlags.Instance);
-            Debug.Log(methods.Length);
             foreach (var method in methods)
             {
-                Debug.Log(method.Name);
                 foreach (var customAttribute in method.CustomAttributes)
                 {
                     var attributeType = customAttribute.AttributeType;
