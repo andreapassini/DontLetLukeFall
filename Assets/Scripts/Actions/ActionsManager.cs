@@ -121,7 +121,6 @@ namespace DLLF
             public bool Jump { get; }
             public float JumpDuration { get; }
             public bool Crouch { get; }
-            public float CrouchDamping { get; }
             public float CrouchMultiplier { get; }
         }
         
@@ -131,7 +130,6 @@ namespace DLLF
             public bool Jump { get; set; }
             public float JumpDuration { get; set; }
             public bool Crouch { get; set; }
-            public float CrouchDamping { get; set; }
             public float CrouchMultiplier { get; set; }
         }
 
