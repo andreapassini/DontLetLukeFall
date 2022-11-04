@@ -7,7 +7,10 @@ using UnityEngine.Assertions;
 
 namespace DLLF
 {
-    public delegate void ActionDelegate();
+    // delegate that represents an action
+    // action method will change parameters in order to perform actions and will return the time in seconds needed to
+    // complete the action
+    public delegate float ActionDelegate();
 
     public class ActionsManager : MonoBehaviour
     {
@@ -17,22 +20,29 @@ namespace DLLF
         [SerializeField] private ActionsSequence _actionsTypeSequence;
         [SerializeField] private ActionsSprites _actionsSprites;
 
-        [SerializeField] private float _actionsDuration;
         [SerializeField] private CharacterController2D _characterController;
         [SerializeField] private ActionUIController _actionUIController;
 
-
         private bool _jump;
         private float _speed;
-
-        // TODO: use a bool to know when a platform from an action interrupts the current action
-        // bool that indicates whether the ActionManager has been interrupted during a time-bounded action
-        // private bool _interrupted;
-
+        private bool _isRunning;
 
         private Queue<ActionType> _actionsSequence = new Queue<ActionType>();
         private Dictionary<ActionType, ActionDelegate> _actionsMapping;
-        private Dictionary<ActionType, ActionDelegate> _fallbackActionsMapping;
+
+
+#if UNITY_EDITOR
+        private List<Vector3> actionsPosition = new List<Vector3>();
+        // DEBUG
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            foreach (var pos in actionsPosition)
+            {
+                Gizmos.DrawCube(pos, Vector3.one);
+            }
+        }
+#endif
 
         private void Awake()
         {
@@ -42,7 +52,6 @@ namespace DLLF
             }
 
             _actionsMapping = new Dictionary<ActionType, ActionDelegate>();
-            _fallbackActionsMapping = new Dictionary<ActionType, ActionDelegate>();
             AutoLinkActionTypesToMethods();
         }
         
@@ -56,8 +65,8 @@ namespace DLLF
             var movementRequest = new MovementRequest
             {
                 Jump = _jump,
+                UnitsToJump = _jump ? movementParams.GetUnitToCoverForJump(_isRunning) : 0,
                 Speed = _speed,
-                JumpDuration = _actionsDuration,
                 CrouchMultiplier = movementParams.CrouchDecrement
             };
             _characterController.Move(movementRequest);
@@ -70,71 +79,82 @@ namespace DLLF
             {
                 ActionDelegate actionDelegate = _actionsMapping[actionToPerform];
                 //_actionUIController.AddActionSprite(_actionsSprites.GetSprite(actionToPerform));
-                actionDelegate.Invoke();
-                yield return new WaitForSeconds(_actionsDuration);
+                float timeToComplete = actionDelegate.Invoke();
+                #if UNITY_EDITOR
+                actionsPosition.Add(transform.position);
+                #endif
+                Debug.Log("Time to complete for action " + actionToPerform + " is  " + timeToComplete + " (current speed: " + _speed + ")");
+                yield return new WaitForSeconds(timeToComplete);
             }
         }
 
         [ImmediateAction(ActionType.Jump)]
-        private void Jump()
+        private float Jump()
         {
-            //activate jump
             Debug.Log("Activating jump");
             _jump = true;
+            // if it is running it will cover more units
+            return GetTime(movementParams.GetUnitToCoverForJump(_isRunning), _speed);
         }
 
         [ContinuousAction(ActionType.WalkRight)]
-        private void WalkRight()
+        private float WalkRight()
         {
-            Debug.Log("Activating WR");
+            Debug.Log("Activating WalkRight");
             _speed = movementParams.WalkSpeed;
+            _isRunning = false;
+            return GetTime(movementParams.UnitsCoveredPerAction, _speed);
+
         }
         
         
         [ContinuousAction(ActionType.WalkLeft)]
-        private void WalkLeft()
+        private float WalkLeft()
         {
-            Debug.Log("Activating WL");
+            Debug.Log("Activating WalkLeft");
             _speed = -movementParams.WalkSpeed;
+            _isRunning = false;
+            return GetTime(movementParams.UnitsCoveredPerAction, _speed);
+
         }
         
-        //TODO: aumentare gradualmente la velocità (?)
-        // Time-bounded action that lets the player run to the right
-        // Increase speed to RunSpeed value for X seconds
-        // at the end, fallback to WalkRight action
-        [TimeBoundedAction(ActionType.RunRight, ActionType.WalkRight)]
-        private void RunRight()
+        // Continuous action that lets the player run to the right
+        // Increase speed to RunSpeed value
+        [ContinuousAction(ActionType.RunRight)]
+        private float RunRight()
         {
             Debug.Log("Activating RunRight");
             _speed = movementParams.RunSpeed;
-            StartCoroutine(FallBackActionCoroutine(ActionType.WalkRight));
+            _isRunning = true;
+            return GetTime(movementParams.UnitsCoveredPerAction, _speed);
+
         }
         
-        // Time-bounded action that lets the player run to the left
-        // Increase speed to RunSpeed value for X seconds
-        // at the end, fallback to WalkLeft action
-        [TimeBoundedAction(ActionType.RunLeft,ActionType.WalkLeft)]
-        private void RunLeft()
+        // Continuous action that lets the player run to the left
+        // Increase speed to RunSpeed value
+        [ContinuousAction(ActionType.RunLeft)]
+        private float RunLeft()
         {
             Debug.Log("Activating RunLeft");
             _speed = -movementParams.RunSpeed;
-            StartCoroutine(FallBackActionCoroutine(ActionType.WalkLeft));
-        }
+            _isRunning = true;
+            return GetTime(movementParams.UnitsCoveredPerAction, _speed);
 
-        private IEnumerator FallBackActionCoroutine(ActionType fallbackActionType)
-        {
-            yield return new WaitForSeconds(_actionsDuration);
-            _actionsMapping[fallbackActionType].Invoke();
         }
-
         
+        // method to calculate time to cover the given space: spaceToCover, at a given speed: speed
+        private float GetTime(float spaceToCover, float speed)
+        {
+            return Mathf.Abs(spaceToCover / speed);
+        }
+
+
         public interface IMovementRequest
         {
             public float Speed { get; }
             public bool Jump { get; }
-            public float JumpDuration { get; }
+            public int UnitsToJump { get; set; }
             public bool Crouch { get; }
-            public float CrouchDamping { get; }
             public float CrouchMultiplier { get; }
         }
         
@@ -142,9 +162,8 @@ namespace DLLF
         {
             public float Speed { get; set; }
             public bool Jump { get; set; }
-            public float JumpDuration { get; set; }
+            public int UnitsToJump { get; set; }
             public bool Crouch { get; set; }
-            public float CrouchDamping { get; set; }
             public float CrouchMultiplier { get; set; }
         }
 
@@ -153,38 +172,18 @@ namespace DLLF
         private void AutoLinkActionTypesToMethods()
         {
             var methods = typeof(ActionsManager).GetMethods(BindingFlags.NonPublic | BindingFlags.Instance);
-            Debug.Log(methods.Length);
             foreach (var method in methods)
             {
-                Debug.Log(method.Name);
                 foreach (var customAttribute in method.CustomAttributes)
                 {
                     var attributeType = customAttribute.AttributeType;
-                    if (attributeType == typeof(ImmediateAction) || attributeType == typeof(ContinuousAction) || attributeType == typeof(TimeBoundedAction))
+                    if (attributeType == typeof(ImmediateAction) || attributeType == typeof(ContinuousAction))
                     {
                         Assert.IsNotNull(customAttribute.ConstructorArguments);
                         Assert.IsTrue(customAttribute.ConstructorArguments.Count > 0);
                         ActionType actionType = (ActionType) customAttribute.ConstructorArguments[0].Value;
                         ActionDelegate actionDelegate = (ActionDelegate) Delegate.CreateDelegate(typeof(ActionDelegate), this, method.Name, false);
                         _actionsMapping.Add(actionType, actionDelegate);
-                    }
-                }
-            }
-
-            // second for because a fallback might be a time bounded action too, so i need to have all the actions before setting fallbacks
-            foreach (var method in methods)
-            {
-                foreach (var customAttribute in method.CustomAttributes)
-                {
-                    var attributeType = customAttribute.AttributeType;
-                    if (attributeType == typeof(TimeBoundedAction))
-                    {
-                        Assert.IsNotNull(customAttribute.ConstructorArguments);
-                        Assert.IsTrue(customAttribute.ConstructorArguments.Count > 1);
-                        ActionType actionType = (ActionType) customAttribute.ConstructorArguments[0].Value;
-                        ActionType fallbackActionType = (ActionType) customAttribute.ConstructorArguments[1].Value;
-                        // fallback of action type (timebounded) is the delegate linked to fallbackActionType type
-                        _fallbackActionsMapping.Add(actionType, _actionsMapping[fallbackActionType]);
                     }
                 }
             }
