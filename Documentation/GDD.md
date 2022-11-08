@@ -1,5 +1,15 @@
 # Questions
 
+## Prototype Problem
+### Luke
+Is not falling, check friction with Rigid body and Physic Material
+
+### Platforms
+UI Sprites does not match Platform Size, check factor size in relation with camera size and resolution
+
+### Action UI
+Not loading sprite form Action Sequence
+
 ## Platform Action
 
 When Luke will land on a special platform, its effect will be triggered causing Luke to perform the action specified by the platform.
