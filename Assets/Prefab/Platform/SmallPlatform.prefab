@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6125275327432163269}
   - component: {fileID: 6125275327432163270}
   - component: {fileID: 6125275327432163268}
-  m_Layer: 0
-  m_Name: Square
-  m_TagString: Untagged
+  m_Layer: 7
+  m_Name: CentralTile
+  m_TagString: FixedPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,7 +94,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 6125275327432163271}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5fd007b4f43ebe34a9ee70427e62b778, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -122,9 +122,9 @@ GameObject:
   - component: {fileID: 6125275328198470742}
   - component: {fileID: 6125275328198470740}
   - component: {fileID: 6125275328198470741}
-  m_Layer: 0
-  m_Name: Square (2)
-  m_TagString: Untagged
+  m_Layer: 7
+  m_Name: LeftTile
+  m_TagString: FixedPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -205,7 +205,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 6125275328198470743}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5fd007b4f43ebe34a9ee70427e62b778, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -233,9 +233,9 @@ GameObject:
   - component: {fileID: 6125275329285405077}
   - component: {fileID: 6125275329285405075}
   - component: {fileID: 6125275329285405076}
-  m_Layer: 0
-  m_Name: Square (1)
-  m_TagString: Untagged
+  m_Layer: 7
+  m_Name: RightTile
+  m_TagString: FixedPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -316,7 +316,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 6125275329285405078}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5fd007b4f43ebe34a9ee70427e62b778, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0

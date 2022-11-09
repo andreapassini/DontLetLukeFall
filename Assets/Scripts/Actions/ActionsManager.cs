@@ -36,7 +36,10 @@ namespace DLLF
         // DEBUG
         private void OnDrawGizmos()
         {
-            Gizmos.color = Color.red;
+            Color gizmosColor = Color.red;
+            gizmosColor.a = .5f;
+            Gizmos.color = gizmosColor;
+            
             foreach (var pos in actionsPosition)
             {
                 Gizmos.DrawCube(pos, Vector3.one);
