@@ -6,9 +6,6 @@ namespace DLLF
 {
     public class CharacterController2D : MonoBehaviour
     {
-        [Range(0, .3f)] [SerializeField]
-        private float m_MovementSmoothing = .05f; // How much to smooth out the movement
-
         [SerializeField] private bool m_AirControl = false; // Whether or not a player can steer while jumping;
         [SerializeField] private LayerMask m_WhatIsGround; // A mask determining what is ground to the character
 
@@ -18,7 +15,7 @@ namespace DLLF
         [SerializeField] private Transform m_CeilingCheck; // A position marking where to check for ceilings
         [SerializeField] private Collider2D m_CrouchDisableCollider; // A collider that will be disabled when crouching
 
-        const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
+        const float k_GroundedRadius = .4f; // Radius of the overlap circle to determine if grounded
         [SerializeField] private bool m_Grounded = true; // Whether or not the player is grounded.
         const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
         private Rigidbody2D m_Rigidbody2D;
@@ -41,6 +38,8 @@ namespace DLLF
         {
             m_Rigidbody2D = GetComponent<Rigidbody2D>();
             _gravityScale = m_Rigidbody2D.gravityScale;
+            if (m_Grounded) m_Rigidbody2D.gravityScale = 0f;
+            else m_Rigidbody2D.gravityScale = _gravityScale;
             if (OnLandEvent == null)
                 OnLandEvent = new UnityEvent();
 
@@ -141,16 +140,66 @@ namespace DLLF
             transform.localScale = theScale;
         }
 
+        /*private void FixedUpdate()
+        {
+            bool wasGrounded = m_Grounded;
+            bool collided = false;
 
+            // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
+            // This can be done using layers instead but Sample Assets will not overwrite your project settings.
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                if (colliders[i].gameObject != gameObject)
+                {
+                    Debug.Log("Collision with ground");
+                    collided = true;
+                    break;
+                }
+            }
+
+            //i was on the ground but now i'm falling
+            if (wasGrounded && !collided)
+            {
+                Debug.Log("Falling");
+                m_Rigidbody2D.gravityScale = _gravityScale;
+                m_Grounded = false;
+                return;
+            }
+
+            //i was in air and i've collided, i've to land
+            if (!wasGrounded && collided)
+            {
+                Debug.Log("Landing");
+                m_Rigidbody2D.gravityScale = 0f;
+                m_Grounded = true;
+                return;
+
+            }
+
+        }*/
+
+        //todo: da rifare usando LayerMask
         private void OnCollisionEnter2D(Collision2D col)
         {
-            //TODO collisione con qualsiasi cosa fa atterrare
-            if (!m_Grounded)
+            if (!m_Grounded && col.collider.gameObject.CompareTag("FixedPlatform"))
             {
                 //landed
+                Debug.Log("Collision enter with " + col.collider.gameObject.name);
                 m_Grounded = true;
                 m_Rigidbody2D.gravityScale = 0.0f;
             }
+        }
+
+        private void OnCollisionExit2D(Collision2D col)
+        {
+            if (m_Grounded && col.collider.gameObject.CompareTag("FixedPlatform"))
+            {
+                Debug.Log("Collision exit from " + col.collider.gameObject.name);
+                m_Grounded = false;
+                m_Rigidbody2D.gravityScale = _gravityScale;
+            }
+
         }
     }
 }
