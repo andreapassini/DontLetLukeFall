@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MovementParams
   m_EditorClassIdentifier: 
   unitsCoveredPerAction: 3
-  _walkSpeed: 1
+  _walkSpeed: 3
   _runIncrement: 2
   _crouchDecrement: 0.39
   _runningJumpMultiplier: 2

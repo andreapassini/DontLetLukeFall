@@ -22,7 +22,8 @@ namespace DLLF
         private bool m_FacingRight = true; // For determining which way the player is currently facing.
         private Vector3 m_Velocity = Vector3.zero;
 
-        private float _gravityScale;
+
+        private Collider2D[] _collisionCheckColliders = new Collider2D[10];
 
         [Header("Events")] [Space] public UnityEvent OnLandEvent;
 
@@ -37,16 +38,14 @@ namespace DLLF
         private void Awake()
         {
             m_Rigidbody2D = GetComponent<Rigidbody2D>();
-            _gravityScale = m_Rigidbody2D.gravityScale;
-            if (m_Grounded) m_Rigidbody2D.gravityScale = 0f;
-            else m_Rigidbody2D.gravityScale = _gravityScale;
+            m_Grounded = IsGrounded();
             if (OnLandEvent == null)
                 OnLandEvent = new UnityEvent();
 
             if (OnCrouchEvent == null)
                 OnCrouchEvent = new BoolEvent();
         }
-        
+
 
 
         public void Move(ActionsManager.IMovementRequest movementRequest)
@@ -115,7 +114,6 @@ namespace DLLF
             {
                 // Add a vertical force to the player.
                 m_Grounded = false;
-                m_Rigidbody2D.gravityScale = _gravityScale;
                 m_Rigidbody2D.AddForce(ComputeJumpForce(movementRequest.UnitsToJump, movementRequest.Speed));
             }
         }
@@ -124,7 +122,8 @@ namespace DLLF
         // y gravity is multiplied by minus one because it is already negative
         private Vector2 ComputeJumpForce(int unitsToCover, float currentSpeed)
         {
-            float desiredYSpeed = (unitsToCover * (Physics2D.gravity.magnitude * m_Rigidbody2D.gravityScale)) / (2 * Mathf.Abs(currentSpeed));
+            float desiredYSpeed = (unitsToCover * (Physics2D.gravity.magnitude * m_Rigidbody2D.gravityScale)) /
+                                  (2 * Mathf.Abs(currentSpeed));
             return new Vector2(0, m_Rigidbody2D.mass * (desiredYSpeed / Time.fixedDeltaTime));
         }
 
@@ -140,19 +139,24 @@ namespace DLLF
             transform.localScale = theScale;
         }
 
-        /*private void FixedUpdate()
+        private void FixedUpdate()
+        {
+            m_Grounded = IsGrounded();
+        }
+
+        private bool IsGrounded()
         {
             bool wasGrounded = m_Grounded;
             bool collided = false;
 
             // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
             // This can be done using layers instead but Sample Assets will not overwrite your project settings.
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
-            for (int i = 0; i < colliders.Length; i++)
+            int numCollider = Physics2D.OverlapCircleNonAlloc(m_GroundCheck.position, k_GroundedRadius,
+                _collisionCheckColliders, m_WhatIsGround);
+            for (int i = 0; i < numCollider; i++)
             {
-                if (colliders[i].gameObject != gameObject)
+                if (_collisionCheckColliders[i].gameObject != gameObject)
                 {
-                    Debug.Log("Collision with ground");
                     collided = true;
                     break;
                 }
@@ -162,44 +166,17 @@ namespace DLLF
             if (wasGrounded && !collided)
             {
                 Debug.Log("Falling");
-                m_Rigidbody2D.gravityScale = _gravityScale;
-                m_Grounded = false;
-                return;
+                return false;
             }
 
             //i was in air and i've collided, i've to land
             if (!wasGrounded && collided)
             {
                 Debug.Log("Landing");
-                m_Rigidbody2D.gravityScale = 0f;
-                m_Grounded = true;
-                return;
-
+                return true;
             }
 
-        }*/
-
-        //todo: da rifare usando LayerMask
-        private void OnCollisionEnter2D(Collision2D col)
-        {
-            if (!m_Grounded && col.collider.gameObject.CompareTag("FixedPlatform"))
-            {
-                //landed
-                Debug.Log("Collision enter with " + col.collider.gameObject.name);
-                m_Grounded = true;
-                m_Rigidbody2D.gravityScale = 0.0f;
-            }
-        }
-
-        private void OnCollisionExit2D(Collision2D col)
-        {
-            if (m_Grounded && col.collider.gameObject.CompareTag("FixedPlatform"))
-            {
-                Debug.Log("Collision exit from " + col.collider.gameObject.name);
-                m_Grounded = false;
-                m_Rigidbody2D.gravityScale = _gravityScale;
-            }
-
+            return wasGrounded;
         }
     }
 }
