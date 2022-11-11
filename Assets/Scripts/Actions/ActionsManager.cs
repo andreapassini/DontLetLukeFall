@@ -57,7 +57,7 @@ namespace DLLF
             _actionsMapping = new Dictionary<ActionType, ActionDelegate>();
             AutoLinkActionTypesToMethods();
         }
-        
+
         void Start()
         {
             StartCoroutine(StartActionSequence());
@@ -76,10 +76,31 @@ namespace DLLF
             if (_jump) _jump = false;
         }
 
+        private bool _firstLoadOfTheUI = true;
+
+        private void SendActionSequenceToActionUIController()
+        {
+            List<Sprite> listOfSpriteToLoad = new List<Sprite>();
+            foreach (var action in _actionsTypeSequence.actions)
+            {
+                listOfSpriteToLoad.Add(_actionsSprites.GetSprite(action));
+            }
+            _actionUIController.LoadActionSequence(listOfSpriteToLoad);
+        }
+        
         private IEnumerator StartActionSequence()
         {
             while (_actionsSequence.TryDequeue(out var actionToPerform))
             {
+                if (_firstLoadOfTheUI)
+                {
+                    SendActionSequenceToActionUIController();
+                    _firstLoadOfTheUI = false;
+                }
+                else
+                {
+                    _actionUIController.NextAction();
+                }
                 ActionDelegate actionDelegate = _actionsMapping[actionToPerform];
                 //_actionUIController.AddActionSprite(_actionsSprites.GetSprite(actionToPerform));
                 float timeToComplete = actionDelegate.Invoke();

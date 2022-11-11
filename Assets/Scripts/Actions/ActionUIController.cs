@@ -12,6 +12,7 @@ public class ActionUIController : MonoBehaviour
     [SerializeField] private Image _image; // This is the image to be cloned; this image should be located at the center of the canvas
     private Image[] _displayActionImages; // this array is initialized with 5 elements (Image) via inspector
     // Each Image represent an action
+    private List<Sprite> _actionsSprites; // In this list it will memorized the list of sprite of actions using method LoadActionSequence
 
     private void Awake()
     // At the beginning images are created; these images go to be located where there was the image to be cloned (at the center of the canvas)
@@ -40,23 +41,35 @@ public class ActionUIController : MonoBehaviour
         return _displayActionImages.Length;
     }
 
-    public void AddActionSprite(Sprite imageActionSprite)
-    // Add an action Sprite (image) and shift right the others
-    // When adding an image, it occupies the first positions on right
+    private void UpdateUi() // update the actions ui
     {
+        int j = 0;
         for (int i = _displayActionImages.Length - 1; i >= 0; i--)
         {
-            if (_displayActionImages[i].sprite == null)
+            try
             {
-                _displayActionImages[i].sprite = imageActionSprite;
-                return;
+                _displayActionImages[i].sprite = _actionsSprites[j];
             }
+            catch (ArgumentOutOfRangeException)
+            {
+                _displayActionImages[i].sprite = null;
+            }
+            j++;
         }
-        for (int i = _displayActionImages.Length; i > 1; i--)
-        {
-            _displayActionImages[i - 1].sprite = _displayActionImages[i - 2].sprite;
-        }
-        _displayActionImages[0].sprite = imageActionSprite;
+    }
+
+    public void LoadActionSequence(List<Sprite> actionsSprites) // This method is to load the list of sprite of actions
+    {
+        _actionsSprites = actionsSprites;
+        UpdateUi();
+    }
+
+    public void NextAction() // This method is to pop the current action and let the other shift right
+    {
+        Sprite removed = _actionsSprites[0];
+        _actionsSprites.RemoveAt(0);
+        //_actionsSprites.Add(removed); // add this line to show actions in loop
+        UpdateUi();
     }
 
 }
