@@ -78,32 +78,31 @@ namespace DLLF
 
         private bool _firstLoadOfTheUI = true;
 
-        private void SendActionSequenceToActionUIController()
+        private void SendActionSequenceToActionUIController(float timeToComplete)
         {
             List<Sprite> listOfSpriteToLoad = new List<Sprite>();
             foreach (var action in _actionsTypeSequence.actions)
             {
                 listOfSpriteToLoad.Add(_actionsSprites.GetSprite(action));
             }
-            _actionUIController.LoadActionSequence(listOfSpriteToLoad);
+            _actionUIController.LoadActionSequence(listOfSpriteToLoad, timeToComplete);
         }
         
         private IEnumerator StartActionSequence()
         {
             while (_actionsSequence.TryDequeue(out var actionToPerform))
             {
+                ActionDelegate actionDelegate = _actionsMapping[actionToPerform];
+                float timeToComplete = actionDelegate.Invoke();
                 if (_firstLoadOfTheUI)
                 {
-                    SendActionSequenceToActionUIController();
+                    SendActionSequenceToActionUIController(timeToComplete);
                     _firstLoadOfTheUI = false;
                 }
                 else
                 {
-                    _actionUIController.NextAction();
+                    _actionUIController.NextAction(timeToComplete);
                 }
-                ActionDelegate actionDelegate = _actionsMapping[actionToPerform];
-                //_actionUIController.AddActionSprite(_actionsSprites.GetSprite(actionToPerform));
-                float timeToComplete = actionDelegate.Invoke();
                 #if UNITY_EDITOR
                 actionsPosition.Add(transform.position);
                 #endif
