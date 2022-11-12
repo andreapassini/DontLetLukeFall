@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+public class SettingMenu : MonoBehaviour
 {
 
     [SerializeField] private GameObject _buttonToFirstSelect;
@@ -21,15 +21,9 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    public void goToSettings()
+    public void goToMainMenu()
     {
-        SceneManager.LoadScene("SettingMenu");
+        SceneManager.LoadScene("MainMenu");
     }
 
-    public void quitGame()
-    {
-        Debug.Log("QUIT");
-        Application.Quit();
-    }
-    
 }
