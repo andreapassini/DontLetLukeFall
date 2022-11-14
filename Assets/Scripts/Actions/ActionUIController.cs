@@ -31,14 +31,14 @@ public class ActionUIController : MonoBehaviour
         for (int i = 0; i < _numActionsToDisplay; i++)
         {
             // For each iteration the image to be cloned is cloned and then moved to the next position
-            Image newImage = Instantiate(_image, _image.transform.position, _image.transform.rotation, _canvas.transform);
+            Image newImage = Instantiate(_image, _image.transform.position, _image.transform.rotation, gameObject.transform);
             _displayActionImages[i] = newImage;
             newImage.sprite = null;
             newImage.GetComponent<Animator>().enabled = false;
             _image.rectTransform.position = new Vector3(_image.rectTransform.position.x + imageLenght,
                 _image.rectTransform.position.y, _image.rectTransform.position.z);
         }
-        _imageBar = Instantiate(_image, _image.transform.position, _image.transform.rotation, _canvas.transform); // This is the image to show the bar of the action
+        _imageBar = Instantiate(_image, _image.transform.position, _image.transform.rotation, gameObject.transform); // This is the image to show the bar of the action
         _image.enabled = false; // The original image to be cloned is disabled
         _imageBarAnimator = _imageBar.GetComponent<Animator>();
         _imageBar.transform.position = _displayActionImages[_displayActionImages.Length-1].transform.position; // The bar will be in the same position of the last image
@@ -89,5 +89,6 @@ public class ActionUIController : MonoBehaviour
         _actionsSprites.RemoveAt(0);
         UpdateUi();
     }
+    
 
 }

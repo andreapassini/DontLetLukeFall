@@ -106,6 +106,7 @@ namespace DLLF
                 Debug.Log("Time to complete for action " + actionToPerform + " is  " + timeToComplete + " (current speed: " + _speed + ")");
                 yield return new WaitForSeconds(timeToComplete);
             }
+            Debug.Log("Actions sequence end");
         }
 
         [ImmediateAction(ActionType.Jump)]
