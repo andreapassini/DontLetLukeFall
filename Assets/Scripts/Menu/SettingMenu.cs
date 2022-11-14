@@ -82,12 +82,12 @@ public class SettingMenu : MonoBehaviour
         _volumeSetting.OnDisableSaveLastSettings(_backgroundMusicSlider.value, _soundEffectsSlider.value);
     }
 
-    public void goToMainMenu() // Go to main menu
+    public void GoToMainMenu() // Go to main menu
     {
         SceneManager.LoadScene("MainMenu");
     }
     
-    public void goToCredits() // Go to credits
+    public void GoToCredits() // Go to credits
     {
         SceneManager.LoadScene("Credits");
     }

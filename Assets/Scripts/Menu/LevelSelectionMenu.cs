@@ -1,23 +1,16 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+public class LevelSelectionMenu : MonoBehaviour
 {
-    // This script is to manage the main menu
-
+    // This script is to manage the level selection menu
+    
     [SerializeField] private GameObject _buttonToFirstSelect; // Button to first select when starting to navigate with keyboard
     [SerializeField] private EventSystem _eventSystem; // The event system to witch attach this script
-
-    private void Start()
-    {
-        // Start with the background music
-        AudioManager.instance.Play("luke_intro");
-    }
-
+    
     void Update()
     {
         // Select an element when starting to navigate with keyboard
@@ -29,21 +22,40 @@ public class MainMenu : MonoBehaviour
             }
         }
     }
-    
-    public void GoToLevelSelectionMenu() // Go to level selection menu
+
+    public void ClickedDoubleArrowLeftButton()
     {
-        SceneManager.LoadScene("LevelSelectionMenu");
+        
+    }
+    
+    public void ClickedDoubleArrowRightButton()
+    {
+        
+    }
+    
+    public void ClickedShowedLevel1Button()
+    {
+        
+    }
+    
+    public void ClickedShowedLevel2Button()
+    {
+        
+    }
+    
+    public void ClickedShowedLevel3Button()
+    {
+        
     }
 
+    public void GoToMainMenu() // Go to main menu
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+    
     public void GoToSettings() // Go to settings menu
     {
         SceneManager.LoadScene("SettingMenu");
-    }
-
-    public void QuitGame() // Exit from the game
-    {
-        Debug.Log("QUIT");
-        Application.Quit();
     }
     
 }
