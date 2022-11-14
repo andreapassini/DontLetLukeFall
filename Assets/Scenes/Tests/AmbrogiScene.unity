@@ -207,7 +207,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &696687059
+--- !u!1001 &837810440
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -217,10 +217,6 @@ PrefabInstance:
     - target: {fileID: 8496391978489936024, guid: 52d104e19135e408f80149ec3ffc8c85, type: 3}
       propertyPath: m_Name
       value: ActionUIController
-      objectReference: {fileID: 0}
-    - target: {fileID: 8496391978489936024, guid: 52d104e19135e408f80149ec3ffc8c85, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8496391978489936026, guid: 52d104e19135e408f80149ec3ffc8c85, type: 3}
       propertyPath: _canvas
@@ -232,7 +228,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8496391978489936027, guid: 52d104e19135e408f80149ec3ffc8c85, type: 3}
       propertyPath: m_Pivot.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8496391978489936027, guid: 52d104e19135e408f80149ec3ffc8c85, type: 3}
       propertyPath: m_RootOrder
@@ -244,7 +240,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8496391978489936027, guid: 52d104e19135e408f80149ec3ffc8c85, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8496391978489936027, guid: 52d104e19135e408f80149ec3ffc8c85, type: 3}
       propertyPath: m_AnchorMin.x
@@ -252,7 +248,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8496391978489936027, guid: 52d104e19135e408f80149ec3ffc8c85, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8496391978489936027, guid: 52d104e19135e408f80149ec3ffc8c85, type: 3}
       propertyPath: m_SizeDelta.x
@@ -310,32 +306,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8496391980048804721, guid: 52d104e19135e408f80149ec3ffc8c85, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8496391980048804725, guid: 52d104e19135e408f80149ec3ffc8c85, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52d104e19135e408f80149ec3ffc8c85, type: 3}
---- !u!224 &696687060 stripped
+--- !u!224 &837810441 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8496391978489936027, guid: 52d104e19135e408f80149ec3ffc8c85, type: 3}
-  m_PrefabInstance: {fileID: 696687059}
+  m_PrefabInstance: {fileID: 837810440}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &730839341 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8496391978489936026, guid: 52d104e19135e408f80149ec3ffc8c85, type: 3}
-  m_PrefabInstance: {fileID: 696687059}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46b03649cfef54b0dab4c6117566e075, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1101512180
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,7 +405,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 696687060}
+  - {fileID: 837810441}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -616,6 +593,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1359147972 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8496391978489936026, guid: 52d104e19135e408f80149ec3ffc8c85, type: 3}
+  m_PrefabInstance: {fileID: 837810440}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46b03649cfef54b0dab4c6117566e075, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1434599149
 GameObject:
   m_ObjectHideFlags: 0
@@ -848,7 +836,7 @@ PrefabInstance:
     - target: {fileID: 1336598801, guid: b410c5c1a8ba4b74ea51a58fb3e07779, type: 3}
       propertyPath: _actionUIController
       value: 
-      objectReference: {fileID: 730839341}
+      objectReference: {fileID: 1359147972}
     - target: {fileID: 505195082365519623, guid: b410c5c1a8ba4b74ea51a58fb3e07779, type: 3}
       propertyPath: m_RootOrder
       value: 1
