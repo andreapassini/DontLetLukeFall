@@ -133,6 +133,34 @@ PrefabInstance:
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
       value: 0.51587296
       objectReference: {fileID: 0}
+    - target: {fileID: 529983147679872225, guid: 9ebd0158c866c4a53b9293f3658f4de4, type: 3}
+      propertyPath: _smoothSpeed
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 529983147679872225, guid: 9ebd0158c866c4a53b9293f3658f4de4, type: 3}
+      propertyPath: _phaseMultiplier
+      value: 0.125
+      objectReference: {fileID: 0}
+    - target: {fileID: 529983147679872225, guid: 9ebd0158c866c4a53b9293f3658f4de4, type: 3}
+      propertyPath: _wiggleMagnitude
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 529983147679872225, guid: 9ebd0158c866c4a53b9293f3658f4de4, type: 3}
+      propertyPath: _phaseMultiplierPick
+      value: -0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 529983147679872225, guid: 9ebd0158c866c4a53b9293f3658f4de4, type: 3}
+      propertyPath: _wiggleMagnitudePick
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 529983147679872225, guid: 9ebd0158c866c4a53b9293f3658f4de4, type: 3}
+      propertyPath: _wigglePickSmoothStep
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 529983147679872225, guid: 9ebd0158c866c4a53b9293f3658f4de4, type: 3}
+      propertyPath: _wiggleMagnitudePickDuration
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 529983147679872238, guid: 9ebd0158c866c4a53b9293f3658f4de4, type: 3}
       propertyPath: m_Name
       value: Scarf
