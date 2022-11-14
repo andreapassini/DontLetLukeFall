@@ -12,6 +12,9 @@ public class ActionUIController : MonoBehaviour
     [SerializeField] private Image _image; // This is the image to be cloned; this image should be located at the center of the canvas
     private Image[] _displayActionImages; // this array is initialized with 5 elements (Image) via inspector
     // Each Image represent an action
+    private Image _imageBar; // this is the image with the bar witch has an animation to show the current action
+    private List<Sprite> _actionsSprites; // In this list it will memorized the list of sprite of actions using method LoadActionSequence
+    private const float TimeToCompleteAnimation = 0.5f;
 
     private void Awake()
     // At the beginning images are created; these images go to be located where there was the image to be cloned (at the center of the canvas)
@@ -28,10 +31,13 @@ public class ActionUIController : MonoBehaviour
             Image newImage = Instantiate(_image, _image.transform.position, _image.transform.rotation, _canvas.transform);
             _displayActionImages[i] = newImage;
             newImage.sprite = null;
+            newImage.GetComponent<Animator>().enabled = false;
             _image.rectTransform.position = new Vector3(_image.rectTransform.position.x + imageLenght,
                 _image.rectTransform.position.y, _image.rectTransform.position.z);
         }
+        _imageBar = Instantiate(_image, _image.transform.position, _image.transform.rotation, _canvas.transform); // This is the image to show the bar of the action
         _image.enabled = false; // The original image to be cloned is disabled
+        _imageBar.transform.position = _displayActionImages[_displayActionImages.Length-1].transform.position; // The bar will be in the same position of the last image
     }
 
     public int GetNumberOfDisplayedActions()
@@ -40,23 +46,38 @@ public class ActionUIController : MonoBehaviour
         return _displayActionImages.Length;
     }
 
-    public void AddActionSprite(Sprite imageActionSprite)
-    // Add an action Sprite (image) and shift right the others
-    // When adding an image, it occupies the first positions on right
+    private void UpdateUi() // update the actions ui
     {
+        int j = 0;
         for (int i = _displayActionImages.Length - 1; i >= 0; i--)
         {
-            if (_displayActionImages[i].sprite == null)
+            try
             {
-                _displayActionImages[i].sprite = imageActionSprite;
-                return;
+                _displayActionImages[i].sprite = _actionsSprites[j];
             }
+            catch (ArgumentOutOfRangeException)
+            {
+                _displayActionImages[i].sprite = null;
+            }
+            j++;
         }
-        for (int i = _displayActionImages.Length; i > 1; i--)
-        {
-            _displayActionImages[i - 1].sprite = _displayActionImages[i - 2].sprite;
-        }
-        _displayActionImages[0].sprite = imageActionSprite;
+    }
+
+    public void LoadActionSequence(List<Sprite> actionsSprites, float durationOfTheFirstAction) 
+    // This method is to load the list of sprite of actions
+    {
+        _imageBar.GetComponent<Animator>().speed = TimeToCompleteAnimation / durationOfTheFirstAction;
+        _actionsSprites = actionsSprites;
+        UpdateUi();
+    }
+
+    public void NextAction(float durationOfThisAction)
+    // This method is to pop the current action and let the other shift right
+    {
+        _imageBar.GetComponent<Animator>().speed = TimeToCompleteAnimation / durationOfThisAction;
+        _imageBar.GetComponent<Animator>().SetTrigger("RestartAnimationOfTheBarTrigger");
+        _actionsSprites.RemoveAt(0);
+        UpdateUi();
     }
 
 }

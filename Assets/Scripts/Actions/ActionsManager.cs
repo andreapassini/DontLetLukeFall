@@ -57,7 +57,7 @@ namespace DLLF
             _actionsMapping = new Dictionary<ActionType, ActionDelegate>();
             AutoLinkActionTypesToMethods();
         }
-        
+
         void Start()
         {
             StartCoroutine(StartActionSequence());
@@ -76,13 +76,33 @@ namespace DLLF
             if (_jump) _jump = false;
         }
 
+        private bool _firstLoadOfTheUI = true;
+
+        private void SendActionSequenceToActionUIController(float timeToComplete)
+        {
+            List<Sprite> listOfSpriteToLoad = new List<Sprite>();
+            foreach (var action in _actionsTypeSequence.actions)
+            {
+                listOfSpriteToLoad.Add(_actionsSprites.GetSprite(action));
+            }
+            _actionUIController.LoadActionSequence(listOfSpriteToLoad, timeToComplete);
+        }
+        
         private IEnumerator StartActionSequence()
         {
             while (_actionsSequence.TryDequeue(out var actionToPerform))
             {
                 ActionDelegate actionDelegate = _actionsMapping[actionToPerform];
-                //_actionUIController.AddActionSprite(_actionsSprites.GetSprite(actionToPerform));
                 float timeToComplete = actionDelegate.Invoke();
+                if (_firstLoadOfTheUI)
+                {
+                    SendActionSequenceToActionUIController(timeToComplete);
+                    _firstLoadOfTheUI = false;
+                }
+                else
+                {
+                    _actionUIController.NextAction(timeToComplete);
+                }
                 #if UNITY_EDITOR
                 actionsPosition.Add(transform.position);
                 #endif
