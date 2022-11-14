@@ -75,9 +75,7 @@ namespace DLLF
             _characterController.Move(movementRequest);
             if (_jump) _jump = false;
         }
-
-        private bool _firstLoadOfTheUI = true;
-
+        
         private void SendActionSequenceToActionUIController(float timeToComplete)
         {
             List<Sprite> listOfSpriteToLoad = new List<Sprite>();
@@ -94,10 +92,9 @@ namespace DLLF
             {
                 ActionDelegate actionDelegate = _actionsMapping[actionToPerform];
                 float timeToComplete = actionDelegate.Invoke();
-                if (_firstLoadOfTheUI)
+                if (! _actionUIController.HasBeenLoaded())
                 {
                     SendActionSequenceToActionUIController(timeToComplete);
-                    _firstLoadOfTheUI = false;
                 }
                 else
                 {

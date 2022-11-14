@@ -17,6 +17,7 @@ public class ActionUIController : MonoBehaviour
     private const float TimeToCompleteAnimation = 0.5f;
 
     private Animator _imageBarAnimator;
+    private bool _hasBeenLoaded;
 
     private void Awake()
     // At the beginning images are created; these images go to be located where there was the image to be cloned (at the center of the canvas)
@@ -49,6 +50,11 @@ public class ActionUIController : MonoBehaviour
         return _displayActionImages.Length;
     }
 
+    public bool HasBeenLoaded()
+    {
+        return _hasBeenLoaded;
+    }
+
     private void UpdateUi() // update the actions ui
     {
         int j = 0;
@@ -71,6 +77,7 @@ public class ActionUIController : MonoBehaviour
     {
         _imageBarAnimator.speed = TimeToCompleteAnimation / durationOfTheFirstAction;
         _actionsSprites = actionsSprites;
+        _hasBeenLoaded = true;
         UpdateUi();
     }
 
