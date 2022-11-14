@@ -19,15 +19,23 @@ public class Scarf : MonoBehaviour
     [SerializeField] private Transform _targetDir;
     [Tooltip("The distance between different points of the LineRender of the scarf")]
     [SerializeField] private float _targetDist;
-    [Tooltip("The more is low the most the scarp is short")]
+    [Tooltip("The more is low the most the scarf is short")]
     [SerializeField] private float _smoothSpeed;
     
     [Tooltip("Speed to wiggle the scarf")]
     [SerializeField] private float _wiggleSpeed;
     [Tooltip("Wiggle magnitude of the scarf")]
     [SerializeField] private float _wiggleMagnitude;
+    [Tooltip("Wiggle magnitude PICK of the scarf")]
+    [SerializeField] private float _wiggleMagnitudePick;
+    [Tooltip("Wiggle PICK Duration of the scarf")]
+    [SerializeField] private float _wiggleMagnitudePickDuration;
+    [Tooltip("Wiggle PICK Smooth Step")]
+    [SerializeField] private float _wigglePickSmoothStep;
     [Tooltip("The more is big the most you have waves when scarf is wiggling")]
     [SerializeField] private float _phaseMultiplier;
+    [Tooltip("Wiggle Phase Pick")]
+    [SerializeField] private float _phaseMultiplierPick;
 
     [Tooltip("To adjust the Y pos to attach the scarf")]
     [SerializeField] private float _scarfYAttachment;
@@ -51,6 +59,8 @@ public class Scarf : MonoBehaviour
         _segmentV = new Vector3[_lenght];
         _lineRendTransform.transform.rotation = Quaternion.Euler(0,0,-90); //Normally the scarf will be in bottom (when Luke is stopped)
         _prevPos = _targetDir.transform.position; //starting position of Luke
+
+        StartCoroutine(MagnitudeVariator());
     }
 
     void Update()
@@ -96,4 +106,38 @@ public class Scarf : MonoBehaviour
         this._crouched = crouched;
     }
     
+    private IEnumerator MagnitudeVariator()
+	{
+        float previousMagnitude = _wiggleMagnitude;
+        float previousPhaseMultiplier = _phaseMultiplier;
+        System.Random random = new System.Random();
+
+        while (true) {
+
+            // magnitude pick
+            _wiggleMagnitude += _wiggleMagnitudePick;
+            _phaseMultiplier += _phaseMultiplierPick;
+
+            // Reset pick
+            StartCoroutine(RestPick(_wiggleMagnitudePickDuration, previousMagnitude, previousPhaseMultiplier));
+
+            yield return new WaitForSeconds(random.Next(2, 4));
+        }
+	}
+
+    private IEnumerator RestPick(float timer, float prevMag, float prevPhase)
+	{
+        yield return new WaitForSeconds(timer);
+
+        Debug.Log("Resetting Pick");
+
+        for(int i = 0; i < _wigglePickSmoothStep; i++) {
+            _wiggleMagnitude = Mathf.Lerp(_wiggleMagnitude, prevMag, i / _wigglePickSmoothStep);
+            _phaseMultiplier = Mathf.Lerp(_phaseMultiplier, prevPhase, i / _wigglePickSmoothStep);
+
+            yield return new WaitForSeconds(timer/_wigglePickSmoothStep);
+        }
+
+        //_wiggleMagnitude = prev;
+    }
 }
