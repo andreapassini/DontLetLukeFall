@@ -70,7 +70,7 @@ Spawn action sprite at the feet (to the left) of Luke when a new action is trigg
 ## Action UI Sprites
 Action UI Sprites need to be 1x1 and not stretched
 
-## Full Player Action before starting the level
+## Randomness in Player Platform
 
 # Deadlines
 
