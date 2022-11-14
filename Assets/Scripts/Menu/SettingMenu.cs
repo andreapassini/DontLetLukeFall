@@ -38,6 +38,7 @@ public class SettingMenu : MonoBehaviour
     
     void Update()
     {
+        // Fix maximum slider values
         if (_backgroundMusicSlider.value >= _maxSliderValue)
         {
             _backgroundMusicSlider.value = _maxSliderValue;
@@ -46,6 +47,7 @@ public class SettingMenu : MonoBehaviour
         {
             _soundEffectsSlider.value = _maxSliderValue;
         }
+        // This part of the script is to change the color of the sliders when navigating on them
         if (_eventSystem.currentSelectedGameObject != null)
         {
             if (_eventSystem.currentSelectedGameObject.name == _backgroundMusicSlider.name && _fillBackgroundMusicSlider.color != _selectionSliderColor)
@@ -65,6 +67,7 @@ public class SettingMenu : MonoBehaviour
                 _fillSoundEffectsSlider.color = _oldColor;
             }
         }
+        // Select an element when starting to navigate with keyboard
         if (Input.anyKeyDown && !(Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2)))
         {
             if (!_eventSystem.currentSelectedGameObject)
@@ -79,15 +82,14 @@ public class SettingMenu : MonoBehaviour
         _volumeSetting.OnDisableSaveLastSettings(_backgroundMusicSlider.value, _soundEffectsSlider.value);
     }
 
-    public void goToMainMenu()
+    public void goToMainMenu() // Go to main menu
     {
         SceneManager.LoadScene("MainMenu");
     }
     
-    public void goToCredits()
+    public void goToCredits() // Go to credits
     {
-        SceneManager.LoadScene("MainMenu");
-        // For now goToCredits goes to MainMenu
+        SceneManager.LoadScene("Credits");
     }
 
 }

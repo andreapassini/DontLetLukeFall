@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,12 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] private GameObject _buttonToFirstSelect; // Button to first select when starting to navigate with keyboard
     [SerializeField] private EventSystem _eventSystem; // The event system to witch attach this script
+
+    private void Start()
+    {
+        // Start with the background music
+        AudioManager.instance.Play("luke_intro");
+    }
 
     void Update()
     {
