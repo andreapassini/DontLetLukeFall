@@ -16,6 +16,8 @@ public class ActionUIController : MonoBehaviour
     private List<Sprite> _actionsSprites; // In this list it will memorized the list of sprite of actions using method LoadActionSequence
     private const float TimeToCompleteAnimation = 0.5f;
 
+    private Animator _imageBarAnimator;
+
     private void Awake()
     // At the beginning images are created; these images go to be located where there was the image to be cloned (at the center of the canvas)
     {
@@ -37,11 +39,12 @@ public class ActionUIController : MonoBehaviour
         }
         _imageBar = Instantiate(_image, _image.transform.position, _image.transform.rotation, _canvas.transform); // This is the image to show the bar of the action
         _image.enabled = false; // The original image to be cloned is disabled
+        _imageBarAnimator = _imageBar.GetComponent<Animator>();
         _imageBar.transform.position = _displayActionImages[_displayActionImages.Length-1].transform.position; // The bar will be in the same position of the last image
     }
 
     public int GetNumberOfDisplayedActions()
-    // Return witch number of actions to display
+    // Return the number of displayed actions
     {
         return _displayActionImages.Length;
     }
@@ -64,18 +67,18 @@ public class ActionUIController : MonoBehaviour
     }
 
     public void LoadActionSequence(List<Sprite> actionsSprites, float durationOfTheFirstAction) 
-    // This method is to load the list of sprite of actions
+    // This method loads the list of sprite of actions
     {
-        _imageBar.GetComponent<Animator>().speed = TimeToCompleteAnimation / durationOfTheFirstAction;
+        _imageBarAnimator.speed = TimeToCompleteAnimation / durationOfTheFirstAction;
         _actionsSprites = actionsSprites;
         UpdateUi();
     }
 
     public void NextAction(float durationOfThisAction)
-    // This method is to pop the current action and let the other shift right
+    // This method pops the current action and lets the others shift right
     {
-        _imageBar.GetComponent<Animator>().speed = TimeToCompleteAnimation / durationOfThisAction;
-        _imageBar.GetComponent<Animator>().SetTrigger("RestartAnimationOfTheBarTrigger");
+        _imageBarAnimator.speed = TimeToCompleteAnimation / durationOfThisAction;
+        _imageBarAnimator.SetTrigger("RestartAnimationOfTheBarTrigger");
         _actionsSprites.RemoveAt(0);
         UpdateUi();
     }
