@@ -53,6 +53,7 @@ MonoBehaviour:
   _numActionsToDisplay: 3
   _canvas: {fileID: 0}
   _image: {fileID: 8496391980048804726}
+  _transparentSprite: {fileID: 21300000, guid: 162ee7ac9bce64057ad47a41c156aade, type: 3}
 --- !u!1 &8496391980048804725
 GameObject:
   m_ObjectHideFlags: 0

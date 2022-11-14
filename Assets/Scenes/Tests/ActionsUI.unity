@@ -396,6 +396,10 @@ PrefabInstance:
       propertyPath: _canvas
       value: 
       objectReference: {fileID: 1602849339}
+    - target: {fileID: 8496391978489936026, guid: 52d104e19135e408f80149ec3ffc8c85, type: 3}
+      propertyPath: _transparentSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 162ee7ac9bce64057ad47a41c156aade, type: 3}
     - target: {fileID: 8496391978489936027, guid: 52d104e19135e408f80149ec3ffc8c85, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
