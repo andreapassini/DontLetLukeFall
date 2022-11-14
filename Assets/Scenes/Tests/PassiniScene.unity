@@ -2156,50 +2156,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Luke
       objectReference: {fileID: 0}
-    - target: {fileID: 7294582467351424884, guid: b410c5c1a8ba4b74ea51a58fb3e07779, type: 3}
-      propertyPath: _smoothSpeed
-      value: 0.025
-      objectReference: {fileID: 0}
-    - target: {fileID: 7294582467351424884, guid: b410c5c1a8ba4b74ea51a58fb3e07779, type: 3}
-      propertyPath: _maxWiggleSpeed
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 7294582467351424884, guid: b410c5c1a8ba4b74ea51a58fb3e07779, type: 3}
-      propertyPath: _minWiggleSpeed
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 7294582467351424884, guid: b410c5c1a8ba4b74ea51a58fb3e07779, type: 3}
-      propertyPath: _smoothingSteps
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7294582467351424884, guid: b410c5c1a8ba4b74ea51a58fb3e07779, type: 3}
-      propertyPath: _phaseMultiplier
-      value: 0.125
-      objectReference: {fileID: 0}
-    - target: {fileID: 7294582467351424884, guid: b410c5c1a8ba4b74ea51a58fb3e07779, type: 3}
-      propertyPath: _wiggleMagnitude
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7294582467351424884, guid: b410c5c1a8ba4b74ea51a58fb3e07779, type: 3}
-      propertyPath: _phaseMultiplierPick
-      value: -0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 7294582467351424884, guid: b410c5c1a8ba4b74ea51a58fb3e07779, type: 3}
-      propertyPath: _wiggleMagnitudePick
-      value: 0.65
-      objectReference: {fileID: 0}
-    - target: {fileID: 7294582467351424884, guid: b410c5c1a8ba4b74ea51a58fb3e07779, type: 3}
-      propertyPath: _wigglePickSmoothStep
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7294582467351424884, guid: b410c5c1a8ba4b74ea51a58fb3e07779, type: 3}
-      propertyPath: _wiggleMagnitudeSmoothStep
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7294582467351424884, guid: b410c5c1a8ba4b74ea51a58fb3e07779, type: 3}
-      propertyPath: _wiggleMagnitudePickDuration
-      value: 0.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b410c5c1a8ba4b74ea51a58fb3e07779, type: 3}
 --- !u!1001 &1205761755
