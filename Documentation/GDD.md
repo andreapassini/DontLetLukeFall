@@ -66,6 +66,12 @@ Increase speed of Luke to 1.25
 
 ## Spawn Action Sprite
 Spawn action sprite at the feet (to the left) of Luke when a new action is triggered.
+
+## Action UI Sprites
+Action UI Sprites need to be 1x1 and not streched
+
+## Full Player Action before starting the level
+
 # Deadlines
 
 ![Scadenze](https://user-images.githubusercontent.com/71270277/198230350-f5aa6e99-eb36-4697-acf2-6da03e2db9c1.png)

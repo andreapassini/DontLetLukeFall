@@ -257,7 +257,7 @@ GameObject:
   m_Component:
   - component: {fileID: 135751981}
   m_Layer: 0
-  m_Name: Level_1
+  m_Name: Level1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1274,7 +1274,7 @@ GameObject:
   m_Component:
   - component: {fileID: 872652959}
   m_Layer: 0
-  m_Name: Level_2
+  m_Name: Level2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2137,7 +2137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 505195082365519623, guid: b410c5c1a8ba4b74ea51a58fb3e07779, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.981
+      value: -3.75
       objectReference: {fileID: 0}
     - target: {fileID: 505195082365519623, guid: b410c5c1a8ba4b74ea51a58fb3e07779, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2408,12 +2408,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1351397758}
   m_Layer: 0
-  m_Name: Level_4
+  m_Name: Level4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1351397758
 Transform:
   m_ObjectHideFlags: 0
@@ -2516,12 +2516,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1368663021}
   m_Layer: 0
-  m_Name: Level_3
+  m_Name: Level3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1368663021
 Transform:
   m_ObjectHideFlags: 0
