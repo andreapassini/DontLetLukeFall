@@ -89,6 +89,10 @@ public class ActionUIController : MonoBehaviour
         _actionsSprites.RemoveAt(0);
         UpdateUi();
     }
-    
+
+    public void StopSequence()
+    {
+        gameObject.SetActive(false);
+    }
 
 }

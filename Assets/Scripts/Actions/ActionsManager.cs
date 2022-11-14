@@ -107,6 +107,7 @@ namespace DLLF
                 yield return new WaitForSeconds(timeToComplete);
             }
             Debug.Log("Actions sequence end");
+            _actionUIController.StopSequence();
         }
 
         [ImmediateAction(ActionType.Jump)]
