@@ -63,7 +63,7 @@ namespace DLLF
             StartCoroutine(StartActionSequence());
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             var movementRequest = new MovementRequest
             {
@@ -88,6 +88,7 @@ namespace DLLF
         
         private IEnumerator StartActionSequence()
         {
+            yield return new WaitForSecondsRealtime(2);
             while (_actionsSequence.TryDequeue(out var actionToPerform))
             {
                 ActionDelegate actionDelegate = _actionsMapping[actionToPerform];
@@ -171,23 +172,7 @@ namespace DLLF
         }
 
 
-        public interface IMovementRequest
-        {
-            public float Speed { get; }
-            public bool Jump { get; }
-            public int UnitsToJump { get; set; }
-            public bool Crouch { get; }
-            public float CrouchMultiplier { get; }
-        }
         
-        private struct MovementRequest : IMovementRequest
-        {
-            public float Speed { get; set; }
-            public bool Jump { get; set; }
-            public int UnitsToJump { get; set; }
-            public bool Crouch { get; set; }
-            public float CrouchMultiplier { get; set; }
-        }
 
         #region AutoSetupWithReflection
 

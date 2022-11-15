@@ -1,182 +1,295 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.Events;
 
-namespace DLLF
-{
-    public class CharacterController2D : MonoBehaviour
-    {
-        [SerializeField] private bool m_AirControl = false; // Whether or not a player can steer while jumping;
-        [SerializeField] private LayerMask m_WhatIsGround; // A mask determining what is ground to the character
+namespace DLLF {
+    /// <summary>
+    /// Hey!
+    /// Tarodev here. I built this controller as there was a severe lack of quality & free 2D controllers out there.
+    /// Right now it only contains movement and jumping, but it should be pretty easy to expand... I may even do it myself
+    /// if there's enough interest. You can play and compete for best times here: https://tarodev.itch.io/
+    /// If you hve any questions or would like to brag about your score, come to discord: https://discord.gg/GqeHHnhHpz
+    /// </summary>
+    public class CharacterController2D : MonoBehaviour, IPlayerController {
+        // Public for external hooks
+        public Vector3 Velocity { get; private set; }
+        public MovementRequest MovementRequest { get; private set; }
+        public bool JumpingThisFrame { get; private set; }
+        public bool LandingThisFrame { get; private set; }
+        public Vector3 RawMovement { get; private set; }
+        public bool Grounded => _colDown;
 
-        [SerializeField]
-        private Transform m_GroundCheck; // A position marking where to check if the player is grounded.
+        private Vector3 _lastPosition;
+        private float _currentHorizontalSpeed, _currentVerticalSpeed;
 
-        [SerializeField] private Transform m_CeilingCheck; // A position marking where to check for ceilings
-        [SerializeField] private Collider2D m_CrouchDisableCollider; // A collider that will be disabled when crouching
+        // This is horrible, but for some reason colliders are not fully established when update starts...
+        private bool _active;
+        void Awake() => Invoke(nameof(Activate), 0.5f);
+        void Activate() =>  _active = true;
+        
 
-        const float k_GroundedRadius = .4f; // Radius of the overlap circle to determine if grounded
-        [SerializeField] private bool m_Grounded = true; // Whether or not the player is grounded.
-        const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
-        private Rigidbody2D m_Rigidbody2D;
-        private bool m_FacingRight = true; // For determining which way the player is currently facing.
-        private Vector3 m_Velocity = Vector3.zero;
-
-
-        private Collider2D[] _collisionCheckColliders = new Collider2D[10];
-
-        [Header("Events")] [Space] public UnityEvent OnLandEvent;
-
-        [System.Serializable]
-        public class BoolEvent : UnityEvent<bool>
+        public void Move(MovementRequest movementRequest)
         {
+            if(!_active) return;
+            // Calculate velocity
+            Velocity = (transform.position - _lastPosition) / Time.deltaTime;
+            _lastPosition = transform.position;
+
+            MovementRequest = movementRequest;
+            if (MovementRequest.Jump) _lastJumpPressed = Time.time;
+            
+            RunCollisionChecks();
+
+            CalculateWalk(); // Horizontal movement
+            CalculateJumpApex(); // Affects fall speed, so calculate before gravity
+            CalculateGravity(); // Vertical movement
+            CalculateJump(); // Possibly overrides vertical
+
+            MoveCharacter(); // Actually perform the axis movement
         }
 
-        public BoolEvent OnCrouchEvent;
-        [SerializeField] private bool m_wasCrouching = false;
+        #region Collisions
 
-        private void Awake()
-        {
-            m_Rigidbody2D = GetComponent<Rigidbody2D>();
-            m_Grounded = IsGrounded();
-            if (OnLandEvent == null)
-                OnLandEvent = new UnityEvent();
+        [Header("COLLISION")] [SerializeField] private Bounds _characterBounds;
+        [SerializeField] private LayerMask _groundLayer;
+        [SerializeField] private int _detectorCount = 3;
+        [SerializeField] private float _detectionRayLength = 0.1f;
+        [SerializeField] [Range(0.1f, 0.3f)] private float _rayBuffer = 0.1f; // Prevents side detectors hitting the ground
 
-            if (OnCrouchEvent == null)
-                OnCrouchEvent = new BoolEvent();
+        private RayRange _raysUp, _raysRight, _raysDown, _raysLeft;
+        private bool _colUp, _colRight, _colDown, _colLeft;
+
+        private float _timeLeftGrounded;
+
+        // We use these raycast checks for pre-collision information
+        private void RunCollisionChecks() {
+            // Generate ray ranges. 
+            CalculateRayRanged();
+
+            // Ground
+            LandingThisFrame = false;
+            var groundedCheck = RunDetection(_raysDown);
+            if (_colDown && !groundedCheck) _timeLeftGrounded = Time.time; // Only trigger when first leaving
+            else if (!_colDown && groundedCheck) {
+                _coyoteUsable = true; // Only trigger when first touching
+                LandingThisFrame = true;
+            }
+
+            _colDown = groundedCheck;
+
+            // The rest
+            _colUp = RunDetection(_raysUp);
+            _colLeft = RunDetection(_raysLeft);
+            _colRight = RunDetection(_raysRight);
+
+            bool RunDetection(RayRange range) {
+                return EvaluateRayPositions(range).Any(point => Physics2D.Raycast(point, range.Dir, _detectionRayLength, _groundLayer));
+            }
+        }
+
+        private void CalculateRayRanged() {
+            // This is crying out for some kind of refactor. 
+            var b = new Bounds(transform.position + _characterBounds.center, _characterBounds.size);
+
+            _raysDown = new RayRange(b.min.x + _rayBuffer, b.min.y, b.max.x - _rayBuffer, b.min.y, Vector2.down);
+            _raysUp = new RayRange(b.min.x + _rayBuffer, b.max.y, b.max.x - _rayBuffer, b.max.y, Vector2.up);
+            _raysLeft = new RayRange(b.min.x, b.min.y + _rayBuffer, b.min.x, b.max.y - _rayBuffer, Vector2.left);
+            _raysRight = new RayRange(b.max.x, b.min.y + _rayBuffer, b.max.x, b.max.y - _rayBuffer, Vector2.right);
         }
 
 
+        private IEnumerable<Vector2> EvaluateRayPositions(RayRange range) {
+            for (var i = 0; i < _detectorCount; i++) {
+                var t = (float)i / (_detectorCount - 1);
+                yield return Vector2.Lerp(range.Start, range.End, t);
+            }
+        }
 
-        public void Move(ActionsManager.IMovementRequest movementRequest)
-        {
-            bool mustCrouch = false;
-            // If crouching, check to see if the character can stand up
-            if (!movementRequest.Crouch)
-            {
-                // If the character has a ceiling preventing them from standing up, keep them crouching
-                if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
-                {
-                    mustCrouch = true;
+        private void OnDrawGizmos() {
+            // Bounds
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireCube(transform.position + _characterBounds.center, _characterBounds.size);
+
+            // Rays
+            if (!Application.isPlaying) {
+                CalculateRayRanged();
+                Gizmos.color = Color.blue;
+                foreach (var range in new List<RayRange> { _raysUp, _raysRight, _raysDown, _raysLeft }) {
+                    foreach (var point in EvaluateRayPositions(range)) {
+                        Gizmos.DrawRay(point, range.Dir * _detectionRayLength);
+                    }
                 }
             }
 
-            float move = movementRequest.Speed;
-            //only control the player if grounded or airControl is turned on
-            if (m_Grounded || m_AirControl)
+            if (!Application.isPlaying) return;
+
+            // Draw the future position. Handy for visualizing gravity
+            Gizmos.color = Color.red;
+            var move = new Vector3(_currentHorizontalSpeed, _currentVerticalSpeed) * Time.deltaTime;
+            Gizmos.DrawWireCube(transform.position + _characterBounds.center + move, _characterBounds.size);
+        }
+
+        #endregion
+
+
+        #region Walk
+
+        [Header("WALKING")] [SerializeField] private float _acceleration = 90;
+        [SerializeField] private float _moveClamp = 13;
+        [SerializeField] private float _deAcceleration = 60f;
+        [SerializeField] private float _apexBonus = 2;
+
+        private void CalculateWalk() {
+            _currentHorizontalSpeed = MovementRequest.Speed;
+
+            //PREVIOUS CODE
+            /*if (MovementRequest.Speed != 0)
             {
-                // If crouching
-                if (mustCrouch)
-                {
-                    if (!m_wasCrouching)
-                    {
-                        m_wasCrouching = true;
-                        OnCrouchEvent.Invoke(true);
+
+
+                // Set horizontal move speed
+                _currentHorizontalSpeed += MovementRequest.Speed * _acceleration * Time.deltaTime;
+
+                // clamped by max frame movement
+                _currentHorizontalSpeed = Mathf.Clamp(_currentHorizontalSpeed, -_moveClamp, _moveClamp);
+
+                // Apply bonus at the apex of a jump
+                var apexBonus = Mathf.Sign(MovementRequest.X) * _apexBonus * _apexPoint;
+                _currentHorizontalSpeed += apexBonus * Time.deltaTime;
+            }
+            else {
+                // No input. Let's slow the character down
+                _currentHorizontalSpeed = Mathf.MoveTowards(_currentHorizontalSpeed, 0, _deAcceleration * Time.deltaTime);
+            }*/
+
+            if (_currentHorizontalSpeed > 0 && _colRight || _currentHorizontalSpeed < 0 && _colLeft) {
+                // Don't walk through walls
+                _currentHorizontalSpeed = 0;
+            }
+        }
+
+        #endregion
+
+        #region Gravity
+
+        [Header("GRAVITY")] [SerializeField] private float _fallClamp = -40f;
+        [SerializeField] private float _minFallSpeed = 80f;
+        [SerializeField] private float _maxFallSpeed = 120f;
+        private float _fallSpeed;
+
+        private void CalculateGravity() {
+            if (_colDown) {
+                // Move out of the ground
+                if (_currentVerticalSpeed < 0) _currentVerticalSpeed = 0;
+            }
+            else {
+                // Add downward force while ascending if we ended the jump early
+                var fallSpeed = _endedJumpEarly && _currentVerticalSpeed > 0 ? _fallSpeed * _jumpEndEarlyGravityModifier : _fallSpeed;
+
+                // Fall
+                _currentVerticalSpeed -= fallSpeed * Time.deltaTime;
+
+                // Clamp
+                if (_currentVerticalSpeed < _fallClamp) _currentVerticalSpeed = _fallClamp;
+            }
+        }
+
+        #endregion
+
+        #region Jump
+
+        [Header("JUMPING")] [SerializeField] private float _jumpHeight = 30;
+        [SerializeField] private float _jumpApexThreshold = 10f;
+        [SerializeField] private float _coyoteTimeThreshold = 0.1f;
+        [SerializeField] private float _jumpBuffer = 0.1f;
+        [SerializeField] private float _jumpEndEarlyGravityModifier = 3;
+        private bool _coyoteUsable;
+        private bool _endedJumpEarly = true;
+        private float _apexPoint; // Becomes 1 at the apex of a jump
+        private float _lastJumpPressed;
+        private bool CanUseCoyote => _coyoteUsable && !_colDown && _timeLeftGrounded + _coyoteTimeThreshold > Time.time;
+        private bool HasBufferedJump => _colDown && _lastJumpPressed + _jumpBuffer > Time.time;
+
+        private void CalculateJumpApex() {
+            if (!_colDown) {
+                // Gets stronger the closer to the top of the jump
+                _apexPoint = Mathf.InverseLerp(_jumpApexThreshold, 0, Mathf.Abs(Velocity.y));
+                _fallSpeed = Mathf.Lerp(_minFallSpeed, _maxFallSpeed, _apexPoint);
+            }
+            else {
+                _apexPoint = 0;
+            }
+        }
+
+        private void CalculateJump() {
+            // Jump if: grounded or within coyote threshold || sufficient jump buffer
+            if (MovementRequest.Jump && CanUseCoyote || HasBufferedJump) {
+                _currentVerticalSpeed = _jumpHeight;
+                _endedJumpEarly = false;
+                _coyoteUsable = false;
+                _timeLeftGrounded = float.MinValue;
+                JumpingThisFrame = true;
+            }
+            else {
+                JumpingThisFrame = false;
+            }
+
+            /*// End the jump early if button released
+            if (!_colDown && MovementRequest.JumpUp && !_endedJumpEarly && Velocity.y > 0) {
+                // _currentVerticalSpeed = 0;
+                _endedJumpEarly = true;
+            }*/
+
+            if (_colUp) {
+                if (_currentVerticalSpeed > 0) _currentVerticalSpeed = 0;
+            }
+        }
+
+        #endregion
+
+        #region Move
+
+        [Header("MOVE")] [SerializeField, Tooltip("Raising this value increases collision accuracy at the cost of performance.")]
+        private int _freeColliderIterations = 10;
+
+        // We cast our bounds before moving to avoid future collisions
+        private void MoveCharacter() {
+            var pos = transform.position + _characterBounds.center;
+            RawMovement = new Vector3(_currentHorizontalSpeed, _currentVerticalSpeed); // Used externally
+            var move = RawMovement * Time.deltaTime;
+            var furthestPoint = pos + move;
+
+            // check furthest movement. If nothing hit, move and don't do extra checks
+            var hit = Physics2D.OverlapBox(furthestPoint, _characterBounds.size, 0, _groundLayer);
+            if (!hit) {
+                transform.position += move;
+                return;
+            }
+
+            // otherwise increment away from current pos; see what closest position we can move to
+            var positionToMoveTo = transform.position;
+            for (int i = 1; i < _freeColliderIterations; i++) {
+                // increment to check all but furthestPoint - we did that already
+                var t = (float)i / _freeColliderIterations;
+                var posToTry = Vector2.Lerp(pos, furthestPoint, t);
+
+                if (Physics2D.OverlapBox(posToTry, _characterBounds.size, 0, _groundLayer)) {
+                    transform.position = positionToMoveTo;
+
+                    // We've landed on a corner or hit our head on a ledge. Nudge the player gently
+                    if (i == 1) {
+                        if (_currentVerticalSpeed < 0) _currentVerticalSpeed = 0;
+                        var dir = transform.position - hit.transform.position;
+                        transform.position += dir.normalized * move.magnitude;
                     }
 
-                    // Reduce the speed by the crouchSpeed multiplier
-                    move *= movementRequest.CrouchMultiplier;
-
-                    // Disable one of the colliders when crouching
-                    if (m_CrouchDisableCollider != null)
-                        m_CrouchDisableCollider.enabled = false;
-                }
-                else
-                {
-                    // Enable the collider when not crouching
-                    if (m_CrouchDisableCollider != null)
-                        m_CrouchDisableCollider.enabled = true;
-
-                    if (m_wasCrouching)
-                    {
-                        m_wasCrouching = false;
-                        OnCrouchEvent.Invoke(false);
-                    }
+                    return;
                 }
 
-                m_Rigidbody2D.velocity = new Vector2(move, m_Rigidbody2D.velocity.y);
-                // If the input is moving the player right and the player is facing left...
-                if (move > 0 && !m_FacingRight)
-                {
-                    // ... flip the player.
-                    Flip();
-                }
-                // Otherwise if the input is moving the player left and the player is facing right...
-                else if (move < 0 && m_FacingRight)
-                {
-                    // ... flip the player.
-                    Flip();
-                }
-            }
-
-            // If the player should jump...
-            if (m_Grounded && movementRequest.Jump)
-            {
-                // Add a vertical force to the player.
-                m_Grounded = false;
-                m_Rigidbody2D.AddForce(ComputeJumpForce(movementRequest.UnitsToJump, movementRequest.Speed));
+                positionToMoveTo = posToTry;
             }
         }
 
-        // compute the force necessary to let the character jump for jumpDuration seconds
-        // y gravity is multiplied by minus one because it is already negative
-        private Vector2 ComputeJumpForce(int unitsToCover, float currentSpeed)
-        {
-            float desiredYSpeed = (unitsToCover * (Physics2D.gravity.magnitude * m_Rigidbody2D.gravityScale)) /
-                                  (2 * Mathf.Abs(currentSpeed));
-            return new Vector2(0, m_Rigidbody2D.mass * (desiredYSpeed / Time.fixedDeltaTime));
-        }
-
-
-        private void Flip()
-        {
-            // Switch the way the player is labelled as facing.
-            m_FacingRight = !m_FacingRight;
-
-            // Multiply the player's x local scale by -1.
-            Vector3 theScale = transform.localScale;
-            theScale.x *= -1;
-            transform.localScale = theScale;
-        }
-
-        private void FixedUpdate()
-        {
-            m_Grounded = IsGrounded();
-        }
-
-        private bool IsGrounded()
-        {
-            bool wasGrounded = m_Grounded;
-            bool collided = false;
-
-            // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
-            // This can be done using layers instead but Sample Assets will not overwrite your project settings.
-            int numCollider = Physics2D.OverlapCircleNonAlloc(m_GroundCheck.position, k_GroundedRadius,
-                _collisionCheckColliders, m_WhatIsGround);
-            for (int i = 0; i < numCollider; i++)
-            {
-                if (_collisionCheckColliders[i].gameObject != gameObject)
-                {
-                    collided = true;
-                    break;
-                }
-            }
-
-            //i was on the ground but now i'm falling
-            if (wasGrounded && !collided)
-            {
-                Debug.Log("Falling");
-                return false;
-            }
-
-            //i was in air and i've collided, i've to land
-            if (!wasGrounded && collided)
-            {
-                Debug.Log("Landing");
-                return true;
-            }
-
-            return wasGrounded;
-        }
+        #endregion
     }
 }
