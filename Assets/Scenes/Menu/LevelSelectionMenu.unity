@@ -1197,8 +1197,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da36f982798a4450aba84f629b418188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _levelsInfo: {fileID: 11400000, guid: 8428a29841d4349cb8e08dc55478643d, type: 2}
   _buttonToFirstSelect: {fileID: 1488017635}
   _eventSystem: {fileID: 1401404707}
+  _doubleArrowLeftButton: {fileID: 2044720869}
+  _doubleArrowRightButton: {fileID: 1129588517}
+  _firstImageLevelButton: {fileID: 2026198600}
+  _lastImageLevelButton: {fileID: 1098763226}
+  _imagesLevels:
+  - {fileID: 884097749}
+  - {fileID: 604187373}
+  - {fileID: 1201443530}
 --- !u!1 &1488017635
 GameObject:
   m_ObjectHideFlags: 0

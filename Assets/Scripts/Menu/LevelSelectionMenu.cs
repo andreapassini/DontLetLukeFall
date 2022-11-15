@@ -1,15 +1,88 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using DLLF;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LevelSelectionMenu : MonoBehaviour
 {
     // This script is to manage the level selection menu
-    
+
+    [SerializeField] private LevelsInfo _levelsInfo;
     [SerializeField] private GameObject _buttonToFirstSelect; // Button to first select when starting to navigate with keyboard
     [SerializeField] private EventSystem _eventSystem; // The event system to witch attach this script
+    [SerializeField] private GameObject _doubleArrowLeftButton; // The button to scroll left between levels
+    [SerializeField] private GameObject _doubleArrowRightButton; // The button to scroll right between levels
+    [SerializeField] private GameObject _firstImageLevelButton; // The first selectable image of the three
+    [SerializeField] private GameObject _lastImageLevelButton; // The last selectable image of the three
+    [SerializeField] private Image[] _imagesLevels; // The three images of the three levels
+
+    private int _firstOfTheThreeLevelsToShow = 0; // The index of the first of the three levels to show
+
+    void LoadTheThreeLevelsToShow()
+    {
+        if (_firstOfTheThreeLevelsToShow < 0)
+        {
+            _firstOfTheThreeLevelsToShow = 0;
+        }
+        int numberOfLevelsToShow = _imagesLevels.Length;
+        int firstOfTheThreeLevelsToNotShow = _firstOfTheThreeLevelsToShow + numberOfLevelsToShow;
+        int totalNumberOfLevels = _levelsInfo.levelInfos.Length;
+        if (firstOfTheThreeLevelsToNotShow > totalNumberOfLevels && _firstOfTheThreeLevelsToShow > 0)
+        {
+            _firstOfTheThreeLevelsToShow = _firstOfTheThreeLevelsToShow - 1;
+            LoadTheThreeLevelsToShow();
+            return;
+        }
+        _doubleArrowLeftButton.SetActive(true);
+        if (_firstOfTheThreeLevelsToShow == 0)
+        {
+            if (_eventSystem.currentSelectedGameObject == _doubleArrowLeftButton)
+            {
+                _eventSystem.SetSelectedGameObject(_firstImageLevelButton);
+            }
+            _doubleArrowLeftButton.SetActive(false);
+        }
+        _doubleArrowRightButton.SetActive(true);
+        bool activateDoubleArrowRightButton = false;
+        if (firstOfTheThreeLevelsToNotShow < totalNumberOfLevels)
+        {
+            activateDoubleArrowRightButton = true;
+        }
+        if (activateDoubleArrowRightButton == false)
+        {
+            if (_eventSystem.currentSelectedGameObject == _doubleArrowRightButton)
+            {
+                _eventSystem.SetSelectedGameObject(_lastImageLevelButton);
+            }
+            _doubleArrowRightButton.SetActive(false);
+        }
+        for (int i = 0; i < _imagesLevels.Length; i++)
+        {
+            _imagesLevels[i].enabled = true;
+            if (_firstOfTheThreeLevelsToShow + i >= totalNumberOfLevels)
+            {
+                _imagesLevels[i].enabled = false;
+            }
+            else
+            {
+                _imagesLevels[i].sprite = _levelsInfo.levelInfos[_firstOfTheThreeLevelsToShow + i].image;
+            }
+        }
+    }
+    
+    private void Start()
+    {
+        LoadTheThreeLevelsToShow();
+    }
+
+    // If you are scrolling the double arrow buttons with keyboard arrows
+    private bool _scrollingLeftWithKeyboard = false;
+    private bool _scrollingRightWithKeyboard = false;
     
     void Update()
     {
@@ -21,31 +94,59 @@ public class LevelSelectionMenu : MonoBehaviour
                 _eventSystem.SetSelectedGameObject(_buttonToFirstSelect);
             }
         }
+        // In case a selected object disappears, a default object is selected
+        if (_eventSystem.currentSelectedGameObject && !_eventSystem.currentSelectedGameObject.activeInHierarchy)
+        {
+            _eventSystem.SetSelectedGameObject(_buttonToFirstSelect);
+        }
+        // To manage double arrows button click while navigating with keyboard
+        if (Input.GetKey("left") && _eventSystem.currentSelectedGameObject == _doubleArrowLeftButton)
+        {
+            print("aaaaaa");
+            _scrollingLeftWithKeyboard = true;
+            ClickedDoubleArrowLeftButton();
+        }
+        else
+        {
+            _scrollingLeftWithKeyboard = false;
+        }
+        if (Input.GetKey("right") && _eventSystem.currentSelectedGameObject == _doubleArrowRightButton)
+        {
+            print("aaaaaa");
+            _scrollingRightWithKeyboard = true;
+            ClickedDoubleArrowRightButton();
+        }
+        else
+        {
+            _scrollingRightWithKeyboard = false;
+        }
     }
 
-    public void ClickedDoubleArrowLeftButton()
+    public void ClickedDoubleArrowLeftButton() // Click left arrows to show previous levels
     {
-        
+        _firstOfTheThreeLevelsToShow = _firstOfTheThreeLevelsToShow - 1;
+        LoadTheThreeLevelsToShow();
     }
     
-    public void ClickedDoubleArrowRightButton()
+    public void ClickedDoubleArrowRightButton() // Click right arrows to show next levels
     {
-        
+        _firstOfTheThreeLevelsToShow = _firstOfTheThreeLevelsToShow + 1;
+        LoadTheThreeLevelsToShow();
     }
     
-    public void ClickedShowedLevel1Button()
+    public void ClickedShowedLevel1Button() // Click on the first showed level
     {
-        
+        SceneManager.LoadScene(_levelsInfo.levelInfos[_firstOfTheThreeLevelsToShow + 0].sceneName);
     }
     
-    public void ClickedShowedLevel2Button()
+    public void ClickedShowedLevel2Button() // Click on the second showed level
     {
-        
+        SceneManager.LoadScene(_levelsInfo.levelInfos[_firstOfTheThreeLevelsToShow + 1].sceneName);
     }
     
-    public void ClickedShowedLevel3Button()
+    public void ClickedShowedLevel3Button() // Click on the third showed level
     {
-        
+        SceneManager.LoadScene(_levelsInfo.levelInfos[_firstOfTheThreeLevelsToShow + 2].sceneName);
     }
 
     public void GoToMainMenu() // Go to main menu
