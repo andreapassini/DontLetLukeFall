@@ -102,7 +102,7 @@ namespace DLLF
                     _actionUIController.NextAction(timeToComplete);
                 }
                 #if UNITY_EDITOR
-                actionsPosition.Add(transform.position);
+                actionsPosition.Add(_characterController.transform.position);
                 #endif
                 Debug.Log("Time to complete for action " + actionToPerform + " is  " + timeToComplete + " (current speed: " + _speed + ")");
                 yield return new WaitForSeconds(timeToComplete);
