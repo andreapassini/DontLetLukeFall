@@ -23,9 +23,9 @@ public class LevelSelectionMenu : MonoBehaviour
 
     private int _firstOfTheThreeLevelsToShow = 0; // The index of the first of the three levels to show
 
-    void LoadTheThreeLevelsToShow()
+    private void LoadTheThreeLevelsToShow() // Function to load the three levels to show
     {
-        if (_firstOfTheThreeLevelsToShow < 0)
+        if (_firstOfTheThreeLevelsToShow < 0) // check on the var _firstOfTheThreeLevelsToShow
         {
             _firstOfTheThreeLevelsToShow = 0;
         }
@@ -33,11 +33,13 @@ public class LevelSelectionMenu : MonoBehaviour
         int firstOfTheThreeLevelsToNotShow = _firstOfTheThreeLevelsToShow + numberOfLevelsToShow;
         int totalNumberOfLevels = _levelsInfo.levelInfos.Length;
         if (firstOfTheThreeLevelsToNotShow > totalNumberOfLevels && _firstOfTheThreeLevelsToShow > 0)
+        // Check on the upper bound of var _firstOfTheThreeLevelsToShow
         {
             _firstOfTheThreeLevelsToShow = _firstOfTheThreeLevelsToShow - 1;
             LoadTheThreeLevelsToShow();
             return;
         }
+        // Set active / not active double arrow buttons
         _doubleArrowLeftButton.SetActive(true);
         if (_firstOfTheThreeLevelsToShow == 0)
         {
@@ -61,6 +63,7 @@ public class LevelSelectionMenu : MonoBehaviour
             }
             _doubleArrowRightButton.SetActive(false);
         }
+        // Load images of levels
         for (int i = 0; i < _imagesLevels.Length; i++)
         {
             _imagesLevels[i].enabled = true;
@@ -80,10 +83,6 @@ public class LevelSelectionMenu : MonoBehaviour
         LoadTheThreeLevelsToShow();
     }
 
-    // If you are scrolling the double arrow buttons with keyboard arrows
-    private bool _scrollingLeftWithKeyboard = false;
-    private bool _scrollingRightWithKeyboard = false;
-    
     void Update()
     {
         // Select an element when starting to navigate with keyboard
@@ -99,26 +98,24 @@ public class LevelSelectionMenu : MonoBehaviour
         {
             _eventSystem.SetSelectedGameObject(_buttonToFirstSelect);
         }
+    }
+    
+    void OnGUI()
+    {
         // To manage double arrows button click while navigating with keyboard
-        if (Input.GetKey("left") && _eventSystem.currentSelectedGameObject == _doubleArrowLeftButton)
+        if (Event.current.Equals(Event.KeyboardEvent("left")))
         {
-            print("aaaaaa");
-            _scrollingLeftWithKeyboard = true;
-            ClickedDoubleArrowLeftButton();
+            if (_eventSystem.currentSelectedGameObject == _doubleArrowLeftButton)
+            {
+                ClickedDoubleArrowLeftButton();
+            }
         }
-        else
+        if (Event.current.Equals(Event.KeyboardEvent("right")))
         {
-            _scrollingLeftWithKeyboard = false;
-        }
-        if (Input.GetKey("right") && _eventSystem.currentSelectedGameObject == _doubleArrowRightButton)
-        {
-            print("aaaaaa");
-            _scrollingRightWithKeyboard = true;
-            ClickedDoubleArrowRightButton();
-        }
-        else
-        {
-            _scrollingRightWithKeyboard = false;
+            if (_eventSystem.currentSelectedGameObject == _doubleArrowRightButton)
+            {
+                ClickedDoubleArrowRightButton();
+            }
         }
     }
 
