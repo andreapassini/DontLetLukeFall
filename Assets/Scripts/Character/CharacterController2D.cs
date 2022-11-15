@@ -54,10 +54,14 @@ namespace DLLF {
         [SerializeField] private LayerMask _groundLayer;
         [SerializeField] private int _detectorCount = 3;
         [SerializeField] private float _detectionRayLength = 0.1f;
-        [SerializeField] [Range(0.1f, 0.3f)] private float _rayBuffer = 0.1f; // Prevents side detectors hitting the ground
-
+        [SerializeField] [Range(0.1f, 0.3f)] private float _rayBuffer = 0.1f;
+        // Prevents side detectors hitting the ground
+        [SerializeField] private float _maxStepHeight;
+        
         private RayRange _raysUp, _raysRight, _raysDown, _raysLeft;
         private bool _colUp, _colRight, _colDown, _colLeft;
+        private bool _steppableStep;
+
 
         private float _timeLeftGrounded;
 
@@ -81,6 +85,7 @@ namespace DLLF {
             _colUp = RunDetection(_raysUp);
             _colLeft = RunDetection(_raysLeft);
             _colRight = RunDetection(_raysRight);
+            
 
             bool RunDetection(RayRange range) {
                 return EvaluateRayPositions(range).Any(point => Physics2D.Raycast(point, range.Dir, _detectionRayLength, _groundLayer));
@@ -95,6 +100,14 @@ namespace DLLF {
             _raysUp = new RayRange(b.min.x + _rayBuffer, b.max.y, b.max.x - _rayBuffer, b.max.y, Vector2.up);
             _raysLeft = new RayRange(b.min.x, b.min.y + _rayBuffer, b.min.x, b.max.y - _rayBuffer, Vector2.left);
             _raysRight = new RayRange(b.max.x, b.min.y + _rayBuffer, b.max.x, b.max.y - _rayBuffer, Vector2.right);
+
+            bool _steppableRight = Physics2D.Raycast(new Vector2(b.max.x, b.min.y), Vector2.right, 0.1f) &&
+                                   !Physics2D.Raycast(new Vector2(b.max.x, b.min.y + _maxStepHeight), Vector2.right, 0.1f);
+            bool _steppableLeft = Physics2D.Raycast(new Vector2(b.min.x, b.min.y), Vector2.left, 0.1f) &&
+                                   !Physics2D.Raycast(new Vector2(b.min.x, b.min.y + _maxStepHeight), Vector2.left, 0.1f);
+            _steppableStep = _steppableRight || _steppableLeft;
+            rLowerStepRay = new Ray(new Vector2(b.max.x, b.min.y), Vector2.right * 0.1f);
+            rUpperStepRay = new Ray(new Vector2(b.max.x, b.min.y + _maxStepHeight), Vector2.right * 0.1f);
         }
 
 
@@ -105,6 +118,7 @@ namespace DLLF {
             }
         }
 
+        private Ray rLowerStepRay, rUpperStepRay;
         private void OnDrawGizmos() {
             // Bounds
             Gizmos.color = Color.yellow;
@@ -119,6 +133,9 @@ namespace DLLF {
                         Gizmos.DrawRay(point, range.Dir * _detectionRayLength);
                     }
                 }
+                Gizmos.color = Color.magenta;
+                Gizmos.DrawRay(rLowerStepRay);
+                Gizmos.DrawRay(rUpperStepRay);
             }
 
             if (!Application.isPlaying) return;
@@ -223,7 +240,7 @@ namespace DLLF {
 
         private void CalculateJump() {
             // Jump if: grounded or within coyote threshold || sufficient jump buffer
-            if (MovementRequest.Jump && CanUseCoyote || HasBufferedJump) {
+            if (_steppableStep || (MovementRequest.Jump && CanUseCoyote || HasBufferedJump)) {
                 _currentVerticalSpeed = _jumpHeight;
                 _endedJumpEarly = false;
                 _coyoteUsable = false;
