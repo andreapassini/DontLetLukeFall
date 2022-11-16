@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance; // The game manager is a singleton
 
     public GameState state;
+    
+    public string levelToPlay; // TO FIX witch tipe of var to represent a level? (string?)
 
     public static event Action<GameState> OnGameStateChanged;
 
@@ -30,6 +32,7 @@ public class GameManager : MonoBehaviour
             case GameState.SelectionLevel:
                 break;
             case GameState.Playing:
+                HandlePlaying();
                 break;
             case GameState.Lose:
                 HandleLose();
@@ -42,6 +45,22 @@ public class GameManager : MonoBehaviour
         }
 
         OnGameStateChanged?.Invoke(newState);
+    }
+
+    public void SetLevelToPlay(string newLevelToPlay)
+    {
+        levelToPlay = newLevelToPlay;
+    }
+    
+    public void NextLevelToPlay()
+    {
+        // TO IMPLEMENT update var levelToPlay with the next level to play
+    }
+
+    private void HandlePlaying()
+    {
+        // TO IMPLEMENT show the scene with the level to play
+        // (To know witch level to play check levelToPlay var)
     }
 
     private void HandleLose()
