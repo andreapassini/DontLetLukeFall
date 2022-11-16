@@ -107,6 +107,7 @@ MonoBehaviour:
   _detectorCount: 3
   _detectionRayLength: 0.1
   _rayBuffer: 0.1
+  _maxStepHeight: 1
   _acceleration: 90
   _moveClamp: 13
   _deAcceleration: 60
@@ -115,6 +116,7 @@ MonoBehaviour:
   _minFallSpeed: 80
   _maxFallSpeed: 120
   _jumpHeight: 30
+  _stepJumpHeight: 10
   _jumpApexThreshold: 10
   _coyoteTimeThreshold: 0.1
   _jumpBuffer: 0.1
@@ -145,7 +147,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 529983147679872239, guid: 9ebd0158c866c4a53b9293f3658f4de4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.24
       objectReference: {fileID: 0}
     - target: {fileID: 529983147679872239, guid: 9ebd0158c866c4a53b9293f3658f4de4, type: 3}
       propertyPath: m_LocalPosition.z
