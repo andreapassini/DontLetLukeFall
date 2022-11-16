@@ -3732,7 +3732,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6125275329367079673, guid: f38afb077ec87a2418ad197c91ddbf4e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.5
+      value: -7.5
       objectReference: {fileID: 0}
     - target: {fileID: 6125275329367079673, guid: f38afb077ec87a2418ad197c91ddbf4e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4202,12 +4202,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1806068762}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14, y: 1.25, z: -10}
+  m_LocalPosition: {x: 0, y: 1.25, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1186984612}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1835494146
 PrefabInstance:
@@ -4528,6 +4528,39 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6125275329367079673, guid: f38afb077ec87a2418ad197c91ddbf4e, type: 3}
   m_PrefabInstance: {fileID: 1978818091}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2039385000 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 505195082365519626, guid: b410c5c1a8ba4b74ea51a58fb3e07779, type: 3}
+  m_PrefabInstance: {fileID: 1186984611}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2039385001 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 505195082365519616, guid: b410c5c1a8ba4b74ea51a58fb3e07779, type: 3}
+  m_PrefabInstance: {fileID: 1186984611}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039385000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60702c54ff1a4560b1e903f088578ae5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2039385003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039385000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12b3b256e05f4625a43f63f52f5278d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementParams: {fileID: 11400000, guid: 50dca298277c09c43abef4d868fc82b6, type: 2}
+  _actionsTypeSequence: {fileID: 11400000, guid: 4aad3a65434f40e409a42e55dcc1aeba, type: 2}
+  _actionsSprites: {fileID: 11400000, guid: f497042f3b253d64eada687dc458e496, type: 2}
+  _characterController: {fileID: 2039385001}
+  _actionUIController: {fileID: 506128377}
 --- !u!1001 &2040399463
 PrefabInstance:
   m_ObjectHideFlags: 0
