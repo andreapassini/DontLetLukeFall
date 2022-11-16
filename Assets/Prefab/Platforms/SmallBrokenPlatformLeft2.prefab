@@ -16,7 +16,7 @@ GameObject:
   m_TagString: FixedPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6125275327432163269
 Transform:
@@ -127,7 +127,7 @@ GameObject:
   m_TagString: FixedPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6125275329285405077
 Transform:
@@ -236,7 +236,7 @@ GameObject:
   m_TagString: FixedPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6125275329367079673
 Transform:
