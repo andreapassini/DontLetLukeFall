@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -63,16 +64,14 @@ public class GameManager : MonoBehaviour
         // (To know witch level to play check levelToPlay var)
     }
 
-    private void HandleLose()
+    private void HandleLose() // Show the screen you lose
     {
-        // TO IMPLEMENT Show the screen you lose
-        // (in this screen there is a button to repeat the level or to return back to the main menu)
+        SceneManager.LoadScene("YouLoseWon");
     }
     
-    private void HandleWin()
+    private void HandleWin() // Show the screen you won
     {
-        // TO IMPLEMENT Show the screen you won
-        // (in this screen there is a button to repeat the level, to go to the next level or to return back to the main menu)
+        SceneManager.LoadScene("YouLoseWon");
     }
 
 }
