@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4428265817256897235}
   - component: {fileID: 4428265817256897234}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,9 +96,9 @@ GameObject:
   - component: {fileID: 8076776616798767886}
   - component: {fileID: 8076776616798767887}
   - component: {fileID: 7579048373515447167}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: ShortRamp
-  m_TagString: PlayerPlatform
+  m_TagString: FixedPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -208,7 +208,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4428265818126249301}
   - component: {fileID: 4428265818126249300}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Square (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +292,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4428265818466030978}
   - component: {fileID: 4428265818466030977}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -376,7 +376,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8429255344247427450}
   - component: {fileID: 8460710782679787456}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Square (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -460,7 +460,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7756618368063700444}
   - component: {fileID: 5970135087939071957}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Square (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
