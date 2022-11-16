@@ -61,16 +61,18 @@ namespace DLLF {
         private RayRange _raysUp, _raysRight, _raysDown, _raysLeft;
         private bool _colUp, _colRight, _colDown, _colLeft;
         
-        private Ray _rLowerStepRay, _rUpperStepRay, _lLowerStepRay, _lUpperStepRay;
-        private bool _mustStepOnObstacle;
+        private Ray[] _stepRays = new Ray[4];
+        private bool _canStepOnObstacle;
 
 
         private float _timeLeftGrounded;
 
         // We use these raycast checks for pre-collision information
         private void RunCollisionChecks() {
+            var b = new Bounds(transform.position + _characterBounds.center, _characterBounds.size);
+
             // Generate ray ranges. 
-            CalculateRayRanged();
+            CalculateRayRanged(b);
 
             // Ground
             LandingThisFrame = false;
@@ -88,30 +90,41 @@ namespace DLLF {
             _colLeft = RunDetection(_raysLeft);
             _colRight = RunDetection(_raysRight);
             
+            // Step detection
+            CalculateStepOnObstacle(b);
 
             bool RunDetection(RayRange range) {
                 return EvaluateRayPositions(range).Any(point => Physics2D.Raycast(point, range.Dir, _detectionRayLength, _groundLayer));
             }
         }
 
-        private void CalculateRayRanged() {
+        private void CalculateRayRanged(Bounds b) {
             // This is crying out for some kind of refactor. 
-            var b = new Bounds(transform.position + _characterBounds.center, _characterBounds.size);
-
             _raysDown = new RayRange(b.min.x + _rayBuffer, b.min.y, b.max.x - _rayBuffer, b.min.y, Vector2.down);
             _raysUp = new RayRange(b.min.x + _rayBuffer, b.max.y, b.max.x - _rayBuffer, b.max.y, Vector2.up);
             _raysLeft = new RayRange(b.min.x, b.min.y + _rayBuffer, b.min.x, b.max.y - _rayBuffer, Vector2.left);
             _raysRight = new RayRange(b.max.x, b.min.y + _rayBuffer, b.max.x, b.max.y - _rayBuffer, Vector2.right);
+        }
 
-            bool _steppableRight = Physics2D.Raycast(new Vector2(b.max.x, b.min.y), Vector2.right, 0.1f) &&
+        private void CalculateStepOnObstacle(Bounds b)
+        {
+            ComputeStepRays(b);
+
+            //If lower ray step detector detects a collision, and the upper does not --> we can step on the obstacle
+            bool stepOnTheRight = Physics2D.Raycast(new Vector2(b.max.x, b.min.y), Vector2.right, 0.1f) &&
                                    !Physics2D.Raycast(new Vector2(b.max.x, b.min.y + _maxStepHeight), Vector2.right, 0.1f);
-            bool _steppableLeft = Physics2D.Raycast(new Vector2(b.min.x, b.min.y), Vector2.left, 0.1f) &&
-                                   !Physics2D.Raycast(new Vector2(b.min.x, b.min.y + _maxStepHeight), Vector2.left, 0.1f);
-            _mustStepOnObstacle = _currentHorizontalSpeed.CompareTo(0.0f) == 0 && (_steppableRight || _steppableLeft);
-            _rLowerStepRay = new Ray(new Vector2(b.max.x, b.min.y), Vector2.right  );
-            _rUpperStepRay = new Ray(new Vector2(b.max.x, b.min.y + _maxStepHeight), Vector2.right);
-            _lLowerStepRay = new Ray(new Vector2(b.min.x, b.min.y), Vector2.left  );
-            _lUpperStepRay = new Ray(new Vector2(b.min.x, b.min.y + _maxStepHeight), Vector2.left);
+            bool stepOnTheLeft = Physics2D.Raycast(new Vector2(b.min.x, b.min.y), Vector2.left, 0.1f) &&
+                                  !Physics2D.Raycast(new Vector2(b.min.x, b.min.y + _maxStepHeight), Vector2.left, 0.1f);
+            _canStepOnObstacle = _currentHorizontalSpeed.CompareTo(0.0f) == 0 && (stepOnTheRight || stepOnTheLeft);
+            
+        }
+
+        private void ComputeStepRays(Bounds b)
+        {
+            _stepRays[0] = new Ray(new Vector2(b.max.x, b.min.y), Vector2.right);
+            _stepRays[1] = new Ray(new Vector2(b.max.x, b.min.y + _maxStepHeight), Vector2.right);
+            _stepRays[2] = new Ray(new Vector2(b.min.x, b.min.y), Vector2.left);
+            _stepRays[3] = new Ray(new Vector2(b.min.x, b.min.y + _maxStepHeight), Vector2.left);
         }
 
 
@@ -129,18 +142,22 @@ namespace DLLF {
 
             // Rays
             if (!Application.isPlaying) {
-                CalculateRayRanged();
+                //collision rays
+                var b = new Bounds(transform.position + _characterBounds.center, _characterBounds.size);
+                CalculateRayRanged(b);
                 Gizmos.color = Color.blue;
                 foreach (var range in new List<RayRange> { _raysUp, _raysRight, _raysDown, _raysLeft }) {
                     foreach (var point in EvaluateRayPositions(range)) {
                         Gizmos.DrawRay(point, range.Dir * _detectionRayLength);
                     }
                 }
+                //step rays
+                ComputeStepRays(b);
                 Gizmos.color = Color.magenta;
-                Gizmos.DrawRay(_rLowerStepRay.origin, _rLowerStepRay.direction * 0.1f);
-                Gizmos.DrawRay(_rUpperStepRay.origin, _rUpperStepRay.direction * 0.1f);
-                Gizmos.DrawRay(_lLowerStepRay.origin, _lLowerStepRay.direction * 0.1f);
-                Gizmos.DrawRay(_lUpperStepRay.origin, _lUpperStepRay.direction * 0.1f);
+                foreach (var ray in _stepRays)
+                {
+                    Gizmos.DrawRay(ray.origin, ray.direction * 0.1f);
+                }
             }
 
             if (!Application.isPlaying) return;
@@ -245,7 +262,7 @@ namespace DLLF {
 
         private void CalculateJump() {
             // Jump if: grounded or within coyote threshold || sufficient jump buffer
-            if (_mustStepOnObstacle || (MovementRequest.Jump && CanUseCoyote || HasBufferedJump)) {
+            if (_canStepOnObstacle || (MovementRequest.Jump && CanUseCoyote || HasBufferedJump)) {
                 _currentVerticalSpeed = _jumpHeight;
                 _endedJumpEarly = false;
                 _coyoteUsable = false;
