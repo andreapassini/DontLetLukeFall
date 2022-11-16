@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static GameManager Instance; // The game manager is a singleton
 
     public GameState state;
 
@@ -18,10 +18,10 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        UpdateGameState(GameState.SelectionLevel);
+        UpdateGameState(GameState.SelectionLevel); // Setting the initial state
     }
 
-    public void UpdateGameState(GameState newState)
+    public void UpdateGameState(GameState newState) // A public method to change the state
     {
         state = newState;
         
@@ -32,8 +32,10 @@ public class GameManager : MonoBehaviour
             case GameState.Playing:
                 break;
             case GameState.Lose:
+                HandleLose();
                 break;
             case GameState.Win:
+                HandleWin();
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
@@ -42,12 +44,41 @@ public class GameManager : MonoBehaviour
         OnGameStateChanged?.Invoke(newState);
     }
 
+    private void HandleLose()
+    {
+        // TO IMPLEMENT Show the screen you lose
+        // (in this screen there is a button to repeat the level or to return back to the main menu)
+    }
+    
+    private void HandleWin()
+    {
+        // TO IMPLEMENT Show the screen you won
+        // (in this screen there is a button to repeat the level, to go to the next level or to return back to the main menu)
+    }
+
 }
 
-public enum GameState
+public enum GameState // The possible states of the game
 {
     SelectionLevel,
     Playing,
     Lose,
     Win
 }
+
+/*
+ * To subscribe on an event:
+ * void Awake(){
+ *  GameManager.OnGameStateChanged += newMethod
+ * }
+ * To unsubscribe on an event:
+ * void OnDestroy(){
+ *  GameManager.OnGameStateChanged -= newMethod
+ * }
+ * New method:
+ * private void newMethod(GameState state){
+ *  //content of the method
+ * }
+ * To update the state:
+ * GameManager.instance.UpdateGameState(.....);
+ */
