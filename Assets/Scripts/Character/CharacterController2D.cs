@@ -54,8 +54,8 @@ namespace DLLF {
         [SerializeField] private LayerMask _groundLayer;
         [SerializeField] private int _detectorCount = 3;
         [SerializeField] private float _detectionRayLength = 0.1f;
-        [SerializeField] [Range(0.1f, 0.3f)] private float _rayBuffer = 0.1f;
         // Prevents side detectors hitting the ground
+        [SerializeField] [Range(0.1f, 0.3f)] private float _rayBuffer = 0.1f;
         [SerializeField] private float _maxStepHeight;
         
         private RayRange _raysUp, _raysRight, _raysDown, _raysLeft;
@@ -63,8 +63,7 @@ namespace DLLF {
         
         private Ray[] _stepRays = new Ray[4];
         private bool _canStepOnObstacle;
-
-
+        
         private float _timeLeftGrounded;
 
         // We use these raycast checks for pre-collision information
@@ -111,9 +110,9 @@ namespace DLLF {
             ComputeStepRays(b);
 
             //If lower ray step detector detects a collision, and the upper does not --> we can step on the obstacle
-            bool stepOnTheRight = Physics2D.Raycast(new Vector2(b.max.x, b.min.y), Vector2.right, 0.1f) &&
+            bool stepOnTheRight = Physics2D.Raycast(new Vector2(b.max.x, b.min.y + _rayBuffer), Vector2.right, 0.1f) &&
                                    !Physics2D.Raycast(new Vector2(b.max.x, b.min.y + _maxStepHeight), Vector2.right, 0.1f);
-            bool stepOnTheLeft = Physics2D.Raycast(new Vector2(b.min.x, b.min.y), Vector2.left, 0.1f) &&
+            bool stepOnTheLeft = Physics2D.Raycast(new Vector2(b.min.x, b.min.y + _rayBuffer), Vector2.left, 0.1f) &&
                                   !Physics2D.Raycast(new Vector2(b.min.x, b.min.y + _maxStepHeight), Vector2.left, 0.1f);
             _canStepOnObstacle = _currentHorizontalSpeed.CompareTo(0.0f) == 0 && (stepOnTheRight || stepOnTheLeft);
             
@@ -121,9 +120,9 @@ namespace DLLF {
 
         private void ComputeStepRays(Bounds b)
         {
-            _stepRays[0] = new Ray(new Vector2(b.max.x, b.min.y), Vector2.right);
+            _stepRays[0] = new Ray(new Vector2(b.max.x, b.min.y + _rayBuffer), Vector2.right);
             _stepRays[1] = new Ray(new Vector2(b.max.x, b.min.y + _maxStepHeight), Vector2.right);
-            _stepRays[2] = new Ray(new Vector2(b.min.x, b.min.y), Vector2.left);
+            _stepRays[2] = new Ray(new Vector2(b.min.x, b.min.y + _rayBuffer), Vector2.left);
             _stepRays[3] = new Ray(new Vector2(b.min.x, b.min.y + _maxStepHeight), Vector2.left);
         }
 
@@ -238,6 +237,7 @@ namespace DLLF {
         #region Jump
 
         [Header("JUMPING")] [SerializeField] private float _jumpHeight = 30;
+        [SerializeField] private float _stepJumpHeight = 10;
         [SerializeField] private float _jumpApexThreshold = 10f;
         [SerializeField] private float _coyoteTimeThreshold = 0.1f;
         [SerializeField] private float _jumpBuffer = 0.1f;
@@ -262,8 +262,15 @@ namespace DLLF {
 
         private void CalculateJump() {
             // Jump if: grounded or within coyote threshold || sufficient jump buffer
-            if (_canStepOnObstacle || (MovementRequest.Jump && CanUseCoyote || HasBufferedJump)) {
+            if (MovementRequest.Jump && CanUseCoyote || HasBufferedJump) {
                 _currentVerticalSpeed = _jumpHeight;
+                _endedJumpEarly = false;
+                _coyoteUsable = false;
+                _timeLeftGrounded = float.MinValue;
+                JumpingThisFrame = true;
+            } else if (_canStepOnObstacle)
+            {
+                _currentVerticalSpeed = _stepJumpHeight;
                 _endedJumpEarly = false;
                 _coyoteUsable = false;
                 _timeLeftGrounded = float.MinValue;
