@@ -12,7 +12,7 @@ GameObject:
   m_Layer: 7
   m_Name: SmallPlatformDistanceCalculator
   m_TagString: FixedPlatform
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
   m_IsActive: 1
