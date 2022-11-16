@@ -60,7 +60,9 @@ namespace DLLF {
         
         private RayRange _raysUp, _raysRight, _raysDown, _raysLeft;
         private bool _colUp, _colRight, _colDown, _colLeft;
-        private bool _steppableStep;
+        
+        private Ray _rLowerStepRay, _rUpperStepRay, _lLowerStepRay, _lUpperStepRay;
+        private bool _mustStepOnObstacle;
 
 
         private float _timeLeftGrounded;
@@ -105,9 +107,11 @@ namespace DLLF {
                                    !Physics2D.Raycast(new Vector2(b.max.x, b.min.y + _maxStepHeight), Vector2.right, 0.1f);
             bool _steppableLeft = Physics2D.Raycast(new Vector2(b.min.x, b.min.y), Vector2.left, 0.1f) &&
                                    !Physics2D.Raycast(new Vector2(b.min.x, b.min.y + _maxStepHeight), Vector2.left, 0.1f);
-            _steppableStep = _steppableRight || _steppableLeft;
-            rLowerStepRay = new Ray(new Vector2(b.max.x, b.min.y), Vector2.right * 0.1f);
-            rUpperStepRay = new Ray(new Vector2(b.max.x, b.min.y + _maxStepHeight), Vector2.right * 0.1f);
+            _mustStepOnObstacle = _currentHorizontalSpeed.CompareTo(0.0f) == 0 && (_steppableRight || _steppableLeft);
+            _rLowerStepRay = new Ray(new Vector2(b.max.x, b.min.y), Vector2.right  );
+            _rUpperStepRay = new Ray(new Vector2(b.max.x, b.min.y + _maxStepHeight), Vector2.right);
+            _lLowerStepRay = new Ray(new Vector2(b.min.x, b.min.y), Vector2.left  );
+            _lUpperStepRay = new Ray(new Vector2(b.min.x, b.min.y + _maxStepHeight), Vector2.left);
         }
 
 
@@ -118,7 +122,6 @@ namespace DLLF {
             }
         }
 
-        private Ray rLowerStepRay, rUpperStepRay;
         private void OnDrawGizmos() {
             // Bounds
             Gizmos.color = Color.yellow;
@@ -134,8 +137,10 @@ namespace DLLF {
                     }
                 }
                 Gizmos.color = Color.magenta;
-                Gizmos.DrawRay(rLowerStepRay);
-                Gizmos.DrawRay(rUpperStepRay);
+                Gizmos.DrawRay(_rLowerStepRay.origin, _rLowerStepRay.direction * 0.1f);
+                Gizmos.DrawRay(_rUpperStepRay.origin, _rUpperStepRay.direction * 0.1f);
+                Gizmos.DrawRay(_lLowerStepRay.origin, _lLowerStepRay.direction * 0.1f);
+                Gizmos.DrawRay(_lUpperStepRay.origin, _lUpperStepRay.direction * 0.1f);
             }
 
             if (!Application.isPlaying) return;
@@ -240,7 +245,7 @@ namespace DLLF {
 
         private void CalculateJump() {
             // Jump if: grounded or within coyote threshold || sufficient jump buffer
-            if (_steppableStep || (MovementRequest.Jump && CanUseCoyote || HasBufferedJump)) {
+            if (_mustStepOnObstacle || (MovementRequest.Jump && CanUseCoyote || HasBufferedJump)) {
                 _currentVerticalSpeed = _jumpHeight;
                 _endedJumpEarly = false;
                 _coyoteUsable = false;
