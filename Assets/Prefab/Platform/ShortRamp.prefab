@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 8076776616798767886}
   - component: {fileID: 8076776616798767887}
   - component: {fileID: 7579048373515447167}
+  - component: {fileID: -555408053517037930}
   m_Layer: 0
   m_Name: ShortRamp
   m_TagString: Untagged
@@ -131,11 +132,11 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4428265817437813453}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -198,6 +199,20 @@ PolygonCollider2D:
     - - {x: 0.5, y: -0.5}
       - {x: 0.5, y: 1.5}
       - {x: -1.5, y: -0.5}
+--- !u!114 &-555408053517037930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4428265817437813453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b7da50824f89864a9685316c1e620e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  action: 0
+  spawnTime: 0
 --- !u!1 &4428265818126249302
 GameObject:
   m_ObjectHideFlags: 0

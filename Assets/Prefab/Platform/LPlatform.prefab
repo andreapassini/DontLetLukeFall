@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 8846577435499249619}
   - component: {fileID: 4010313118695640593}
   - component: {fileID: 4392097088121985196}
+  - component: {fileID: 7789056261640507105}
   m_Layer: 0
   m_Name: LPlatform
   m_TagString: Untagged
@@ -213,11 +214,11 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8846577435499249618}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -257,6 +258,20 @@ PolygonCollider2D:
       - {x: -1.5, y: -1.5}
       - {x: 0.5, y: -1.5}
       - {x: 0.5, y: 1.5}
+--- !u!114 &7789056261640507105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8846577435499249618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b7da50824f89864a9685316c1e620e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  action: 0
+  spawnTime: 0
 --- !u!1 &8846577435669671923
 GameObject:
   m_ObjectHideFlags: 0
