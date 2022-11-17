@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8846577434462883997}
   - component: {fileID: 8846577434462883998}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8846577434945054794}
   - component: {fileID: 8846577434945054795}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,9 +180,9 @@ GameObject:
   - component: {fileID: 4010313118695640593}
   - component: {fileID: 4392097088121985196}
   - component: {fileID: 7789056261640507105}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LPlatform
-  m_TagString: Untagged
+  m_TagString: FixedPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -218,7 +218,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.0001
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -282,7 +282,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8846577435669671884}
   - component: {fileID: 8846577435669671885}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -366,7 +366,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1889642569848044724}
   - component: {fileID: 160668615817254574}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

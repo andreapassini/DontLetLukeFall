@@ -1,23 +1,91 @@
 # Questions
 
+## Prototype Problem
+### Luke
+Is not falling, check friction with Rigid body and Physic Material
+
+### Platforms
+UI Sprites does not match Platform Size, check factor size in relation with camera size and resolution
+
+### Action UI
+Not loading sprite form Action Sequence
+
 ## Platform Action
 
 When Luke will land on a special platform, its effect will be triggered causing Luke to perform the action specified by the platform.
 
-	How long the action will last?
- - 5 seconds
- - The remaining time of Luke's Action.
- - Substituting the current action
+**How long the action will last?**
 
-	Where it will be shown on the UI
+1. **De-Synch**
+	The platform action will fire and affect the behavior of Luke in parallel with Luke's actions but its timer will **not** be **synched** with Luke's Actions Timer
+2. **Substitute and restart**
+	The platform action will substitute the current Luke's Action in the UI and its timer will reset
+3. **Synch**
+	The platform action will fire and affect the behavior of Luke in parallel with Luke's actions but its timer will **synched** with Luke's Actions Timer
+4. Shortcut (De-Sync with "no-time related actions")
+
+**Where it will be shown on the UI**
 - On top of the Head of Luke, with a small sign (Circle with inside the action, a colored bar around the circle dictating the remaining time)
-- On the ActionUI substituting the current Action
+- On the Action UI substituting the current Action
 
+Vertical actions do not affect horizontal actions
+Horizontal actions do not affect vertical actions
+
+**Platform Stopping**
+What height will Luke be able to overcome?
+
+**Crouch and Jump**
+What happen if Luke is crouched and a Jump action is fired?
+
+**Platform**
+How to fuse color and outline of the platforms
 
 <br>
+## Prof Suggestions
+### Luke's Action
+Action duration is no more related to time, but the space traveled by Luke. 
+1 Action for Each platform (considering platform of fixed length)
+
+
+### Tile Size
+Grid = 1 Unit
+=> Player H 2, L 1
+=> Platform Standard H 1, L 3
+Camera Size = 10
+Res Single Sprite= 256x256s
+
+### Scarf rotation bug
+To rotate the character use: transform.rotation = Quaternion.Euler(0,180,0); and not transform.localScale = new Vector3(-1, 1, 1);
+(So change rotation, otherwise, using change of scale, the scarf doesn't change direction correctly)
+
+# TO DO
+## Game Manager
+To keep track of the game state,
+- Load Scene
+- Open Menus
+
+## Increase plat length to 5
+cause Speed to slow
+Increase platform length to 5
+Increase speed of Luke to 1.25
+
+## Spawn Action Sprite
+Spawn action sprite at the feet (to the left) of Luke when a new action is triggered.
+
+## Action UI Sprites
+Action UI Sprites need to be 1x1 and not stretched
+
+## Randomness in Player Platform
+
+# Deadlines
+
+![Scadenze](https://user-images.githubusercontent.com/71270277/198230350-f5aa6e99-eb36-4697-acf2-6da03e2db9c1.png)
+
+
 # Game Design Document - Don't Let Luke Fall
 
 ## Concept
+
 ![DontLetLukeFallConcept](https://user-images.githubusercontent.com/71270277/195996636-192c0d71-f488-4599-80b0-434929d5e3c7.png)
 
 ## Team Members
@@ -43,7 +111,7 @@ When Luke will land on a special platform, its effect will be triggered causing 
  - 10/10/2022 - Team Meeting
 
 
-## Task Assignement 
+## Task Assignment 
 - GDD => Andrea Passini
 - Platform Logic => Luca
 - Platform UI => Luca
@@ -73,18 +141,14 @@ After being positioned a new platform will appear in the slot with a slight deal
 # Gameplay
 ## Overview
 
+At the start of the level Luke will be walking right.
+His goal is to reach the end of the level, where a bright light will awake him.
+
+You will be able to place platforms in real time, preventing Luke to fall and allowing him to reach the end of the level.
+
+You will be able to foresee the next 3 actions that Luke will perform.
 
 <br>
-## Specs Game
-
-### Res
-1920x1080
-16:9
-
-### Art Free
-
-https://opengameart.org/
-
 ## Resources
 
 ### Health of Luke
@@ -92,16 +156,21 @@ https://opengameart.org/
 ### Luke 
 
 ### Luke's Actions
-- Walk Left
-- Walk Right
-- Run Letf
-- Run Right
-- Stop Moving
-- Jump
-- Crouch
+Luke's Actions:
+- **Instantaneous**
+	- Jump
+	-  Walk Left
+	- Walk Right
+
+- **Time-Limited**
+	- Run Left
+	- Run Right
+	- Stop Moving
+	- Crouch
 
 ### Player Platforms
 - #### *Main Platforms*
+	![[Platforms.png]]
 	- Short Horizontal Platform
 	- Long Horizontal Platform
 	- Ramp
@@ -110,14 +179,18 @@ https://opengameart.org/
 	- T - Shaped Platform
 - #### *Special Platforms*
 	Shaped as Main Platform but when Luke will pass over this platforms they will trigger that specific action.
-	- Walk Left
-	- Walk Right
-	- Run Letf
+	**Platform Actions**:
+	![[PlatformActions.png]]
+	("shortcut" [s])
+	- [s]Walk Left
+	- [s]Walk Right
+	- Run Left
 	- Run Right
 	- Stop Moving
-	- Jump
+	- [s]Jump
 	- Crouch
-### **Enironmental Platforms**
+- 
+### **Environmental Platforms**
 - Horizontal Platforms
 - Ramps
 - Walls
@@ -197,19 +270,64 @@ When the player will drop a platform (**trigger**) over a platform (or multiple 
 ![PlatfromCombination](https://user-images.githubusercontent.com/71270277/195996132-1011af5f-effb-4ee1-84ba-ca5c7c9e15a9.png)
 
 
-### Luke's Actions
+### Actions
+
+Actions determine the behavior of Luke.
+
+Actions can be divided into 2 groups, based on the duration of their effect in time:
+
+- **Instantaneous**
+	Instantaneous actions's effect is not limited by time, it will affect the behavior of Luke
+	- Jump
+	- Dash
+
+- **Time-Limited**
+	The effect of Time-Limited actions is limited in time.
+	They will affect instantaneously the behavior of Luke, their effect will last for 5 seconds, until a new Luke's Action is fired.
+	- Run Right
+	- Run Left
+	- Crouch
+	- Stop
+
+- **Continuous**
+	The effect of these actions will keep affecting the behavior of Luke until a new Continuous Action is fired.
+	- Walk Right
+	- Walk Left
+
+To prevent any misconceptions: 
+**All Actions will affect instantaneously the behavior of Luke**
+The subject of these division is the *effect duration* in time. 
+
+Actions can also be divided into 2 groups, based on with axis they affect:
+
+- **Vertical Actions**
+	Vertical Actions will **affect** the **vertical axis** of Luke, without affecting the horizontal axis.
+
+- **Horizontal Actions**
+	Horizontal Actions will affect the horizontal axis of Luke, without affecting the vertical axis.
+<br>
+**Actions List:**
+
 - #### Walk Right
+	**Continuous Action**
 	Luke will **walk right** until another action will affect Luke's Horizontal axis
+
 - #### Walk Left
+	**Continuous Action**
 	Luke will **walk left** until another action will affect Luke's Horizontal axis
+
 - #### Run Right
+	**Time-Limited**
 	Luke will **run right**.
 	When this action is over Luke will **walk right**
+
 - #### Run Left
+	**Time-Limited**
 	Luke will **run left**.
 	When this action is over Luke will **walk left**
+
 - #### **Jump**
-	
+	**Instantaneous**
 	Luke will execute a **jump** if he is standing on a platform.
 	
 	(https://www.youtube.com/watch?v=3sWTzMsmdx8)
@@ -239,14 +357,34 @@ When the player will drop a platform (**trigger**) over a platform (or multiple 
 	When Luke is jumping and falling short to reach a platfrom for few inches, he will snap on top of the platforming.
 	
 	![Ledge Catch](https://user-images.githubusercontent.com/71270277/196028788-ab0361c4-d2a6-4787-81ae-114d93b28d13.png)
-	
-	
-	
-	
 
 - #### Crouch
+	**Time-Limited**
+	Luke will crouch
+	- **reducing** his **height** 
+	- **slowing** him down by a factor of **0.5**.
+	This will allow Luke to pass through narrow passages/holes
+	
+	When **Crouch** effect **ends** and Luke is still in a **narrow passage/hole**, Luke will keep being crouch until the end of the **passage/hole**, other actions will fire but if they are vertical, they will not affect Luke's behavior
+	
+	When **Crouch** is **active** and a **Jump action** is fired, Luke will:
+	- Crouch-Jumping?
+	- Standing and then Jumping?
+
 - #### Stop
+	**Time-Limited**
 	Luke will stop moving until a new action will make him.
+
+### Luke's Actions
+
+Luke's Actions are actions organized in a list, that ca be observed in the UI component at the top of the screen.
+They represent the fixed future behavior of Luke.
+
+### Platform Actions
+
+Platform actions are Actions that will trigger when Luke will pass over a special platform.
+
+**How Luke's Actions and Platform Actions will affect each other?**
 
 ### Platform Spawn
 
@@ -291,10 +429,37 @@ Shake
 
 <br>
 <br>
+## Game Specs
+
+### Res
+1920x1080
+16:9
+
+### Grid
+grid 0.5
+	Pix per Unit 64
+	Slice 32
+
+### Input
+
+ - **PC:** 
+	 - **Mouse and Keyboard**
+ - **Mobile:**
+	 - **Touchscreen**
+
+### Art Free
+
+https://opengameart.org/
+
 # Interfaces
 
 
 ![UI](https://user-images.githubusercontent.com/71270277/196240380-787152ab-e3e2-49a6-a55f-5653f49a73dd.png)
+
+![StartingMenu](https://user-images.githubusercontent.com/71270277/198277355-21028ab3-23ed-458d-8722-682783c6031b.png)
+![Options](https://user-images.githubusercontent.com/71270277/198280012-097387dc-49cc-402c-aa96-9cfd48913a1c.png)
+
+![LevelSelection](https://user-images.githubusercontent.com/71270277/198277340-3c02f3c5-4716-4092-b527-173e982be964.png)
 
 
 <br>
