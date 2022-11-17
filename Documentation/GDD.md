@@ -53,6 +53,11 @@ Grid = 1 Unit
 => Platform Standard H 1, L 3
 Camera Size = 10
 Res Single Sprite= 256x256
+
+### Scarf rotation bug
+To rotate the character use: transform.rotation = Quaternion.Euler(0,180,0); and not transform.localScale = new Vector3(-1, 1, 1);
+(So change rotation, otherwise, using change of scale, the scarf doesn't change direction correctly)
+=======
 # TO DO
 ## Game Manager
 To keep track of the game state,
