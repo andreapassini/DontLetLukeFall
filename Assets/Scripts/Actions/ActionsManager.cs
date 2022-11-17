@@ -30,7 +30,6 @@ namespace DLLF
         private Queue<ActionType> _actionsSequence = new Queue<ActionType>();
         private Dictionary<ActionType, ActionDelegate> _actionsMapping;
 
-
 #if UNITY_EDITOR
         private List<Vector3> actionsPosition = new List<Vector3>();
         // DEBUG
@@ -74,6 +73,7 @@ namespace DLLF
             };
             _characterController.Move(movementRequest);
             if (_jump) _jump = false;
+
         }
         
         private void SendActionSequenceToActionUIController(float timeToComplete)
@@ -86,6 +86,36 @@ namespace DLLF
             _actionUIController.LoadActionSequence(listOfSpriteToLoad, timeToComplete);
         }
         
+        private IEnumerator StartActionSequence(bool activate)
+		{
+            if (activate) {
+                yield return new WaitForSecondsRealtime(2);
+                while(true) {
+                    if (transform.position.x % 5 == 0) {
+                        if (_actionsSequence.TryDequeue(out var actionToPerform)) {
+                            ActionDelegate actionDelegate = _actionsMapping[actionToPerform];
+                            float timeToComplete = actionDelegate.Invoke();
+                            if (!_actionUIController.HasBeenLoaded()) {
+                                SendActionSequenceToActionUIController(timeToComplete);
+                            } else {
+                                _actionUIController.NextAction(timeToComplete);
+                            }
+                            #if UNITY_EDITOR
+                            actionsPosition.Add(_characterController.transform.position);
+                            #endif
+                            Debug.Log("Time to complete for action " + actionToPerform + " is  " + timeToComplete + " (current speed: " + _speed + ")");
+                            yield return new WaitForEndOfFrame();
+                        }
+                    } else {
+                        yield return new WaitForEndOfFrame();
+					}
+				}
+
+                Debug.Log("Actions sequence end");
+                _actionUIController.StopSequence();
+            }
+        }
+
         private IEnumerator StartActionSequence()
         {
             yield return new WaitForSecondsRealtime(2);
