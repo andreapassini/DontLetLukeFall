@@ -48,11 +48,6 @@ namespace DLLF
 
         private void Awake()
         {
-            foreach (var actionType in _actionsTypeSequence.actions)
-            {
-                _actionsSequence.Enqueue(actionType);
-            }
-
             _actionsMapping = new Dictionary<ActionType, ActionDelegate>();
             AutoLinkActionTypesToMethods();
         }
@@ -60,6 +55,10 @@ namespace DLLF
         public void Begin(ActionsSequence actionsSequence)
         {
             _actionsTypeSequence = actionsSequence;
+            foreach (var actionType in _actionsTypeSequence.actions)
+            {
+                _actionsSequence.Enqueue(actionType);
+            }
             StartCoroutine(StartActionSequence());
         }
 
@@ -119,10 +118,10 @@ namespace DLLF
 
         private IEnumerator StartActionSequence()
         {
-            yield return new WaitForSecondsRealtime(2);
+            yield return new WaitUntil(() => _characterController.Active);
             while (_actionsSequence.TryDequeue(out var actionToPerform))
             {
-                ActionDelegate actionDelegate = _actionsMapping[actionToPerform];
+               ActionDelegate actionDelegate = _actionsMapping[actionToPerform];
                 float timeToComplete = actionDelegate.Invoke();
                 if (! _actionUIController.HasBeenLoaded())
                 {
@@ -135,9 +134,8 @@ namespace DLLF
                 #if UNITY_EDITOR
                 actionsPosition.Add(_characterController.transform.position);
                 #endif
-                Debug.Log("Time to complete for action " + actionToPerform + " is  " + timeToComplete + " (current speed: " + _speed + ")");
                 yield return new WaitForSeconds(timeToComplete);
-            }
+           }
             Debug.Log("Actions sequence end");
             _actionUIController.StopSequence();
         }

@@ -9,11 +9,6 @@ using System.Collections.Generic;
 
 namespace DLLF
 {
-    using UnityEngine;
-    using UnityEngine.Events;
-    using System.Collections;
-    using System.Collections.Generic;
-
     public class EventManager : MonoBehaviour {
 
         private Dictionary <string, UnityEvent> eventDictionary;
@@ -40,6 +35,11 @@ namespace DLLF
 
                 return eventManager;
             }
+        }
+
+        void Awake()
+        {
+            DontDestroyOnLoad(gameObject);
         }
 
         void Init ()

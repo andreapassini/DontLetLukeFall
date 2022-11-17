@@ -17,12 +17,14 @@ namespace DLLF
             //Register to onLevelFailedEvent and onLevelCompletedEvent
             EventManager.StartListening(OnLevelCompletedEventName, OnLevelCompleted);
             EventManager.StartListening(OnLevelFailedEventName, OnLevelFailed);
+
         }
 
         void Start()
         {
             _levelActionsManager.Begin(_levelActionsSequence);
         }
+        
 
         private void OnDestroy()
         {
@@ -30,6 +32,7 @@ namespace DLLF
             EventManager.StopListening(OnLevelFailedEventName, OnLevelFailed);
         }
 
+        //TODO integrare con GameManager quando andrà in develop
         private void OnLevelCompleted()
         {
             Debug.Log("Level completed!");
