@@ -23,7 +23,10 @@ public class YouLoseWonSceneScript : MonoBehaviour
             _youLoseWonText.text = "You won!";
             _secondaryText.text = "You've completed the level " + GameManager.Instance.levelToPlay + "!";
         }
-
+        if (GameManager.Instance.LevelToPlayIsTheLastOne())
+        {
+            _buttonNextLevel.SetActive(false);
+        }
         if (GameManager.Instance.state == GameState.Lose)
         {
             _youLoseWonText.text = "You lose!";

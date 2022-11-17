@@ -10,13 +10,22 @@ public class GameManager : MonoBehaviour
 
     public GameState state;
     
-    public string levelToPlay; // TO FIX witch tipe of var to represent a level? (string?)
+    public int levelToPlay; // The level you are playing / you are going to play
 
     public static event Action<GameState> OnGameStateChanged;
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
@@ -48,20 +57,26 @@ public class GameManager : MonoBehaviour
         OnGameStateChanged?.Invoke(newState);
     }
 
-    public void SetLevelToPlay(string newLevelToPlay)
+    public void SetLevelToPlay(int newLevelToPlay)
     {
         levelToPlay = newLevelToPlay;
     }
-    
-    public void NextLevelToPlay()
+
+    public bool LevelToPlayIsTheLastOne()
     {
-        // TO IMPLEMENT update var levelToPlay with the next level to play
+        // TODO
+        // TO FIX return true if var levelToPlay is the last level available, else false
+        return false;
+    }
+    
+    public void NextLevelToPlay() // update var levelToPlay with the next level to play
+    {
+        levelToPlay++;
     }
 
-    private void HandlePlaying()
+    private void HandlePlaying() // show the scene with the level to play
     {
-        // TO IMPLEMENT show the scene with the level to play
-        // (To know witch level to play check levelToPlay var)
+        SceneManager.LoadScene("Level" + levelToPlay);
     }
 
     private void HandleLose() // Show the screen you lose
