@@ -20,4 +20,28 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu/LevelSelectionMenu.unity
     guid: ccf1f5046c12048ed85b1b436a3e67ac
+  - enabled: 1
+    path: Assets/Scenes/Tests/YouLoseWon.unity
+    guid: e074312ff6a0c4ad6bc31ce0c4260ce0
+  - enabled: 1
+    path: Assets/Scenes/FakeLevelsJustToTestGameManager/Level1.unity
+    guid: fb644377b02c14fc8b161429743d67fd
+  - enabled: 1
+    path: Assets/Scenes/FakeLevelsJustToTestGameManager/Level2.unity
+    guid: 46183379cbbdb4c6fab32c88528ae0a2
+  - enabled: 1
+    path: Assets/Scenes/FakeLevelsJustToTestGameManager/Level3.unity
+    guid: 68633d9f05bac4420b5ec514fcd1e3e7
+  - enabled: 1
+    path: Assets/Scenes/FakeLevelsJustToTestGameManager/Level4.unity
+    guid: 8b742607e4d8f4998b37499474296394
+  - enabled: 1
+    path: Assets/Scenes/FakeLevelsJustToTestGameManager/Level5.unity
+    guid: 53e958ac012444f2a8c44e342754f4b4
+  - enabled: 1
+    path: Assets/Scenes/FakeLevelsJustToTestGameManager/Level6.unity
+    guid: 7beacf356b8af4f3ba84a081fda01197
+  - enabled: 1
+    path: Assets/Scenes/FakeLevelsJustToTestGameManager/Level7.unity
+    guid: 1d358564383e14e5a89094df3833c404
   m_configObjects: {}

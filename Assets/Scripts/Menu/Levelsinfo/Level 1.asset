@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3265b327a942a404bb20f1d056c33d0f, type: 3}
   m_Name: Level 1
   m_EditorClassIdentifier: 
-  sceneName: MainMenu
+  levelNumber: 1
   image: {fileID: 21300000, guid: 482f34f0ca5984d9d97c2ba9722bac1b, type: 3}

@@ -130,20 +130,26 @@ public class LevelSelectionMenu : MonoBehaviour
         _firstOfTheThreeLevelsToShow = _firstOfTheThreeLevelsToShow + 1;
         LoadTheThreeLevelsToShow();
     }
+
+    private void ClickedShowedLevel(int num) // Click on a showed level
+    {
+        int levelYouAreGoingToPlay = _levelsInfo.levelInfos[_firstOfTheThreeLevelsToShow + num].levelNumber;
+        GameManager.Instance.PlayLevel(levelYouAreGoingToPlay);
+    }
     
     public void ClickedShowedLevel1Button() // Click on the first showed level
     {
-        SceneManager.LoadScene(_levelsInfo.levelInfos[_firstOfTheThreeLevelsToShow + 0].sceneName);
+        ClickedShowedLevel(0);
     }
     
     public void ClickedShowedLevel2Button() // Click on the second showed level
     {
-        SceneManager.LoadScene(_levelsInfo.levelInfos[_firstOfTheThreeLevelsToShow + 1].sceneName);
+        ClickedShowedLevel(1);
     }
     
     public void ClickedShowedLevel3Button() // Click on the third showed level
     {
-        SceneManager.LoadScene(_levelsInfo.levelInfos[_firstOfTheThreeLevelsToShow + 2].sceneName);
+        ClickedShowedLevel(2);
     }
 
     public void GoToMainMenu() // Go to main menu

@@ -57,6 +57,25 @@ Res Single Sprite= 256x256
 ### Scarf rotation bug
 To rotate the character use: transform.rotation = Quaternion.Euler(0,180,0); and not transform.localScale = new Vector3(-1, 1, 1);
 (So change rotation, otherwise, using change of scale, the scarf doesn't change direction correctly)
+=======
+# TO DO
+## Game Manager
+To keep track of the game state,
+- Load Scene
+- Open Menus
+
+## Increase plat length to 5
+cause Speed to slow
+Increase platform length to 5
+Increase speed of Luke to 1.25
+
+## Spawn Action Sprite
+Spawn action sprite at the feet (to the left) of Luke when a new action is triggered.
+
+## Action UI Sprites
+Action UI Sprites need to be 1x1 and not stretched
+
+## Randomness in Player Platform
 
 # Deadlines
 

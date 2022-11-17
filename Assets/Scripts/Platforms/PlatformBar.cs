@@ -24,8 +24,16 @@ namespace DLLF
             }
         }
 
-        // Update is called once per frame
-        void Update()
+		private void Start()
+		{
+            // Full the platform before starting the level
+            CreateNewPlatform();
+            CreateNewPlatform();
+            CreateNewPlatform();
+        }
+
+		// Update is called once per frame
+		void Update()
         {
             if (!AllSlotFull())
             {
