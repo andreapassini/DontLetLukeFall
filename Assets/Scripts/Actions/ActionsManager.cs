@@ -17,7 +17,6 @@ namespace DLLF
 
         [SerializeField] private MovementParams movementParams;
 
-        [SerializeField] private ActionsSequence _actionsTypeSequence;
         [SerializeField] private ActionsSprites _actionsSprites;
 
         [SerializeField] private CharacterController2D _characterController;
@@ -29,6 +28,7 @@ namespace DLLF
 
         private Queue<ActionType> _actionsSequence = new Queue<ActionType>();
         private Dictionary<ActionType, ActionDelegate> _actionsMapping;
+        private ActionsSequence _actionsTypeSequence;
 
 #if UNITY_EDITOR
         private List<Vector3> actionsPosition = new List<Vector3>();
@@ -57,8 +57,9 @@ namespace DLLF
             AutoLinkActionTypesToMethods();
         }
 
-        void Start()
+        public void Begin(ActionsSequence actionsSequence)
         {
+            _actionsTypeSequence = actionsSequence;
             StartCoroutine(StartActionSequence());
         }
 
@@ -75,7 +76,7 @@ namespace DLLF
             if (_jump) _jump = false;
 
         }
-        
+
         private void SendActionSequenceToActionUIController(float timeToComplete)
         {
             List<Sprite> listOfSpriteToLoad = new List<Sprite>();
@@ -228,6 +229,7 @@ namespace DLLF
         
 
         #endregion
+
 
     }
     
