@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 
     public GameState state;
     
-    public int levelToPlay; // The level you are playing / you are going to play
+    private int _levelToPlay; // The level you are playing / you are going to play
 
     public static event Action<GameState> OnGameStateChanged;
 
@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
         switch (newState)
         {
             case GameState.SelectionLevel:
+                HandleSelectionLevel();
                 break;
             case GameState.Playing:
                 HandlePlaying();
@@ -59,17 +60,21 @@ public class GameManager : MonoBehaviour
 
         OnGameStateChanged?.Invoke(newState);
     }
-
-    public void SetLevelToPlay(int newLevelToPlay)
+    
+    public int GetLevelToPlay()
     {
-        levelToPlay = newLevelToPlay;
+        return _levelToPlay;
     }
 
-    public bool LevelToPlayIsTheLastOne()
+    public void PlayLevel(int levelToPlay)
     {
-        // TODO
-        // TO FIX return true if var levelToPlay is the last level available, else false
-        if (_levelsInfo.levelInfos.Length <= levelToPlay)
+        _levelToPlay = levelToPlay;
+        UpdateGameState(GameState.Playing);
+    }
+
+    public bool LevelToPlayIsTheLastOne() // return true if var levelToPlay is the last level available, else false
+    {
+        if (_levelsInfo.levelInfos.Length <= _levelToPlay)
         {
             return true;
         }
@@ -78,12 +83,17 @@ public class GameManager : MonoBehaviour
     
     public void NextLevelToPlay() // update var levelToPlay with the next level to play
     {
-        levelToPlay++;
+        _levelToPlay++;
+    }
+
+    private void HandleSelectionLevel()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 
     private void HandlePlaying() // show the scene with the level to play
     {
-        SceneManager.LoadScene("Level" + levelToPlay);
+        SceneManager.LoadScene("Level" + _levelToPlay);
     }
 
     private void HandleLose() // Show the screen you lose

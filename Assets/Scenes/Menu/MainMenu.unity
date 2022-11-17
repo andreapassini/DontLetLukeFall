@@ -822,8 +822,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a01ca1f1768540d8a5cae11646de336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _levelsInfo: {fileID: 11400000, guid: 8428a29841d4349cb8e08dc55478643d, type: 2}
   state: 0
-  levelToPlay: 0
 --- !u!4 &1160205744
 Transform:
   m_ObjectHideFlags: 0

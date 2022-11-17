@@ -21,18 +21,21 @@ public class YouLoseWonSceneScript : MonoBehaviour
         if (GameManager.Instance.state == GameState.Win)
         {
             _youLoseWonText.text = "You won!";
-            _secondaryText.text = "You've completed the level " + GameManager.Instance.levelToPlay + "!";
+            _secondaryText.text = "You've completed the level " + GameManager.Instance.GetLevelToPlay() + "!";
         }
         if (GameManager.Instance.LevelToPlayIsTheLastOne())
         {
             _buttonNextLevel.SetActive(false);
         }
+        Debug.Log("aaaaa");
         if (GameManager.Instance.state == GameState.Lose)
         {
+            Debug.Log("bbbbb");
             _youLoseWonText.text = "You lose!";
-            _secondaryText.text = "You've not completed the level " + GameManager.Instance.levelToPlay + "!";
+            _secondaryText.text = "You've not completed the level " + GameManager.Instance.GetLevelToPlay() + "!";
             _buttonNextLevel.SetActive(false);
         }
+        Debug.Log("ccccc");
     }
 
     // Update is called once per frame
@@ -61,7 +64,7 @@ public class YouLoseWonSceneScript : MonoBehaviour
     
     public void GoToMenu() // Return to main menu
     {
-        SceneManager.LoadScene("MainMenu");
+        GameManager.Instance.UpdateGameState(GameState.SelectionLevel);
     }
     
 }
