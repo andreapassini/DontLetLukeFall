@@ -1,12 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DLLF;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance; // The game manager is a singleton
+    
+    [SerializeField] private LevelsInfo _levelsInfo;
 
     public GameState state;
     
@@ -66,6 +69,10 @@ public class GameManager : MonoBehaviour
     {
         // TODO
         // TO FIX return true if var levelToPlay is the last level available, else false
+        if (_levelsInfo.levelInfos.Length <= levelToPlay)
+        {
+            return true;
+        }
         return false;
     }
     
