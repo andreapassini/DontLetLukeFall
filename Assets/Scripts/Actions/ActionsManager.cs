@@ -17,7 +17,6 @@ namespace DLLF
 
         [SerializeField] private MovementParams movementParams;
 
-        [SerializeField] private ActionsSequence _actionsTypeSequence;
         [SerializeField] private ActionsSprites _actionsSprites;
 
         [SerializeField] private CharacterController2D _characterController;
@@ -29,6 +28,7 @@ namespace DLLF
 
         private Queue<ActionType> _actionsSequence = new Queue<ActionType>();
         private Dictionary<ActionType, ActionDelegate> _actionsMapping;
+        private ActionsSequence _actionsTypeSequence;
 
 #if UNITY_EDITOR
         private List<Vector3> actionsPosition = new List<Vector3>();
@@ -48,17 +48,17 @@ namespace DLLF
 
         private void Awake()
         {
-            foreach (var actionType in _actionsTypeSequence.actions)
-            {
-                _actionsSequence.Enqueue(actionType);
-            }
-
             _actionsMapping = new Dictionary<ActionType, ActionDelegate>();
             AutoLinkActionTypesToMethods();
         }
 
-        void Start()
+        public void Begin(ActionsSequence actionsSequence)
         {
+            _actionsTypeSequence = actionsSequence;
+            foreach (var actionType in _actionsTypeSequence.actions)
+            {
+                _actionsSequence.Enqueue(actionType);
+            }
             StartCoroutine(StartActionSequence());
         }
 
@@ -75,7 +75,7 @@ namespace DLLF
             if (_jump) _jump = false;
 
         }
-        
+
         private void SendActionSequenceToActionUIController(float timeToComplete)
         {
             List<Sprite> listOfSpriteToLoad = new List<Sprite>();
@@ -118,10 +118,10 @@ namespace DLLF
 
         private IEnumerator StartActionSequence()
         {
-            yield return new WaitForSecondsRealtime(2);
+            yield return new WaitUntil(() => _characterController.IsActive);
             while (_actionsSequence.TryDequeue(out var actionToPerform))
             {
-                ActionDelegate actionDelegate = _actionsMapping[actionToPerform];
+               ActionDelegate actionDelegate = _actionsMapping[actionToPerform];
                 float timeToComplete = actionDelegate.Invoke();
                 if (! _actionUIController.HasBeenLoaded())
                 {
@@ -134,7 +134,6 @@ namespace DLLF
                 #if UNITY_EDITOR
                 actionsPosition.Add(_characterController.transform.position);
                 #endif
-                Debug.Log("Time to complete for action " + actionToPerform + " is  " + timeToComplete + " (current speed: " + _speed + ")");
                 yield return new WaitForSeconds(timeToComplete);
             }
             Debug.Log("Actions sequence end");
@@ -228,6 +227,7 @@ namespace DLLF
         
 
         #endregion
+
 
     }
     
