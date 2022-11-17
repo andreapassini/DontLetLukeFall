@@ -118,7 +118,7 @@ namespace DLLF
 
         private IEnumerator StartActionSequence()
         {
-            yield return new WaitUntil(() => _characterController.Active);
+            yield return new WaitUntil(() => _characterController.IsActive);
             while (_actionsSequence.TryDequeue(out var actionToPerform))
             {
                ActionDelegate actionDelegate = _actionsMapping[actionToPerform];
@@ -135,7 +135,7 @@ namespace DLLF
                 actionsPosition.Add(_characterController.transform.position);
                 #endif
                 yield return new WaitForSeconds(timeToComplete);
-           }
+            }
             Debug.Log("Actions sequence end");
             _actionUIController.StopSequence();
         }

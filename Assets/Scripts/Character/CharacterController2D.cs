@@ -23,14 +23,14 @@ namespace DLLF {
         private float _currentHorizontalSpeed, _currentVerticalSpeed;
 
         // This is horrible, but for some reason colliders are not fully established when update starts...
-        private bool _active;
+        public bool IsActive { get; private set; }
         void Awake() => Invoke(nameof(Activate), 0.5f);
-        void Activate() =>  _active = true;
+        void Activate() =>  IsActive = true;
         
 
         public void Move(MovementRequest movementRequest)
         {
-            if(!_active) return;
+            if(!IsActive) return;
             // Calculate velocity
             Velocity = (transform.position - _lastPosition) / Time.deltaTime;
             _lastPosition = transform.position;
