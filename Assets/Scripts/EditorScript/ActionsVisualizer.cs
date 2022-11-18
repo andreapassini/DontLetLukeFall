@@ -5,7 +5,7 @@ using DLLF;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ActionsEditorScriptVisualizer : MonoBehaviour
+public class ActionsVisualizer : MonoBehaviour
 {
 
     [SerializeField] private GameObject _luke;
@@ -17,25 +17,17 @@ public class ActionsEditorScriptVisualizer : MonoBehaviour
     private const float _referenceCameraSize = 8.457275f;
     private const float _referenceImageMeasure = 321f;
     
-    public void VisualizeActions()
+    private void Awake()
     {
-        // (re)enable image to initial params
-        _image.enabled = true;
-        _image.transform.position = new Vector3(0, 0, 0);
-        ((RectTransform)_image.transform).sizeDelta = new Vector2 (100, 100);
         // fixing image dimensions
-        /*
         float measure = _referenceCameraSize * _referenceImageMeasure / _camera.orthographicSize;
         ((RectTransform)_image.transform).sizeDelta = new Vector2 (measure, measure);
-        */
         // fixing image position to Luke's position
-        
-        //Vector3 relativePositionOfLukeToCamera = _camera.transform.InverseTransformDirection(_luke.transform.position - _camera.transform.position);
-        //float multiplier = 952.0f / 15.0f;
-        //multiplier = multiplier * _referenceCameraSize / _camera.orthographicSize;
-        //multiplier = multiplier * _canvas.pixelRect.width / 1920f;
-        //_image.transform.position = new Vector3(multiplier * relativePositionOfLukeToCamera.x + _canvas.pixelRect.width / 2,multiplier * relativePositionOfLukeToCamera.y + _canvas.pixelRect.height / 2,_image.transform.position.z);
-        _image.transform.position = _luke.transform.position;
+        Vector3 relativePositionOfLukeToCamera = _camera.transform.InverseTransformDirection(_luke.transform.position - _camera.transform.position);
+        float multiplier = 952.0f / 15.0f;
+        multiplier = multiplier * _referenceCameraSize / _camera.orthographicSize;
+        multiplier = multiplier * _canvas.pixelRect.width / 1920f;
+        _image.transform.position = new Vector3(multiplier * relativePositionOfLukeToCamera.x + _canvas.pixelRect.width / 2,multiplier * relativePositionOfLukeToCamera.y + _canvas.pixelRect.height / 2,_image.transform.position.z);
         // fixing image position so that is located in the place of the actions
         float imageLenght = _image.rectTransform.rect.width;
         _image.transform.position = new Vector3(_image.transform.position.x + imageLenght / 2, _image.transform.position.y,
