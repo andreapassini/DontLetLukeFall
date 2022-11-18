@@ -639,6 +639,7 @@ MonoBehaviour:
   _luke: {fileID: 609157565}
   _canvas: {fileID: 782390233}
   _camera: {fileID: 1725777302}
+  _actionsSprites: {fileID: 11400000, guid: f497042f3b253d64eada687dc458e496, type: 2}
   _image: {fileID: 1775000457}
 --- !u!1001 &1518065934
 PrefabInstance:
@@ -775,11 +776,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 505195082365519623, guid: b410c5c1a8ba4b74ea51a58fb3e07779, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.98
+      value: -11.85
       objectReference: {fileID: 0}
     - target: {fileID: 505195082365519623, guid: b410c5c1a8ba4b74ea51a58fb3e07779, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.01
+      value: 0.85
       objectReference: {fileID: 0}
     - target: {fileID: 505195082365519623, guid: b410c5c1a8ba4b74ea51a58fb3e07779, type: 3}
       propertyPath: m_LocalPosition.z

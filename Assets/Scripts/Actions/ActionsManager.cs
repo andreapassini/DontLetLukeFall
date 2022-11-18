@@ -46,6 +46,11 @@ namespace DLLF
         }
 #endif
 
+        public ActionType[] GetActionSequence()
+        {
+            return _actionsTypeSequence.actions;
+        }
+
         private void Awake()
         {
             foreach (var actionType in _actionsTypeSequence.actions)
