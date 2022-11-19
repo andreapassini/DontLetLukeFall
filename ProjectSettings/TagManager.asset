@@ -6,6 +6,7 @@ TagManager:
   tags:
   - FixedPlatform
   - PlayerPlatform
+  - FailFloor
   layers:
   - Default
   - TransparentFX
@@ -17,6 +18,7 @@ TagManager:
   - FixedPlatform
   - PlayerPlatform
   - PostProcessing
+  - LevelEnd
   - 
   - 
   - 

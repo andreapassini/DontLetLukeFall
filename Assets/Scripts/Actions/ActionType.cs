@@ -7,6 +7,7 @@
         WalkLeft,
         RunRight,
         RunLeft,
-        Crouch
+        Crouch,
+        Null
     }
 }

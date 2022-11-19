@@ -19,10 +19,9 @@ namespace DLLF
 
         private PlatformSlot _slot;
         private CanvasGroup _canvasGroup;
-        [SerializeField]
-        [Min(0.1f)]
-        private float _scaleFactor = 1.6f;
         private bool _isWithEffect=false;
+        private GameObject _spawnedPlatform;
+        private Image[] _spriteRenderersUI;
         private void Awake()
         {
             _rectTransform = GetComponent<RectTransform>();
@@ -37,11 +36,11 @@ namespace DLLF
             _cam = Camera.main;
             _slot = this.GetComponentInParent<PlatformSlot>();
             _canvasGroup = this.GetComponent<CanvasGroup>();
+            _spriteRenderersUI = GetComponentsInChildren<Image>();
             if (Random.Range(0, 100) < 20)
             {
                 _isWithEffect = true;
-                Image[] spriteRenderersUI = GetComponentsInChildren<Image>();
-                foreach (Image renderer in spriteRenderersUI)
+                foreach (Image renderer in _spriteRenderersUI)
                 {
                     renderer.color = new Color(255, 0, 0);
                 }
@@ -52,43 +51,48 @@ namespace DLLF
         {
             Vector3 spawnPosition = _cam.ScreenToWorldPoint(transform.position);
             spawnPosition = new Vector3(spawnPosition.x, spawnPosition.y, 0);
-            GameObject SpawnedPlatform = Instantiate<GameObject>(_realPlatform);
-            SpawnedPlatform.AddComponent(typeof(Platform));
+            _spawnedPlatform = Instantiate<GameObject>(_realPlatform);
             if (_isWithEffect)
             {
-                SpriteRenderer[] spriteRenderers = SpawnedPlatform.GetComponentsInChildren<SpriteRenderer>();
+                SpriteRenderer[] spriteRenderers = _spawnedPlatform.GetComponentsInChildren<SpriteRenderer>();
                 foreach (SpriteRenderer renderer in spriteRenderers)
                 {
                     renderer.color = new Color(255, 0, 0);
                 }
             }
-            SpawnedPlatform.transform.position = spawnPosition;
+            _spawnedPlatform.transform.position = spawnPosition;
         }
         public void OnBeginDrag(PointerEventData eventData)
         {
-            Debug.Log("onBeginDrag");
+         //   Debug.Log("onBeginDrag");
             _canvasGroup.blocksRaycasts = false;
-            this.transform.localScale = this.transform.localScale * _scaleFactor;
+            SpawnInWorld();
+            _spawnedPlatform.layer = LayerMask.NameToLayer("UI");
+            SetVisibleUI(false);
         }
 
         public void OnDrag(PointerEventData eventData)
         {
-            Debug.Log("OnDrag");
+            //Debug.Log("OnDrag");
             _rectTransform.anchoredPosition += eventData.delta / _canvas.scaleFactor;
+            Vector3 spawnPosition = _cam.ScreenToWorldPoint(transform.position);
+            spawnPosition = new Vector3((int)spawnPosition.x, (int)spawnPosition.y, 0);
+            _spawnedPlatform.transform.position = spawnPosition;
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            Debug.Log("OnEndDrag");
+           // Debug.Log("OnEndDrag");
             if (!_slot.reselectedPlatform)
             {
                 _slot.isEmpty = true;
-                SpawnInWorld();
+                _spawnedPlatform.layer = LayerMask.NameToLayer("Default");
                 Destroy(this.gameObject);
             }
             else
             {
-                this.transform.localScale = this.transform.localScale / _scaleFactor;
+                DestroyPlatform();
+                SetVisibleUI(true);
                 _slot.reselectedPlatform = false;
             }
             _canvasGroup.blocksRaycasts = true;
@@ -96,8 +100,20 @@ namespace DLLF
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            Debug.Log("OnPointerDown");
+           // Debug.Log("OnPointerDown");
         }
 
+        public void SetVisibleUI(bool isVisible)
+        {
+            foreach (Image renderer in _spriteRenderersUI)
+            {
+                renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, isVisible?255:0);
+            }
+        }
+
+        public void DestroyPlatform()
+        {
+            Destroy(_spawnedPlatform.gameObject);
+        }
     }
 }
