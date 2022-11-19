@@ -9,6 +9,7 @@ public class ActionsVisualizer : MonoBehaviour
 // This script is to visualize actions while creating levels; this script should be disabled in the final game
 {
 
+    [SerializeField] private bool _visualizeActions; // Chose if you want to visualize actions or not
     [SerializeField] private GameObject _luke; // Luke
     [SerializeField] private Canvas _canvas; // The canvas
     [SerializeField] private Camera _camera; // The main camera
@@ -22,6 +23,10 @@ public class ActionsVisualizer : MonoBehaviour
     
     private void Awake()
     {
+        if (_visualizeActions == false)
+        {
+            return;
+        }
         // fixing image dimensions
         float measure = _referenceCameraSize * _referenceImageMeasure * _canvas.pixelRect.width / (_camera.orthographicSize * _referenceCanvasWidth);
         ((RectTransform)_image.transform).sizeDelta = new Vector2 (measure, measure);
