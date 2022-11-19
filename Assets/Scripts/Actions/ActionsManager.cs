@@ -46,6 +46,11 @@ namespace DLLF
         }
 #endif
 
+        public ActionType[] GetActionSequence()
+        {
+            return _actionsTypeSequence.actions;
+        }
+
         private void Awake()
         {
             _actionsMapping = new Dictionary<ActionType, ActionDelegate>();
