@@ -40,8 +40,10 @@ TagManager:
   - 
   - 
   - 
-  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Platform
+    uniqueID: 436536497
     locked: 0
