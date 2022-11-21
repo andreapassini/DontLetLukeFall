@@ -39,6 +39,11 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("SettingMenu");
     }
+    
+    public void GoToSendFeedback() // Go to send feedback menu
+    {
+        SceneManager.LoadScene("SendFeedbackMenu");
+    }
 
     public void QuitGame() // Exit from the game
     {

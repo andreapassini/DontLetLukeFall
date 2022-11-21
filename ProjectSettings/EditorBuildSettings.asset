@@ -44,4 +44,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FakeLevelsJustToTestGameManager/Level7.unity
     guid: 1d358564383e14e5a89094df3833c404
+  - enabled: 1
+    path: Assets/Scenes/Menu/SendFeedbackMenu.unity
+    guid: 43696e0c6a009491390b0bad902ae70d
   m_configObjects: {}
