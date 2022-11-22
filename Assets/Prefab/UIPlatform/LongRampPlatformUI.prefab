@@ -53,9 +53,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e0f4017a6232bb4baef4d9571dd6f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _realPlatform: {fileID: 4026177253315376335, guid: 2641ffadf1d7f334e85df0dccef29aa3, type: 3}
+  _realPlatform: {fileID: 6560242389684104238, guid: 0885ec3ad7210514482e636f1528c34a, type: 3}
   _canvas: {fileID: 0}
-  _scaleFactor: 1.6
 --- !u!225 &7438976430986780160
 CanvasGroup:
   m_ObjectHideFlags: 0
