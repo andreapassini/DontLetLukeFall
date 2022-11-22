@@ -28,6 +28,11 @@ public class MainMenu : MonoBehaviour
                 _eventSystem.SetSelectedGameObject(_buttonToFirstSelect);
             }
         }
+        // Click on Esc key to quit the game
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            QuitGame();
+        }
     }
     
     public void GoToLevelSelectionMenu() // Go to level selection menu

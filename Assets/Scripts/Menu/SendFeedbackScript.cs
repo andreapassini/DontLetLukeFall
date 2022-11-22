@@ -122,6 +122,12 @@ public class SendFeedbackScript : MonoBehaviour
         {
             _eventSystem.SetSelectedGameObject(_feedbackInputGameObject);
         }
+        // Click on Esc key to go back to main menu
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            _feedbackInputField.text = "";
+            StartCoroutine(SendFeedback());
+        }
     }
     
 }

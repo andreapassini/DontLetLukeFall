@@ -98,6 +98,11 @@ public class LevelSelectionMenu : MonoBehaviour
         {
             _eventSystem.SetSelectedGameObject(_buttonToFirstSelect);
         }
+        // Click on Esc key to go back to main menu
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GoToMainMenu();
+        }
     }
     
     void OnGUI()
