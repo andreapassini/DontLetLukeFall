@@ -21,6 +21,7 @@ public class SendFeedbackScript : MonoBehaviour
     
     IEnumerator SendFeedback() // Send feedback (this coroutine is activated when pushing return key)
     {
+        TextFileManager.AddDateFinishedToPlay();
         _feedbackInputGameObject.SetActive(false);
         _feedbackSentGameObject.SetActive(true);
         if (_feedbackInputField.text.Length <= 1) // If empty feedback, operation cancelled
@@ -32,7 +33,7 @@ public class SendFeedbackScript : MonoBehaviour
         { // Sending feedback
             _feedbackSentText.text = "Sending feedback...";
             yield return new WaitForSeconds(1);
-            string feedback = _feedbackInputField.text;
+            string feedback = _feedbackInputField.text + TextFileManager.ReadFileContent();
             // string feedback will finish with an \n
             // string feedback to be adjusted with played infos TODO
             if (_sendToOurForm)

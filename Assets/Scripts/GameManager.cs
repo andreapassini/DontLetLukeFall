@@ -94,16 +94,19 @@ public class GameManager : MonoBehaviour
     private void HandlePlaying() // show the scene with the level to play
     {
         SceneManager.LoadScene("Level" + _levelToPlay);
+        TextFileManager.AddWitchLevelYouStartPlaying();
     }
 
     private void HandleLose() // Show the screen you lose
     {
         SceneManager.LoadScene("YouLoseWon");
+        TextFileManager.AddThatYouLostALevel();
     }
     
     private void HandleWin() // Show the screen you won
     {
         SceneManager.LoadScene("YouLoseWon");
+        TextFileManager.AddThatYouWonALevel();
     }
 
 }
