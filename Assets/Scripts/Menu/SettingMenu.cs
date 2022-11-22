@@ -75,6 +75,11 @@ public class SettingMenu : MonoBehaviour
                 _eventSystem.SetSelectedGameObject(_buttonToFirstSelect);
             }
         }
+        // Click on Esc key to go back to main menu
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GoToMainMenu();
+        }
     }
     
     private void OnDisable() // On disable save volume settings
