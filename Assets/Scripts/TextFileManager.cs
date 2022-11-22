@@ -7,8 +7,9 @@ public class TextFileManager : MonoBehaviour
 // This script is to create a txt file witch is used to log some infos to be attached in an even feedback
 {
 
-    private const string _fileName = "Log.txt";
-    private static bool _createdTheFile = false;
+    private const string _fileName = "Log.txt"; // The name of the file
+    // The file Log.txt is used to log to add more infos when posting a feedback
+    private static bool _createdTheFile = false; // To avoid to recreate the file more times
     
     private void CreateText()
     {
@@ -22,7 +23,7 @@ public class TextFileManager : MonoBehaviour
         // Empty the file
         File.WriteAllText(path, "");
         // Content of the file
-        string content = "\n" + "Started to play date: " + System.DateTime.Now + "\n";
+        string content = "\n" + "Started to play date: " + System.DateTime.Now + "\n"; // When you started to play
         // Add some to text to it
         File.AppendAllText(path, content);
     }
@@ -37,7 +38,8 @@ public class TextFileManager : MonoBehaviour
         }
     }
 
-    public static void AddDateFinishedToPlay()
+    public static void AddDateFinishedToPlay() // To add in the log file when you finished to play
+    // This function is called when you are going to send the feedback
     {
         // Path of the file
         string path = Application.dataPath + "/" + _fileName;
@@ -47,7 +49,7 @@ public class TextFileManager : MonoBehaviour
         File.AppendAllText(path, content);
     }
 
-    public static void AddWitchLevelYouStartPlaying()
+    public static void AddWitchLevelYouStartPlaying() // To add in the log file witch level you start to play
     {
         // Path of the file
         string path = Application.dataPath + "/" + _fileName;
@@ -58,7 +60,7 @@ public class TextFileManager : MonoBehaviour
         File.AppendAllText(path, content);
     }
 
-    public static void AddThatYouWonALevel()
+    public static void AddThatYouWonALevel() // To add in the log file that you won
     {
         // Path of the file
         string path = Application.dataPath + "/" + _fileName;
@@ -68,7 +70,7 @@ public class TextFileManager : MonoBehaviour
         File.AppendAllText(path, content);
     }
     
-    public static void AddThatYouLostALevel()
+    public static void AddThatYouLostALevel() // To add in the log file that you lost
     {
         // Path of the file
         string path = Application.dataPath + "/" + _fileName;
@@ -78,7 +80,7 @@ public class TextFileManager : MonoBehaviour
         File.AppendAllText(path, content);
     }
 
-    public static string ReadFileContent()
+    public static string ReadFileContent() // To read the log file content
     {
         // Path of the file
         string path = Application.dataPath + "/" + _fileName;
