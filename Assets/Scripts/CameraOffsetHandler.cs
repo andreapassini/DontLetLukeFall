@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace DLLF
 {
+    [RequireComponent(typeof(CinemachineCameraOffset))]
     public class CameraOffsetHandler : MonoBehaviour
     {
         // Start is called before the first frame update
