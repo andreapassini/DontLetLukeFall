@@ -52,6 +52,13 @@ namespace DLLF
         {
             return _actionsTypeSequence.actions;
         }
+        
+        public ActionType[] GetActionSequenceViaLevelManager(LevelManager levelManager)
+        {
+            ActionsSequence actionsSequence = levelManager.GetLevelActionsSequence();
+            Begin(actionsSequence);
+            return _actionsTypeSequence.actions;
+        }
 
         private void Awake()
         {

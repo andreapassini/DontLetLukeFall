@@ -24,7 +24,11 @@ namespace DLLF
         {
             _levelActionsManager.Begin(_levelActionsSequence);
         }
-        
+
+        public ActionsSequence GetLevelActionsSequence()
+        {
+            return _levelActionsSequence;
+        }
 
         private void OnDestroy()
         {

@@ -13,6 +13,7 @@ public class ActionsVisualizer : MonoBehaviour
     [SerializeField] private GameObject _luke; // Luke
     [SerializeField] private Canvas _canvas; // The canvas
     [SerializeField] private Camera _camera; // The main camera
+    [SerializeField] private ActionsManager _actionsManager; // The action manager (witch contain the action sequence)
     [SerializeField] private ActionsSprites _actionsSprites; // The action sprites
     [SerializeField] private Image _image; // The image to be cloned to visualize the other actions
 
@@ -21,7 +22,7 @@ public class ActionsVisualizer : MonoBehaviour
     private const float _referenceCanvasWidth = 1920f; // to fix image position based on camera size
     private const float _referenceMultiplierForLukePosition = 952.0f / 15.0f; // to fix image position based on ratio between canvas size and unity unit measure
     
-    private void Awake()
+    private void Start()
     {
         if (_visualizeActions == false)
         {
@@ -41,8 +42,7 @@ public class ActionsVisualizer : MonoBehaviour
         _image.transform.position = new Vector3(_image.transform.position.x + imageLenght / 2, _image.transform.position.y,
             _image.transform.position.z);
         // cloning the image
-        ActionsManager actionsManager = _luke.GetComponent<ActionsManager>();
-        foreach (var el in actionsManager.GetActionSequence())
+        foreach (var el in _actionsManager.GetActionSequence())
         {
             Image newImage = Instantiate(_image, _image.transform.position, _image.transform.rotation, gameObject.transform);
             _image.rectTransform.position = new Vector3(_image.rectTransform.position.x + imageLenght,
