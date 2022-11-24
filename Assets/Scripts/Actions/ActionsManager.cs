@@ -56,6 +56,10 @@ namespace DLLF
         private void Awake()
         {
             _lukeAnimator = _characterController.GetComponent<Animator>(); // Get the animator component
+            if (_lukeAnimator == null)
+            {
+                Debug.Log("You missed to add the animator to Luke!");
+            }
             _actionsMapping = new Dictionary<ActionType, ActionDelegate>();
             AutoLinkActionTypesToMethods();
         }
@@ -84,8 +88,11 @@ namespace DLLF
 
             if (_speed == 0) // In case speed is 0, set iddle animation
             {
-                _lukeAnimator.SetTrigger("IddleTrigger");
-                _lukeAnimator.speed = 1;
+                if (_lukeAnimator != null)
+                {
+                    _lukeAnimator.SetTrigger("IddleTrigger");
+                    _lukeAnimator.speed = 1;
+                }
             }
 
         }
@@ -158,8 +165,11 @@ namespace DLLF
         private float Jump()
         {
             Debug.Log("Activating jump");
-            _lukeAnimator.SetTrigger("JumpTrigger"); // set jump animation
-            _lukeAnimator.speed = 1;
+            if (_lukeAnimator != null)
+            {
+                _lukeAnimator.SetTrigger("JumpTrigger"); // set jump animation
+                _lukeAnimator.speed = 1;
+            }
             _jump = true;
             // if it is running it will cover more units
             return GetTime(movementParams.GetUnitToCoverForJump(_isRunning), _speed);
@@ -169,8 +179,11 @@ namespace DLLF
         private float WalkRight()
         {
             Debug.Log("Activating WalkRight");
-            _lukeAnimator.SetTrigger("WalkRightTrigger"); // set walk right animation
-            _lukeAnimator.speed = 1;
+            if (_lukeAnimator != null)
+            {
+                _lukeAnimator.SetTrigger("WalkRightTrigger"); // set walk right animation
+                _lukeAnimator.speed = 1;
+            }
             _speed = movementParams.WalkSpeed;
             _isRunning = false;
             return GetTime(movementParams.UnitsCoveredPerAction, _speed);
@@ -183,8 +196,11 @@ namespace DLLF
         {
             Debug.Log("Activating WalkLeft");
             _lukeAnimator.SetTrigger("WalkLeftTrigger"); // set walk left animation
-            _lukeAnimator.speed = 1;
-            _speed = -movementParams.WalkSpeed;
+            if (_lukeAnimator != null)
+            {
+                _lukeAnimator.speed = 1;
+                _speed = -movementParams.WalkSpeed;
+            }
             _isRunning = false;
             return GetTime(movementParams.UnitsCoveredPerAction, _speed);
 
@@ -196,8 +212,11 @@ namespace DLLF
         private float RunRight()
         {
             Debug.Log("Activating RunRight");
-            _lukeAnimator.SetTrigger("RunRightTrigger"); // set run right animation; double the speed
-            _lukeAnimator.speed = 2;
+            if (_lukeAnimator != null)
+            {
+                _lukeAnimator.SetTrigger("RunRightTrigger"); // set run right animation; double the speed
+                _lukeAnimator.speed = 2;
+            }
             _speed = movementParams.RunSpeed;
             _isRunning = true;
             return GetTime(movementParams.UnitsCoveredPerAction, _speed);
@@ -210,8 +229,11 @@ namespace DLLF
         private float RunLeft()
         {
             Debug.Log("Activating RunLeft");
-            _lukeAnimator.SetTrigger("RunLeftTrigger"); // set run left animation; double the speed
-            _lukeAnimator.speed = 2;
+            if (_lukeAnimator != null)
+            {
+                _lukeAnimator.SetTrigger("RunLeftTrigger"); // set run left animation; double the speed
+                _lukeAnimator.speed = 2;
+            }
             _speed = -movementParams.RunSpeed;
             _isRunning = true;
             return GetTime(movementParams.UnitsCoveredPerAction, _speed);
