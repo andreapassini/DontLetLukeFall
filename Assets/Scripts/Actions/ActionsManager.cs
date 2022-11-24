@@ -195,12 +195,12 @@ namespace DLLF
         private float WalkLeft()
         {
             Debug.Log("Activating WalkLeft");
-            _lukeAnimator.SetTrigger("WalkLeftTrigger"); // set walk left animation
             if (_lukeAnimator != null)
             {
+                _lukeAnimator.SetTrigger("WalkLeftTrigger"); // set walk left animation
                 _lukeAnimator.speed = 1;
-                _speed = -movementParams.WalkSpeed;
             }
+            _speed = -movementParams.WalkSpeed;
             _isRunning = false;
             return GetTime(movementParams.UnitsCoveredPerAction, _speed);
 
