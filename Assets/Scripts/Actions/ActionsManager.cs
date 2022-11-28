@@ -55,6 +55,8 @@ namespace DLLF
 
         private void Awake()
         {
+            _characterController ??= transform.GetComponentInParent<CharacterController2D>();
+            
             _lukeAnimator = _characterController.GetComponent<Animator>(); // Get the animator component
             if (_lukeAnimator == null)
             {
@@ -64,7 +66,7 @@ namespace DLLF
             AutoLinkActionTypesToMethods();
         }
 
-        public void Begin(ActionsSequence actionsSequence)
+		public void Begin(ActionsSequence actionsSequence)
         {
             _actionsTypeSequence = actionsSequence;
             foreach (var actionType in _actionsTypeSequence.actions)
