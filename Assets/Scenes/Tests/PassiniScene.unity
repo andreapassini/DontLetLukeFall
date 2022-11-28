@@ -1270,17 +1270,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8496391978489936027, guid: 52d104e19135e408f80149ec3ffc8c85, type: 3}
   m_PrefabInstance: {fileID: 1386965091}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &506128377 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8496391978489936026, guid: 52d104e19135e408f80149ec3ffc8c85, type: 3}
-  m_PrefabInstance: {fileID: 1386965091}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46b03649cfef54b0dab4c6117566e075, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &510395813
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1725,6 +1714,10 @@ PrefabInstance:
     - target: {fileID: 815512333537805034, guid: 8b62bd213329ea44d93ce29820e867dd, type: 3}
       propertyPath: m_Name
       value: Tentacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 815512333537805034, guid: 8b62bd213329ea44d93ce29820e867dd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 815512333537805037, guid: 8b62bd213329ea44d93ce29820e867dd, type: 3}
       propertyPath: m_RootOrder
@@ -3353,18 +3346,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1806068765, guid: b410c5c1a8ba4b74ea51a58fb3e07779, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2039385003, guid: b410c5c1a8ba4b74ea51a58fb3e07779, type: 3}
-      propertyPath: _actionUIController
-      value: 
-      objectReference: {fileID: 506128377}
-    - target: {fileID: 2039385003, guid: b410c5c1a8ba4b74ea51a58fb3e07779, type: 3}
-      propertyPath: _actionsTypeSequence
-      value: 
-      objectReference: {fileID: 11400000, guid: 196ce7f6f6511164993f7cd40787cce0, type: 2}
     - target: {fileID: 505195082365519623, guid: b410c5c1a8ba4b74ea51a58fb3e07779, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -3412,14 +3393,6 @@ PrefabInstance:
     - target: {fileID: 505195082365519626, guid: b410c5c1a8ba4b74ea51a58fb3e07779, type: 3}
       propertyPath: m_Name
       value: Luke
-      objectReference: {fileID: 0}
-    - target: {fileID: 505195082365519626, guid: b410c5c1a8ba4b74ea51a58fb3e07779, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7294582467351424890, guid: b410c5c1a8ba4b74ea51a58fb3e07779, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b410c5c1a8ba4b74ea51a58fb3e07779, type: 3}
