@@ -12,11 +12,15 @@ public class ActionsEditorScriptVisualizer : MonoBehaviour
     [SerializeField] private GameObject _luke; // Luke
     [SerializeField] private Canvas _canvas; // The canvas
     [SerializeField] private Camera _camera; // The main camera
+    [SerializeField] private ActionsManager _actionsManager; // The action manager (witch contain the action sequence)
+    [SerializeField] private LevelManager _levelManager; // The level manager to set action sequence to the Action Manager
     [SerializeField] private ActionsSprites _actionsSprites; // The action sprites
     [SerializeField] private Image _image; // The image to be cloned to visualize the other actions
     
     [SerializeField] private List<Image> _instantiatedImages; // This list should be left empty at the beginning
     // This list will contain images of actions to visualize
+    
+    
     
     private const float _referenceImageMeasure = 5f; // to fix image dimensions based on dimension of a platform
     private const float _referenceCanvasWidth = 1920f; // to fix image dimensions based on camera size
@@ -33,12 +37,15 @@ public class ActionsEditorScriptVisualizer : MonoBehaviour
             SafeDestroyGameObject(el);
         }
         _instantiatedImages.Clear();
+        // At the end (re)disable the image
+        _image.enabled = false;
     }
     
     public void VisualizeActions()
     {
         // (re)enable the image to initial params and reset images of actions you used before
         RemoveActions();
+        _image.enabled = true;
         // fixing image dimensions
         float measure = _referenceImageMeasure * _referenceCanvasWidth / _canvas.pixelRect.width;
         ((RectTransform)_image.transform).sizeDelta = new Vector2 (measure, measure);
@@ -51,10 +58,9 @@ public class ActionsEditorScriptVisualizer : MonoBehaviour
         float imageLenght = _image.rectTransform.rect.width;
         _image.transform.position = new Vector3(_image.transform.position.x + imageLenght / 2, _image.transform.position.y, _image.transform.position.z);
         // cloning the image
-        ActionsManager actionsManager = _luke.GetComponent<ActionsManager>();
-        foreach (var el in actionsManager.GetActionSequence())
+        foreach (var el in _actionsManager.GetActionSequenceViaLevelManager(_levelManager))
         {
-            Image newImage = Instantiate(_image, _image.transform.position, _image.transform.rotation, gameObject.transform);
+            Image newImage = Instantiate(_image, _image.transform.position, _image.transform.rotation, transform);
             _image.rectTransform.position = new Vector3(_image.rectTransform.position.x + imageLenght,
                 _image.rectTransform.position.y, _image.rectTransform.position.z);
             newImage.sprite = _actionsSprites.GetSprite(el);
@@ -62,6 +68,7 @@ public class ActionsEditorScriptVisualizer : MonoBehaviour
         }
         _image.enabled = false;
     }
+    
     
     private static T SafeDestroy<T>(T obj) where T : UnityEngine.Object
     {
@@ -77,5 +84,7 @@ public class ActionsEditorScriptVisualizer : MonoBehaviour
             SafeDestroy(component.gameObject);
         return null;
     }
+    
+    
 
 }

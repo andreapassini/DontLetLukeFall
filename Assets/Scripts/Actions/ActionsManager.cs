@@ -48,8 +48,15 @@ namespace DLLF
         }
 #endif
 
-        public ActionType[] GetActionSequence()
+        public ActionType[] GetActionSequence() // Function to get the action sequence used for the ActionVisualizer useful when creating a level
         {
+            return _actionsTypeSequence.actions;
+        }
+
+        public ActionType[] GetActionSequenceViaLevelManager(LevelManager levelManager) // Function to get the action sequence via the level managerused for the ActionScriptVisualizer useful when creating a level
+        {
+            ActionsSequence actionsSequence = levelManager.GetLevelActionsSequence();
+            Begin(actionsSequence);
             return _actionsTypeSequence.actions;
         }
 
