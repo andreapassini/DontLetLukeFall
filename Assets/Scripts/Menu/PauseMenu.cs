@@ -81,13 +81,19 @@ public class PauseMenu : MonoBehaviour
     public void RestartLevel() // restart the current level
     {
         Resume();
-        GameManager.Instance.UpdateGameState(GameState.Playing);
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.UpdateGameState(GameState.Playing);
+        }
     }
     
     public void QuitLevel() // Quit to main menu
     {
         Resume();
-        GameManager.Instance.UpdateGameState(GameState.SelectionLevel);
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.UpdateGameState(GameState.SelectionLevel);
+        }
     }
     
 }
