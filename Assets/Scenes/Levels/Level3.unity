@@ -1221,6 +1221,10 @@ PrefabInstance:
       propertyPath: _visualizeActions
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1141338847949440050, guid: 031b0ae4fd12b704a9d66f6cab8e292b, type: 3}
+      propertyPath: _visualizeActionsInPlay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1141338847949440051, guid: 031b0ae4fd12b704a9d66f6cab8e292b, type: 3}
       propertyPath: _luke
       value: 
@@ -2910,7 +2914,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:

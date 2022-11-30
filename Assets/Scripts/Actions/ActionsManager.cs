@@ -16,11 +16,11 @@ namespace DLLF
     {
 
         [SerializeField] private MovementParams movementParams;
-
         [SerializeField] private ActionsSprites _actionsSprites;
-
         [SerializeField] private CharacterController2D _characterController;
         [SerializeField] private ActionUIController _actionUIController;
+        
+        [SerializeField] private ActionsSpritesSpawner _actionsSpritesSpawner;
 
         private Animator _lukeAnimator; // The luke animator (this var is set automatically in Awake via _characterController)
         
@@ -31,22 +31,7 @@ namespace DLLF
         private Queue<ActionType> _actionsSequence = new Queue<ActionType>();
         private Dictionary<ActionType, ActionDelegate> _actionsMapping;
         private ActionsSequence _actionsTypeSequence;
-
-#if UNITY_EDITOR
-        private List<Vector3> actionsPosition = new List<Vector3>();
-        // DEBUG
-        private void OnDrawGizmos()
-        {
-            Color gizmosColor = Color.red;
-            gizmosColor.a = .5f;
-            Gizmos.color = gizmosColor;
-            
-            foreach (var pos in actionsPosition)
-            {
-                Gizmos.DrawCube(pos, Vector3.one);
-            }
-        }
-#endif
+        private ActionsSpritesLoader _actionsSpritesLoader;
 
         public ActionType[] GetActionSequence() // Function to get the action sequence used for the ActionVisualizer useful when creating a level
         {
@@ -72,8 +57,8 @@ namespace DLLF
             _actionsMapping = new Dictionary<ActionType, ActionDelegate>();
             AutoLinkActionTypesToMethods();
         }
-
-		public void Begin(ActionsSequence actionsSequence)
+        
+        public void Begin(ActionsSequence actionsSequence)
         {
             _actionsTypeSequence = actionsSequence;
             foreach (var actionType in _actionsTypeSequence.actions)
@@ -83,6 +68,14 @@ namespace DLLF
             StartCoroutine(StartActionSequence());
         }
 
+        public void StartPlatformAction(ActionType actionType)
+        {
+            var actionDelegate = _actionsMapping[actionType];
+            actionDelegate.Invoke();
+            _actionsSpritesSpawner.SpawnPlatformActionSprite(_characterController.transform, actionType);
+        }
+
+        
         private void Update()
         {
             var movementRequest = new MovementRequest
@@ -106,53 +99,16 @@ namespace DLLF
 
         }
 
-        private void SendActionSequenceToActionUIController(float timeToComplete)
-        {
-            List<Sprite> listOfSpriteToLoad = new List<Sprite>();
-            foreach (var action in _actionsTypeSequence.actions)
-            {
-                listOfSpriteToLoad.Add(_actionsSprites.GetSprite(action));
-            }
-            _actionUIController.LoadActionSequence(listOfSpriteToLoad, timeToComplete);
-        }
         
-        private IEnumerator StartActionSequence(bool activate)
-		{
-            if (activate) {
-                yield return new WaitForSecondsRealtime(2);
-                while(true) {
-                    if (transform.position.x % 5 == 0) {
-                        if (_actionsSequence.TryDequeue(out var actionToPerform)) {
-                            ActionDelegate actionDelegate = _actionsMapping[actionToPerform];
-                            float timeToComplete = actionDelegate.Invoke();
-                            if (!_actionUIController.HasBeenLoaded()) {
-                                SendActionSequenceToActionUIController(timeToComplete);
-                            } else {
-                                _actionUIController.NextAction(timeToComplete);
-                            }
-                            #if UNITY_EDITOR
-                            actionsPosition.Add(_characterController.transform.position);
-                            #endif
-                            Debug.Log("Time to complete for action " + actionToPerform + " is  " + timeToComplete + " (current speed: " + _speed + ")");
-                            yield return new WaitForEndOfFrame();
-                        }
-                    } else {
-                        yield return new WaitForEndOfFrame();
-					}
-				}
-
-                Debug.Log("Actions sequence end");
-                _actionUIController.StopSequence();
-            }
-        }
-
         private IEnumerator StartActionSequence()
         {
             yield return new WaitUntil(() => _characterController.IsActive);
             while (_actionsSequence.TryDequeue(out var actionToPerform))
             {
                ActionDelegate actionDelegate = _actionsMapping[actionToPerform];
+
                 float timeToComplete = actionDelegate.Invoke();
+                _actionsSpritesSpawner.SpawnSequenceActionSprite(_characterController.transform, actionToPerform, timeToComplete);
                 if (! _actionUIController.HasBeenLoaded())
                 {
                     SendActionSequenceToActionUIController(timeToComplete);
@@ -170,7 +126,10 @@ namespace DLLF
             _actionUIController.StopSequence();
         }
 
-        [ImmediateAction(ActionType.Jump)]
+
+		#region Actions
+
+		[ImmediateAction(ActionType.Jump)]
         private float Jump()
         {
             Debug.Log("Activating jump");
@@ -184,6 +143,7 @@ namespace DLLF
             return GetTime(movementParams.GetUnitToCoverForJump(_isRunning), _speed);
         }
 
+        //TODO for every action that changes horizontal direction rotate the player or flip the sprite render on Y axis
         [ContinuousAction(ActionType.WalkRight)]
         private float WalkRight()
         {
@@ -248,15 +208,45 @@ namespace DLLF
             return GetTime(movementParams.UnitsCoveredPerAction, _speed);
 
         }
-        
-        // method to calculate time to cover the given space: spaceToCover, at a given speed: speed
-        private float GetTime(float spaceToCover, float speed)
+
+		#endregion
+
+		// method to calculate time to cover the given space: spaceToCover, at a given speed: speed
+		private float GetTime(float spaceToCover, float speed)
         {
             return Mathf.Abs(spaceToCover / speed);
         }
-
-
         
+        private void SendActionSequenceToActionUIController(float timeToComplete)
+        {
+            List<Sprite> listOfSpriteToLoad = new List<Sprite>();
+            foreach (var action in _actionsTypeSequence.actions)
+            {
+                listOfSpriteToLoad.Add(_actionsSprites.GetSprite(action));
+            }
+            _actionUIController.LoadActionSequence(listOfSpriteToLoad, timeToComplete);
+        }
+
+
+        #region GIZMOS
+
+            #if UNITY_EDITOR
+                    private List<Vector3> actionsPosition = new List<Vector3>();
+                    // DEBUG
+                    private void OnDrawGizmos()
+                    {
+                        Color gizmosColor = Color.red;
+                        gizmosColor.a = .5f;
+                        Gizmos.color = gizmosColor;
+                        
+                        foreach (var pos in actionsPosition)
+                        {
+                            Gizmos.DrawCube(pos, Vector3.one);
+                        }
+                    }
+            #endif
+
+        #endregion
 
         #region AutoSetupWithReflection
 

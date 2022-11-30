@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2502557511496569497}
   - component: {fileID: 2502557511496569498}
+  - component: {fileID: 1099842800}
   m_Layer: 2
   m_Name: ActionsManager
   m_TagString: Untagged
@@ -48,3 +49,22 @@ MonoBehaviour:
   _actionsSprites: {fileID: 11400000, guid: f497042f3b253d64eada687dc458e496, type: 2}
   _characterController: {fileID: 0}
   _actionUIController: {fileID: 0}
+  _actionsSpritesSpawner: {fileID: 1099842800}
+--- !u!114 &1099842800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2502557511496569499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c262989906104342822a9fa43c2371b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _showPlatformActions: 1
+  _actionsFadeOut: 1
+  _scalingFactor: 0.5
+  _overrideTimeToComplete: 0
+  _initialCapacity: 3
+  _maxSize: 5

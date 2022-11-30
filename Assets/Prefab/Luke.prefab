@@ -105,7 +105,7 @@ MonoBehaviour:
     m_Extent: {x: 0.5, y: 1, z: 0}
   _groundLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 384
   _detectorCount: 3
   _detectionRayLength: 0.1
   _rayBuffer: 0.1

@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace DLLF
 {
@@ -59,9 +62,22 @@ namespace DLLF
                 {
                     renderer.color = new Color(255, 0, 0);
                 }
+                
+                //randomize the effect of the platform
+                _spawnedPlatform.GetComponent<Platform>().action = RandomizeEffect();
             }
             _spawnedPlatform.transform.position = spawnPosition;
         }
+
+
+        private ActionType RandomizeEffect()
+        {
+            var effects = ((ActionType[])Enum.GetValues(typeof(ActionType))).ToList();
+            //removing null action type, of we are here we want an effect
+            effects.Remove(ActionType.Null);
+            return effects[Random.Range(0, effects.Count)];
+        }
+        
         public void OnBeginDrag(PointerEventData eventData)
         {
          //   Debug.Log("onBeginDrag");
@@ -86,7 +102,7 @@ namespace DLLF
             if (!_slot.reselectedPlatform)
             {
                 _slot.isEmpty = true;
-                _spawnedPlatform.layer = LayerMask.NameToLayer("Default");
+                _spawnedPlatform.layer = LayerMask.NameToLayer("PlayerPlatform");
                 Destroy(this.gameObject);
             }
             else
