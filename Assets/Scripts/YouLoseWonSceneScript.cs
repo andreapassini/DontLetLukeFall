@@ -27,15 +27,12 @@ public class YouLoseWonSceneScript : MonoBehaviour
         {
             _buttonNextLevel.SetActive(false);
         }
-        Debug.Log("aaaaa");
         if (GameManager.Instance.state == GameState.Lose)
         {
-            Debug.Log("bbbbb");
             _youLoseWonText.text = "You lose!";
             _secondaryText.text = "You've not completed the level " + GameManager.Instance.GetLevelToPlay() + "!";
             _buttonNextLevel.SetActive(false);
         }
-        Debug.Log("ccccc");
     }
 
     // Update is called once per frame

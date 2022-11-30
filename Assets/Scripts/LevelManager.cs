@@ -40,11 +40,13 @@ namespace DLLF
         private void OnLevelCompleted()
         {
             Debug.Log("Level completed!");
+            GameManager.Instance.UpdateGameState(GameState.Win);
         }
 
         private void OnLevelFailed()
         {
             Debug.Log("Level failed!");
+            GameManager.Instance.UpdateGameState(GameState.Lose);
         }
     }
 
