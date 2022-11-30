@@ -23,5 +23,3 @@ MonoBehaviour:
     actionType: 3
   - sprite: {fileID: 21300000, guid: 24c141a211e018e47b2d6ee39cfe9f45, type: 3}
     actionType: 4
-  - sprite: {fileID: 0}
-    actionType: 0
