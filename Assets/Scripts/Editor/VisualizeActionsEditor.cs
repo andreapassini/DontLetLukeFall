@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(ActionsEditorScriptVisualizer))]
 public class VisualizeActionsEditor : Editor
 // This script enable two buttons for the editor script
@@ -25,3 +26,4 @@ public class VisualizeActionsEditor : Editor
     }
     
 }
+#endif
