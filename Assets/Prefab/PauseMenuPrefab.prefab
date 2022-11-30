@@ -1077,7 +1077,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4946249322720862956}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1107,4 +1107,5 @@ MonoBehaviour:
   _pauseMenuUI: {fileID: 4946249321130263276}
   _pauseButton: {fileID: 4946249321369701982}
   _eventSystem: {fileID: 0}
+  _platformBar: {fileID: 0}
   _buttonToFirstSelect: {fileID: 4946249320747159080}
