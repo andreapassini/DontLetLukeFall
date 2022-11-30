@@ -10,6 +10,14 @@ public class RotateToTarget : MonoBehaviour
     private Vector2 _direction;
 
     public float moveSpeed;
+    
+    private void Start()
+    {
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.Play("luke_intro");
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -49,4 +57,5 @@ public class RotateToTarget : MonoBehaviour
         }
         _previousPosition = newPosition;
     }
+    
 }

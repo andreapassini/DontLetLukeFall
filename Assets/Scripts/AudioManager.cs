@@ -80,6 +80,30 @@ public class AudioManager : MonoBehaviour
         s.source.Stop();
     }
 
+    public void PauseAllBackgroundMusics() // Method to pause all backgrounds musics
+    {
+        AudioSource[] audioSources = GetComponents<AudioSource>();
+        foreach (var el in audioSources)
+        {
+            if (el.outputAudioMixerGroup.name == "BackgroundMusic")
+            {
+                el.Pause();
+            }
+        }
+    }
+    
+    public void UnPauseAllBackgroundMusics() // Method to unpause all backgrounds musics
+    {
+        AudioSource[] audioSources = GetComponents<AudioSource>();
+        foreach (var el in audioSources)
+        {
+            if (el.outputAudioMixerGroup.name == "BackgroundMusic")
+            {
+                el.UnPause();
+            }
+        }
+    }
+    
     public float GetVolumeScriptableObject(string name) // Method to obtain witch is the volume of a specific sound in its scriptable object
     {
         Sound s = Array.Find(_sounds.sounds.Select(el => el.sound).ToArray(), sound => sound.name == name);
