@@ -54,9 +54,15 @@ public class PauseMenu : MonoBehaviour
         _eventSystem.SetSelectedGameObject(null);
         _pauseMenuUI.SetActive(false); // close pause menu
         _pauseButton.SetActive(true);
-        _platformBar.SetActive(true);
+        if (_platformBar != null)
+        {
+            _platformBar.SetActive(true);
+        }
         Time.timeScale = _oldTimeScale; // restart time
-        AudioManager.instance.UnPauseAllBackgroundMusics(); // Background music is resumed
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.UnPauseAllBackgroundMusics(); // Background music is resumed
+        }
         gameIsPaused = false;
     }
 
@@ -68,13 +74,19 @@ public class PauseMenu : MonoBehaviour
         }
         _pauseMenuUI.SetActive(true); // open pause menu
         _pauseButton.SetActive(false);
-        _platformBar.SetActive(false);
+        if (_platformBar != null)
+        {
+            _platformBar.SetActive(false);
+        }
         if (Time.timeScale != 0f)
         {
             _oldTimeScale = Time.timeScale;
         }
         Time.timeScale = 0f; // Stop time
-        AudioManager.instance.PauseAllBackgroundMusics(); // Background music is paused
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PauseAllBackgroundMusics(); // Background music is paused
+        }
         gameIsPaused = true;
     }
 
