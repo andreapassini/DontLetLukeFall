@@ -32,8 +32,9 @@ namespace DLLF
             {
                 if (action != ActionType.Null)
                 {
-                    Debug.Log("LoadAction");
+                    Debug.Log("LoadAction " + action.ToString());
                     _actionsManager.StartPlatformAction(action);
+                    action = ActionType.Null;
                 }
             }
             
