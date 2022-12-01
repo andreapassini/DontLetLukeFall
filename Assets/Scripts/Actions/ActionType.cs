@@ -8,6 +8,7 @@
         RunRight,
         RunLeft,
         Crouch,
-        Null
+        Null,
+        Stop
     }
 }
