@@ -1,11 +1,4 @@
 
-Started to play date: 11/30/2022 4:46:04 PM
-Started level 1 in date: 11/30/2022 4:46:06 PM
-Started level 1 in date: 11/30/2022 4:46:10 PM
-Started level 2 in date: 11/30/2022 4:46:16 PM
-Started level 2 in date: 11/30/2022 4:46:22 PM
-Started level 2 in date: 11/30/2022 4:46:25 PM
-Started level 3 in date: 11/30/2022 4:46:29 PM
-Started level 3 in date: 11/30/2022 4:46:39 PM
-Started level 6 in date: 11/30/2022 4:46:45 PM
-Started level 6 in date: 11/30/2022 4:46:48 PM
+Started to play date: 12/1/2022 11:52:36 AM
+Started level 6 in date: 12/1/2022 11:52:39 AM
+Won the level in date: 12/1/2022 11:52:57 AM
