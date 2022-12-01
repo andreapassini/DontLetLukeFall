@@ -9,6 +9,7 @@
         RunLeft,
         Crouch,
         Null,
-        Stop
+        Stop,
+        Die
     }
 }
