@@ -16,7 +16,6 @@ namespace DLLF
     {
 
         [SerializeField] private MovementParams movementParams;
-        [SerializeField] private ActionsSprites _actionsSprites;
         [SerializeField] private CharacterController2D _characterController;
         [SerializeField] private ActionUIController _actionUIController;
         
@@ -48,7 +47,8 @@ namespace DLLF
         private void Awake()
         {
             _characterController ??= transform.GetComponentInParent<CharacterController2D>();
-            
+            _actionsSpritesLoader = ActionsSpritesLoader.Instance;
+            if (! _actionsSpritesLoader.Loaded) _actionsSpritesLoader.LoadSprites();
             _lukeAnimator = _characterController.GetComponent<Animator>(); // Get the animator component
             if (_lukeAnimator == null)
             {
@@ -88,7 +88,7 @@ namespace DLLF
             _characterController.Move(movementRequest);
             if (_jump) _jump = false;
 
-            if (_speed == 0) // In case speed is 0, set iddle animation
+            if (_speed == 0) // In case speed is 0, set idle animation
             {
                 if (_lukeAnimator != null)
                 {
@@ -209,6 +209,22 @@ namespace DLLF
 
         }
 
+        [ImmediateAction(ActionType.Stop)]
+        private float Stop()
+        {
+            Debug.Log("Activating Stop");
+            if (_lukeAnimator != null)
+            {
+                _lukeAnimator.SetTrigger("IddleTrigger");
+                _lukeAnimator.speed = 1;
+            }
+
+            _speed = 0;
+            _isRunning = false;
+            _jump = false;
+            return 3f;
+        }
+
 		#endregion
 
 		// method to calculate time to cover the given space: spaceToCover, at a given speed: speed
@@ -222,7 +238,7 @@ namespace DLLF
             List<Sprite> listOfSpriteToLoad = new List<Sprite>();
             foreach (var action in _actionsTypeSequence.actions)
             {
-                listOfSpriteToLoad.Add(_actionsSprites.GetSprite(action));
+                listOfSpriteToLoad.Add(_actionsSpritesLoader.GetSprite(action));
             }
             _actionUIController.LoadActionSequence(listOfSpriteToLoad, timeToComplete);
         }
