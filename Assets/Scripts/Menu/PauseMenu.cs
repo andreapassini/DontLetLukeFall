@@ -58,10 +58,10 @@ public class PauseMenu : MonoBehaviour
         {
             _platformBar.SetActive(true);
         }
-        Time.timeScale = _oldTimeScale; // restart time
+        //Time.timeScale = _oldTimeScale; // restart time
         if (AudioManager.instance != null)
         {
-            AudioManager.instance.UnPauseAllBackgroundMusics(); // Background music is resumed
+            //AudioManager.instance.UnPauseAllBackgroundMusics(); // Background music is resumed
         }
         gameIsPaused = false;
     }
@@ -82,10 +82,10 @@ public class PauseMenu : MonoBehaviour
         {
             _oldTimeScale = Time.timeScale;
         }
-        Time.timeScale = 0f; // Stop time
+        //Time.timeScale = 0f; // Stop time
         if (AudioManager.instance != null)
         {
-            AudioManager.instance.PauseAllBackgroundMusics(); // Background music is paused
+            //AudioManager.instance.PauseAllBackgroundMusics(); // Background music is paused
         }
         gameIsPaused = true;
     }
