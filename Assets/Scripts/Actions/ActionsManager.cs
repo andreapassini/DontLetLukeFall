@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -223,6 +224,25 @@ namespace DLLF
             _isRunning = false;
             _jump = false;
             return 3f;
+        }
+
+        [ImmediateAction(ActionType.Die)]
+        private float Die()
+        {
+            Debug.Log("Activating Die");
+            if (_lukeAnimator != null)
+            {
+                _lukeAnimator.SetTrigger("DeadTrigger");
+                _lukeAnimator.speed = 1;
+            }
+
+            _speed = 0;
+            _isRunning = false;
+            _jump = false;
+            StopCoroutine(nameof(StartActionSequence));
+            _actionUIController.StopSequence();
+            EventManager.TriggerEvent(LevelManager.OnLevelFailedEventName);
+            return 100f;
         }
 
 		#endregion
