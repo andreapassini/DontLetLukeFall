@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,12 @@ namespace DLLF
         [HideInInspector]
         public float spawnTime;
         private ActionsManager _actionsManager;
+        private int _playerPlatformLayer;
+
+        private void Awake()
+        {
+            _playerPlatformLayer = LayerMask.NameToLayer("PlayerPlatform");
+        }
 
         private void Start()
         {
@@ -18,22 +25,31 @@ namespace DLLF
             spawnTime = Time.time;
         }
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void OnTriggerEnter2D(Collider2D col)
         {
-            Debug.Log("CollisionDetected");
-            if (collision.gameObject.tag.Equals("Player"))
+            Debug.Log(gameObject.name + "trigger detected");
+            if (col.gameObject.tag.Equals("Player"))
             {
-                Debug.Log("LoadAction");
-                _actionsManager.StartPlatformAction(action);
+                if (action != ActionType.Null)
+                {
+                    Debug.Log("LoadAction");
+                    _actionsManager.StartPlatformAction(action);
+                }
             }
-            else if(collision.gameObject.layer.Equals("PlayerPlatform"))
+            
+        }
+
+        private void OnCollisionEnter2D(Collision2D col)
+        {
+            Debug.Log(gameObject.name + " collision detected");
+            if (col.gameObject.layer == _playerPlatformLayer)
             {
-                Platform platform = collision.gameObject.GetComponent<Platform>();
-                if (platform != null || action!=ActionType.Null)
+                Platform platform = col.gameObject.GetComponent<Platform>();
+                if (platform != null || action != ActionType.Null)
                 {
                     if (platform.spawnTime < spawnTime)
                     {
-                       platform.action=action;
+                        platform.action = action;
                     }
                 }
             }
