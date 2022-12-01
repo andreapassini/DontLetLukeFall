@@ -2336,6 +2336,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8496391978489936027, guid: 52d104e19135e408f80149ec3ffc8c85, type: 3}
   m_PrefabInstance: {fileID: 1469501290}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1469501292 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8496391978489936026, guid: 52d104e19135e408f80149ec3ffc8c85, type: 3}
+  m_PrefabInstance: {fileID: 1469501290}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46b03649cfef54b0dab4c6117566e075, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1474435386
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3586,7 +3597,7 @@ PrefabInstance:
     - target: {fileID: 2502557511496569498, guid: 399182b6299f25a4299fae0b6604027a, type: 3}
       propertyPath: _actionUIController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1469501292}
     - target: {fileID: 2502557511496569498, guid: 399182b6299f25a4299fae0b6604027a, type: 3}
       propertyPath: _characterController
       value: 
