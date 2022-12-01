@@ -2815,6 +2815,10 @@ PrefabInstance:
       propertyPath: _levelActionsManager
       value: 
       objectReference: {fileID: 154059096}
+    - target: {fileID: 6729434161784164172, guid: 05f403bb8ff6ef44ca49e693d786d65a, type: 3}
+      propertyPath: _levelActionsSequence
+      value: 
+      objectReference: {fileID: 11400000, guid: 4aad3a65434f40e409a42e55dcc1aeba, type: 2}
     - target: {fileID: 6729434161784164173, guid: 05f403bb8ff6ef44ca49e693d786d65a, type: 3}
       propertyPath: m_RootOrder
       value: 3
