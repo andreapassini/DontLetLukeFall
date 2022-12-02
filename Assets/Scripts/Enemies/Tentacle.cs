@@ -67,6 +67,8 @@ public class Tentacle : MonoBehaviour
 
     private void ResetPos()
     {
+        _lineRenderer.enabled = false;
+
         _segmentPoses[0] = _targetDir.position;
         for (int i = 1; i < _lenght; i++)
         {
@@ -86,6 +88,7 @@ public class Tentacle : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
+        _lineRenderer.enabled = true;
         _activateTentacle = true;
     }
 }
