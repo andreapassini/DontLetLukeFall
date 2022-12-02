@@ -2305,10 +2305,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8496391980048804724, guid: 52d104e19135e408f80149ec3ffc8c85, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 50
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52d104e19135e408f80149ec3ffc8c85, type: 3}
 --- !u!224 &1640413732 stripped
@@ -2715,7 +2711,7 @@ PrefabInstance:
       objectReference: {fileID: 1974103183}
     - target: {fileID: 7011895341372022967, guid: 791509a958948f74da23acf2e6b3b8de, type: 3}
       propertyPath: TopLeft.x
-      value: -8
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 7011895341372022967, guid: 791509a958948f74da23acf2e6b3b8de, type: 3}
       propertyPath: TopLeft.y
@@ -2723,7 +2719,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7011895341372022967, guid: 791509a958948f74da23acf2e6b3b8de, type: 3}
       propertyPath: TopRight.x
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7011895341372022967, guid: 791509a958948f74da23acf2e6b3b8de, type: 3}
       propertyPath: TopRight.y
@@ -2735,7 +2731,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7011895341372022967, guid: 791509a958948f74da23acf2e6b3b8de, type: 3}
       propertyPath: BottomLeft.x
-      value: -8
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 7011895341372022967, guid: 791509a958948f74da23acf2e6b3b8de, type: 3}
       propertyPath: BottomLeft.y
@@ -2743,7 +2739,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7011895341372022967, guid: 791509a958948f74da23acf2e6b3b8de, type: 3}
       propertyPath: BottomRight.x
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7011895341372022967, guid: 791509a958948f74da23acf2e6b3b8de, type: 3}
       propertyPath: BottomRight.y
