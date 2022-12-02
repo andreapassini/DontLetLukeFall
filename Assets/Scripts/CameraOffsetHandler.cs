@@ -49,7 +49,7 @@ namespace DLLF
             }
             if (target.x != lastTarget.x || target.y != lastTarget.y)
             {
-                Debug.Log("reset");
+                //Debug.Log("reset");
                 timeStart = 0;
                 lastPosition = offset.m_Offset;
             }

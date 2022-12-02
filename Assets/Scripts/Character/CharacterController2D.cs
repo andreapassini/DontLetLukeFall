@@ -110,10 +110,10 @@ namespace DLLF {
             ComputeStepRays(b);
 
             //If lower ray step detector detects a collision, and the upper does not --> we can step on the obstacle
-            bool stepOnTheRight = Physics2D.Raycast(new Vector2(b.max.x, b.min.y + _rayBuffer), Vector2.right, 0.1f) &&
-                                   !Physics2D.Raycast(new Vector2(b.max.x, b.min.y + _maxStepHeight), Vector2.right, 0.1f);
-            bool stepOnTheLeft = Physics2D.Raycast(new Vector2(b.min.x, b.min.y + _rayBuffer), Vector2.left, 0.1f) &&
-                                  !Physics2D.Raycast(new Vector2(b.min.x, b.min.y + _maxStepHeight), Vector2.left, 0.1f);
+            bool stepOnTheRight = Physics2D.Raycast(new Vector2(b.max.x, b.min.y + _rayBuffer), Vector2.right, 0.1f, _groundLayer) &&
+                                   !Physics2D.Raycast(new Vector2(b.max.x, b.min.y + _maxStepHeight), Vector2.right, 0.1f, _groundLayer);
+            bool stepOnTheLeft = Physics2D.Raycast(new Vector2(b.min.x, b.min.y + _rayBuffer), Vector2.left, 0.1f, _groundLayer) &&
+                                  !Physics2D.Raycast(new Vector2(b.min.x, b.min.y + _maxStepHeight), Vector2.left, 0.1f, _groundLayer);
             _canStepOnObstacle = _currentHorizontalSpeed.CompareTo(0.0f) == 0 && (stepOnTheRight || stepOnTheLeft);
             
         }

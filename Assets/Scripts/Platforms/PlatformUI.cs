@@ -25,6 +25,8 @@ namespace DLLF
         private bool _isWithEffect=false;
         private GameObject _spawnedPlatform;
         private Image[] _spriteRenderersUI;
+        private List<ActionType> _actionsTypes;
+
         private void Awake()
         {
             _rectTransform = GetComponent<RectTransform>();
@@ -32,6 +34,10 @@ namespace DLLF
             {
                 _canvas = GameObject.FindObjectOfType<Canvas>();
             }
+            _actionsTypes = ((ActionType[])Enum.GetValues(typeof(ActionType))).ToList();
+            _actionsTypes.Remove(ActionType.Null);
+            _actionsTypes.Remove(ActionType.Die);
+
         }
         // Start is called before the first frame update
         void Start()
@@ -72,10 +78,7 @@ namespace DLLF
 
         private ActionType RandomizeEffect()
         {
-            var effects = ((ActionType[])Enum.GetValues(typeof(ActionType))).ToList();
-            //removing null action type, of we are here we want an effect
-            effects.Remove(ActionType.Null);
-            return effects[Random.Range(0, effects.Count)];
+            return _actionsTypes[Random.Range(0, _actionsTypes.Count)];
         }
         
         public void OnBeginDrag(PointerEventData eventData)
