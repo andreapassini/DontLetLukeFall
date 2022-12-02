@@ -16,6 +16,7 @@ public class SendFeedbackScript : MonoBehaviour
     [SerializeField] private EventSystem _eventSystem; // The event system to witch attach this script
     [SerializeField] private bool _sendToOurForm; // If enabled the feedback is sent to our form
     [SerializeField] private bool _sendToProfessorForm; // If enabled the feedback is sent to professor's form
+    [SerializeField] private GameObject[] _elementsToHide; // Elements to hide in the scene when sending a feedback
     
     private const string _videogameName = "DontLetLukeFall";
     
@@ -23,6 +24,10 @@ public class SendFeedbackScript : MonoBehaviour
     {
         TextFileManager.AddDateFinishedToPlay();
         _feedbackInputGameObject.SetActive(false);
+        foreach (var el in _elementsToHide)
+        {
+            el.SetActive(false);
+        }
         _feedbackSentGameObject.SetActive(true);
         if (_feedbackInputField.text.Length <= 1) // If empty feedback, operation cancelled
         {
@@ -128,6 +133,17 @@ public class SendFeedbackScript : MonoBehaviour
             _feedbackInputField.text = "";
             StartCoroutine(SendFeedback());
         }
+    }
+
+    public void ReturnToMainMenuButton() // Back button to return back to main menu
+    {
+        _feedbackInputField.text = "";
+        StartCoroutine(SendFeedback());
+    }
+
+    public void sendFeedbackButton() // Send feedback button
+    {
+        StartCoroutine(SendFeedback());
     }
     
 }
