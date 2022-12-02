@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Tests/VideoAction.unity
+    guid: b7cb8e6e8d0552641aff0ef4ad1c9bf9
+  - enabled: 0
     path: Assets/Scenes/Tests/PassiniScene.unity
     guid: 9deea8262645c8f40967c14d8c23b57d
   - enabled: 0
