@@ -11,7 +11,8 @@ public class ActionUIController : MonoBehaviour
     [SerializeField] private GameObject _canvas; // This is the canvas where to visualize images
     [SerializeField] private Image _image; // This is the image to be cloned; this image should be located at the center of the canvas
     [SerializeField] private Sprite _transparentSprite; // This is a transparent sprite used when there are less actions then the number of actions to display
-
+    [SerializeField] private bool _avoidDoubleOffset; // Avoid double offset when showing images of actions in action ui
+    
     private Image[] _displayActionImages; // this array is initialized with 5 elements (Image) via inspector
     // Each Image represent an action
     private Image _imageBar; // this is the image with the bar witch has an animation to show the current action
@@ -28,6 +29,11 @@ public class ActionUIController : MonoBehaviour
         float movingPosFirstImage = (imageLenght * (_numActionsToDisplay - 1));
         _image.rectTransform.position = new Vector3(_image.rectTransform.position.x - movingPosFirstImage,
             _image.rectTransform.position.y, _image.rectTransform.position.z);
+        if (_avoidDoubleOffset == false)
+        {
+            _image.rectTransform.position = new Vector3(_image.rectTransform.position.x - movingPosFirstImage,
+                _image.rectTransform.position.y, _image.rectTransform.position.z);
+        }
         // The image to be cloned is moved to the fist position
         _displayActionImages = new Image[_numActionsToDisplay];
         for (int i = 0; i < _numActionsToDisplay; i++)
@@ -39,6 +45,11 @@ public class ActionUIController : MonoBehaviour
             newImage.GetComponent<Animator>().enabled = false;
             _image.rectTransform.position = new Vector3(_image.rectTransform.position.x + imageLenght,
                 _image.rectTransform.position.y, _image.rectTransform.position.z);
+            if (_avoidDoubleOffset == false)
+            {
+                _image.rectTransform.position = new Vector3(_image.rectTransform.position.x + imageLenght,
+                    _image.rectTransform.position.y, _image.rectTransform.position.z);
+            }
         }
         _imageBar = Instantiate(_image, _image.transform.position, _image.transform.rotation, gameObject.transform); // This is the image to show the bar of the action
         _image.enabled = false; // The original image to be cloned is disabled

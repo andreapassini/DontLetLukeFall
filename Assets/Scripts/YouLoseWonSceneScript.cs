@@ -17,6 +17,7 @@ public class YouLoseWonSceneScript : MonoBehaviour
     
     private void Start()
     {
+        PauseMenu.gameIsPaused = false;
         _buttonNextLevel.SetActive(true);
         if (GameManager.Instance.state == GameState.Win)
         {
