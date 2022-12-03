@@ -27,9 +27,9 @@ namespace DLLF
 		private void Start()
 		{
             // Full the platform before starting the level
-            CreateNewPlatform();
-            CreateNewPlatform();
-            CreateNewPlatform();
+            //CreateNewPlatform();
+            //CreateNewPlatform();
+            //CreateNewPlatform();
         }
 
 		// Update is called once per frame
@@ -55,7 +55,8 @@ namespace DLLF
 
         private void CreateNewPlatform()
         {
-            PlatformUI selectedPlatform = _platforms[UnityEngine.Random.Range(0, _platforms.Count - 1)];
+            //PlatformUI selectedPlatform = _platforms[UnityEngine.Random.Range(0, _platforms.Count - 1)];
+            PlatformUI selectedPlatform = _platforms[0];
             _platformSlots.Where(s => s.isEmpty).First().GeneratePlatform(selectedPlatform);
         }
 
