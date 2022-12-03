@@ -185,6 +185,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scarf
       objectReference: {fileID: 0}
+    - target: {fileID: 529983147679872238, guid: 9ebd0158c866c4a53b9293f3658f4de4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 529983147679872239, guid: 9ebd0158c866c4a53b9293f3658f4de4, type: 3}
       propertyPath: m_RootOrder
       value: 0
