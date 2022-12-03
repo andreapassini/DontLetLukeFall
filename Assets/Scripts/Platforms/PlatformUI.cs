@@ -78,7 +78,9 @@ namespace DLLF
 
         private ActionType RandomizeEffect()
         {
-            return _actionsTypes[Random.Range(0, _actionsTypes.Count)];
+            //for now it is only jump
+            //return _actionsTypes[Random.Range(0, _actionsTypes.Count)];
+            return ActionType.Jump;
         }
         
         public void OnBeginDrag(PointerEventData eventData)

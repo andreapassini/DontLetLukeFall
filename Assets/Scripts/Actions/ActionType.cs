@@ -7,7 +7,6 @@
         WalkLeft,
         RunRight,
         RunLeft,
-        Crouch,
         Null,
         Stop,
         Die

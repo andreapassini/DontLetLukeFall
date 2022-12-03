@@ -24,6 +24,12 @@ namespace DLLF
             _spriteRenderer.sprite = actionSprite;
             StartCoroutine(FadeOut(fadeOutTime));
         }
+        
+        
+        public void Init(Sprite actionSprite)
+        {
+            _spriteRenderer.sprite = actionSprite;
+        }
 
         public void SetPool(IObjectPool<SpriteVisualizer> pool)
         {
