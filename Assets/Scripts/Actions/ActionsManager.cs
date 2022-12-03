@@ -28,6 +28,8 @@ namespace DLLF
         private float _speed;
         private bool _isRunning;
 
+        private bool _triggeredDeadAnimation = false;
+
         private Queue<ActionType> _actionsSequence = new Queue<ActionType>();
         private Dictionary<ActionType, ActionDelegate> _actionsMapping;
         private ActionsSequence _actionsTypeSequence;
@@ -93,7 +95,10 @@ namespace DLLF
             {
                 if (_lukeAnimator != null)
                 {
-                    _lukeAnimator.SetTrigger("IddleTrigger");
+                    if (_triggeredDeadAnimation == false)
+                    {
+                        _lukeAnimator.SetTrigger("IddleTrigger");
+                    }
                     _lukeAnimator.speed = 1;
                 }
             }
@@ -137,6 +142,7 @@ namespace DLLF
             if (_lukeAnimator != null)
             {
                 _lukeAnimator.SetTrigger("JumpTrigger"); // set jump animation
+                _triggeredDeadAnimation = false;
                 _lukeAnimator.speed = 1;
             }
             _jump = true;
@@ -152,6 +158,7 @@ namespace DLLF
             if (_lukeAnimator != null)
             {
                 _lukeAnimator.SetTrigger("WalkRightTrigger"); // set walk right animation
+                _triggeredDeadAnimation = false;
                 _lukeAnimator.speed = 1;
             }
             _speed = movementParams.WalkSpeed;
@@ -168,6 +175,7 @@ namespace DLLF
             if (_lukeAnimator != null)
             {
                 _lukeAnimator.SetTrigger("WalkLeftTrigger"); // set walk left animation
+                _triggeredDeadAnimation = false;
                 _lukeAnimator.speed = 1;
             }
             _speed = -movementParams.WalkSpeed;
@@ -185,6 +193,7 @@ namespace DLLF
             if (_lukeAnimator != null)
             {
                 _lukeAnimator.SetTrigger("RunRightTrigger"); // set run right animation; double the speed
+                _triggeredDeadAnimation = false;
                 _lukeAnimator.speed = 2;
             }
             _speed = movementParams.RunSpeed;
@@ -202,6 +211,7 @@ namespace DLLF
             if (_lukeAnimator != null)
             {
                 _lukeAnimator.SetTrigger("RunLeftTrigger"); // set run left animation; double the speed
+                _triggeredDeadAnimation = false;
                 _lukeAnimator.speed = 2;
             }
             _speed = -movementParams.RunSpeed;
@@ -217,6 +227,7 @@ namespace DLLF
             if (_lukeAnimator != null)
             {
                 _lukeAnimator.SetTrigger("IddleTrigger");
+                _triggeredDeadAnimation = false;
                 _lukeAnimator.speed = 1;
             }
 
@@ -233,6 +244,7 @@ namespace DLLF
             if (_lukeAnimator != null)
             {
                 _lukeAnimator.SetTrigger("DeadTrigger");
+                _triggeredDeadAnimation = true;
                 _lukeAnimator.speed = 1;
             }
 
