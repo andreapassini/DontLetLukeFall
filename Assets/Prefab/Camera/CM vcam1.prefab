@@ -100,10 +100,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d166b564af6812542857f1c0a1c3f368, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TopLeft: {x: -5, y: 0, z: 0}
-  TopRight: {x: 5, y: 0, z: 0}
-  BottomLeft: {x: -5, y: 0, z: 0}
-  BottomRight: {x: 5, y: 0, z: 0}
+  TopLeft: {x: -2, y: 0, z: 0}
+  TopRight: {x: 2, y: 0, z: 0}
+  BottomLeft: {x: -2, y: 0, z: 0}
+  BottomRight: {x: 2, y: 0, z: 0}
   timeCamera: 1.5
   player: {fileID: 0}
 --- !u!1 &7011895343066201724
