@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -101,9 +101,126 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Squiid2_3
+      rect:
+        serializedVersion: 2
+        x: 536
+        y: 1412
+        width: 184
+        height: 198
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1ada2d867f1efb4b92308303a055c32
+      internalID: 676344027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Squiid2_9
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 1359
+        width: 184
+        height: 214
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33acdfea956f3fe4f8e8210064fca0c2
+      internalID: -1187898397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Squiid2_21
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 706
+        width: 541
+        height: 625
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e2135b9c1fc3304192e5774e789031e
+      internalID: 1433824967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Squiid2_0
+      rect:
+        serializedVersion: 2
+        x: 863
+        y: 1350
+        width: 345
+        height: 251
+      alignment: 9
+      pivot: {x: 0.42097664, y: 0.7659246}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 645fa5fdfef699642a5f4ba63fe85ca2
+      internalID: 1676745968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Squiid2_1
+      rect:
+        serializedVersion: 2
+        x: 1383
+        y: 1368
+        width: 252
+        height: 122
+      alignment: 9
+      pivot: {x: 0.5634189, y: 0.26882583}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a568375c2ef197548baee5e1d60d471b
+      internalID: 1983510789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -114,7 +231,30 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Squiid2_11: 1425712676
+      Squiid2_16: 780747209
+      Squiid2_21: 1433824967
+      Squiid2_7: -1905448149
+      Squiid2_19: -348370229
+      Squiid2_0: 1676745968
+      Squiid2_2: 769417009
+      Squiid2_15: 667529875
+      Squiid2_18: -981619094
+      Squiid2_20: -1831482927
+      Squiid2_3: 676344027
+      Squiid2_13: 333272603
+      Squiid2_14: -1428111235
+      Squiid2_4: 1961927160
+      Squiid2_6: -1238313007
+      Squiid2_12: 1556439285
+      Squiid2_22: -1827266041
+      Squiid2_1: 1983510789
+      Squiid2_10: -499025350
+      Squiid2_9: -1187898397
+      Squiid2_5: 1484500806
+      Squiid2_17: -280891535
+      Squiid2_8: 282938491
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
