@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 815512333531055970}
   m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
-  m_LocalPosition: {x: -9.645509, y: 20.075403, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -56,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: fe8e728b30897fd47a3a7ac84c71714c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -207,8 +207,8 @@ MonoBehaviour:
   _trailSpeed: 350
   _wiggleSpeed: 2
   _wiggleMagnitude: 50
-  _phaseMultiplier: 4
   _wiggleDir: {fileID: 2158871113985296924}
+  _startDealy: 0
 --- !u!1 &815512333537805034
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,7 +346,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: 21300000, guid: f086783b1e99b6644a645f096e94fb86, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 798cefce077e7444fb2942c80fdde082, type: 3}
   m_Color: {r: 0.21960786, g: 0.227451, b: 0.227451, a: 1}
   m_FlipX: 0
   m_FlipY: 0
