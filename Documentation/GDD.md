@@ -1,43 +1,74 @@
 
-
-
+## Questions
 
 **Crouch and Jump**
 What happen if Luke is crouched and a Jump action is fired?
 <br>
-## Prof Suggestions
-### Luke's Action
-Action duration is no more related to time, but the space traveled by Luke. 
-1 Action for Each platform (considering platform of fixed length)
+
+# Prototype Feedbacks
+
+## Level Overview
+
+Having a Level Overview may help player to prepare a fast strategy for solving the level.
 
 
-### Tile Size
-Grid = 1 Unit
-=> Player H 2, L 1
-=> Platform Standard H 1, L 3
-Camera Size = 10
-Res Single Sprite= 256x256s
+## Level Slow Start
 
-### Scarf rotation bug
-To rotate the character use: transform.rotation = Quaternion.Euler(0,180,0); and not transform.localScale = new Vector3(-1, 1, 1);
-(So change rotation, otherwise, using change of scale, the scarf doesn't change direction correctly)
+A delay at the start of the level may help the player getting ready for the action.
+
+
+## Camera and Platform Positioning
+
+The fact that the camera is following Luke, do not make placing platform easy and intuitive
+
+Camera too zoomed-in 
+
+## Luke Speed and platform lenght
+
+Luke speed and platfrom lenght make the game too frenetic
+
+
+## Action UI
+
+Luke's actions are not very clear and Luke's behavior is hard to predict since the game is frenetic.
+
+
+
+## Player Platforms too neat Luke
+
+Luke can get stucked in platforms
 
 # TO DO
-## Game Manager
-To keep track of the game state,
-- Load Scene
-- Open Menus
 
-## Increase plat length to 5
-cause Speed to slow
-Increase platform length to 5
-Increase speed of Luke to 1.25
+## Background
 
-## Spawn Action Sprite
-Spawn action sprite at the feet (to the left) of Luke when a new action is triggered.
+Remove background and leave a skybox white-gray, as the intro
 
-## Action UI Sprites
-Action UI Sprites need to be 1x1 and not stretched
+## Update credits 
+
+Update credits inside the game
+
+## Startign Panoramica of the level
+
+## Starting Delay
+
+Wait a bunch of seconds before starting Luke's Actions so the player can look a the next actions and platforms to place
+
+
+
+
+
+## UI
+
+Increase Size of UI
+Increase the number of actions displayed to 5
+
+
+## Add Package Feel
+
+
+
+
 
 ## Randomness in Player Platform
 
@@ -419,6 +450,13 @@ Shake
 ### Res
 1920x1080
 16:9
+
+### Tile Size
+Grid = 1 Unit
+=> Player H 2, L 1
+=> Platform Standard H 1, L 5
+Camera Size = 10
+Res Single Sprite= 256x256s
 
 ### Grid
 grid 0.5
