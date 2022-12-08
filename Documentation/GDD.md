@@ -1,45 +1,9 @@
-# Questions
 
-## Prototype Problem
-### Luke
-Is not falling, check friction with Rigid body and Physic Material
 
-### Platforms
-UI Sprites does not match Platform Size, check factor size in relation with camera size and resolution
 
-### Action UI
-Not loading sprite form Action Sequence
-
-## Platform Action
-
-When Luke will land on a special platform, its effect will be triggered causing Luke to perform the action specified by the platform.
-
-**How long the action will last?**
-
-1. **De-Synch**
-	The platform action will fire and affect the behavior of Luke in parallel with Luke's actions but its timer will **not** be **synched** with Luke's Actions Timer
-2. **Substitute and restart**
-	The platform action will substitute the current Luke's Action in the UI and its timer will reset
-3. **Synch**
-	The platform action will fire and affect the behavior of Luke in parallel with Luke's actions but its timer will **synched** with Luke's Actions Timer
-4. Shortcut (De-Sync with "no-time related actions")
-
-**Where it will be shown on the UI**
-- On top of the Head of Luke, with a small sign (Circle with inside the action, a colored bar around the circle dictating the remaining time)
-- On the Action UI substituting the current Action
-
-Vertical actions do not affect horizontal actions
-Horizontal actions do not affect vertical actions
-
-**Platform Stopping**
-What height will Luke be able to overcome?
 
 **Crouch and Jump**
 What happen if Luke is crouched and a Jump action is fired?
-
-**Platform**
-How to fuse color and outline of the platforms
-
 <br>
 ## Prof Suggestions
 ### Luke's Action
@@ -139,6 +103,7 @@ You will be able to forsee the next 3 moves of Luke, each will last for 5 second
 After being positioned a new platform will appear in the slot with a slight dealy.
 <br>
 # Gameplay
+
 ## Overview
 
 At the start of the level Luke will be walking right.
@@ -147,7 +112,6 @@ His goal is to reach the end of the level, where a bright light will awake him.
 You will be able to place platforms in real time, preventing Luke to fall and allowing him to reach the end of the level.
 
 You will be able to foresee the next 3 actions that Luke will perform.
-
 <br>
 ## Resources
 
@@ -189,7 +153,23 @@ Luke's Actions:
 	- Stop Moving
 	- [s]Jump
 	- Crouch
-- 
+- #### Platform Action
+	When Luke will land on a special platform, its effect will be triggered causing Luke to perform the action specified by the platform.
+	
+	**How long the action will last?**
+	
+	4. **Shortcut** (De-Sync with "no-time related actions") 
+		The **platform action** will start when Luke is touching the special platform.
+		Platform Actions will only be **instantaneus actions** (**impulse actions**) or **Continuous Actions**,
+		to avoid any synch-desynch misconceptions.
+	
+	**Where it will be shown on the UI**
+	- At the feet of Luke, with a small sign
+	
+	Vertical actions do not affect horizontal actions
+	Horizontal actions do not affect vertical actions
+
+
 ### **Environmental Platforms**
 - Horizontal Platforms
 - Ramps
@@ -276,7 +256,7 @@ Actions determine the behavior of Luke.
 
 Actions can be divided into 2 groups, based on the duration of their effect in time:
 
-- **Instantaneous**
+- **Instantaneous / Impulse**
 	Instantaneous actions's effect is not limited by time, it will affect the behavior of Luke
 	- Jump
 	- Dash
@@ -374,6 +354,11 @@ Actions can also be divided into 2 groups, based on with axis they affect:
 - #### Stop
 	**Time-Limited**
 	Luke will stop moving until a new action will make him.
+
+#### Obstacle Avoidance
+
+What height will Luke be able to overcome? = 1 vertical unit
+What lenght will Luke be able to overpass? = 1 horizontal unit
 
 ### Luke's Actions
 
