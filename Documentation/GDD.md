@@ -40,6 +40,11 @@ Luke can get stucked in platforms
 
 # TO DO
 
+## Luke's new animations
+Add the new sprites to Luke's animations
+Test fluid transitions
+
+## Grid while placing platforms
 ## Slowmo while placing platforms
 
 Add a slowmo effect for 2 sec
@@ -48,18 +53,10 @@ Start when clicking on the platform to move
 ## Camera
 
 Reduce camera zoom, a camera size to 10 should be enough.
-Add a greater vertical threshold for camera movement.
-
-## Background
-
-Remove background and leave a skybox white-gray, as the intro
-
-## Update credits 
-
-Update credits inside the game
+Add a greater vertical threshold for camera movement. or move it vertical only when Luke land on a higher level platform.
 
 ## Startign Panoramica of the level
-
+ 
 ## Starting Delay
 
 Wait a bunch of seconds before starting Luke's Actions so the player can look a the next actions and platforms to place
@@ -68,6 +65,20 @@ Wait a bunch of seconds before starting Luke's Actions so the player can look a 
 
 Increase Size of UI
 Increase the number of actions displayed to 5
+
+
+## Add in-game soundtrack
+
+
+--------------------------
+
+## Update credits 
+
+Update credits inside the game
+
+## Background
+
+Remove background and leave a skybox white-gray, as the intro
 
 ## Player Platforms sorting layer
 Player Platforms should be rendered on top of the environmental platforms
@@ -81,6 +92,8 @@ Player Platforms should be rendered on top of the environmental platforms
 ## Create level 8
 ## Create level 9
 ## Create level 10
+
+
 
 # Deadlines
 
