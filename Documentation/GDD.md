@@ -113,6 +113,8 @@ Increase the number of actions displayed to 5
 
 Update credits inside the game
 
+## Update Intro with new Sprites => Andrea Passini
+
 ## Background => Andrea Passini
 Remove background and leave a skybox white-gray, as the intro
 
