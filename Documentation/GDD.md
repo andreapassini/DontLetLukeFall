@@ -4,8 +4,35 @@
 **Crouch and Jump**
 What happen if Luke is crouched and a Jump action is fired?
 <br>
+# Bugs
+
+## Step Jump not working
+https://www.youtube.com/watch?v=-9709suYI0E&ab_channel=ChrisVooren
+at 2:20 => 20:35
+
+## Placing platform on top of Luke block Luke's movement
+
+https://www.youtube.com/watch?v=-9709suYI0E&ab_channel=ChrisVooren
+at 0:50 => 1:10
+
+## Click on platform not wokring (MacOS)
+
+https://www.youtube.com/watch?v=wOkPIB0-DuI&ab_channel=TommasoSacchetti
+at 1:31
 
 # Prototype Feedbacks
+
+## Full Screen in Browser
+
+Someone wasn't able to play it in full screen while staying the browser
+
+## Random Platforms
+
+Having completely random platforms make the game unreliable
+
+## Tutorial
+
+Add a tutorial in game and also in settings some information about controls and how to play
 
 ## Level Overview
 
@@ -23,9 +50,9 @@ The fact that the camera is following Luke, do not make placing platform easy an
 
 Camera too zoomed-in 
 
-## Luke Speed and platform lenght
+## Luke Speed and platform length
 
-Luke speed and platfrom lenght make the game too frenetic
+Luke speed and platform length make the game too frenetic
 
 
 ## Action UI
@@ -40,7 +67,12 @@ Luke can get stucked in platforms
 
 # TO DO
 
+## In-Game Tutorial
+
+Add a tutorial in game and also in settings some information about controls and how to play
+
 ## Luke's new animations
+
 Add the new sprites to Luke's animations
 Test fluid transitions
 
