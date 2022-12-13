@@ -33,44 +33,67 @@ Luke speed and platfrom lenght make the game too frenetic
 Luke's actions are not very clear and Luke's behavior is hard to predict since the game is frenetic.
 
 
-
 ## Player Platforms too neat Luke
 
 Luke can get stucked in platforms
 
+
 # TO DO
 
-## Background
+## Luke's new animations
+Add the new sprites to Luke's animations
+Test fluid transitions
 
-Remove background and leave a skybox white-gray, as the intro
+## Grid while placing platforms
+## Slowmo while placing platforms
 
-## Update credits 
+Add a slowmo effect for 2 sec
+Start when clicking on the platform to move
 
-Update credits inside the game
+## Camera
+
+Reduce camera zoom, a camera size to 10 should be enough.
+Add a greater vertical threshold for camera movement. or move it vertical only when Luke land on a higher level platform.
 
 ## Startign Panoramica of the level
-
+ 
 ## Starting Delay
 
 Wait a bunch of seconds before starting Luke's Actions so the player can look a the next actions and platforms to place
 
-
-
-
-
-## UI
+## Action UI
 
 Increase Size of UI
 Increase the number of actions displayed to 5
 
 
+## Add in-game soundtrack
+
+
+--------------------------
+
+## Update credits 
+
+Update credits inside the game
+
+## Background
+
+Remove background and leave a skybox white-gray, as the intro
+
+## Player Platforms sorting layer
+Player Platforms should be rendered on top of the environmental platforms
+
+## Randomness in Player Platform
+## Animate enemies
 ## Add Package Feel
 
 
+## Create level 7
+## Create level 8
+## Create level 9
+## Create level 10
 
 
-
-## Randomness in Player Platform
 
 # Deadlines
 
