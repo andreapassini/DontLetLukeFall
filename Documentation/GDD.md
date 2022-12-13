@@ -67,55 +67,59 @@ Luke can get stucked in platforms
 
 # TO DO
 
-## In-Game Tutorial
+## In-Game Tutorial => Carlo Ambrogi
 
 Add a tutorial in game and also in settings some information about controls and how to play
 
-## Luke's new animations
+## Luke's new animations => Andrea Taroni
 
 Add the new sprites to Luke's animations
 Test fluid transitions
 
-## Grid while placing platforms
-## Slowmo while placing platforms
+## Grid while placing platforms => Luca Finoia
 
-Add a slowmo effect for 2 sec
+## Slow-mo while placing platforms => Andrea Taroni
+
+Add a slow-mo effect for 2 sec
 Start when clicking on the platform to move
 
-## Camera
+## Camera => Luca Finoia
 
 Reduce camera zoom, a camera size to 10 should be enough.
 Add a greater vertical threshold for camera movement. or move it vertical only when Luke land on a higher level platform.
 
-## Startign Panoramica of the level
+## Starting Panoramica of the level
  
 ## Starting Delay
 
 Wait a bunch of seconds before starting Luke's Actions so the player can look a the next actions and platforms to place
 
-## Action UI
+## Action UI => Carlo Ambrogi
 
 Increase Size of UI
 Increase the number of actions displayed to 5
 
 
-## Add in-game soundtrack
+## Add in-game soundtrack => Andrea Passini
+
+## Add  a test level for the camera and Action speed
+
+## Crouch action
 
 
 --------------------------
 
-## Update credits 
+## Update credits => Andrea Passini
 
 Update credits inside the game
 
-## Background
-
+## Background => Andrea Passini
 Remove background and leave a skybox white-gray, as the intro
 
 ## Player Platforms sorting layer
 Player Platforms should be rendered on top of the environmental platforms
 
-## Randomness in Player Platform
+## Randomness in Player Platform => Andrea Passini
 ## Animate enemies
 ## Add Package Feel
 
