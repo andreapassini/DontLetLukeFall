@@ -4,6 +4,7 @@ namespace DLLF
 	{
 		Long,
 		LongRamp,
+		LongMidRamp,
 		ShortRamp,
 		L,
 		T,

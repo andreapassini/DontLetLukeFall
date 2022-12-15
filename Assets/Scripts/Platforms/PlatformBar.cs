@@ -12,6 +12,8 @@ namespace DLLF
         private float _cooldownNewPlatform = 3f;
         private float _timer = 0f;
         [SerializeField]
+        private PlatformSequence _platformSequence;
+        [SerializeField]
         private PlatformSlot[] _platformSlots;
         [SerializeField]
         private List<PlatformUI> _platforms = new List<PlatformUI>();
