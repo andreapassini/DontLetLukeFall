@@ -89,7 +89,7 @@ namespace DLLF
                 }
             }
 
-            return -1;
+            return UnityEngine.Random.Range(0, _platforms.Count - 1);
         }
 
         public void EnqueuePlatforms(PlatformSequence sequence)
