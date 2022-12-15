@@ -557,7 +557,7 @@ He will be able to perform this actions:
 
 - Walk Left
 - Walk Right
-- Run Letf
+- Run Left
 - Run Right
 - Stop Moving
 - Jump
