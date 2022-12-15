@@ -109,10 +109,6 @@ Increase the number of actions displayed to 5
 
 --------------------------
 
-## Update credits => Andrea Passini
-
-Update credits inside the game
-
 ## Update Intro with new Sprites => Andrea Passini
 
 ## Background => Andrea Passini
