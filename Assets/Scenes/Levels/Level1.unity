@@ -3614,6 +3614,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 6729434161784164172, guid: 05f403bb8ff6ef44ca49e693d786d65a, type: 3}
+      propertyPath: _levelPlatformBar
+      value: 
+      objectReference: {fileID: 1858410946}
+    - target: {fileID: 6729434161784164172, guid: 05f403bb8ff6ef44ca49e693d786d65a, type: 3}
       propertyPath: _levelActionsManager
       value: 
       objectReference: {fileID: 1520206423}
@@ -3621,6 +3625,10 @@ PrefabInstance:
       propertyPath: _levelActionsSequence
       value: 
       objectReference: {fileID: 11400000, guid: 02122add8aaa6874f9c89a88a42c78a3, type: 2}
+    - target: {fileID: 6729434161784164172, guid: 05f403bb8ff6ef44ca49e693d786d65a, type: 3}
+      propertyPath: _levelPlatformSequence
+      value: 
+      objectReference: {fileID: 11400000, guid: 59c4491bbcc5f78439e76c77dba8373d, type: 2}
     - target: {fileID: 6729434161784164173, guid: 05f403bb8ff6ef44ca49e693d786d65a, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -3913,6 +3921,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6100200383979909939, guid: 51981a1fe1ee06a4589c9e8dd494cafb, type: 3}
   m_PrefabInstance: {fileID: 1858410943}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1858410946 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6100200383979909936, guid: 51981a1fe1ee06a4589c9e8dd494cafb, type: 3}
+  m_PrefabInstance: {fileID: 1858410943}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858410945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62a2adcf8165a8f478b4859f59882330, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1890784139
 GameObject:
   m_ObjectHideFlags: 0
