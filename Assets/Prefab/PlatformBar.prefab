@@ -284,6 +284,7 @@ GameObject:
   - component: {fileID: 6100200383979909938}
   - component: {fileID: 6100200383979909937}
   - component: {fileID: 6100200383979909936}
+  - component: {fileID: 943291662}
   m_Layer: 5
   m_Name: PlatformBar
   m_TagString: Untagged
@@ -342,6 +343,20 @@ MonoBehaviour:
   - {fileID: 2994894513148571137, guid: 796d7f52231350343af18ba5296cc305, type: 3}
   - {fileID: 3621784365943520031, guid: a3168c1077c415a42a18d4bd533d1a42, type: 3}
   - {fileID: 1048790436907930103, guid: 3f2a73614dd7ec7428801efdaf83a529, type: 3}
+--- !u!114 &943291662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6100200383979909939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6236a00292b4cc599a0e97f3600affd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _multiplier: 0.5
+  _slowMoDuration: 2
 --- !u!1 &6100200384386281890
 GameObject:
   m_ObjectHideFlags: 0

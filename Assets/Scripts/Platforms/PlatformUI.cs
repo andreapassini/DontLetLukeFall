@@ -27,6 +27,8 @@ namespace DLLF
         private Image[] _spriteRenderersUI;
         private List<ActionType> _actionsTypes;
 
+        private ISlowMotion _slowMotion;
+
         private void Awake()
         {
             _rectTransform = GetComponent<RectTransform>();
@@ -54,6 +56,11 @@ namespace DLLF
                     renderer.color = new Color(255, 0, 0);
                 }
             }
+        }
+
+        public void SetSlowMo(ISlowMotion slowMotion)
+        {
+            _slowMotion = slowMotion;
         }
 
         public void SpawnInWorld()
@@ -86,6 +93,7 @@ namespace DLLF
         public void OnBeginDrag(PointerEventData eventData)
         {
          //   Debug.Log("onBeginDrag");
+            _slowMotion.ActivateSlowMotion();
             _canvasGroup.blocksRaycasts = false;
             SpawnInWorld();
             _spawnedPlatform.layer = LayerMask.NameToLayer("UI");
@@ -116,6 +124,7 @@ namespace DLLF
                 SetVisibleUI(true);
                 _slot.reselectedPlatform = false;
             }
+            _slowMotion.DeactivateSlowMotion();
             _canvasGroup.blocksRaycasts = true;
         }
 

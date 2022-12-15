@@ -16,6 +16,7 @@ namespace DLLF
         private PlatformSlot[] _platformSlots;
         [SerializeField]
         private List<PlatformUI> _platforms = new List<PlatformUI>();
+        
 
         private PlatformSequence _platformSequence;
         private Queue<int> _platformsQueue = new Queue<int>();
@@ -32,6 +33,7 @@ namespace DLLF
             _platformSequence ??= Resources.Load<PlatformSequence>(
                 "LevelsPlatforms/"
                 + SceneManager.GetActiveScene().name);
+            
         }
 
 		private void Start()
