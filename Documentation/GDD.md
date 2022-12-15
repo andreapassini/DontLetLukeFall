@@ -15,7 +15,7 @@ at 2:20 => 20:35
 https://www.youtube.com/watch?v=-9709suYI0E&ab_channel=ChrisVooren
 at 0:50 => 1:10
 
-## Click on platform not wokring (MacOS)
+## Click on platform not working (MacOS)
 
 https://www.youtube.com/watch?v=wOkPIB0-DuI&ab_channel=TommasoSacchetti
 at 1:31
