@@ -141,10 +141,10 @@ Player Platforms should be rendered on top of the environmental platforms
 ![DontLetLukeFallConcept](https://user-images.githubusercontent.com/71270277/195996636-192c0d71-f488-4599-80b0-434929d5e3c7.png)
 
 ## Team Members
-- Andrea Passini
-- Andrea Taroni
-- Luca Finoia
-- Carlo Ambrogi
+- Andrea Passini - Game Designer, Team Leader
+- Andrea Taroni - Game Developer
+- Luca Finoia - Game Developer
+- Carlo Ambrogi - Game Developer
 
 ### External Collaborators
 
@@ -152,32 +152,79 @@ Player Platforms should be rendered on top of the environmental platforms
 - Luca Staffoni
 - Irene Corioni
 
-#### Sound Designer
-- Matteo Bernardini
-
-#### Artists
 #### Sound Designers
+**Bubble Fish Studio** ( https://bubblefish.studio/ )
+- Matteo Bernardini
+- Yilin
+
+#### 2D Artists
+- Luca Staffoni
+- Irene Corioni
 
 ## Design History
  - 03/10/2022 - Andrea Passini - Game Concept 
- - 10/10/2022 - Team Meeting
+ - 10/10/2022 - Weekly Team Call
+ - 17/10/2022 - Weekly Team Call
+ - 27/10/2022 - Weekly Team Call
+ - 02/11/2022 - Weekly Team Call
+ - 03/11/2022 - Team Meeting with Prof Lanzi
+ - 08/11/2022 - Weekly Team Call
+ - 14/11/2022 - Team Meeting SiLab
+ - 14/11/2022 - Weekly Team Call
+ - 17/11/2022 - Team Meeting SiLab
+ - 22/11/2022 - Weekly Team Call
+ - 28/11/2022 - Team Meeting SiLab
+ - 29/11/2022 - Weekly Team Call
+ - 30/11/2022 - Team Meeting SiLab
+ - 01/12/2022 - Team Call
+ - 03/12/2022 - Prototype Submission
+ - 06/12/2022 - Weekly Team Call
+ - 07/12/2022 - Team Meeting SiLab
+ - 13/12/2022 - Weekly Team Call
+ - 14/12/2022 - Team Meeting SiLab
 
+## Contributions
 
-## Task Assignment 
-- GDD => Andrea Passini
-- Platform Logic => Luca
-- Platform UI => Luca
-- Action Logic => Andrea Taroni
-- Action UI => Carlo
+### Andrea Passini
+- Game Design Document
+- Levels ( 1 to 5 )
+- Itch.io Page (https://polimi-game-collective.itch.io/dont-let-luke-fall)
+- Animating Enemies
+- Platforms sprites
+- Background Sprites
+- Environment Sprites
 
-**TODO**:
-- Platform UI, Reposition in UI Platform => Luca
-- Platform UI, Start timer in End Drag => Luca
-- Platform UI, Calculate Sprite-Platfrom ratio => Luca
-- Integration
-- Background Music => Carlo
-- SFX integration => Carlo
+### Luca Taroni
+- Action Logic
 - Character Controller
+- Level Manager
+
+### Luca Finoia
+- Platform Logic
+- Platform UI
+- Camera
+
+### Carlo Ambrogi
+- Action UI
+- Sound Integration
+- Starting Menu
+- Game Manager
+- Level 6
+- Level Tutorial
+
+### Irene Corioni
+- Enemies Sprites
+
+### Luca Staffoni
+- Luke's Sprites
+- Luke's Animations
+
+### Yilin and Matteo Bernardini
+- Background Game Music
+- Background Intro Music
+- Luke's SFX
+- Platform SFX
+- Action SFX
 
 # Vision Statement
 
