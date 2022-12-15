@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 7438976430986780163}
   - component: {fileID: 7438976430986780160}
   m_Layer: 5
-  m_Name: LongRampPlatformUI
+  m_Name: LongMidRampUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

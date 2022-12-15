@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 6956757067793604953}
   - component: {fileID: 6829918094388101697}
   m_Layer: 7
-  m_Name: LongPlatformRamp
+  m_Name: LongMidRamp
   m_TagString: FixedPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
