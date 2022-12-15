@@ -76,7 +76,10 @@ namespace DLLF
         {
             if (_platformsQueue.TryDequeue(out var actionToPerform))
                 return actionToPerform;
-            
+
+#if UNITY_EDITOR
+            Debug.Log("Queue Empty");
+#endif
             return 0;
         }
 
