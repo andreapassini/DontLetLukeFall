@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace DLLF
 {
@@ -12,11 +13,13 @@ namespace DLLF
         private float _cooldownNewPlatform = 3f;
         private float _timer = 0f;
         [SerializeField]
-        private PlatformSequence _platformSequence;
-        [SerializeField]
         private PlatformSlot[] _platformSlots;
         [SerializeField]
         private List<PlatformUI> _platforms = new List<PlatformUI>();
+
+        private PlatformSequence _platformSequence;
+        private Queue<int> _platformsQueue = new Queue<int>();
+        private LevelManager levelManager;
 
         private void Awake()
         {
@@ -24,14 +27,16 @@ namespace DLLF
             {
                 _platformSlots = GameObject.FindObjectsOfType<PlatformSlot>();
             }
+
+            // Check if null, load from Resources
+            _platformSequence ??= Resources.Load<PlatformSequence>(
+                "LevelsPlatforms/"
+                + SceneManager.GetActiveScene().name);
         }
 
 		private void Start()
 		{
-            // Full the platform before starting the level
-            CreateNewPlatform();
-            CreateNewPlatform();
-            CreateNewPlatform();
+            ;
         }
 
 		// Update is called once per frame
@@ -55,9 +60,10 @@ namespace DLLF
             }
         }
 
-        private void CreateNewPlatform()
+        public void CreateNewPlatform()
         {
-            PlatformUI selectedPlatform = _platforms[UnityEngine.Random.Range(0, _platforms.Count - 1)];
+            PlatformUI selectedPlatform = _platforms[getNextPlatform()];
+            //PlatformUI selectedPlatform = _platforms[UnityEngine.Random.Range(0, _platforms.Count - 1)];
             _platformSlots.Where(s => s.isEmpty).First().GeneratePlatform(selectedPlatform);
         }
 
@@ -66,6 +72,44 @@ namespace DLLF
             return _platformSlots.All(s => !s.isEmpty);
         }
 
+        private int getNextPlatform()
+        {
+            if (_platformsQueue.TryDequeue(out var actionToPerform))
+                return actionToPerform;
+            
+            return 0;
+        }
 
+        private int getPlatfromUIFromEnum(PlatformType platformType)
+        {
+            for(int i = 0; i < _platforms.Count; i++)
+            {
+                if (_platforms[i].ToString().Equals(platformType.ToString() + "UI")){
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
+        public void EnqueuePlatforms(PlatformSequence sequence)
+        {
+            _platformSequence = sequence;
+
+            foreach(var platform in _platformSequence.platforms)
+            {
+                int nextIndex = getPlatfromUIFromEnum(platform);
+
+                if (nextIndex == -1)
+                    continue;
+
+                _platformsQueue.Enqueue(nextIndex);
+            }
+
+            // Full the platform before starting the level
+            CreateNewPlatform();
+            CreateNewPlatform();
+            CreateNewPlatform();
+        }
     }
 }

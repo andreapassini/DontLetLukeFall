@@ -12,6 +12,10 @@ namespace DLLF
         
         [SerializeField] private ActionsSequence _levelActionsSequence;
         [SerializeField] private ActionsManager _levelActionsManager;
+
+        [SerializeField] private PlatformSequence _levelPlatformSequence;
+        [SerializeField] private PlatformBar _levelPlatformBar;
+
         void Awake()
         {
             //Register to onLevelFailedEvent and onLevelCompletedEvent
@@ -23,11 +27,17 @@ namespace DLLF
         void Start()
         {
             _levelActionsManager.Begin(_levelActionsSequence);
+            _levelPlatformBar.EnqueuePlatforms(_levelPlatformSequence);
         }
 
         public ActionsSequence GetLevelActionsSequence()
         {
             return _levelActionsSequence;
+        }
+        
+        public PlatformSequence GetLevelPlatformSequence()
+        {
+            return _levelPlatformSequence;
         }
 
         private void OnDestroy()
