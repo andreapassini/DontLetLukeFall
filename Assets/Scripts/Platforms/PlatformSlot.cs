@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,11 +14,20 @@ namespace DLLF
         [HideInInspector]
         public bool reselectedPlatform=false;
 
+        private LevelManager _levelManager;
+
+        private void Awake()
+        {
+            _levelManager = FindObjectOfType<LevelManager>();
+        }
+
         public void GeneratePlatform(PlatformUI platform)
         {
             isEmpty = false;
-            Instantiate(platform.gameObject, this.gameObject.transform);
+            var spawned = Instantiate(platform.gameObject, this.gameObject.transform);
+            spawned.GetComponent<PlatformUI>().SetSlowMo(_levelManager.GetSlowMo());
         }
+        
 
         public void OnDrop(PointerEventData eventData)
         {

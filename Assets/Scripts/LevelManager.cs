@@ -16,12 +16,14 @@ namespace DLLF
         [SerializeField] private PlatformSequence _levelPlatformSequence;
         [SerializeField] private PlatformBar _levelPlatformBar;
 
+        private TimedSlowMotion _slowMotion;
+        
         void Awake()
         {
             //Register to onLevelFailedEvent and onLevelCompletedEvent
             EventManager.StartListening(OnLevelCompletedEventName, OnLevelCompleted);
             EventManager.StartListening(OnLevelFailedEventName, OnLevelFailed);
-
+            _slowMotion = GetComponent<TimedSlowMotion>();
         }
 
         void Start()
@@ -46,7 +48,6 @@ namespace DLLF
             EventManager.StopListening(OnLevelFailedEventName, OnLevelFailed);
         }
 
-        //TODO integrare con GameManager quando andrà in develop
         private void OnLevelCompleted()
         {
             Debug.Log("Level completed!");
@@ -58,6 +59,13 @@ namespace DLLF
             Debug.Log("Level failed!");
             GameManager.Instance.UpdateGameState(GameState.Lose);
         }
+
+
+        public ISlowMotion GetSlowMo()
+        {
+            return _slowMotion;
+        }
     }
+    
 
 }

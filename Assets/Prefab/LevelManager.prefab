@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6729434161784164173}
   - component: {fileID: 6729434161784164172}
+  - component: {fileID: 1152539698}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -44,5 +45,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32e47ea4e0da9884d8082e54ed2eb276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelActionsSequence: {fileID: 11400000, guid: 196ce7f6f6511164993f7cd40787cce0, type: 2}
+  _levelActionsSequence: {fileID: 11400000, guid: 1644e83e5f4b6504199978eaa8204599, type: 2}
   _levelActionsManager: {fileID: 0}
+--- !u!114 &1152539698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6729434161784164175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eadb3d10aaea4c7c825d5430db67187a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _slowMoMultiplier: 0.5
+  _slowMoDuration: 2

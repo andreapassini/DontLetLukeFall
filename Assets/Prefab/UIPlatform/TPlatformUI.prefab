@@ -285,7 +285,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _realPlatform: {fileID: 3797306871680917324, guid: e328948893013274fbf1b8d42d32cd70, type: 3}
   _canvas: {fileID: 0}
-  _scaleFactor: 2.66
 --- !u!225 &1048790436907930100
 CanvasGroup:
   m_ObjectHideFlags: 0
