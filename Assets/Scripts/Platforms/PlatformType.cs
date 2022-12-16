@@ -2,12 +2,12 @@ namespace DLLF
 {
 	public enum PlatformType
 	{
-		Long,
+		LongPlatform,
 		LongRamp,
 		LongMidRamp,
 		ShortRamp,
-		L,
-		T,
+		LPlatform,
+		TPlatform,
 		Wall
 	}
 }

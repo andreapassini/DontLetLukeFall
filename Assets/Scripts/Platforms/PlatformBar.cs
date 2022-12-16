@@ -88,8 +88,12 @@ namespace DLLF
         private int getPlatfromUIFromEnum(PlatformType platformType)
         {
             for(int i = 0; i < _platforms.Count; i++)
-            {
-                if (_platforms[i].ToString().Equals(platformType.ToString() + "UI")){
+            {        
+                string platformName = _platforms[i].ToString();
+                int spaceIndex = platformName.LastIndexOf(" ");
+                platformName = platformName.Substring(0, spaceIndex);
+
+                if (platformName.Equals(platformType.ToString() + "UI")){
                     return i;
                 }
             }
