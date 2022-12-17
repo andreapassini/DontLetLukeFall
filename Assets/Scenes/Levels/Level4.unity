@@ -816,6 +816,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2066967507}
     - target: {fileID: 6729434161784164172, guid: 05f403bb8ff6ef44ca49e693d786d65a, type: 3}
+      propertyPath: _levelActionsSequence
+      value: 
+      objectReference: {fileID: 11400000, guid: 196ce7f6f6511164993f7cd40787cce0, type: 2}
+    - target: {fileID: 6729434161784164172, guid: 05f403bb8ff6ef44ca49e693d786d65a, type: 3}
       propertyPath: _levelPlatformSequence
       value: 
       objectReference: {fileID: 11400000, guid: 8409f9f9d38ab234298d5f517c14af41, type: 2}
@@ -2789,7 +2793,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
