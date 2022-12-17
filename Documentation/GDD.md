@@ -78,16 +78,6 @@ Test fluid transitions
 
 ## Grid while placing platforms => Luca Finoia
 
-## Slow-mo while placing platforms => Andrea Taroni
-
-Add a slow-mo effect for 2 sec
-Start when clicking on the platform to move
-
-## Camera => Luca Finoia
-
-Reduce camera zoom, a camera size to 10 should be enough.
-Add a greater vertical threshold for camera movement. or move it vertical only when Luke land on a higher level platform.
-
 ## Starting Panoramica of the level
  
 ## Starting Delay
@@ -105,6 +95,21 @@ Increase the number of actions displayed to 5
 ## Add  a test level for the camera and Action speed
 
 ## Crouch action
+
+
+
+
+
+
+
+
+--------------------------
+Polishing
+## Action Trigger Visual Effect
+## Placing Platform Visual Effect
+## Slow-mo Visual Effect
+## End Level Transition
+## Death Visual Effect
 
 
 --------------------------
