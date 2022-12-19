@@ -93,7 +93,15 @@ public class GameManager : MonoBehaviour
 
     private void HandlePlaying() // show the scene with the level to play
     {
-        SceneManager.LoadScene("Level" + _levelToPlay);
+        if (_levelToPlay == 1)
+        {
+            SceneManager.LoadScene("Tutorial");
+        }
+        else
+        {
+            int levelToPlayNameScene = _levelToPlay - 1;
+            SceneManager.LoadScene("Level" + levelToPlayNameScene);
+        }
         TextFileManager.AddWitchLevelYouStartPlaying();
     }
 
@@ -118,20 +126,3 @@ public enum GameState // The possible states of the game
     Lose,
     Win
 }
-
-/*
- * To subscribe on an event:
- * void Awake(){
- *  GameManager.OnGameStateChanged += newMethod
- * }
- * To unsubscribe on an event:
- * void OnDestroy(){
- *  GameManager.OnGameStateChanged -= newMethod
- * }
- * New method:
- * private void newMethod(GameState state){
- *  //content of the method
- * }
- * To update the state:
- * GameManager.instance.UpdateGameState(.....);
- */

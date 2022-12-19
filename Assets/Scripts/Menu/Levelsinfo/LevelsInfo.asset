@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: LevelsInfo
   m_EditorClassIdentifier: 
   levelInfos:
+  - {fileID: 11400000, guid: 7cf80d7055d1d428f81a1594db0f2ebe, type: 2}
   - {fileID: 11400000, guid: 33902f5b88250495baee80d7e8ff4b23, type: 2}
   - {fileID: 11400000, guid: ba05e56cab49042f089cdf598e6e922d, type: 2}
   - {fileID: 11400000, guid: 0825f72a7ffff495c9aa78587ec24c1d, type: 2}
