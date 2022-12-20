@@ -68,7 +68,85 @@ public class AudioManager : MonoBehaviour
         }
         s.source.Play();
     }
+
+    public void PlayIntro()
+	{
+        Sound s = Array.Find(_sounds.sounds.Select(el => el.sound).ToArray(), sound => sound.name == "Intro");
+        if (s == null) {
+            Debug.Log("Sound " + name + " not found!");
+            return;
+        }
+        if (s.source == null) {
+            return;
+        }
+        s.source.Play();
+    }
+
+    public void PlayBackgroundMusic()
+    {
+        Sound s = Array.Find(_sounds.sounds.Select(el => el.sound).ToArray(), sound => sound.name == "BackgroungMusic");
+        if (s == null) {
+            Debug.Log("Sound " + name + " not found!");
+            return;
+        }
+        if (s.source == null) {
+            return;
+        }
+        s.source.Play();
+    }
+
+    public void PlayClickMenuSFX()
+    {
+        Sound s = Array.Find(_sounds.sounds.Select(el => el.sound).ToArray(), sound => sound.name == "ClickMenuSFX");
+        if (s == null) {
+            Debug.Log("Sound " + name + " not found!");
+            return;
+        }
+        if (s.source == null) {
+            return;
+        }
+        s.source.Play();
+    }    
     
+    public void PlayNewPlatfromSFX()
+    {
+        Sound s = Array.Find(_sounds.sounds.Select(el => el.sound).ToArray(), sound => sound.name == "NewPlatformSFX");
+        if (s == null) {
+            Debug.Log("Sound " + name + " not found!");
+            return;
+        }
+        if (s.source == null) {
+            return;
+        }
+        s.source.Play();
+    }
+
+    public void PlayPlacePlatfromSFX()
+    {
+        Sound s = Array.Find(_sounds.sounds.Select(el => el.sound).ToArray(), sound => sound.name == "PlacementSFX");
+        if (s == null) {
+            Debug.Log("Sound " + name + " not found!");
+            return;
+        }
+        if (s.source == null) {
+            return;
+        }
+        s.source.Play();
+    }
+
+    public void PlayActionSFX()
+    {
+        Sound s = Array.Find(_sounds.sounds.Select(el => el.sound).ToArray(), sound => sound.name == "ChangeActionSFX");
+        if (s == null) {
+            Debug.Log("Sound " + name + " not found!");
+            return;
+        }
+        if (s.source == null) {
+            return;
+        }
+        s.source.Play();
+    }
+
     public void Stop(string name) // Method to stop a (looped) music by its name
     {
         Sound s = Array.Find(_sounds.sounds.Select(el => el.sound).ToArray(), sound => sound.name == name);

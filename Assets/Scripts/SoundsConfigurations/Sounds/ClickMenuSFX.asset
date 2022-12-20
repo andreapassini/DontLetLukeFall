@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 914c73a34b76d46e496439b1382d42b7, type: 3}
-  m_Name: BackgroungMusic
+  m_Name: ClickMenuSFX
   m_EditorClassIdentifier: 
   sound:
-    name: BackgroungMusic
-    clip: {fileID: 8300000, guid: 2e87d8a3a3201ee41a42514a205b298b, type: 3}
-    volume: 1
-    pitch: 1.5
+    name: ClickMenuSFX
+    clip: {fileID: 8300000, guid: 1c6bc3981cad1d4498be66ab509262d0, type: 3}
+    volume: 0
+    pitch: 0
     source: {fileID: 0}
-    loop: 1
+    loop: 0
