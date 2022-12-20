@@ -127,6 +127,8 @@ namespace DLLF
             }
             _slowMotion.DeactivateSlowMotion();
             _canvasGroup.blocksRaycasts = true;
+
+            AudioManager.instance.PlayPlacePlatfromSFX();
         }
 
         public void OnPointerDown(PointerEventData eventData)

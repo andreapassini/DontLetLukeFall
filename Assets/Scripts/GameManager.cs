@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 
     public static event Action<GameState> OnGameStateChanged;
 
-	[SerializeField] private AudioManager _audioManager;
+    private AudioManager _audioManager;
 
     private void Awake()
     {
@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        _audioManager = AudioManager.instance;
+
         UpdateGameState(GameState.SelectionLevel); // Setting the initial state
         _audioManager.PlayIntro();
     }
