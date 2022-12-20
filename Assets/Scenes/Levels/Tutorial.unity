@@ -3937,7 +3937,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -5501,10 +5501,10 @@ MonoBehaviour:
   _platformBar: {fileID: 1858410945}
   _tutorialImages:
   - {fileID: 21300000, guid: 96824bea9690a406a8601953a401d46b, type: 3}
-  - {fileID: 21300000, guid: 05279bdddcc21480396d84eb0a2575a0, type: 3}
+  - {fileID: 21300000, guid: 25771b10b9a8a471a816c94eb60699ac, type: 3}
   - {fileID: 21300000, guid: 9fcd45d6388ac44e599aee795d203a0e, type: 3}
-  - {fileID: 21300000, guid: 965df39262b814c71a9cd6343fe31f8b, type: 3}
-  - {fileID: 21300000, guid: ee27a5872a6f04928b65dcf14a61f57e, type: 3}
+  - {fileID: 21300000, guid: 66a4ae89d7e3a48b0aab38bb3d185553, type: 3}
+  - {fileID: 21300000, guid: e53a483d463fd48f6aff195901d268f8, type: 3}
   _transparentImage: {fileID: 21300000, guid: cc1d7465c5fbd41a48a421df6f2bc5c2, type: 3}
   _imageForTutorial: {fileID: 993262103}
   _coverImageForTutorial: {fileID: 708118552}
