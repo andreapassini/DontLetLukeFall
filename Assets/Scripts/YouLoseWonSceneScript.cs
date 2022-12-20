@@ -22,7 +22,13 @@ public class YouLoseWonSceneScript : MonoBehaviour
         if (GameManager.Instance.state == GameState.Win)
         {
             _youLoseWonText.text = "You won!";
-            _secondaryText.text = "You've completed the level " + GameManager.Instance.GetLevelToPlay() + "!";
+            int numberLevelToShow = GameManager.Instance.GetLevelToPlay() - 1;
+            string numberLevelToShowString = "" + numberLevelToShow + "";
+            if (numberLevelToShow == 0)
+            {
+                numberLevelToShowString = "tutorial";
+            }
+            _secondaryText.text = "You've completed the level " + numberLevelToShowString + "!";
         }
         if (GameManager.Instance.LevelToPlayIsTheLastOne())
         {
@@ -31,7 +37,13 @@ public class YouLoseWonSceneScript : MonoBehaviour
         if (GameManager.Instance.state == GameState.Lose)
         {
             _youLoseWonText.text = "You lose!";
-            _secondaryText.text = "You've not completed the level " + GameManager.Instance.GetLevelToPlay() + "!";
+            int numberLevelToShow = GameManager.Instance.GetLevelToPlay() - 1;
+            string numberLevelToShowString = "" + numberLevelToShow + "";
+            if (numberLevelToShow == 0)
+            {
+                numberLevelToShowString = "tutorial";
+            }
+            _secondaryText.text = "You've not completed the level " + numberLevelToShowString + "!";
             _buttonNextLevel.SetActive(false);
         }
     }

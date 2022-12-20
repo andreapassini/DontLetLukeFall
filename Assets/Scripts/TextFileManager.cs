@@ -130,7 +130,7 @@ public class TextFileManager : MonoBehaviour
     public static void AddWitchLevelYouStartPlaying() // To add in the log file witch level you start to play
     {
         // Content to add in the file
-        int numberOfTheLevel = GameManager.Instance.GetLevelToPlay();
+        int numberOfTheLevel = GameManager.Instance.GetLevelToPlay() - 1;
         string content = "Started level " + numberOfTheLevel + " in date: " + System.DateTime.Now + "\n";
         // Add some to text to it
         _file = _file + content;
