@@ -22,14 +22,11 @@ namespace DLLF
         
         [SerializeField] private ActionsSpritesSpawner _actionsSpritesSpawner;
 
-        private Animator _lukeAnimator; // The luke animator (this var is set automatically in Awake via _characterController)
         
         private bool _jump;
         private float _speed;
         private bool _isRunning;
-
-        private bool _triggeredDeadAnimation = false;
-
+        
         private Queue<ActionType> _actionsSequence = new Queue<ActionType>();
         private Dictionary<ActionType, ActionDelegate> _actionsMapping;
         private ActionsSequence _actionsTypeSequence;
@@ -52,11 +49,6 @@ namespace DLLF
             _characterController ??= transform.GetComponentInParent<CharacterController2D>();
             _actionsSpritesLoader = ActionsSpritesLoader.Instance;
             if (! _actionsSpritesLoader.Loaded) _actionsSpritesLoader.LoadSprites();
-            _lukeAnimator = _characterController.GetComponent<Animator>(); // Get the animator component
-            if (_lukeAnimator == null)
-            {
-                Debug.Log("You missed to add the animator to Luke!");
-            }
             _actionsMapping = new Dictionary<ActionType, ActionDelegate>();
             AutoLinkActionTypesToMethods();
         }
@@ -90,18 +82,6 @@ namespace DLLF
             };
             _characterController.Move(movementRequest);
             if (_jump) _jump = false;
-
-            if (_speed == 0) // In case speed is 0, set idle animation
-            {
-                if (_lukeAnimator != null)
-                {
-                    if (_triggeredDeadAnimation == false)
-                    {
-                        _lukeAnimator.SetTrigger("IddleTrigger");
-                    }
-                    _lukeAnimator.speed = 1;
-                }
-            }
 
         }
 
@@ -139,12 +119,6 @@ namespace DLLF
         private float Jump()
         {
             Debug.Log("Activating jump");
-            if (_lukeAnimator != null)
-            {
-                _lukeAnimator.SetTrigger("JumpTrigger"); // set jump animation
-                _triggeredDeadAnimation = false;
-                _lukeAnimator.speed = 1;
-            }
             _jump = true;
             // if it is running it will cover more units
             return GetTime(movementParams.GetUnitToCoverForJump(_isRunning), _speed);
@@ -155,12 +129,7 @@ namespace DLLF
         private float WalkRight()
         {
             Debug.Log("Activating WalkRight");
-            if (_lukeAnimator != null)
-            {
-                _lukeAnimator.SetTrigger("WalkRightTrigger"); // set walk right animation
-                _triggeredDeadAnimation = false;
-                _lukeAnimator.speed = 1;
-            }
+            
             _speed = movementParams.WalkSpeed;
             _isRunning = false;
             return GetTime(movementParams.UnitsCoveredPerAction, _speed);
@@ -172,12 +141,7 @@ namespace DLLF
         private float WalkLeft()
         {
             Debug.Log("Activating WalkLeft");
-            if (_lukeAnimator != null)
-            {
-                _lukeAnimator.SetTrigger("WalkLeftTrigger"); // set walk left animation
-                _triggeredDeadAnimation = false;
-                _lukeAnimator.speed = 1;
-            }
+            
             _speed = -movementParams.WalkSpeed;
             _isRunning = false;
             return GetTime(movementParams.UnitsCoveredPerAction, _speed);
@@ -190,12 +154,7 @@ namespace DLLF
         private float RunRight()
         {
             Debug.Log("Activating RunRight");
-            if (_lukeAnimator != null)
-            {
-                _lukeAnimator.SetTrigger("RunRightTrigger"); // set run right animation; double the speed
-                _triggeredDeadAnimation = false;
-                _lukeAnimator.speed = 2;
-            }
+            
             _speed = movementParams.RunSpeed;
             _isRunning = true;
             return GetTime(movementParams.UnitsCoveredPerAction, _speed);
@@ -208,12 +167,7 @@ namespace DLLF
         private float RunLeft()
         {
             Debug.Log("Activating RunLeft");
-            if (_lukeAnimator != null)
-            {
-                _lukeAnimator.SetTrigger("RunLeftTrigger"); // set run left animation; double the speed
-                _triggeredDeadAnimation = false;
-                _lukeAnimator.speed = 2;
-            }
+            
             _speed = -movementParams.RunSpeed;
             _isRunning = true;
             return GetTime(movementParams.UnitsCoveredPerAction, _speed);
@@ -224,12 +178,7 @@ namespace DLLF
         private float Stop()
         {
             Debug.Log("Activating Stop");
-            if (_lukeAnimator != null)
-            {
-                _lukeAnimator.SetTrigger("IddleTrigger");
-                _triggeredDeadAnimation = false;
-                _lukeAnimator.speed = 1;
-            }
+            
 
             _speed = 0;
             _isRunning = false;
@@ -241,12 +190,7 @@ namespace DLLF
         private float Die()
         {
             Debug.Log("Activating Die");
-            if (_lukeAnimator != null)
-            {
-                _lukeAnimator.SetTrigger("DeadTrigger");
-                _triggeredDeadAnimation = true;
-                _lukeAnimator.speed = 1;
-            }
+            
 
             _speed = 0;
             _isRunning = false;

@@ -10,6 +10,7 @@ namespace DLLF {
     /// if there's enough interest. You can play and compete for best times here: https://tarodev.itch.io/
     /// If you hve any questions or would like to brag about your score, come to discord: https://discord.gg/GqeHHnhHpz
     /// </summary>
+    
     public class CharacterController2D : MonoBehaviour, IPlayerController {
         // Public for external hooks
         public Vector3 Velocity { get; private set; }
@@ -22,9 +23,19 @@ namespace DLLF {
         private Vector3 _lastPosition;
         private float _currentHorizontalSpeed, _currentVerticalSpeed;
 
+
+        private Animator _animator;
+        private SpriteRenderer _spriteRenderer;
+        
         // This is horrible, but for some reason colliders are not fully established when update starts...
         public bool IsActive { get; private set; }
-        void Awake() => Invoke(nameof(Activate), 0.5f);
+
+        void Awake()
+        {
+            Invoke(nameof(Activate), 0.5f);
+            _animator = GetComponent<Animator>();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+        }
         void Activate() =>  IsActive = true;
         
 
@@ -46,6 +57,15 @@ namespace DLLF {
             CalculateJump(); // Possibly overrides vertical
 
             MoveCharacter(); // Actually perform the axis movement
+            
+            if (JumpingThisFrame) _animator.SetTrigger("Jump");
+            
+            if (_currentHorizontalSpeed != 0.0f)
+            {
+                _spriteRenderer.flipX = _currentHorizontalSpeed < 0.0f;
+            }
+            _animator.SetFloat("Speed", Mathf.Abs(_currentHorizontalSpeed));
+
         }
 
         #region Collisions
