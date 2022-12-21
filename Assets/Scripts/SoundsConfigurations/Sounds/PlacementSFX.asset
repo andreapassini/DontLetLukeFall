@@ -16,6 +16,6 @@ MonoBehaviour:
     name: PlacementSFX
     clip: {fileID: 8300000, guid: 771e94f427f71a74e8ee3ebcde102004, type: 3}
     volume: 1
-    pitch: 1.5
+    pitch: 1
     source: {fileID: 0}
     loop: 0

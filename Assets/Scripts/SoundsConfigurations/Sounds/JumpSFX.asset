@@ -16,6 +16,6 @@ MonoBehaviour:
     name: JumpSFX
     clip: {fileID: 8300000, guid: 3318f41e6c5214eb7bd99ee7610cc56d, type: 3}
     volume: 1
-    pitch: 1.5
+    pitch: 1
     source: {fileID: 0}
     loop: 0

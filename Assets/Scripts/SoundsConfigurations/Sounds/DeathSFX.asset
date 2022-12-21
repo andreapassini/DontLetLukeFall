@@ -16,6 +16,6 @@ MonoBehaviour:
     name: DeathSFX
     clip: {fileID: 8300000, guid: ffdd4cf2a4adcbe4895dd2af4bbb96dd, type: 3}
     volume: 1
-    pitch: 1.5
+    pitch: 1
     source: {fileID: 0}
     loop: 0

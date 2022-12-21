@@ -68,7 +68,7 @@ namespace DLLF
             //PlatformUI selectedPlatform = _platforms[UnityEngine.Random.Range(0, _platforms.Count - 1)];
             _platformSlots.Where(s => s.isEmpty).First().GeneratePlatform(selectedPlatform);
 
-            _audioManager.PlayNewPlatfromSFX();
+            AudioManager.instance.PlayNewPlatfromSFX();
         }
 
         private bool AllSlotFull()

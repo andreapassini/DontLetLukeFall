@@ -15,7 +15,7 @@ MonoBehaviour:
   sound:
     name: Intro
     clip: {fileID: 8300000, guid: d990ee2e4526f95438460779b00c156d, type: 3}
-    volume: 1
-    pitch: 1.5
+    volume: 0.75
+    pitch: 1
     source: {fileID: 0}
     loop: 1

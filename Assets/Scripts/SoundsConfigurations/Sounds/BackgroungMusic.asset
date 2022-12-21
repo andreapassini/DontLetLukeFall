@@ -16,6 +16,6 @@ MonoBehaviour:
     name: BackgroungMusic
     clip: {fileID: 8300000, guid: 2e87d8a3a3201ee41a42514a205b298b, type: 3}
     volume: 1
-    pitch: 1.5
+    pitch: 1
     source: {fileID: 0}
     loop: 1

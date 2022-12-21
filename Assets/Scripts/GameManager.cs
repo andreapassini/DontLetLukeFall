@@ -38,7 +38,6 @@ public class GameManager : MonoBehaviour
         _audioManager = AudioManager.instance;
 
         UpdateGameState(GameState.SelectionLevel); // Setting the initial state
-        _audioManager.PlayIntro();
     }
 
     public void UpdateGameState(GameState newState) // A public method to change the state
@@ -119,7 +118,6 @@ public class GameManager : MonoBehaviour
         TextFileManager.AddThatYouLostALevel();
 
         _audioManager.PauseAllBackgroundMusics();
-        _audioManager.PlayIntro();
     }
     
     private void HandleWin() // Show the screen you won
@@ -128,7 +126,6 @@ public class GameManager : MonoBehaviour
         TextFileManager.AddThatYouWonALevel();
 
         _audioManager.PauseAllBackgroundMusics();
-        _audioManager.PlayIntro();
     }
 
 }

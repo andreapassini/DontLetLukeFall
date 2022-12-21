@@ -15,7 +15,7 @@ MonoBehaviour:
   sound:
     name: ChangeActionSFX
     clip: {fileID: 8300000, guid: 1646d652d3d006f4cb4439661bdfd9a4, type: 3}
-    volume: 1
-    pitch: 1.5
+    volume: 0.5
+    pitch: 1
     source: {fileID: 0}
     loop: 0
