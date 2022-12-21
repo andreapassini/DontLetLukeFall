@@ -249,4 +249,9 @@ public class AudioManager : MonoBehaviour
             _preSceneMenu = false;
         }
     }
+
+    public AudioMixerGroup GetAudioMixer()
+	{
+        return _audioMixerGroup;
+	}
 }

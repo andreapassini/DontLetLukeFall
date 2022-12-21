@@ -17,7 +17,7 @@ public class VolumeSetting : MonoBehaviour // This script is to manage the volum
     public float GetBackgroundMusicVolume() // Method to get the background music volume from user pref
     {
 		float defaultParameter;
-        AudioManager.instance.GetComponent<AudioMixer>().GetFloat("BackgroundMusic", out defaultParameter);
+        AudioManager.instance.GetAudioMixer().audioMixer.GetFloat("BackgroundMusic", out defaultParameter);
 
         return PlayerPrefs.GetFloat(AudioManager.BACKGROUNDMUSIC_KEY, defaultParameter);
     }
@@ -25,7 +25,7 @@ public class VolumeSetting : MonoBehaviour // This script is to manage the volum
     public float GetSoundEffectsVolume() // Method to get the sound effects volume from user pref
     {
         float defaultParameter;
-        AudioManager.instance.GetComponent<AudioMixer>().GetFloat("SoundEffects", out defaultParameter);
+        AudioManager.instance.GetAudioMixer().audioMixer.GetFloat("SoundEffects", out defaultParameter);
 
         return PlayerPrefs.GetFloat(AudioManager.SOUNDEFFECTS_KEY, defaultParameter);
     }
