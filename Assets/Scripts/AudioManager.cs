@@ -250,8 +250,8 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public AudioMixerGroup GetAudioMixer()
+    public AudioMixer GetAudioMixer()
 	{
-        return _audioMixerGroup;
+        return _mixer;
 	}
 }
