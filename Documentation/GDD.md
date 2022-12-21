@@ -67,9 +67,13 @@ Luke can get stucked in platforms
 
 # TO DO
 
-## In-Game Tutorial => Carlo Ambrogi
+## Build to test new gameplay
 
-Add a tutorial in game and also in settings some information about controls and how to play
+## UI Action Bar 
+
+## Platform on top of Luke => Luca Finoia
+
+## Sound volume Default in settings ref mixer => Andrea Passini
 
 ## Luke's new animations => Andrea Taroni
 
@@ -78,19 +82,11 @@ Test fluid transitions
 
 ## Grid while placing platforms => Luca Finoia
 
-## Starting Panoramica of the level
+## Starting Panoramica of the level => Andrea Taroni
  
-## Starting Delay
+## Starting Delay => Andrea Taroni
 
 Wait a bunch of seconds before starting Luke's Actions so the player can look a the next actions and platforms to place
-
-## Action UI => Carlo Ambrogi
-
-Increase Size of UI
-Increase the number of actions displayed to 5
-
-
-## Add in-game soundtrack => Andrea Passini
 
 ## Add  a test level for the camera and Action speed
 
@@ -122,7 +118,6 @@ Remove background and leave a skybox white-gray, as the intro
 ## Player Platforms sorting layer
 Player Platforms should be rendered on top of the environmental platforms
 
-## Randomness in Player Platform => Andrea Passini
 ## Animate enemies
 ## Add Package Feel
 
