@@ -25,6 +25,7 @@ namespace DLLF {
 
 
         private Animator _animator;
+        private SpriteRenderer _spriteRenderer;
         
         // This is horrible, but for some reason colliders are not fully established when update starts...
         public bool IsActive { get; private set; }
@@ -33,6 +34,7 @@ namespace DLLF {
         {
             Invoke(nameof(Activate), 0.5f);
             _animator = GetComponent<Animator>();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
         }
         void Activate() =>  IsActive = true;
         
@@ -57,21 +59,13 @@ namespace DLLF {
             MoveCharacter(); // Actually perform the axis movement
             
             if (JumpingThisFrame) _animator.SetTrigger("Jump");
-            if (_currentHorizontalSpeed == 0.0f && _currentVerticalSpeed == 0.0f)
-            {
-                _animator.SetBool("Walking", false);
-                _animator.SetBool("Running", false);
-            }
-            if (_currentHorizontalSpeed > 5.0f)
-            {
-                _animator.SetBool("Walking", false);
-                _animator.SetBool("Running", true);
-            }
-            else  {
-                _animator.SetBool("Running", false);
-                _animator.SetBool("Walking", true);
-            }
             
+            if (_currentHorizontalSpeed != 0.0f)
+            {
+                _spriteRenderer.flipX = _currentHorizontalSpeed < 0.0f;
+            }
+            _animator.SetFloat("Speed", Mathf.Abs(_currentHorizontalSpeed));
+
         }
 
         #region Collisions
