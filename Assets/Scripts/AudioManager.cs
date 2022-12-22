@@ -4,6 +4,7 @@ using System.Linq;
 //using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 // This is the Audio manager; this script is assigned to an empty game object witch has the task to be the audio manager
@@ -18,6 +19,8 @@ public class AudioManager : MonoBehaviour
     public const string SOUNDEFFECTS_KEY = "soundEffectsVolume";
     
     public static AudioManager instance; // There is only one audio manager
+
+    private bool _preSceneMenu;
 
     public void Awake()
     {
@@ -52,8 +55,16 @@ public class AudioManager : MonoBehaviour
             }
             s.source.outputAudioMixerGroup = _audioMixerGroup.audioMixer.FindMatchingGroups(outputMixer)[0]; // Assignment of the sound to an audio mixer group
         }
+
+        CheckMenu();
     }
 
+    private void Update()
+    {
+        CheckMenu();
+    }
+
+    #region Play
     public void Play(string name) // Method to play a music or a sound effect by its name
     {
         Sound s = Array.Find(_sounds.sounds.Select(el => el.sound).ToArray(), sound => sound.name == name);
@@ -68,7 +79,86 @@ public class AudioManager : MonoBehaviour
         }
         s.source.Play();
     }
+
+    public void PlayIntro()
+	{
+        Sound s = Array.Find(_sounds.sounds.Select(el => el.sound).ToArray(), sound => sound.name == "Intro");
+        if (s == null) {
+            Debug.Log("Sound " + name + " not found!");
+            return;
+        }
+        if (s.source == null) {
+            return;
+        }
+        s.source.Play();
+    }
+
+    public void PlayBackgroundMusic()
+    {
+        Sound s = Array.Find(_sounds.sounds.Select(el => el.sound).ToArray(), sound => sound.name == "BackgroungMusic");
+        if (s == null) {
+            Debug.Log("Sound " + name + " not found!");
+            return;
+        }
+        if (s.source == null) {
+            return;
+        }
+        s.source.Play();
+    }
+
+    public void PlayClickMenuSFX()
+    {
+        Sound s = Array.Find(_sounds.sounds.Select(el => el.sound).ToArray(), sound => sound.name == "ClickMenuSFX");
+        if (s == null) {
+            Debug.Log("Sound " + name + " not found!");
+            return;
+        }
+        if (s.source == null) {
+            return;
+        }
+        s.source.Play();
+    }    
     
+    public void PlayNewPlatfromSFX()
+    {
+        Sound s = Array.Find(_sounds.sounds.Select(el => el.sound).ToArray(), sound => sound.name == "NewPlatformSFX");
+        if (s == null) {
+            Debug.Log("Sound " + name + " not found!");
+            return;
+        }
+        if (s.source == null) {
+            return;
+        }
+        s.source.Play();
+    }
+
+    public void PlayPlacePlatfromSFX()
+    {
+        Sound s = Array.Find(_sounds.sounds.Select(el => el.sound).ToArray(), sound => sound.name == "PlacementSFX");
+        if (s == null) {
+            Debug.Log("Sound " + name + " not found!");
+            return;
+        }
+        if (s.source == null) {
+            return;
+        }
+        s.source.Play();
+    }
+
+    public void PlayActionSFX()
+    {
+        Sound s = Array.Find(_sounds.sounds.Select(el => el.sound).ToArray(), sound => sound.name == "ChangeActionSFX");
+        if (s == null) {
+            Debug.Log("Sound " + name + " not found!");
+            return;
+        }
+        if (s.source == null) {
+            return;
+        }
+        s.source.Play();
+    }
+    #endregion
+
     public void Stop(string name) // Method to stop a (looped) music by its name
     {
         Sound s = Array.Find(_sounds.sounds.Select(el => el.sound).ToArray(), sound => sound.name == name);
@@ -138,4 +228,30 @@ public class AudioManager : MonoBehaviour
         _mixer.SetFloat(VolumeSetting.MIXER_SOUNDEFFECTS, Mathf.Log10(soundEffectsVolume) * 20);
     }
     
+    private void CheckMenu()
+    {
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        if(sceneName.Equals("Credits") 
+            || sceneName.Equals("LevelSelectionMenu")
+            || sceneName.Equals("LogoScene")
+            || sceneName.Equals("MainMenu")
+            || sceneName.Equals("SendFeedbackMenu")
+            || sceneName.Equals("SettingMenu")
+            || sceneName.Equals("YouLoseWon"))
+        {
+            if(!_preSceneMenu)
+                PlayIntro();
+
+            _preSceneMenu = true;
+        } else
+        {
+            _preSceneMenu = false;
+        }
+    }
+
+    public AudioMixer GetAudioMixer()
+	{
+        return _mixer;
+	}
 }

@@ -106,6 +106,9 @@ namespace DLLF
                 #if UNITY_EDITOR
                 actionsPosition.Add(_characterController.transform.position);
                 #endif
+
+                AudioManager.instance.PlayActionSFX();
+
                 yield return new WaitForSeconds(timeToComplete);
             }
             Debug.Log("Actions sequence end");

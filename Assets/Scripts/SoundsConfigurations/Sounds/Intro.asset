@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 914c73a34b76d46e496439b1382d42b7, type: 3}
-  m_Name: JumpSoundEffect
+  m_Name: Intro
   m_EditorClassIdentifier: 
   sound:
-    name: JumpSoundEffect
-    clip: {fileID: 8300000, guid: 3318f41e6c5214eb7bd99ee7610cc56d, type: 3}
-    volume: 1
-    pitch: 1.5
+    name: Intro
+    clip: {fileID: 8300000, guid: d990ee2e4526f95438460779b00c156d, type: 3}
+    volume: 0.75
+    pitch: 1
     source: {fileID: 0}
-    loop: 0
+    loop: 1

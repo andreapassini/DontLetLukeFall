@@ -21,6 +21,7 @@ namespace DLLF
         private PlatformSequence _platformSequence;
         private Queue<int> _platformsQueue = new Queue<int>();
         private LevelManager levelManager;
+        private AudioManager _audioManager;
 
         private void Awake()
         {
@@ -33,12 +34,11 @@ namespace DLLF
             _platformSequence ??= Resources.Load<PlatformSequence>(
                 "LevelsPlatforms/"
                 + SceneManager.GetActiveScene().name);
-            
         }
 
 		private void Start()
 		{
-            ;
+            _audioManager = AudioManager.instance;
         }
 
 		// Update is called once per frame
@@ -67,6 +67,8 @@ namespace DLLF
             PlatformUI selectedPlatform = _platforms[getNextPlatform()];
             //PlatformUI selectedPlatform = _platforms[UnityEngine.Random.Range(0, _platforms.Count - 1)];
             _platformSlots.Where(s => s.isEmpty).First().GeneratePlatform(selectedPlatform);
+
+            AudioManager.instance.PlayNewPlatfromSFX();
         }
 
         private bool AllSlotFull()

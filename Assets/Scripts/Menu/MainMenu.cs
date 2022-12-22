@@ -14,8 +14,6 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
-        // Start with the background music
-        AudioManager.instance.Play("luke_intro");
     }
 
     void Update()

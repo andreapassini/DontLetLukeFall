@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
 
     public static event Action<GameState> OnGameStateChanged;
 
+    private AudioManager _audioManager;
+
     private void Awake()
     {
         if (Instance == null)
@@ -33,6 +35,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        _audioManager = AudioManager.instance;
+
         UpdateGameState(GameState.SelectionLevel); // Setting the initial state
     }
 
@@ -103,18 +107,25 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("Level" + levelToPlayNameScene);
         }
         TextFileManager.AddWitchLevelYouStartPlaying();
+
+        _audioManager.PauseAllBackgroundMusics();
+        _audioManager.PlayBackgroundMusic();
     }
 
     private void HandleLose() // Show the screen you lose
     {
         SceneManager.LoadScene("YouLoseWon");
         TextFileManager.AddThatYouLostALevel();
+
+        _audioManager.PauseAllBackgroundMusics();
     }
     
     private void HandleWin() // Show the screen you won
     {
         SceneManager.LoadScene("YouLoseWon");
         TextFileManager.AddThatYouWonALevel();
+
+        _audioManager.PauseAllBackgroundMusics();
     }
 
 }

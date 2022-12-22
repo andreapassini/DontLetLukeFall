@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 914c73a34b76d46e496439b1382d42b7, type: 3}
-  m_Name: DeathSoundEffect
+  m_Name: DeathSFX
   m_EditorClassIdentifier: 
   sound:
-    name: DeathSoundEffect
-    clip: {fileID: 8300000, guid: 3318f41e6c5214eb7bd99ee7610cc56d, type: 3}
+    name: DeathSFX
+    clip: {fileID: 8300000, guid: ffdd4cf2a4adcbe4895dd2af4bbb96dd, type: 3}
     volume: 1
-    pitch: 1.5
+    pitch: 1
     source: {fileID: 0}
     loop: 0

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 914c73a34b76d46e496439b1382d42b7, type: 3}
-  m_Name: PlacementSoundEffect
+  m_Name: NewPlatfromSFX
   m_EditorClassIdentifier: 
   sound:
-    name: PlacementSoundEffect
-    clip: {fileID: 8300000, guid: 5532e7766848940a8bc898ef3e935c9d, type: 3}
-    volume: 1
-    pitch: 1.5
+    name: NewPlatformSFX
+    clip: {fileID: 8300000, guid: 3dd93e8b6d6d98649adfbe08f83fb1b2, type: 3}
+    volume: 0.75
+    pitch: 1
     source: {fileID: 0}
     loop: 0
