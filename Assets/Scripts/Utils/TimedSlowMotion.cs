@@ -12,6 +12,14 @@ namespace DLLF
         private float _slowMoMultiplier;
         [SerializeField]
         private float _slowMoDuration;
+
+        // Interpolate value of time scale to have a smooth slowmo transition
+        [SerializeField]
+        private float _interpolationDuration = .15f;
+        [SerializeField]
+        private float _interpolationSegments = 5f;
+
+        private IEnumerator _slowMoBack;
         
         void Awake()
         {
@@ -22,20 +30,51 @@ namespace DLLF
         public void ActivateSlowMotion()
         {
             Debug.Log("Activating slow mo");
+            _slowMoBack = SlowMoBackInterpolation();
             StartCoroutine(StartTimedSlowMo());
         }
 
         private IEnumerator StartTimedSlowMo()
         {
+            float unitInterpolation = (_originalTimeScale - _slowMoTimeScale) / _interpolationSegments;
+
+            for (int i = 0; i < _interpolationSegments; i++)
+            {
+                Time.timeScale = _slowMoTimeScale - (unitInterpolation * i);
+                yield return new WaitForSecondsRealtime(_interpolationDuration/_interpolationSegments);
+            }
+
             Time.timeScale = _slowMoTimeScale;
             yield return new WaitForSecondsRealtime(_slowMoDuration);
             Debug.Log("Deactivating slow mo");
-            Time.timeScale = _originalTimeScale;
+
+            StartCoroutine(_slowMoBack);
         } 
 
         public void DeactivateSlowMotion()
         {
             StopCoroutine(nameof(StartTimedSlowMo));
+
+            // With IEnumerator ref, we can stop coroutine and keep its progression/steps/state
+            // so when we call start again using IEnumerator ref, we restart from the stopped state
+            // without losing progression
+            // If the cor of _slowMoBack is already over, it will not restart
+            // To restart the endend cor, StartCoroutine(Coroutine())
+            StartCoroutine(_slowMoBack);
+
+            Time.timeScale = _originalTimeScale;
+        }
+
+        public IEnumerator SlowMoBackInterpolation()
+        {
+            float unitInterpolation = (_originalTimeScale - _slowMoTimeScale) / _interpolationSegments;
+
+            for (int i = 0; i < _interpolationSegments; i++)
+            {
+                Time.timeScale = _slowMoTimeScale + (unitInterpolation * i);
+                yield return new WaitForSecondsRealtime(_interpolationDuration / _interpolationSegments);
+            }
+
             Time.timeScale = _originalTimeScale;
         }
         

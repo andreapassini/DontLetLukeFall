@@ -67,6 +67,8 @@ Luke can get stucked in platforms
 
 # TO DO
 
+## Slowmo Interpolation of .5f or .3f seconds
+
 ## Build to test new gameplay
 
 ## UI Action Bar 
