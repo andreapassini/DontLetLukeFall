@@ -84,6 +84,8 @@ AudioMixerController:
   m_ExposedParameters:
   - guid: d9e646a8fcbc1418fb943892abcd0d17
     name: BackgroundMusicVolume
+  - guid: 7b2f378560a844b9e96dde52e0e6cc58
+    name: MasterPitch
   - guid: 241f8ca1d58c34068a6afbb90e404a1f
     name: SoundEffectsVolume
   m_AudioMixerGroupViews:
