@@ -24,10 +24,13 @@ namespace DLLF
         private CanvasGroup _canvasGroup;
         private bool _isWithEffect=false;
         private GameObject _spawnedPlatform;
+        private GameObject _player;
         private Image[] _spriteRenderersUI;
         private List<ActionType> _actionsTypes;
 
         private ISlowMotion _slowMotion;
+        [SerializeField]
+        private float _minDistanceFromPlayer=2f;
 
         private void Awake()
         {
@@ -36,6 +39,7 @@ namespace DLLF
             {
                 _canvas = GameObject.FindObjectOfType<Canvas>();
             }
+            _player = GameObject.FindGameObjectWithTag("Player");
             _actionsTypes = ((ActionType[])Enum.GetValues(typeof(ActionType))).ToList();
             _actionsTypes.Remove(ActionType.Null);
             _actionsTypes.Remove(ActionType.Die);
@@ -106,7 +110,10 @@ namespace DLLF
             _rectTransform.anchoredPosition += eventData.delta / _canvas.scaleFactor;
             Vector3 spawnPosition = _cam.ScreenToWorldPoint(transform.position);
             spawnPosition = new Vector3((int)spawnPosition.x, (int)spawnPosition.y, 0);
-            _spawnedPlatform.transform.position = spawnPosition;
+            if (Vector3.Distance(spawnPosition, _player.transform.position) > _minDistanceFromPlayer)
+            {
+                _spawnedPlatform.transform.position = spawnPosition;
+            }
         }
 
         public void OnEndDrag(PointerEventData eventData)
