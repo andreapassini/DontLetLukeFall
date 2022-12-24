@@ -37,7 +37,6 @@ namespace DLLF {
             _spriteRenderer = GetComponent<SpriteRenderer>();
         }
         void Activate() =>  IsActive = true;
-        
 
         public void Move(MovementRequest movementRequest)
         {
@@ -58,7 +57,15 @@ namespace DLLF {
 
             MoveCharacter(); // Actually perform the axis movement
             
-            if (JumpingThisFrame) _animator.SetTrigger("Jump");
+            if (JumpingThisFrame)
+            {
+                _animator.SetTrigger("Jump");
+                _animator.SetBool("isJumping", true);
+            }
+            else if(LandingThisFrame)
+            {
+                _animator.SetBool("isJumping", false);
+            }
             
             if (_currentHorizontalSpeed != 0.0f)
             {
