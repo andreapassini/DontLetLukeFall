@@ -11,6 +11,7 @@ public class ActionUIController : MonoBehaviour
     [SerializeField] private Image[] _displayActionImages; // this array is setted with images via inspector
     // Each Image represent an action
     [SerializeField] private Image _imageBar; // this is the image with the bar witch has an animation to show the current action
+    [SerializeField] private Image _imageExplosionChangeAction; // this is the image to show an explosion animation when changing action
     
     private List<Sprite> _actionsSprites; // In this list it will memorized the list of sprite of actions using method LoadActionSequence
     private const float TimeToCompleteAnimation = 1f;
@@ -19,6 +20,8 @@ public class ActionUIController : MonoBehaviour
 
     private bool _animationBarActive = false;
     private float _animationBarVelocity = 0f;
+    
+    private Animator _explosionChangeActionAnimator;
 
     private void Awake()
     {
@@ -29,6 +32,8 @@ public class ActionUIController : MonoBehaviour
         }
         _animationBarActive = false;
         UpdateBarAmount(0f);
+        _explosionChangeActionAnimator = _imageExplosionChangeAction.GetComponent<Animator>();
+        _explosionChangeActionAnimator.enabled = false;
     }
 
     private void Update()
@@ -72,9 +77,16 @@ public class ActionUIController : MonoBehaviour
         }
     }
 
+    private void ShowExplosionChangeActionAnimation()
+    {
+        _explosionChangeActionAnimator.enabled = true;
+        _explosionChangeActionAnimator.SetTrigger("animationExplosionChangeAction");
+    }
+
     public void LoadActionSequence(List<Sprite> actionsSprites, float durationOfTheFirstAction) 
     // This method loads the list of sprite of actions
     {
+        ShowExplosionChangeActionAnimation();
         _animationBarActive = true;
         _animationBarVelocity = TimeToCompleteAnimation / durationOfTheFirstAction;
         UpdateBarAmount(1f);
@@ -86,6 +98,7 @@ public class ActionUIController : MonoBehaviour
     public void NextAction(float durationOfThisAction)
     // This method pops the current action and lets the others shift right
     {
+        ShowExplosionChangeActionAnimation();
         _animationBarVelocity = TimeToCompleteAnimation / durationOfThisAction;
         UpdateBarAmount(1f);
         _actionsSprites.RemoveAt(0);
