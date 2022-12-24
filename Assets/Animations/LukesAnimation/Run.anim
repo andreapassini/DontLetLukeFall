@@ -28,7 +28,7 @@ AnimationClip:
     - time: 0.25
       value: {fileID: 21300000, guid: 5a9360ff82ce44142a7dcbecde0b903e, type: 3}
     attribute: m_Sprite
-    path: 
+    path: LukeSprite
     classID: 212
     script: {fileID: 0}
   m_SampleRate: 12
@@ -39,7 +39,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 0
+      path: 172293478
       attribute: 0
       script: {fileID: 0}
       typeID: 212
