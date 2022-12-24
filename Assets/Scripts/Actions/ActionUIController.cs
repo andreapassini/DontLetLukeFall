@@ -13,10 +13,12 @@ public class ActionUIController : MonoBehaviour
     [SerializeField] private Image _imageBar; // this is the image with the bar witch has an animation to show the current action
     
     private List<Sprite> _actionsSprites; // In this list it will memorized the list of sprite of actions using method LoadActionSequence
-    private const float TimeToCompleteAnimation = 0.5f;
+    private const float TimeToCompleteAnimation = 1f;
 
-    private Animator _imageBarAnimator;
     private bool _hasBeenLoaded;
+
+    private bool _animationBarActive = false;
+    private float _animationBarVelocity = 0f;
 
     private void Awake()
     {
@@ -25,8 +27,21 @@ public class ActionUIController : MonoBehaviour
             el.sprite = _transparentSprite;
             el.GetComponent<Animator>().enabled = false;
         }
-        _imageBarAnimator = _imageBar.GetComponent<Animator>();
-        _imageBarAnimator.enabled = false; // At the beginning the bar is disabled and it is enabled when it's called LoadActionSequence
+        _animationBarActive = false;
+        UpdateBarAmount(0f);
+    }
+
+    private void Update()
+    {
+        if (_animationBarActive)
+        {
+            UpdateBarAmount(Mathf.MoveTowards(_imageBar.fillAmount, 0f, _animationBarVelocity * Time.deltaTime));
+        }
+    }
+
+    private void UpdateBarAmount(float percentage)
+    {
+        _imageBar.fillAmount = percentage;
     }
 
     public int GetNumberOfDisplayedActions()
@@ -60,9 +75,9 @@ public class ActionUIController : MonoBehaviour
     public void LoadActionSequence(List<Sprite> actionsSprites, float durationOfTheFirstAction) 
     // This method loads the list of sprite of actions
     {
-        _imageBarAnimator.enabled = true;
-        _imageBarAnimator.speed = TimeToCompleteAnimation / durationOfTheFirstAction;
-        _imageBarAnimator.SetTrigger("RestartAnimationOfTheBarTrigger");
+        _animationBarActive = true;
+        _animationBarVelocity = TimeToCompleteAnimation / durationOfTheFirstAction;
+        UpdateBarAmount(1f);
         _actionsSprites = actionsSprites;
         _hasBeenLoaded = true;
         UpdateUi();
@@ -71,8 +86,8 @@ public class ActionUIController : MonoBehaviour
     public void NextAction(float durationOfThisAction)
     // This method pops the current action and lets the others shift right
     {
-        _imageBarAnimator.speed = TimeToCompleteAnimation / durationOfThisAction;
-        _imageBarAnimator.SetTrigger("RestartAnimationOfTheBarTrigger");
+        _animationBarVelocity = TimeToCompleteAnimation / durationOfThisAction;
+        UpdateBarAmount(1f);
         _actionsSprites.RemoveAt(0);
         UpdateUi();
     }
