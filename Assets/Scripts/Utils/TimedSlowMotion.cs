@@ -23,6 +23,9 @@ namespace DLLF
         private float _slowMoPitch;
         private float _masterPitch;
 
+        // Feel
+         
+
         private IEnumerator _slowMoBack;
         
         void Awake()
@@ -35,6 +38,7 @@ namespace DLLF
         {
             AudioManager.instance.GetAudioMixer().GetFloat("MasterPitch", out _masterPitch);
             _slowMoPitch = _masterPitch * _slowMoMultiplier;
+
         }
 
         public void ActivateSlowMotion()
