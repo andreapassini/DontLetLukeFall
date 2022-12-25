@@ -34,6 +34,7 @@ Transform:
   m_Children:
   - {fileID: 7294582467351424890}
   - {fileID: 5694487014890223122}
+  - {fileID: 5807198047905461957}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -325,3 +326,171 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 529983147679872239, guid: 9ebd0158c866c4a53b9293f3658f4de4, type: 3}
   m_PrefabInstance: {fileID: 7089071285927467925}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8238436510028864461
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 505195082365519623}
+    m_Modifications:
+    - target: {fileID: 836416455643751988, guid: e5266d45b10077c4ca400f7c07428465, type: 3}
+      propertyPath: m_Name
+      value: SlowMoFeedback
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504988204593982728, guid: e5266d45b10077c4ca400f7c07428465, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504988204593982728, guid: e5266d45b10077c4ca400f7c07428465, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504988204593982728, guid: e5266d45b10077c4ca400f7c07428465, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504988204593982728, guid: e5266d45b10077c4ca400f7c07428465, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504988204593982728, guid: e5266d45b10077c4ca400f7c07428465, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504988204593982728, guid: e5266d45b10077c4ca400f7c07428465, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504988204593982728, guid: e5266d45b10077c4ca400f7c07428465, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504988204593982728, guid: e5266d45b10077c4ca400f7c07428465, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504988204593982728, guid: e5266d45b10077c4ca400f7c07428465, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504988204593982728, guid: e5266d45b10077c4ca400f7c07428465, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504988204593982728, guid: e5266d45b10077c4ca400f7c07428465, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e5266d45b10077c4ca400f7c07428465, type: 3}
+--- !u!4 &5807198047905461957 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2504988204593982728, guid: e5266d45b10077c4ca400f7c07428465, type: 3}
+  m_PrefabInstance: {fileID: 8238436510028864461}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8777306830659321337 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 836416455643751988, guid: e5266d45b10077c4ca400f7c07428465, type: 3}
+  m_PrefabInstance: {fileID: 8238436510028864461}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8002854978220481600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8777306830659321337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6da43522623d4704e979466dc7650b65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Feedbacks: []
+  InitializationMode: 2
+  SafeMode: 3
+  Direction: 0
+  AutoChangeDirectionOnEnd: 0
+  AutoPlayOnStart: 0
+  AutoPlayOnEnable: 0
+  ForceTimescaleMode: 0
+  ForcedTimescaleMode: 1
+  DurationMultiplier: 1
+  DisplayFullDurationDetails: 0
+  PlayerTimescaleMode: 1
+  CooldownDuration: 0
+  InitialDelay: 0
+  CanPlay: 1
+  CanPlayWhileAlreadyPlaying: 1
+  ChanceToPlay: 100
+  FeedbacksIntensity: 1
+  Events:
+    TriggerMMFeedbacksEvents: 0
+    TriggerUnityEvents: 1
+    OnPlay:
+      m_PersistentCalls:
+        m_Calls: []
+    OnPause:
+      m_PersistentCalls:
+        m_Calls: []
+    OnResume:
+      m_PersistentCalls:
+        m_Calls: []
+    OnRevert:
+      m_PersistentCalls:
+        m_Calls: []
+    OnComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  DebugActive: 0
+  FeedbacksList:
+  - rid: 7737718007505879040
+  KeepPlayModeChanges: 0
+  PerformanceMode: 0
+  ForceStopFeedbacksOnDisable: 1
+  references:
+    version: 2
+    RefIds:
+    - rid: 7737718007505879040
+      type: {class: MMF_Sound, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks.MMTools}
+      data:
+        Active: 1
+        UniqueID: 1560150287
+        Label: Sound
+        Channel: 0
+        Chance: 100
+        DisplayColor: {r: 0, g: 0, b: 0, a: 1}
+        Timing:
+          TimescaleMode: 0
+          ExcludeFromHoldingPauses: 0
+          ContributeToTotalDuration: 1
+          InitialDelay: 0
+          CooldownDuration: 0
+          InterruptsOnStop: 1
+          NumberOfRepeats: 0
+          RepeatForever: 0
+          DelayBetweenRepeats: 1
+          MMFeedbacksDirectionCondition: 0
+          PlayDirection: 0
+          ConstantIntensity: 0
+          UseIntensityInterval: 0
+          IntensityIntervalMin: 0
+          IntensityIntervalMax: 0
+          Sequence: {fileID: 0}
+          TrackID: 0
+          Quantized: 0
+          TargetBPM: 120
+        Owner: {fileID: 8002854978220481600}
+        DebugActive: 0
+        Sfx: {fileID: 8300000, guid: 098448c5fcb1d4f3a82d4a9aa969c7ed, type: 3}
+        RandomSfx: []
+        TestPlayButton:
+          ButtonText: Debug Play Sound
+        TestStopButton:
+          ButtonText: Debug Stop Sound
+        PlayMethod: 0
+        PoolSize: 10
+        MinVolume: 1
+        MaxVolume: 1
+        MinPitch: 1
+        MaxPitch: 1
+        SfxAudioMixerGroup: {fileID: 24300002, guid: 802dbd0e3604c4cbcb26ce8f5e6a5aab, type: 2}
