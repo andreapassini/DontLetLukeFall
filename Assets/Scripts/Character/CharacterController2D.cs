@@ -34,7 +34,7 @@ namespace DLLF {
         {
             Invoke(nameof(Activate), 0.5f);
             _animator = GetComponent<Animator>();
-            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _spriteRenderer = transform.Find("LukeSprite").GetComponent<SpriteRenderer>();
         }
         void Activate() =>  IsActive = true;
 
