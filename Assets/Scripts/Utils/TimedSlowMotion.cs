@@ -93,5 +93,9 @@ namespace DLLF
             AudioManager.instance.GetAudioMixer().SetFloat("MasterPitch", _masterPitch);
         }
 
+        private void OnDestroy()
+        {
+            Time.timeScale = _originalTimeScale;
+        }
     }
 }
