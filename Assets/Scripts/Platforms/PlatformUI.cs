@@ -123,7 +123,8 @@ namespace DLLF
             {
                 _slot.isEmpty = true;
                 _spawnedPlatform.layer = LayerMask.NameToLayer("PlayerPlatform");
-                _spawnedPlatform.GetComponent<SpriteMask>().enabled = false;
+                //_spawnedPlatform.GetComponentInChildren<SpriteMask>().enabled = false;
+                _spawnedPlatform.transform.Find("SpriteMask").GetComponent<SpriteMask>().enabled = false;
                 Destroy(this.gameObject);
             }
             else

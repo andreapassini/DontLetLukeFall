@@ -34,10 +34,9 @@ namespace DLLF {
         {
             Invoke(nameof(Activate), 0.5f);
             _animator = GetComponent<Animator>();
-            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _spriteRenderer = transform.Find("LukeSprite").GetComponent<SpriteRenderer>();
         }
         void Activate() =>  IsActive = true;
-        
 
         public void Move(MovementRequest movementRequest)
         {
@@ -58,7 +57,15 @@ namespace DLLF {
 
             MoveCharacter(); // Actually perform the axis movement
             
-            if (JumpingThisFrame) _animator.SetTrigger("Jump");
+            if (JumpingThisFrame)
+            {
+                _animator.SetTrigger("Jump");
+                _animator.SetBool("isJumping", true);
+            }
+            else if(LandingThisFrame)
+            {
+                _animator.SetBool("isJumping", false);
+            }
             
             if (_currentHorizontalSpeed != 0.0f)
             {
