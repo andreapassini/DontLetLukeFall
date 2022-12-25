@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using MoreMountains.Feedbacks;
 
 namespace DLLF
 {
@@ -23,6 +24,10 @@ namespace DLLF
         private float _slowMoPitch;
         private float _masterPitch;
 
+		// Feedback
+		[SerializeField]
+        private MMF_Player _slowMoFeedback;
+
         private IEnumerator _slowMoBack;
         
         void Awake()
@@ -34,6 +39,7 @@ namespace DLLF
         private void Start()
         {
             AudioManager.instance.GetAudioMixer().GetFloat("MasterPitch", out _masterPitch);
+            _slowMoFeedback ??= Resources.Load<GameObject>("VFX/SlowMoFeedback.prefab").GetComponent<MMF_Player>();
             _slowMoPitch = _masterPitch * _slowMoMultiplier;
         }
 
@@ -46,6 +52,8 @@ namespace DLLF
 
         private IEnumerator StartTimedSlowMo()
         {
+            _slowMoFeedback.PlayFeedbacks();
+
             float unitInterpolation = (_originalTimeScale - _slowMoTimeScale) / _interpolationSegments;
 
             for (int i = (int)_interpolationSegments; i > 0; i--)
@@ -91,6 +99,8 @@ namespace DLLF
 
             Time.timeScale = _originalTimeScale;
             AudioManager.instance.GetAudioMixer().SetFloat("MasterPitch", _masterPitch);
+
+            _slowMoFeedback.StopFeedbacks();
         }
 
         private void OnDestroy()

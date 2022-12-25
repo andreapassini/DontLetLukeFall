@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 7011895341372022965}
   - component: {fileID: 7011895341372022966}
   - component: {fileID: 7011895341372022967}
+  - component: {fileID: 637224591}
+  - component: {fileID: 637224592}
   m_Layer: 0
   m_Name: CM vcam1
   m_TagString: Untagged
@@ -106,6 +108,51 @@ MonoBehaviour:
   BottomRight: {x: 2, y: 0, z: 0}
   timeCamera: 1.5
   player: {fileID: 0}
+--- !u!114 &637224591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7011895341372022960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d66462bf720d28469c8db4b2e52720c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Channel: 1
+  DefaultShakeAmplitude: 1
+  DefaultShakeFrequency: 70
+  IdleAmplitude: 0
+  IdleFrequency: 1
+  LerpSpeed: 5
+  TestDuration: 6
+  TestAmplitude: 5
+  TestFrequency: 80
+  TestShakeButton: 0
+--- !u!114 &637224592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7011895341372022960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ApplyAfter: 2
+  m_ChannelMask: 1
+  m_Gain: 1
+  m_Use2DDistance: 0
+  m_UseCameraSpace: 1
+  m_ReactionSettings:
+    m_SecondaryNoise: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_Duration: 1
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &7011895343066201724
 GameObject:
   m_ObjectHideFlags: 0
