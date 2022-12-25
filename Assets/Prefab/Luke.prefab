@@ -337,6 +337,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlowMoFeedback
       objectReference: {fileID: 0}
+    - target: {fileID: 836416455643751988, guid: e5266d45b10077c4ca400f7c07428465, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2504988204593982728, guid: e5266d45b10077c4ca400f7c07428465, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -778,7 +782,7 @@ MonoBehaviour:
           TargetBPM: 120
         Owner: {fileID: 8002854978220481600}
         DebugActive: 0
-        Duration: 0.2
+        Duration: 2
         ResetShakerValuesAfterShake: 1
         ResetTargetValuesAfterShake: 1
         Intensity:
@@ -787,27 +791,18 @@ MonoBehaviour:
           - serializedVersion: 3
             time: 0
             value: 0
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          - serializedVersion: 3
-            time: 0.5
-            value: 1
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
             weightedMode: 0
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
             time: 1
-            value: 0
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
+            value: 1
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
             weightedMode: 0
             inWeight: 0
             outWeight: 0

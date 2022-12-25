@@ -52,7 +52,7 @@ namespace DLLF
 
         private IEnumerator StartTimedSlowMo()
         {
-            _slowMoFeedback.PlayFeedbacks();
+            _slowMoFeedback?.PlayFeedbacks();
 
             float unitInterpolation = (_originalTimeScale - _slowMoTimeScale) / _interpolationSegments;
 
@@ -100,7 +100,7 @@ namespace DLLF
             Time.timeScale = _originalTimeScale;
             AudioManager.instance.GetAudioMixer().SetFloat("MasterPitch", _masterPitch);
 
-            _slowMoFeedback.StopFeedbacks();
+            _slowMoFeedback?.StopFeedbacks();
         }
 
         private void OnDestroy()
