@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using MoreMountains.Feedbacks;
 
 namespace DLLF {
     /// <summary>
@@ -26,7 +27,7 @@ namespace DLLF {
         private Animator _animator;
         private SpriteRenderer _spriteRenderer;
 
-
+        private LukeFeedbacks _lukeFeedbacks;
         
         // This is horrible, but for some reason colliders are not fully established when update starts...
         public bool IsActive { get; private set; }
@@ -36,6 +37,8 @@ namespace DLLF {
             Invoke(nameof(Activate), 0.5f);
             _animator = GetComponent<Animator>();
             _spriteRenderer = transform.Find("LukeSprite").GetComponent<SpriteRenderer>();
+
+            _lukeFeedbacks = GetComponent<LukeFeedbacks>();
         }
         void Activate() =>  IsActive = true;
 
@@ -66,8 +69,9 @@ namespace DLLF {
             else if(LandingThisFrame)
             {
                 _animator.SetBool("isJumping", false);
+                _lukeFeedbacks.PlayLandingFeedback();
             }
-            
+
             if (_currentHorizontalSpeed != 0.0f)
             {
                 _spriteRenderer.flipX = _currentHorizontalSpeed < 0.0f;

@@ -39,7 +39,7 @@ namespace DLLF
         private void Start()
         {
             AudioManager.instance.GetAudioMixer().GetFloat("MasterPitch", out _masterPitch);
-            _slowMoFeedback ??= Resources.Load<GameObject>("VFX/SlowMoFeedback.prefab").GetComponent<MMF_Player>();
+            _slowMoFeedback = transform.GetComponentInChildren<MMF_Player>();
             _slowMoPitch = _masterPitch * _slowMoMultiplier;
         }
 
