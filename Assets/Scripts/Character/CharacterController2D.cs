@@ -23,9 +23,10 @@ namespace DLLF {
         private Vector3 _lastPosition;
         private float _currentHorizontalSpeed, _currentVerticalSpeed;
 
-
         private Animator _animator;
         private SpriteRenderer _spriteRenderer;
+
+
         
         // This is horrible, but for some reason colliders are not fully established when update starts...
         public bool IsActive { get; private set; }
@@ -195,7 +196,6 @@ namespace DLLF {
         }
 
         #endregion
-
 
         #region Walk
 
