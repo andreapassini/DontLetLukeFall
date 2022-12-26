@@ -33,6 +33,9 @@ namespace DLLF {
         // This is horrible, but for some reason colliders are not fully established when update starts...
         public bool IsActive { get; private set; }
 
+        // Stepping
+        private bool _isStepping;
+
         void Awake()
         {
             Invoke(nameof(Activate), 0.5f);
@@ -70,7 +73,10 @@ namespace DLLF {
             else if(LandingThisFrame)
             {
                 _animator.SetBool("isJumping", false);
-                _lukeFeedbacks.PlayLandingFeedback();
+                if(!_isStepping)
+                    _lukeFeedbacks?.PlayLandingFeedback();           
+                else
+                    _isStepping = false;
             }
 
             if (_currentHorizontalSpeed != 0.0f)
@@ -148,7 +154,6 @@ namespace DLLF {
             bool stepOnTheLeft = Physics2D.Raycast(new Vector2(b.min.x, b.min.y + _rayBuffer), Vector2.left, 0.1f, _groundLayer) &&
                                   !Physics2D.Raycast(new Vector2(b.min.x, b.min.y + _maxStepHeight), Vector2.left, 0.1f, _groundLayer);
             _canStepOnObstacle = _currentHorizontalSpeed.CompareTo(0.0f) == 0 && (stepOnTheRight || stepOnTheLeft);
-            
         }
 
         private void ComputeStepRays(Bounds b)
@@ -308,6 +313,8 @@ namespace DLLF {
                 _coyoteUsable = false;
                 _timeLeftGrounded = float.MinValue;
                 JumpingThisFrame = true;
+
+                _isStepping = true;
             }
             else {
                 JumpingThisFrame = false;
