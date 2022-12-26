@@ -8,12 +8,7 @@ public class AnimationPlacingPlatform : MonoBehaviour
     private float _timer = 0.0f;
     private bool _needToExecuteAnimation = false;
     private float _startScaleValue = 2.0f;
-    private float _speed = 1.25f;
-
-    void Start()
-    {
-        ExecuteAnimation();//TEST
-    }
+    private float _speed = 2.25f;
 
     void Update()
     {
