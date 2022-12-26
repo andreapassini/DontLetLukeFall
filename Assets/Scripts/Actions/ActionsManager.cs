@@ -123,7 +123,6 @@ namespace DLLF
         {
             Debug.Log("Activating jump");
             _jump = true;
-
             // if it is running it will cover more units
             return GetTime(movementParams.GetUnitToCoverForJump(_isRunning), _speed);
         }
@@ -161,7 +160,6 @@ namespace DLLF
             
             _speed = movementParams.RunSpeed;
             _isRunning = true;
-
             return GetTime(movementParams.UnitsCoveredPerAction, _speed);
 
         }
@@ -175,7 +173,6 @@ namespace DLLF
             
             _speed = -movementParams.RunSpeed;
             _isRunning = true;
-
             return GetTime(movementParams.UnitsCoveredPerAction, _speed);
 
         }
@@ -184,7 +181,6 @@ namespace DLLF
         private float Stop()
         {
             Debug.Log("Activating Stop");
-            
             
 
             _speed = 0;
