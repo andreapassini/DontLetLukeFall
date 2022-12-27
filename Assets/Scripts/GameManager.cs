@@ -100,12 +100,20 @@ public class GameManager : MonoBehaviour
     {
         if (_levelToPlay == 1)
         {
-            MMAdditiveSceneLoadingManager.LoadScene("Tutorial", "LoadingScreen");
+            MMAdditiveSceneLoadingManagerSettings screenLoadingSettings =
+                new MMAdditiveSceneLoadingManagerSettings();
+            screenLoadingSettings.LoadingSceneName = "LoadingScreen";
+            screenLoadingSettings.ProgressBarSpeed = 2f;
+            MMAdditiveSceneLoadingManager.LoadScene("Tutorial", screenLoadingSettings);
         }
         else
         {
             int levelToPlayNameScene = _levelToPlay - 1;
-            MMAdditiveSceneLoadingManager.LoadScene("Level" + levelToPlayNameScene, "LoadingScreen");
+            MMAdditiveSceneLoadingManagerSettings screenLoadingSettings =
+                new MMAdditiveSceneLoadingManagerSettings();
+            screenLoadingSettings.LoadingSceneName = "LoadingScreen";
+            screenLoadingSettings.ProgressBarSpeed = 2f;
+            MMAdditiveSceneLoadingManager.LoadScene("Level" + levelToPlayNameScene, screenLoadingSettings);
         }
         TextFileManager.AddWitchLevelYouStartPlaying();
 
@@ -113,19 +121,26 @@ public class GameManager : MonoBehaviour
         _audioManager.PlayBackgroundMusic();
     }
 
+    private void LoadYouLoseWonScene()
+    {
+        MMAdditiveSceneLoadingManagerSettings screenLoadingSettings =
+            new MMAdditiveSceneLoadingManagerSettings();
+        screenLoadingSettings.LoadingSceneName = "QuickTransitionScreen";
+        screenLoadingSettings.ProgressBarSpeed = 20f;
+        MMAdditiveSceneLoadingManager.LoadScene("YouLoseWon", screenLoadingSettings);
+    }
+
     private void HandleLose() // Show the screen you lose
     {
-        SceneManager.LoadScene("YouLoseWon");
+        LoadYouLoseWonScene();
         TextFileManager.AddThatYouLostALevel();
-
         _audioManager.PauseAllBackgroundMusics();
     }
     
     private void HandleWin() // Show the screen you won
     {
-        SceneManager.LoadScene("YouLoseWon");
+        LoadYouLoseWonScene();
         TextFileManager.AddThatYouWonALevel();
-
         _audioManager.PauseAllBackgroundMusics();
     }
 

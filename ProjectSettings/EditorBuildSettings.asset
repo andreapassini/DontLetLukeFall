@@ -30,6 +30,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu/LoadingScreen.unity
     guid: c275cda19160e424f87be07adbbef32e
   - enabled: 1
+    path: Assets/Scenes/Menu/QuickTransitionScreen.unity
+    guid: 60852ac6111634608876c6260580d908
+  - enabled: 1
     path: Assets/Scenes/Levels/Tutorial.unity
     guid: e6c91a99a57bd41caa60179b2dab30f0
   - enabled: 1
