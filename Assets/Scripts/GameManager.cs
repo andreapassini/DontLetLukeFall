@@ -101,13 +101,11 @@ public class GameManager : MonoBehaviour
         if (_levelToPlay == 1)
         {
             MMAdditiveSceneLoadingManager.LoadScene("Tutorial", "LoadingScreen");
-            //SceneManager.LoadScene("Tutorial");
         }
         else
         {
             int levelToPlayNameScene = _levelToPlay - 1;
             MMAdditiveSceneLoadingManager.LoadScene("Level" + levelToPlayNameScene, "LoadingScreen");
-            //SceneManager.LoadScene("Level" + levelToPlayNameScene);
         }
         TextFileManager.AddWitchLevelYouStartPlaying();
 
