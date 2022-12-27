@@ -107,6 +107,10 @@ namespace DLLF
         public void OnDrag(PointerEventData eventData)
         {
             //Debug.Log("OnDrag");
+            if (_canvas == null)
+            {
+                _canvas = GameObject.FindObjectOfType<Canvas>();
+            }
             _rectTransform.anchoredPosition += eventData.delta / _canvas.scaleFactor;
             Vector3 spawnPosition = _cam.ScreenToWorldPoint(transform.position);
             spawnPosition = new Vector3((int)spawnPosition.x, (int)spawnPosition.y, 0);

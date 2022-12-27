@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DLLF;
+using MoreMountains.Tools;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -99,12 +100,14 @@ public class GameManager : MonoBehaviour
     {
         if (_levelToPlay == 1)
         {
-            SceneManager.LoadScene("Tutorial");
+            MMAdditiveSceneLoadingManager.LoadScene("Tutorial", "LoadingScreen");
+            //SceneManager.LoadScene("Tutorial");
         }
         else
         {
             int levelToPlayNameScene = _levelToPlay - 1;
-            SceneManager.LoadScene("Level" + levelToPlayNameScene);
+            MMAdditiveSceneLoadingManager.LoadScene("Level" + levelToPlayNameScene, "LoadingScreen");
+            //SceneManager.LoadScene("Level" + levelToPlayNameScene);
         }
         TextFileManager.AddWitchLevelYouStartPlaying();
 
