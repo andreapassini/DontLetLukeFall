@@ -1,16 +1,25 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using DLLF;
 using MoreMountains.Tools;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance; // The game manager is a singleton
     
     [SerializeField] private LevelsInfo _levelsInfo;
+    
+    private GameObject _loaderCanvas; // The panel in a scene to show the loading screen
+    private Image _progressBar; // The image of the progress bar in a loading screen
+    private float _targetForProgressBar; // The target to mouve the progress bar
+    private bool _needToUpdateTheProgressBar = false; // If we need to update the value of the progress bar
+    private float _maxSpeedProgressBar = 2.0f; // Max speed for the progress bar
 
     public GameState state;
     
@@ -39,6 +48,54 @@ public class GameManager : MonoBehaviour
         _audioManager = AudioManager.instance;
 
         UpdateGameState(GameState.SelectionLevel); // Setting the initial state
+    }
+
+    private void Update()
+    {
+        if (_needToUpdateTheProgressBar)
+        {
+            _progressBar.fillAmount = Mathf.MoveTowards(_progressBar.fillAmount, _targetForProgressBar, _maxSpeedProgressBar * Time.deltaTime);
+        }
+    }
+
+    public void SetElementsForLoadingScreen(GameObject loaderCanvas, Image progressBar)
+    // A method to set the loader canvas and the progress bar for the loading screen
+    {
+        _loaderCanvas = loaderCanvas;
+        _progressBar = progressBar;
+    }
+    
+    public async void LoadScene(string sceneName) // A function to load a scene showing a loading screen
+    {
+        if (_progressBar == null || _loaderCanvas == null)
+        {
+            SceneManager.LoadScene(sceneName);
+            return;
+        }
+        
+        _needToUpdateTheProgressBar = true;
+        _targetForProgressBar = 0;
+        _progressBar.fillAmount = 0;
+        
+        var scene = SceneManager.LoadSceneAsync(sceneName);
+        scene.allowSceneActivation = false;
+        
+        _loaderCanvas.SetActive(true);
+
+        do
+        {
+            await Task.Delay(100);
+            _targetForProgressBar = scene.progress;
+            _targetForProgressBar = 1.0f * (_targetForProgressBar / 0.9f);
+            if (_targetForProgressBar > 1.0f)
+            {
+                _targetForProgressBar = 1.0f;
+            }
+        } while (scene.progress < 0.9f || _progressBar.fillAmount < 0.9f);
+        _targetForProgressBar = 1.0f;
+        
+        scene.allowSceneActivation = true;
+        _needToUpdateTheProgressBar = false;
     }
 
     public void UpdateGameState(GameState newState) // A public method to change the state
@@ -100,20 +157,12 @@ public class GameManager : MonoBehaviour
     {
         if (_levelToPlay == 1)
         {
-            MMAdditiveSceneLoadingManagerSettings screenLoadingSettings =
-                new MMAdditiveSceneLoadingManagerSettings();
-            screenLoadingSettings.LoadingSceneName = "LoadingScreen";
-            screenLoadingSettings.ProgressBarSpeed = 2f;
-            MMAdditiveSceneLoadingManager.LoadScene("Tutorial", screenLoadingSettings);
+            GameManager.Instance.LoadScene("Tutorial");
         }
         else
         {
             int levelToPlayNameScene = _levelToPlay - 1;
-            MMAdditiveSceneLoadingManagerSettings screenLoadingSettings =
-                new MMAdditiveSceneLoadingManagerSettings();
-            screenLoadingSettings.LoadingSceneName = "LoadingScreen";
-            screenLoadingSettings.ProgressBarSpeed = 2f;
-            MMAdditiveSceneLoadingManager.LoadScene("Level" + levelToPlayNameScene, screenLoadingSettings);
+            GameManager.Instance.LoadScene("Level" + levelToPlayNameScene);
         }
         TextFileManager.AddWitchLevelYouStartPlaying();
 
@@ -123,11 +172,7 @@ public class GameManager : MonoBehaviour
 
     private void LoadYouLoseWonScene()
     {
-        MMAdditiveSceneLoadingManagerSettings screenLoadingSettings =
-            new MMAdditiveSceneLoadingManagerSettings();
-        screenLoadingSettings.LoadingSceneName = "QuickTransitionScreen";
-        screenLoadingSettings.ProgressBarSpeed = 20f;
-        MMAdditiveSceneLoadingManager.LoadScene("YouLoseWon", screenLoadingSettings);
+        SceneManager.LoadScene("YouLoseWon");
     }
 
     private void HandleLose() // Show the screen you lose

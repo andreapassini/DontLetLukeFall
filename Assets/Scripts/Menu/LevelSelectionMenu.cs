@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using DLLF;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -20,6 +21,9 @@ public class LevelSelectionMenu : MonoBehaviour
     [SerializeField] private GameObject _firstImageLevelButton; // The first selectable image of the three
     [SerializeField] private GameObject _lastImageLevelButton; // The last selectable image of the three
     [SerializeField] private Image[] _imagesLevels; // The three images of the three levels
+    
+    [SerializeField] private GameObject _loaderCanvas;
+    [SerializeField] private Image _progressBar;
 
     private int _firstOfTheThreeLevelsToShow = 0; // The index of the first of the three levels to show
 
@@ -80,6 +84,7 @@ public class LevelSelectionMenu : MonoBehaviour
     
     private void Start()
     {
+        GameManager.Instance.SetElementsForLoadingScreen(_loaderCanvas, _progressBar);
         LoadTheThreeLevelsToShow();
     }
 

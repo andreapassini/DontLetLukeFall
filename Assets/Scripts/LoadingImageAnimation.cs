@@ -7,10 +7,10 @@ public class LoadingImageAnimation : MonoBehaviour
     
     private Animator _LoadingImageAnimator;
     
-    public void StartAnimation()
+    public void StartAnimation() // Start an animation of Luke during the loading screen
     {
         _LoadingImageAnimator = GetComponent<Animator>();
-        _LoadingImageAnimator.SetTrigger("loadingImageAnimtion");
+        _LoadingImageAnimator.SetTrigger("loadingImageAnimation");
     }
 
 }
