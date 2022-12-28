@@ -22,6 +22,8 @@ namespace DLLF
         
         [SerializeField] private ActionsSpritesSpawner _actionsSpritesSpawner;
 
+        [SerializeField] private float _startDelay;
+
         
         private bool _jump;
         private float _speed;
@@ -88,7 +90,7 @@ namespace DLLF
         
         private IEnumerator StartActionSequence()
         {
-            yield return new WaitUntil(() => _characterController.IsActive);
+            yield return new WaitForSecondsRealtime(_startDelay);
             while (_actionsSequence.TryDequeue(out var actionToPerform))
             {
                ActionDelegate actionDelegate = _actionsMapping[actionToPerform];
@@ -227,6 +229,8 @@ namespace DLLF
 
             #if UNITY_EDITOR
                     private List<Vector3> actionsPosition = new List<Vector3>();
+
+
                     // DEBUG
                     private void OnDrawGizmos()
                     {
