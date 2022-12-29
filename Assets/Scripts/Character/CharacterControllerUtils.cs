@@ -17,7 +17,6 @@ namespace DLLF {
         public bool Jump { get; set; }
         public int UnitsToJump { get; set; }
         public bool Crouch { get; set; }
-        public float CrouchMultiplier { get; set; }
     }
 
     public interface IPlayerController {
