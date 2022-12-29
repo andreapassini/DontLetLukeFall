@@ -11,10 +11,7 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] private GameObject _buttonToFirstSelect; // Button to first select when starting to navigate with keyboard
     [SerializeField] private EventSystem _eventSystem; // The event system to witch attach this script
-
-    private void Start()
-    {
-    }
+    [SerializeField] private ScriptForTransitionsBetweenMenuScenes _scriptForTransitionsBetweenMenuScenes; // A script to load the next scene with a transition
 
     void Update()
     {
@@ -35,17 +32,17 @@ public class MainMenu : MonoBehaviour
     
     public void GoToLevelSelectionMenu() // Go to level selection menu
     {
-        SceneManager.LoadScene("LevelSelectionMenu");
+        _scriptForTransitionsBetweenMenuScenes.AnimationEndTransitionBetweenMenuScenes("LevelSelectionMenu");
     }
 
     public void GoToSettings() // Go to settings menu
     {
-        SceneManager.LoadScene("SettingMenu");
+        _scriptForTransitionsBetweenMenuScenes.AnimationEndTransitionBetweenMenuScenes("SettingMenu");
     }
     
     public void GoToSendFeedback() // Go to send feedback menu
     {
-        SceneManager.LoadScene("SendFeedbackMenu");
+        _scriptForTransitionsBetweenMenuScenes.AnimationEndTransitionBetweenMenuScenes("SendFeedbackMenu");
     }
 
     public void QuitGame() // Exit from the game
