@@ -41,7 +41,7 @@ namespace DLLF
 
         public float RunSpeed => _walkSpeed * _runIncrement;
 
-        public float CrouchDecrement => _crouchDecrement;
+        public float CrouchSpeed => _walkSpeed * _crouchDecrement;
 
         public int UnitsCoveredPerAction => unitsCoveredPerAction;
 
