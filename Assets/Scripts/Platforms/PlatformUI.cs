@@ -125,6 +125,7 @@ namespace DLLF
                 _spawnedPlatform.layer = LayerMask.NameToLayer("PlayerPlatform");
                 //_spawnedPlatform.GetComponentInChildren<SpriteMask>().enabled = false;
                 _spawnedPlatform.transform.Find("SpriteMask").GetComponent<SpriteMask>().enabled = false;
+                _spawnedPlatform.transform.Find("AnimationPlacingPlatform").GetComponent<AnimationPlacingPlatform>().ExecuteAnimation();
                 Destroy(this.gameObject);
             }
             else
