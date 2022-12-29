@@ -15,29 +15,33 @@ namespace DLLF
 
     public class ActionsManager : MonoBehaviour
     {
-
         [SerializeField] private MovementParams movementParams;
         [SerializeField] private CharacterController2D _characterController;
         [SerializeField] private ActionUIController _actionUIController;
-        
+
         [SerializeField] private ActionsSpritesSpawner _actionsSpritesSpawner;
 
-        
+        [SerializeField] private float _startDelay;
+
+
         private bool _jump;
         private float _speed;
         private bool _isRunning;
-        
+
         private Queue<ActionType> _actionsSequence = new Queue<ActionType>();
         private Dictionary<ActionType, ActionDelegate> _actionsMapping;
         private ActionsSequence _actionsTypeSequence;
         private ActionsSpritesLoader _actionsSpritesLoader;
 
-        public ActionType[] GetActionSequence() // Function to get the action sequence used for the ActionVisualizer useful when creating a level
+        public ActionType[]
+            GetActionSequence() // Function to get the action sequence used for the ActionVisualizer useful when creating a level
         {
             return _actionsTypeSequence.actions;
         }
 
-        public ActionType[] GetActionSequenceViaLevelManager(LevelManager levelManager) // Function to get the action sequence via the level managerused for the ActionScriptVisualizer useful when creating a level
+        public ActionType[]
+            GetActionSequenceViaLevelManager(
+                LevelManager levelManager) // Function to get the action sequence via the level managerused for the ActionScriptVisualizer useful when creating a level
         {
             ActionsSequence actionsSequence = levelManager.GetLevelActionsSequence();
             Begin(actionsSequence);
@@ -48,11 +52,11 @@ namespace DLLF
         {
             _characterController ??= transform.GetComponentInParent<CharacterController2D>();
             _actionsSpritesLoader = ActionsSpritesLoader.Instance;
-            if (! _actionsSpritesLoader.Loaded) _actionsSpritesLoader.LoadSprites();
+            if (!_actionsSpritesLoader.Loaded) _actionsSpritesLoader.LoadSprites();
             _actionsMapping = new Dictionary<ActionType, ActionDelegate>();
             AutoLinkActionTypesToMethods();
         }
-        
+
         public void Begin(ActionsSequence actionsSequence)
         {
             _actionsTypeSequence = actionsSequence;
@@ -60,6 +64,7 @@ namespace DLLF
             {
                 _actionsSequence.Enqueue(actionType);
             }
+
             StartCoroutine(StartActionSequence());
         }
 
@@ -70,7 +75,7 @@ namespace DLLF
             _actionsSpritesSpawner.SpawnPlatformActionSprite(_characterController.transform, actionType);
         }
 
-        
+
         private void Update()
         {
             var movementRequest = new MovementRequest
@@ -82,43 +87,39 @@ namespace DLLF
             };
             _characterController.Move(movementRequest);
             if (_jump) _jump = false;
-
         }
 
-        
+
         private IEnumerator StartActionSequence()
         {
-            yield return new WaitUntil(() => _characterController.IsActive);
+            SendActionSequenceToActionUIController(0.01f);
+            _actionsSequence.Dequeue(); //dequeuing placeholder
+            yield return new WaitForSecondsRealtime(_startDelay);
             while (_actionsSequence.TryDequeue(out var actionToPerform))
             {
-               ActionDelegate actionDelegate = _actionsMapping[actionToPerform];
+                ActionDelegate actionDelegate = _actionsMapping[actionToPerform];
 
                 float timeToComplete = actionDelegate.Invoke();
-                _actionsSpritesSpawner.SpawnSequenceActionSprite(_characterController.transform, actionToPerform, timeToComplete);
-                if (! _actionUIController.HasBeenLoaded())
-                {
-                    SendActionSequenceToActionUIController(timeToComplete);
-                }
-                else
-                {
-                    _actionUIController.NextAction(timeToComplete);
-                }
-                #if UNITY_EDITOR
+                _actionsSpritesSpawner.SpawnSequenceActionSprite(_characterController.transform, actionToPerform,
+                    timeToComplete);
+                _actionUIController.NextAction(timeToComplete);
+#if UNITY_EDITOR
                 actionsPosition.Add(_characterController.transform.position);
-                #endif
+#endif
 
                 AudioManager.instance.PlayActionSFX();
 
                 yield return new WaitForSeconds(timeToComplete);
             }
+
             Debug.Log("Actions sequence end");
             _actionUIController.StopSequence();
         }
 
 
-		#region Actions
+        #region Actions
 
-		[ImmediateAction(ActionType.Jump)]
+        [ImmediateAction(ActionType.Jump)]
         private float Jump()
         {
             Debug.Log("Activating jump");
@@ -132,56 +133,52 @@ namespace DLLF
         private float WalkRight()
         {
             Debug.Log("Activating WalkRight");
-            
+
             _speed = movementParams.WalkSpeed;
             _isRunning = false;
             return GetTime(movementParams.UnitsCoveredPerAction, _speed);
-
         }
-        
-        
+
+
         [ContinuousAction(ActionType.WalkLeft)]
         private float WalkLeft()
         {
             Debug.Log("Activating WalkLeft");
-            
+
             _speed = -movementParams.WalkSpeed;
             _isRunning = false;
             return GetTime(movementParams.UnitsCoveredPerAction, _speed);
-
         }
-        
+
         // Continuous action that lets the player run to the right
         // Increase speed to RunSpeed value
         [ContinuousAction(ActionType.RunRight)]
         private float RunRight()
         {
             Debug.Log("Activating RunRight");
-            
+
             _speed = movementParams.RunSpeed;
             _isRunning = true;
             return GetTime(movementParams.UnitsCoveredPerAction, _speed);
-
         }
-        
+
         // Continuous action that lets the player run to the left
         // Increase speed to RunSpeed value
         [ContinuousAction(ActionType.RunLeft)]
         private float RunLeft()
         {
             Debug.Log("Activating RunLeft");
-            
+
             _speed = -movementParams.RunSpeed;
             _isRunning = true;
             return GetTime(movementParams.UnitsCoveredPerAction, _speed);
-
         }
 
         [ImmediateAction(ActionType.Stop)]
         private float Stop()
         {
             Debug.Log("Activating Stop");
-            
+
 
             _speed = 0;
             _isRunning = false;
@@ -193,7 +190,7 @@ namespace DLLF
         private float Die()
         {
             Debug.Log("Activating Die");
-            
+
 
             _speed = 0;
             _isRunning = false;
@@ -204,14 +201,14 @@ namespace DLLF
             return 100f;
         }
 
-		#endregion
+        #endregion
 
-		// method to calculate time to cover the given space: spaceToCover, at a given speed: speed
-		private float GetTime(float spaceToCover, float speed)
+        // method to calculate time to cover the given space: spaceToCover, at a given speed: speed
+        private float GetTime(float spaceToCover, float speed)
         {
             return Mathf.Abs(spaceToCover / speed);
         }
-        
+
         private void SendActionSequenceToActionUIController(float timeToComplete)
         {
             List<Sprite> listOfSpriteToLoad = new List<Sprite>();
@@ -219,27 +216,30 @@ namespace DLLF
             {
                 listOfSpriteToLoad.Add(_actionsSpritesLoader.GetSprite(action));
             }
+
             _actionUIController.LoadActionSequence(listOfSpriteToLoad, timeToComplete);
         }
 
 
         #region GIZMOS
 
-            #if UNITY_EDITOR
-                    private List<Vector3> actionsPosition = new List<Vector3>();
-                    // DEBUG
-                    private void OnDrawGizmos()
-                    {
-                        Color gizmosColor = Color.red;
-                        gizmosColor.a = .5f;
-                        Gizmos.color = gizmosColor;
-                        
-                        foreach (var pos in actionsPosition)
-                        {
-                            Gizmos.DrawCube(pos, Vector3.one);
-                        }
-                    }
-            #endif
+#if UNITY_EDITOR
+        private List<Vector3> actionsPosition = new List<Vector3>();
+
+
+        // DEBUG
+        private void OnDrawGizmos()
+        {
+            Color gizmosColor = Color.red;
+            gizmosColor.a = .5f;
+            Gizmos.color = gizmosColor;
+
+            foreach (var pos in actionsPosition)
+            {
+                Gizmos.DrawCube(pos, Vector3.one);
+            }
+        }
+#endif
 
         #endregion
 
@@ -257,21 +257,15 @@ namespace DLLF
                     {
                         Assert.IsNotNull(customAttribute.ConstructorArguments);
                         Assert.IsTrue(customAttribute.ConstructorArguments.Count > 0);
-                        ActionType actionType = (ActionType) customAttribute.ConstructorArguments[0].Value;
-                        ActionDelegate actionDelegate = (ActionDelegate) Delegate.CreateDelegate(typeof(ActionDelegate), this, method.Name, false);
+                        ActionType actionType = (ActionType)customAttribute.ConstructorArguments[0].Value;
+                        ActionDelegate actionDelegate =
+                            (ActionDelegate)Delegate.CreateDelegate(typeof(ActionDelegate), this, method.Name, false);
                         _actionsMapping.Add(actionType, actionDelegate);
                     }
                 }
             }
         }
-        
 
         #endregion
-
-
     }
-    
-    
-
-
 }

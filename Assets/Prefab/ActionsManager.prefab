@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2502557511496569499}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -46,10 +46,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementParams: {fileID: 11400000, guid: 50dca298277c09c43abef4d868fc82b6, type: 2}
-  _actionsSprites: {fileID: 11400000, guid: f497042f3b253d64eada687dc458e496, type: 2}
   _characterController: {fileID: 0}
   _actionUIController: {fileID: 0}
   _actionsSpritesSpawner: {fileID: 1099842800}
+  _startDelay: 8
 --- !u!114 &1099842800
 MonoBehaviour:
   m_ObjectHideFlags: 0
