@@ -22,8 +22,8 @@ public class LevelSelectionMenu : MonoBehaviour
     [SerializeField] private GameObject _lastImageLevelButton; // The last selectable image of the three
     [SerializeField] private Image[] _imagesLevels; // The three images of the three levels
     
-    [SerializeField] private GameObject _loaderCanvas;
-    [SerializeField] private Image _progressBar;
+    [SerializeField] private GameObject _loaderCanvas; // The loading screen
+    [SerializeField] private Image _progressBar; // The progress bar in the loading screen
 
     private int _firstOfTheThreeLevelsToShow = 0; // The index of the first of the three levels to show
 
