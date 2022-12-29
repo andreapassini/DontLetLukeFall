@@ -14,7 +14,7 @@ public class ScriptForTransitionsBetweenMenuScenes : MonoBehaviour
     IEnumerator LoadNextScene(string nextScene)
     {
         gameObject.GetComponent<Animator>().SetTrigger("end");
-        yield return new WaitForSeconds(2f); // Do the animation of the transition
+        yield return new WaitForSeconds(0.75f); // Do the animation of the transition
         SceneManager.LoadScene(nextScene);
     }
     

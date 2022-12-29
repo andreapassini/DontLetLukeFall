@@ -24,6 +24,8 @@ public class LevelSelectionMenu : MonoBehaviour
     
     [SerializeField] private GameObject _loaderCanvas; // The loading screen
     [SerializeField] private Image _progressBar; // The progress bar in the loading screen
+    
+    [SerializeField] private ScriptForTransitionsBetweenMenuScenes _scriptForTransitionsBetweenMenuScenes; // A script to load the next scene with a transition
 
     private int _firstOfTheThreeLevelsToShow = 0; // The index of the first of the three levels to show
 
@@ -164,12 +166,12 @@ public class LevelSelectionMenu : MonoBehaviour
 
     public void GoToMainMenu() // Go to main menu
     {
-        SceneManager.LoadScene("MainMenu");
+        _scriptForTransitionsBetweenMenuScenes.AnimationEndTransitionBetweenMenuScenes("MainMenu");
     }
     
     public void GoToSettings() // Go to settings menu
     {
-        SceneManager.LoadScene("SettingMenu");
+        _scriptForTransitionsBetweenMenuScenes.AnimationEndTransitionBetweenMenuScenes("SettingMenu");
     }
     
 }

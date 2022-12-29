@@ -23,6 +23,8 @@ public class SettingMenu : MonoBehaviour
     // The two sliders to set background music volume and sound effects volume
     [SerializeField] private Slider _backgroundMusicSlider;
     [SerializeField] private Slider _soundEffectsSlider;
+    
+    [SerializeField] private ScriptForTransitionsBetweenMenuScenes _scriptForTransitionsBetweenMenuScenes; // A script to load the next scene with a transition
 
     private void Awake() // At the beginning we add listeners on the values of the sliders to change the volume
     {
@@ -89,12 +91,12 @@ public class SettingMenu : MonoBehaviour
 
     public void GoToMainMenu() // Go to main menu
     {
-        SceneManager.LoadScene("MainMenu");
+        _scriptForTransitionsBetweenMenuScenes.AnimationEndTransitionBetweenMenuScenes("MainMenu");
     }
     
     public void GoToCredits() // Go to credits
     {
-        SceneManager.LoadScene("Credits");
+        _scriptForTransitionsBetweenMenuScenes.AnimationEndTransitionBetweenMenuScenes("Credits");
     }
 
 }
