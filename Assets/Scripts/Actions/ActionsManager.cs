@@ -22,12 +22,13 @@ namespace DLLF
         [SerializeField] private ActionsSpritesSpawner _actionsSpritesSpawner;
 
         [SerializeField] private float _startDelay;
-
-
+        
+        
         private bool _jump;
         private float _speed;
         private bool _isRunning;
-
+        private bool _crouching;
+        
         private Queue<ActionType> _actionsSequence = new Queue<ActionType>();
         private Dictionary<ActionType, ActionDelegate> _actionsMapping;
         private ActionsSequence _actionsTypeSequence;
@@ -83,7 +84,7 @@ namespace DLLF
                 Jump = _jump,
                 UnitsToJump = _jump ? movementParams.GetUnitToCoverForJump(_isRunning) : 0,
                 Speed = _speed,
-                CrouchMultiplier = movementParams.CrouchDecrement
+                Crouch = _crouching
             };
             _characterController.Move(movementRequest);
             if (_jump) _jump = false;
@@ -118,11 +119,19 @@ namespace DLLF
 
 
         #region Actions
+        [ContinuousAction(ActionType.Crouch)]
+        private float Crouch()
+        {
+            Debug.Log("Activating Crouch");
+            _crouching = true;
+            _speed = movementParams.CrouchSpeed;
+            return GetTime(movementParams.UnitsCoveredPerAction, _speed);
+        }
 
-        [ImmediateAction(ActionType.Jump)]
+		[ImmediateAction(ActionType.Jump)]
         private float Jump()
         {
-            Debug.Log("Activating jump");
+            Debug.Log("Activating Jump");
             _jump = true;
             // if it is running it will cover more units
             return GetTime(movementParams.GetUnitToCoverForJump(_isRunning), _speed);
@@ -136,6 +145,7 @@ namespace DLLF
 
             _speed = movementParams.WalkSpeed;
             _isRunning = false;
+            _crouching = false;
             return GetTime(movementParams.UnitsCoveredPerAction, _speed);
         }
 
@@ -147,6 +157,7 @@ namespace DLLF
 
             _speed = -movementParams.WalkSpeed;
             _isRunning = false;
+            _crouching = false;
             return GetTime(movementParams.UnitsCoveredPerAction, _speed);
         }
 
@@ -159,6 +170,7 @@ namespace DLLF
 
             _speed = movementParams.RunSpeed;
             _isRunning = true;
+            _crouching = false;
             return GetTime(movementParams.UnitsCoveredPerAction, _speed);
         }
 
@@ -171,6 +183,7 @@ namespace DLLF
 
             _speed = -movementParams.RunSpeed;
             _isRunning = true;
+            _crouching = false;
             return GetTime(movementParams.UnitsCoveredPerAction, _speed);
         }
 
@@ -182,6 +195,7 @@ namespace DLLF
 
             _speed = 0;
             _isRunning = false;
+            _crouching = false;
             _jump = false;
             return 3f;
         }
@@ -194,6 +208,7 @@ namespace DLLF
 
             _speed = 0;
             _isRunning = false;
+            _crouching = false;
             _jump = false;
             StopCoroutine(nameof(StartActionSequence));
             _actionUIController.StopSequence();
