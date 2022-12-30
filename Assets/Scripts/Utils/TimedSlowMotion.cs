@@ -106,6 +106,8 @@ namespace DLLF
         private void OnDestroy()
         {
             Time.timeScale = _originalTimeScale;
+            AudioManager.instance.GetAudioMixer().SetFloat("MasterPitch", _masterPitch);
+            _slowMoFeedback?.StopFeedbacks();
         }
     }
 }
