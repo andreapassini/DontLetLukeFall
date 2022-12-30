@@ -394,7 +394,7 @@ MonoBehaviour:
     - rid: 7737718009709461520
       type: {class: MMF_LensDistortion_URP, ns: MoreMountains.FeedbacksForThirdParty, asm: MoreMountains.Feedbacks.URP}
       data:
-        Active: 1
+        Active: 0
         UniqueID: -717575828
         Label: Lens Distortion URP
         Channel: 0

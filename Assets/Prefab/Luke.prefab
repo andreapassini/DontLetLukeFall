@@ -114,10 +114,6 @@ MonoBehaviour:
   _detectionRayLength: 0.1
   _rayBuffer: 0.1
   _maxStepHeight: 1
-  _acceleration: 90
-  _moveClamp: 13
-  _deAcceleration: 60
-  _apexBonus: 2
   _fallClamp: -40
   _minFallSpeed: 80
   _maxFallSpeed: 120
@@ -1019,7 +1015,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3645141131543775294, guid: c6eea62c71274914cb8c40a051a25ce0, type: 3}
       propertyPath: managedReferences[8960907115845386253].Active
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3645141131543775294, guid: c6eea62c71274914cb8c40a051a25ce0, type: 3}
       propertyPath: managedReferences[8960907115845386253].Chance
