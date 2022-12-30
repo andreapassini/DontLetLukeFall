@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 namespace DLLF
 {
-    public class PlatformSlot : MonoBehaviour, IDropHandler
+    public class PlatformSlot : MonoBehaviour//, IDropHandler
     {
         [HideInInspector]
         public bool isEmpty = true;
@@ -29,7 +29,8 @@ namespace DLLF
         }
         
 
-        public void OnDrop(PointerEventData eventData)
+        /*
+         * public void OnDrop(PointerEventData eventData)
         {
             if(eventData.pointerDrag != null)
             {
@@ -38,5 +39,6 @@ namespace DLLF
                 eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = new Vector3(1,0,0);
             }
         }
+        */
     }
 }
