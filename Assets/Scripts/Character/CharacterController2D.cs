@@ -42,11 +42,13 @@ namespace DLLF {
         public void animationDeath() // This method is to play the death animation when Luke die
         {
             _animator.SetTrigger("Death");
+            _lukeFeedbacks?.PlayLoseFeedback();
         }
         
         public void animationWon() // This method is to play an animation when Luke arrive to the end of the level
         {
             _animator.SetTrigger("Won");
+            _lukeFeedbacks?.PlayWonFeedback();
         }
 
         public void Move(MovementRequest movementRequest)
@@ -77,7 +79,7 @@ namespace DLLF {
             {
                 _animator.SetBool("isJumping", false);
                 if(!_isStepping)
-                    _lukeFeedbacks?.PlayLandingFeedback();           
+                    _lukeFeedbacks?.PlayLandingFeedback();
                 else
                     _isStepping = false;
             }
