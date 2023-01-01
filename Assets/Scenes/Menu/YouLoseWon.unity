@@ -782,6 +782,8 @@ MonoBehaviour:
   _youLoseWonText: {fileID: 353113586}
   _secondaryText: {fileID: 678666494}
   _buttonNextLevel: {fileID: 580008466}
+  _loaderCanvas: {fileID: 1662357839}
+  _progressBar: {fileID: 1662357838}
 --- !u!1 &1209836169
 GameObject:
   m_ObjectHideFlags: 0
@@ -958,6 +960,22 @@ PrefabInstance:
 --- !u!224 &1662357837 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2669786272479374716, guid: 469aa292ae2b04738a9af52c19175391, type: 3}
+  m_PrefabInstance: {fileID: 1662357836}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1662357838 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2669786272375872351, guid: 469aa292ae2b04738a9af52c19175391, type: 3}
+  m_PrefabInstance: {fileID: 1662357836}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1662357839 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2669786272479374717, guid: 469aa292ae2b04738a9af52c19175391, type: 3}
   m_PrefabInstance: {fileID: 1662357836}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1670606488
