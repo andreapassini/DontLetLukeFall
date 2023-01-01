@@ -16,6 +16,8 @@ namespace DLLF
         [SerializeField] private PlatformSequence _levelPlatformSequence;
         [SerializeField] private PlatformBar _levelPlatformBar;
 
+        [SerializeField] private StartingEndingLevelTransition _startingEndingLevelTransition;
+
         private TimedSlowMotion _slowMotion;
         
         void Awake()
@@ -51,15 +53,30 @@ namespace DLLF
         private void OnLevelCompleted()
         {
             Debug.Log("Level completed!");
-            GameManager.Instance.UpdateGameState(GameState.Win);
+            if (_startingEndingLevelTransition != null)
+            {
+                _startingEndingLevelTransition.AnimationTransitionEndLevel(GameState.Win); // Show the ending transition at the end of the level
+            }
+            else
+            {
+                Debug.Log("You've missed to connect the panel for the ending level transition");
+                GameManager.Instance.UpdateGameState(GameState.Win);
+            }
         }
 
         private void OnLevelFailed()
         {
             Debug.Log("Level failed!");
-            GameManager.Instance.UpdateGameState(GameState.Lose);
+            if (_startingEndingLevelTransition != null)
+            {
+                _startingEndingLevelTransition.AnimationTransitionEndLevel(GameState.Lose); // Show the ending transition at the end of the level
+            }
+            else
+            {
+                Debug.Log("You've missed to connect the panel for the ending level transition");
+                GameManager.Instance.UpdateGameState(GameState.Lose);
+            }
         }
-
 
         public ISlowMotion GetSlowMo()
         {
