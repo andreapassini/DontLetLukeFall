@@ -39,6 +39,16 @@ namespace DLLF {
         }
         void Activate() =>  IsActive = true;
 
+        public void animationDeath() // This method is to play the death animation when Luke die
+        {
+            _animator.SetTrigger("Death");
+        }
+        
+        public void animationWon() // This method is to play an animation when Luke arrive to the end of the level
+        {
+            _animator.SetTrigger("Won");
+        }
+
         public void Move(MovementRequest movementRequest)
         {
             if(!IsActive) return;
