@@ -121,6 +121,7 @@ namespace DLLF
             CreateNewPlatform();
             CreateNewPlatform();
             CreateNewPlatform();
+            PlatformUI.SetPregeneratedPlatform(3);
         }
     }
 }

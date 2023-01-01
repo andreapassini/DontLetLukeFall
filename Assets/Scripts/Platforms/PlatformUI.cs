@@ -27,8 +27,8 @@ namespace DLLF
         private GameObject _player;
         private Image[] _spriteRenderersUI;
         private List<ActionType> _actionsTypes;
-
         private ISlowMotion _slowMotion;
+        private static int _pregeneratedPlatform;
         [SerializeField]
         private float _minDistanceFromPlayer=2f;
 
@@ -43,7 +43,6 @@ namespace DLLF
             _actionsTypes = ((ActionType[])Enum.GetValues(typeof(ActionType))).ToList();
             _actionsTypes.Remove(ActionType.Null);
             _actionsTypes.Remove(ActionType.Die);
-
         }
         // Start is called before the first frame update
         void Start()
@@ -60,6 +59,16 @@ namespace DLLF
                     renderer.color = new Color(255, 0, 0);
                 }
             }
+            if(_pregeneratedPlatform > 0)
+            {
+                _pregeneratedPlatform--;
+                StopDragAndDrop();
+            }
+        }
+
+        public static void SetPregeneratedPlatform(int amount)
+        {
+            _pregeneratedPlatform = amount;
         }
 
         public void SetSlowMo(ISlowMotion slowMotion)
@@ -114,6 +123,18 @@ namespace DLLF
             {
                 _spawnedPlatform.transform.position = spawnPosition;
             }
+        }
+
+        public void StopDragAndDrop()
+        {
+            _canvasGroup.blocksRaycasts=false;
+            StartCoroutine("RestartPlatformInteraction");
+        }
+
+        IEnumerator RestartPlatformInteraction()
+        {
+            yield return new WaitForSeconds(5);
+            _canvasGroup.blocksRaycasts=true;
         }
 
         public void OnEndDrag(PointerEventData eventData)
