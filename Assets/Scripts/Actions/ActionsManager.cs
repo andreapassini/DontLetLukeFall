@@ -34,6 +34,8 @@ namespace DLLF
         private ActionsSequence _actionsTypeSequence;
         private ActionsSpritesLoader _actionsSpritesLoader;
 
+        private bool _needToContinueWithTheActionSequence = true; // This var is set to false when Luke Win
+
         public ActionType[]
             GetActionSequence() // Function to get the action sequence used for the ActionVisualizer useful when creating a level
         {
@@ -96,7 +98,7 @@ namespace DLLF
             SendActionSequenceToActionUIController(0.01f);
             _actionsSequence.Dequeue(); //dequeuing placeholder
             yield return new WaitForSecondsRealtime(_startDelay);
-            while (_actionsSequence.TryDequeue(out var actionToPerform))
+            while (_actionsSequence.TryDequeue(out var actionToPerform) && _needToContinueWithTheActionSequence)
             {
                 ActionDelegate actionDelegate = _actionsMapping[actionToPerform];
 
@@ -217,6 +219,25 @@ namespace DLLF
         }
 
         #endregion
+        
+        public void animationDeath() // This method is to play the death animation when Luke die (fall)
+        {
+            Debug.Log("Luke has fallen");
+            _speed = 0;
+            _isRunning = false;
+            _crouching = false;
+            _jump = false;
+            _characterController.animationDeath(); // play the death animation
+        }
+        
+        public void animationWon() // This method is to play an animation when Luke arrive to the end of the level
+        {
+            Debug.Log("Luke has won");
+            Stop();
+            _needToContinueWithTheActionSequence = false;
+            _actionUIController.StopSequence();
+            _characterController.animationWon(); // play an animation that Luke has won
+        }
 
         // method to calculate time to cover the given space: spaceToCover, at a given speed: speed
         private float GetTime(float spaceToCover, float speed)

@@ -8,10 +8,22 @@ public class LukeFeedbacks : MonoBehaviour
     [SerializeField] private MMF_Player _jumpFeedback;
     [SerializeField] private MMF_Player _landingFeedback;
     [SerializeField] private MMF_Player _sprintFeedback;
+    [SerializeField] private MMF_Player _winFeedback;
+    [SerializeField] private MMF_Player _loseFeedback;
 
     public void PlayJumpFeedback()
     {
         _jumpFeedback?.PlayFeedbacks();
+    }
+    
+    public void PlayWonFeedback()
+    {
+        _winFeedback?.PlayFeedbacks();
+    }
+    
+    public void PlayLoseFeedback()
+    {
+        _loseFeedback?.PlayFeedbacks();
     }
 
     public void PlayLandingFeedback()

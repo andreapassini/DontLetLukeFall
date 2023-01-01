@@ -62,6 +62,14 @@ namespace DLLF
                 Debug.Log("You've missed to connect the panel for the ending level transition");
                 GameManager.Instance.UpdateGameState(GameState.Win);
             }
+            _levelActionsManager.animationWon(); // play an animation that Luke has won
+            StartCoroutine(GoToShowYouVeWon());
+        }
+        
+        IEnumerator GoToShowYouVeWon() // Load scene that you won in delay
+        {
+            yield return new WaitForSeconds(2);
+            GameManager.Instance.UpdateGameState(GameState.Win);
         }
 
         private void OnLevelFailed()
@@ -76,6 +84,14 @@ namespace DLLF
                 Debug.Log("You've missed to connect the panel for the ending level transition");
                 GameManager.Instance.UpdateGameState(GameState.Lose);
             }
+            _levelActionsManager.animationDeath(); // play the death animation
+            StartCoroutine(GoToShowYouVeLose());
+        }
+
+        IEnumerator GoToShowYouVeLose() // Load scene that you lose in delay
+        {
+            yield return new WaitForSeconds(2);
+            GameManager.Instance.UpdateGameState(GameState.Lose);
         }
 
         public ISlowMotion GetSlowMo()
