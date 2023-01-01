@@ -18,6 +18,8 @@ public class SendFeedbackScript : MonoBehaviour
     [SerializeField] private bool _sendToProfessorForm; // If enabled the feedback is sent to professor's form
     [SerializeField] private GameObject[] _elementsToHide; // Elements to hide in the scene when sending a feedback
     
+    [SerializeField] private ScriptForTransitionsBetweenMenuScenes _scriptForTransitionsBetweenMenuScenes; // A script to load the next scene with a transition
+
     private const string _videogameName = "DontLetLukeFall";
     
     IEnumerator SendFeedback() // Send feedback (this coroutine is activated when pushing return key)
@@ -53,7 +55,8 @@ public class SendFeedbackScript : MonoBehaviour
             _feedbackSentText.text = "Feedback sent!";
             yield return new WaitForSeconds(1);
         }
-        SceneManager.LoadScene("MainMenu"); // At the end return to main menu
+        // At the end return to main menu
+        _scriptForTransitionsBetweenMenuScenes.AnimationEndTransitionBetweenMenuScenes("MainMenu");
     }
 
     IEnumerator SendFeedbackToOurForm(string videogame_name, string feedback) // Send feedback to our form
