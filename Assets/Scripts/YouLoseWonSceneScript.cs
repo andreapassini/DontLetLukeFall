@@ -15,6 +15,9 @@ public class YouLoseWonSceneScript : MonoBehaviour
     [SerializeField] private Text _secondaryText; // A text with the written something as "You've completed the level aaa!"
     [SerializeField] private GameObject _buttonNextLevel; // This button could not be shown in case you lose
     
+    [SerializeField] private GameObject _loaderCanvas; // The loading screen
+    [SerializeField] private Image _progressBar; // The progress bar in the loading screen
+    
     private void Start()
     {
         PauseMenu.gameIsPaused = false;
@@ -69,6 +72,7 @@ public class YouLoseWonSceneScript : MonoBehaviour
     public void NextLevel() // Go to the next level
     {
         GameManager.Instance.NextLevelToPlay();
+        GameManager.Instance.SetElementsForLoadingScreen(_loaderCanvas, _progressBar);
         GameManager.Instance.UpdateGameState(GameState.Playing);
     }
     
