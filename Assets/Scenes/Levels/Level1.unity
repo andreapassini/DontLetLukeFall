@@ -3549,10 +3549,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Luke
       objectReference: {fileID: 0}
-    - target: {fileID: 6910535663292760844, guid: b410c5c1a8ba4b74ea51a58fb3e07779, type: 3}
-      propertyPath: managedReferences[8960907115845386250].Sfx
-      value: 
-      objectReference: {fileID: 8300000, guid: 8187cbc538d5b49b0a17c31dc749eb76, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b410c5c1a8ba4b74ea51a58fb3e07779, type: 3}
 --- !u!114 &1848793382 stripped
