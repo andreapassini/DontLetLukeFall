@@ -591,7 +591,7 @@ PrefabInstance:
     - target: {fileID: 5620686489104303739, guid: f904d33a7ef6f674aa6814d85a52ea7c, type: 3}
       propertyPath: managedReferences[8960907115845386250].Sfx
       value: 
-      objectReference: {fileID: 8300000, guid: 46dcfa1187f4a1e4cb3793dd1351f669, type: 3}
+      objectReference: {fileID: 8300000, guid: 8187cbc538d5b49b0a17c31dc749eb76, type: 3}
     - target: {fileID: 5620686489104303739, guid: f904d33a7ef6f674aa6814d85a52ea7c, type: 3}
       propertyPath: managedReferences[8960907115845386251].Mode
       value: 0
