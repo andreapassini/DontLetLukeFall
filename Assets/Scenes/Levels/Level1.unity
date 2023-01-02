@@ -3347,10 +3347,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1152539698, guid: 05f403bb8ff6ef44ca49e693d786d65a, type: 3}
-      propertyPath: _slowMoMultiplier
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 6729434161784164172, guid: 05f403bb8ff6ef44ca49e693d786d65a, type: 3}
       propertyPath: _levelPlatformBar
       value: 

@@ -80,16 +80,18 @@ namespace DLLF
 
         public void DeactivateSlowMotion()
         {
-            StopCoroutine(nameof(StartTimedSlowMo));
+            //StopCoroutine(nameof(StartTimedSlowMo));
+            StopCoroutine(StartTimedSlowMo());
 
             // With IEnumerator ref, we can stop coroutine and keep its progression/steps/state
             // so when we call start again using IEnumerator ref, we restart from the stopped state
             // without losing progression
             // If the cor of _slowMoBack is already over, it will not restart
             // To restart the endend cor, StartCoroutine(Coroutine())
-            //StartCoroutine(_slowMoBack);
+            StartCoroutine(_slowMoBack);
 
             Time.timeScale = _originalTimeScale;
+            _slowMoFeedback?.StopFeedbacks();
         }
 
         public IEnumerator SlowMoBackInterpolation()

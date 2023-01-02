@@ -63,9 +63,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eadb3d10aaea4c7c825d5430db67187a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slowMoMultiplier: 0.05
-  _slowMoDuration: 1
-  _interpolationDurationAtStart: 1
+  _slowMoMultiplier: 0.1
+  _slowMoDuration: 2
+  _interpolationDurationAtStart: 0.15
   _interpolationSegmentsAtStart: 25
   _interpolationDurationAtEnd: 0.15
   _interpolationSegmentsAtEnd: 25
