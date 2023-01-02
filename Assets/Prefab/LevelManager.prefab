@@ -50,6 +50,7 @@ MonoBehaviour:
   _levelActionsManager: {fileID: 0}
   _levelPlatformSequence: {fileID: 11400000, guid: 59c4491bbcc5f78439e76c77dba8373d, type: 2}
   _levelPlatformBar: {fileID: 0}
+  _startingEndingLevelTransition: {fileID: 0}
 --- !u!114 &1152539698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,10 +63,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eadb3d10aaea4c7c825d5430db67187a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slowMoMultiplier: 0.5
+  _slowMoMultiplier: 0.1
   _slowMoDuration: 2
-  _interpolationDuration: 0.15
-  _interpolationSegments: 5
+  _interpolationDurationAtStart: 0.15
+  _interpolationSegmentsAtStart: 25
+  _interpolationDurationAtEnd: 0.15
+  _interpolationSegmentsAtEnd: 25
   _slowMoFeedback: {fileID: 5118800170640875350}
 --- !u!1001 &6690253020880192087
 PrefabInstance:
@@ -160,11 +163,11 @@ MonoBehaviour:
   AutoChangeDirectionOnEnd: 0
   AutoPlayOnStart: 0
   AutoPlayOnEnable: 0
-  ForceTimescaleMode: 0
-  ForcedTimescaleMode: 1
+  ForceTimescaleMode: 1
+  ForcedTimescaleMode: 0
   DurationMultiplier: 1
   DisplayFullDurationDetails: 0
-  PlayerTimescaleMode: 1
+  PlayerTimescaleMode: 0
   CooldownDuration: 0
   InitialDelay: 0
   CanPlay: 1
@@ -191,22 +194,24 @@ MonoBehaviour:
         m_Calls: []
   DebugActive: 0
   FeedbacksList:
-  - rid: 7737718009709461518
-  - rid: 7737718009709461519
-  - rid: 7737718009709461520
-  - rid: 7737718009709461521
-  - rid: 7737718009709461524
+  - rid: 8960907124978221071
+  - rid: 8960907124978221072
+  - rid: 8960907124978221073
+  - rid: 8960907124978221074
+  - rid: 8960907124978221075
+  - rid: 8960907124978221076
+  - rid: 8960907124978221077
   KeepPlayModeChanges: 0
   PerformanceMode: 0
   ForceStopFeedbacksOnDisable: 1
   references:
     version: 2
     RefIds:
-    - rid: 7737718009709461518
+    - rid: 8960907124978221071
       type: {class: MMF_CinemachineImpulse, ns: MoreMountains.FeedbacksForThirdParty, asm: MoreMountains.Feedbacks.Cinemachine}
       data:
         Active: 1
-        UniqueID: 235487823
+        UniqueID: -396363742
         Label: Cinemachine Impulse
         Channel: 0
         Chance: 100
@@ -308,7 +313,7 @@ MonoBehaviour:
               m_PreInfinity: 2
               m_PostInfinity: 2
               m_RotationOrder: 4
-            m_AttackTime: 1.15
+            m_AttackTime: 0.85
             m_SustainTime: 1
             m_DecayTime: 0.15
             m_ScaleWithImpact: 1
@@ -320,11 +325,11 @@ MonoBehaviour:
           m_PropagationSpeed: 343
         Velocity: {x: 0.5, y: 0.5, z: 0.5}
         ClearImpulseOnStop: 1
-    - rid: 7737718009709461519
+    - rid: 8960907124978221072
       type: {class: MMF_ChromaticAberration_URP, ns: MoreMountains.FeedbacksForThirdParty, asm: MoreMountains.Feedbacks.URP}
       data:
         Active: 1
-        UniqueID: 279531594
+        UniqueID: -1260045593
         Label: Chromatic Aberration URP
         Channel: 0
         Chance: 100
@@ -362,26 +367,26 @@ MonoBehaviour:
           - serializedVersion: 3
             time: 0
             value: 0
-            inSlope: 3.929333
-            outSlope: 3.929333
+            inSlope: 2.004933
+            outSlope: 2.004933
             tangentMode: 34
             weightedMode: 0
             inWeight: 0
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.22985406
-            value: 0.90317315
-            inSlope: 0.34294707
-            outSlope: 0.34294707
+            time: 0.5002446
+            value: 1.002957
+            inSlope: 0.02049023
+            outSlope: 0.02049023
             tangentMode: 0
             weightedMode: 0
-            inWeight: 0.33333334
-            outWeight: 0.15552437
+            inWeight: 0.17973098
+            outWeight: 0.33333334
           - serializedVersion: 3
             time: 1
-            value: 1
-            inSlope: 0.12572533
-            outSlope: 0.12572533
+            value: 0.0047187805
+            inSlope: -1.9974537
+            outSlope: -1.9974537
             tangentMode: 34
             weightedMode: 0
             inWeight: 0.33333334
@@ -391,11 +396,11 @@ MonoBehaviour:
           m_RotationOrder: 4
         Amplitude: 1
         RelativeIntensity: 1
-    - rid: 7737718009709461520
+    - rid: 8960907124978221073
       type: {class: MMF_LensDistortion_URP, ns: MoreMountains.FeedbacksForThirdParty, asm: MoreMountains.Feedbacks.URP}
       data:
         Active: 0
-        UniqueID: -717575828
+        UniqueID: 1058956307
         Label: Lens Distortion URP
         Channel: 0
         Chance: 100
@@ -461,11 +466,11 @@ MonoBehaviour:
           m_RotationOrder: 4
         RemapIntensityZero: 0
         RemapIntensityOne: 0.5
-    - rid: 7737718009709461521
+    - rid: 8960907124978221074
       type: {class: MMF_Vignette_URP, ns: MoreMountains.FeedbacksForThirdParty, asm: MoreMountains.Feedbacks.URP}
       data:
         Active: 1
-        UniqueID: 405781123
+        UniqueID: -1851370903
         Label: Vignette URP
         Channel: 0
         Chance: 100
@@ -501,29 +506,29 @@ MonoBehaviour:
           - serializedVersion: 3
             time: 0
             value: 0
-            inSlope: 2.7212043
-            outSlope: 2.7212043
-            tangentMode: 34
+            inSlope: 2
+            outSlope: 2
+            tangentMode: 0
             weightedMode: 0
             inWeight: 0
-            outWeight: 0.33333334
+            outWeight: 0
           - serializedVersion: 3
-            time: 0.2719819
-            value: 0.7401183
-            inSlope: 0.7421353
-            outSlope: 0.7421353
+            time: 0.5094094
+            value: 0.9961227
+            inSlope: 0.020343516
+            outSlope: 0.020343516
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
-            outWeight: 0.18045574
+            outWeight: 0.37883025
           - serializedVersion: 3
-            time: 1
-            value: 1
-            inSlope: 0.35697144
-            outSlope: 0.35697144
-            tangentMode: 34
+            time: 1.0125122
+            value: 0.0047187805
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
             weightedMode: 0
-            inWeight: 0.33333334
+            inWeight: 0
             outWeight: 0
           m_PreInfinity: 2
           m_PostInfinity: 2
@@ -531,11 +536,11 @@ MonoBehaviour:
         RemapIntensityZero: 0
         RemapIntensityOne: 1
         RelativeIntensity: 1
-    - rid: 7737718009709461524
+    - rid: 8960907124978221075
       type: {class: MMF_FilmGrain_URP, ns: MoreMountains.FeedbacksForThirdParty, asm: MoreMountains.Feedbacks.URP}
       data:
         Active: 1
-        UniqueID: 785854415
+        UniqueID: -484889885
         Label: Film Grain URP
         Channel: 0
         Chance: 100
@@ -571,29 +576,29 @@ MonoBehaviour:
           - serializedVersion: 3
             time: 0
             value: 0
-            inSlope: 3.471098
-            outSlope: 3.471098
-            tangentMode: 34
+            inSlope: 2
+            outSlope: 2
+            tangentMode: 0
             weightedMode: 0
             inWeight: 0
-            outWeight: 0.33333334
+            outWeight: 0
           - serializedVersion: 3
-            time: 0.26048818
-            value: 0.90418
-            inSlope: 0.10891142
-            outSlope: 0.10891142
+            time: 0.50282407
+            value: 0.9956594
+            inSlope: -0.01515102
+            outSlope: -0.01515102
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
-            outWeight: 0.18422307
+            outWeight: 0.36613616
           - serializedVersion: 3
-            time: 1
-            value: 1
-            inSlope: 0.12957197
-            outSlope: 0.12957197
-            tangentMode: 34
+            time: 0.9916687
+            value: 0.011791229
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
             weightedMode: 0
-            inWeight: 0.33333334
+            inWeight: 0
             outWeight: 0
           m_PreInfinity: 2
           m_PostInfinity: 2
@@ -601,6 +606,155 @@ MonoBehaviour:
         RemapIntensityZero: 0
         RemapIntensityOne: 1
         RelativeIntensity: 1
+    - rid: 8960907124978221076
+      type: {class: MMF_Bloom_URP, ns: MoreMountains.FeedbacksForThirdParty, asm: MoreMountains.Feedbacks.URP}
+      data:
+        Active: 1
+        UniqueID: -888088907
+        Label: Bloom URP
+        Channel: 0
+        Chance: 100
+        DisplayColor: {r: 0, g: 0, b: 0, a: 1}
+        Timing:
+          TimescaleMode: 0
+          ExcludeFromHoldingPauses: 0
+          ContributeToTotalDuration: 1
+          InitialDelay: 0
+          CooldownDuration: 0
+          InterruptsOnStop: 1
+          NumberOfRepeats: 0
+          RepeatForever: 0
+          DelayBetweenRepeats: 1
+          MMFeedbacksDirectionCondition: 0
+          PlayDirection: 0
+          ConstantIntensity: 0
+          UseIntensityInterval: 0
+          IntensityIntervalMin: 0
+          IntensityIntervalMax: 0
+          Sequence: {fileID: 0}
+          TrackID: 0
+          Quantized: 0
+          TargetBPM: 120
+        Owner: {fileID: 5118800170640875350}
+        DebugActive: 0
+        ShakeDuration: 2
+        ResetShakerValuesAfterShake: 1
+        ResetTargetValuesAfterShake: 1
+        RelativeValues: 1
+        ShakeIntensity:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 2
+            outSlope: 2
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 0.50255644
+            value: 0.9944764
+            inSlope: 0.023934906
+            outSlope: 0.023934906
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.47999403
+          - serializedVersion: 3
+            time: 1.0041809
+            value: 0.014152527
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        RemapIntensityZero: 0
+        RemapIntensityOne: -3
+        ShakeThreshold:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 1.9824066
+            outSlope: 1.9824066
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.5011919
+            value: 0.99356616
+            inSlope: -0.0060021877
+            outSlope: -0.0060021877
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.9958191
+            value: 0.0070762634
+            inSlope: -1.994411
+            outSlope: -1.994411
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        RemapThresholdZero: 0
+        RemapThresholdOne: 0
+    - rid: 8960907124978221077
+      type: {class: MMF_Sound, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks.MMTools}
+      data:
+        Active: 0
+        UniqueID: 724759328
+        Label: Sound
+        Channel: 0
+        Chance: 100
+        DisplayColor: {r: 0, g: 0, b: 0, a: 1}
+        Timing:
+          TimescaleMode: 0
+          ExcludeFromHoldingPauses: 0
+          ContributeToTotalDuration: 1
+          InitialDelay: 0
+          CooldownDuration: 0
+          InterruptsOnStop: 1
+          NumberOfRepeats: 3
+          RepeatForever: 0
+          DelayBetweenRepeats: 1
+          MMFeedbacksDirectionCondition: 0
+          PlayDirection: 0
+          ConstantIntensity: 0
+          UseIntensityInterval: 0
+          IntensityIntervalMin: 0
+          IntensityIntervalMax: 0
+          Sequence: {fileID: 0}
+          TrackID: 0
+          Quantized: 0
+          TargetBPM: 120
+        Owner: {fileID: 5118800170640875350}
+        DebugActive: 0
+        Sfx: {fileID: 8300000, guid: 8c5a32474dfb31747953c71d2cfc1075, type: 3}
+        RandomSfx: []
+        TestPlayButton:
+          ButtonText: Debug Play Sound
+        TestStopButton:
+          ButtonText: Debug Stop Sound
+        PlayMethod: 0
+        PoolSize: 10
+        MinVolume: 1
+        MaxVolume: 1
+        MinPitch: 1
+        MaxPitch: 1
+        SfxAudioMixerGroup: {fileID: 24300002, guid: 802dbd0e3604c4cbcb26ce8f5e6a5aab, type: 2}
 --- !u!4 &9086870060736343903 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2504988204593982728, guid: e5266d45b10077c4ca400f7c07428465, type: 3}
