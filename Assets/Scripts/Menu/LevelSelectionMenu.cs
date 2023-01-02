@@ -13,51 +13,56 @@ public class LevelSelectionMenu : MonoBehaviour
 {
     // This script is to manage the level selection menu
 
-    [SerializeField] private LevelsInfo _levelsInfo;
+    [SerializeField] private LevelsInfo _levelsInfo; // The information of the levels
     [SerializeField] private GameObject _buttonToFirstSelect; // Button to first select when starting to navigate with keyboard
     [SerializeField] private EventSystem _eventSystem; // The event system to witch attach this script
     [SerializeField] private GameObject _doubleArrowLeftButton; // The button to scroll left between levels
     [SerializeField] private GameObject _doubleArrowRightButton; // The button to scroll right between levels
-    [SerializeField] private GameObject _firstImageLevelButton; // The first selectable image of the three
-    [SerializeField] private GameObject _lastImageLevelButton; // The last selectable image of the three
+    [SerializeField] private GameObject[] _imageLevelButtons; // The three selectable images
     [SerializeField] private Image[] _imagesLevels; // The three images of the three levels
+    [SerializeField] private Text _pageNumberText; // A text to show the page number
     
     [SerializeField] private GameObject _loaderCanvas; // The loading screen
     [SerializeField] private Image _progressBar; // The progress bar in the loading screen
     
     [SerializeField] private ScriptForTransitionsBetweenMenuScenes _scriptForTransitionsBetweenMenuScenes; // A script to load the next scene with a transition
 
-    private int _firstOfTheThreeLevelsToShow = 0; // The index of the first of the three levels to show
+    private int _page = 0; // The page you are visualizing
 
     private void LoadTheThreeLevelsToShow() // Function to load the three levels to show
     {
-        if (_firstOfTheThreeLevelsToShow < 0) // check on the var _firstOfTheThreeLevelsToShow
+        int totalNumberOfLevels = _levelsInfo.levelInfos.Length; // Total number of levels
+        int totalNumberOfPages = totalNumberOfLevels / 3;
+        if (totalNumberOfLevels % 3 > 0)
         {
-            _firstOfTheThreeLevelsToShow = 0;
+            totalNumberOfPages++; // Total number of pages
         }
-        int numberOfLevelsToShow = _imagesLevels.Length;
-        int firstOfTheThreeLevelsToNotShow = _firstOfTheThreeLevelsToShow + numberOfLevelsToShow;
-        int totalNumberOfLevels = _levelsInfo.levelInfos.Length;
-        if (firstOfTheThreeLevelsToNotShow > totalNumberOfLevels && _firstOfTheThreeLevelsToShow > 0)
-        // Check on the upper bound of var _firstOfTheThreeLevelsToShow
+        if (_page < 0) // Checks on var _page
         {
-            _firstOfTheThreeLevelsToShow = _firstOfTheThreeLevelsToShow - 1;
-            LoadTheThreeLevelsToShow();
-            return;
+            _page = 0;
+        }
+        if (_page >= totalNumberOfPages)
+        {
+            _page = totalNumberOfPages - 1;
         }
         // Set active / not active double arrow buttons
+        for (int i = 0; i < 3; i++)
+        {
+            _imageLevelButtons[i].SetActive(true);
+        }
+        bool needToSelectLastImageLevelAvailable = false;
         _doubleArrowLeftButton.SetActive(true);
-        if (_firstOfTheThreeLevelsToShow == 0)
+        if (_page == 0)
         {
             if (_eventSystem.currentSelectedGameObject == _doubleArrowLeftButton)
             {
-                _eventSystem.SetSelectedGameObject(_firstImageLevelButton);
+                _eventSystem.SetSelectedGameObject(_imageLevelButtons[0]);
             }
             _doubleArrowLeftButton.SetActive(false);
         }
         _doubleArrowRightButton.SetActive(true);
         bool activateDoubleArrowRightButton = false;
-        if (firstOfTheThreeLevelsToNotShow < totalNumberOfLevels)
+        if (_page < totalNumberOfPages-1)
         {
             activateDoubleArrowRightButton = true;
         }
@@ -65,21 +70,35 @@ public class LevelSelectionMenu : MonoBehaviour
         {
             if (_eventSystem.currentSelectedGameObject == _doubleArrowRightButton)
             {
-                _eventSystem.SetSelectedGameObject(_lastImageLevelButton);
+                _eventSystem.SetSelectedGameObject(_imageLevelButtons[0]);
+                needToSelectLastImageLevelAvailable = true;
             }
             _doubleArrowRightButton.SetActive(false);
         }
+        // Show the number of the page
+        _pageNumberText.text = (_page+1).ToString() + "/" + totalNumberOfPages.ToString();
         // Load images of levels
-        for (int i = 0; i < _imagesLevels.Length; i++)
+        for (int i = 0; i < 3; i++)
         {
             _imagesLevels[i].enabled = true;
-            if (_firstOfTheThreeLevelsToShow + i >= totalNumberOfLevels)
+            if ((_page * 3) + i >= totalNumberOfLevels)
             {
                 _imagesLevels[i].enabled = false;
+                _imageLevelButtons[i].SetActive(false);
             }
             else
             {
-                _imagesLevels[i].sprite = _levelsInfo.levelInfos[_firstOfTheThreeLevelsToShow + i].image;
+                _imagesLevels[i].sprite = _levelsInfo.levelInfos[(_page * 3) + i].image;
+            }
+        }
+        if (needToSelectLastImageLevelAvailable)
+        {
+            if (_imageLevelButtons[2].activeSelf)
+            {
+                _eventSystem.SetSelectedGameObject(_imageLevelButtons[2]);
+            } else if (_imageLevelButtons[1].activeSelf)
+            {
+                _eventSystem.SetSelectedGameObject(_imageLevelButtons[1]);
             }
         }
     }
@@ -119,6 +138,7 @@ public class LevelSelectionMenu : MonoBehaviour
         {
             if (_eventSystem.currentSelectedGameObject == _doubleArrowLeftButton)
             {
+                AudioManager.instance?.PlayClickMenuSFX();
                 ClickedDoubleArrowLeftButton();
             }
         }
@@ -126,6 +146,7 @@ public class LevelSelectionMenu : MonoBehaviour
         {
             if (_eventSystem.currentSelectedGameObject == _doubleArrowRightButton)
             {
+                AudioManager.instance?.PlayClickMenuSFX();
                 ClickedDoubleArrowRightButton();
             }
         }
@@ -133,19 +154,19 @@ public class LevelSelectionMenu : MonoBehaviour
 
     public void ClickedDoubleArrowLeftButton() // Click left arrows to show previous levels
     {
-        _firstOfTheThreeLevelsToShow = _firstOfTheThreeLevelsToShow - 1;
+        _page = _page - 1;
         LoadTheThreeLevelsToShow();
     }
     
     public void ClickedDoubleArrowRightButton() // Click right arrows to show next levels
     {
-        _firstOfTheThreeLevelsToShow = _firstOfTheThreeLevelsToShow + 1;
+        _page = _page + 1;
         LoadTheThreeLevelsToShow();
     }
 
     private void ClickedShowedLevel(int num) // Click on a showed level
     {
-        int levelYouAreGoingToPlay = _levelsInfo.levelInfos[_firstOfTheThreeLevelsToShow + num].levelNumber;
+        int levelYouAreGoingToPlay = _levelsInfo.levelInfos[(_page * 3) + num].levelNumber;
         GameManager.Instance.PlayLevel(levelYouAreGoingToPlay);
     }
     

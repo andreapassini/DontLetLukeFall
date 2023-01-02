@@ -224,6 +224,7 @@ RectTransform:
   - {fileID: 2026198601}
   - {fileID: 1640823756}
   - {fileID: 1098763227}
+  - {fileID: 333276029}
   - {fileID: 560098717}
   - {fileID: 215747661}
   m_Father: {fileID: 0}
@@ -327,7 +328,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4427946984183682478, guid: 5a302ded4733f40a0a05355c8b693cb9, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4427946984183682478, guid: 5a302ded4733f40a0a05355c8b693cb9, type: 3}
       propertyPath: m_AnchorMax.x
@@ -423,6 +424,86 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4427946984183682478, guid: 5a302ded4733f40a0a05355c8b693cb9, type: 3}
   m_PrefabInstance: {fileID: 215747659}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &333276028
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 333276029}
+  - component: {fileID: 333276031}
+  - component: {fileID: 333276030}
+  m_Layer: 5
+  m_Name: PageNumberText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &333276029
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333276028}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 60583108}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 300, y: 200}
+  m_Pivot: {x: 1, y: 0}
+--- !u!114 &333276030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333276028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 1beb61851aa204fdd8f4cf4d93614c0f, type: 3}
+    m_FontSize: 100
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 1
+    m_MaxSize: 140
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 99/99
+--- !u!222 &333276031
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333276028}
+  m_CullTransparentMesh: 1
 --- !u!1001 &560098716
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -440,7 +521,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2669786272479374716, guid: 469aa292ae2b04738a9af52c19175391, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2669786272479374716, guid: 469aa292ae2b04738a9af52c19175391, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1459,12 +1540,15 @@ MonoBehaviour:
   _eventSystem: {fileID: 1401404707}
   _doubleArrowLeftButton: {fileID: 2044720869}
   _doubleArrowRightButton: {fileID: 1129588517}
-  _firstImageLevelButton: {fileID: 2026198600}
-  _lastImageLevelButton: {fileID: 1098763226}
+  _imageLevelButtons:
+  - {fileID: 2026198600}
+  - {fileID: 1640823755}
+  - {fileID: 1098763226}
   _imagesLevels:
   - {fileID: 884097749}
   - {fileID: 604187373}
   - {fileID: 1201443530}
+  _pageNumberText: {fileID: 333276030}
   _loaderCanvas: {fileID: 560098719}
   _progressBar: {fileID: 560098718}
   _scriptForTransitionsBetweenMenuScenes: {fileID: 215747660}
