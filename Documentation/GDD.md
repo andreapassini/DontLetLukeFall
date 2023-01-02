@@ -67,35 +67,20 @@ Luke can get stucked in platforms
 
 # TO DO
 
-## Slowmo Interpolation of .5f or .3f seconds
-
-## Build to test new gameplay
-
-## UI Action Bar 
-
-## Platform on top of Luke => Luca Finoia
-
-## Sound volume Default in settings ref mixer => Andrea Passini
-
-## Luke's new animations => Andrea Taroni
-
-Add the new sprites to Luke's animations
-Test fluid transitions
-
-## Grid while placing platforms => Luca Finoia
-
-## Starting Panoramica of the level => Andrea Taroni
- 
-## Starting Delay => Andrea Taroni
-
-Wait a bunch of seconds before starting Luke's Actions so the player can look a the next actions and platforms to place
-
-## Add  a test level for the camera and Action speed
-
-## Crouch action
-
-
-
+## WebGL Tutorial => Andrea Taroni
+## Loading screen rework artwork => Carlo Ambrogi
+## Win or Lose UI artwork rework => Carlo Ambrogi
+## Level Selection UI => Carlo Ambrogi
+## Action UI rework => Carlo Ambrogi
+## Fix platform not moving with standing cursor => Luca Finoia
+## Preview UI  => Luca Finoia
+## Moving platforms  => Luca Finoia
+## Level 7 not stop action at start => Andrea Passini
+## Audio in menus => Andrea Passini
+## SFX Button Menus => Carlo Ambrogi
+## Level 8 => Andrea Taroni
+## Level 9  => Luca Finoia
+## Level 10 => Andrea Passini
 
 
 
