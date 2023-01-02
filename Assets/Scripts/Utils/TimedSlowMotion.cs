@@ -14,11 +14,17 @@ namespace DLLF
         [SerializeField]
         private float _slowMoDuration;
 
-        // Interpolate value of time scale to have a smooth slowmo transition
+        // At Start Interpolate value of time scale to have a smooth slowmo transition
         [SerializeField]
-        private float _interpolationDuration = .15f;
+        private float _interpolationDurationAtStart = .15f;
         [SerializeField]
-        private float _interpolationSegments = 5f;
+        private float _interpolationSegmentsAtStart = 25f;
+
+        // At End Interpolate value of time scale to have a smooth slowmo transition
+        [SerializeField]
+        private float _interpolationDurationAtEnd = .15f;
+        [SerializeField]
+        private float _interpolationSegmentsAtEnd = 25f;
 
         // Mixer ref
         private float _slowMoPitch;
@@ -54,13 +60,13 @@ namespace DLLF
         {
             _slowMoFeedback?.PlayFeedbacks();
 
-            float unitInterpolation = (_originalTimeScale - _slowMoTimeScale) / _interpolationSegments;
+            float unitInterpolation = (_originalTimeScale - _slowMoTimeScale) / _interpolationSegmentsAtStart;
 
-            for (int i = (int)_interpolationSegments; i > 0; i--)
+            for (int i = (int)_interpolationSegmentsAtStart; i > 0; i--)
             {
                 Time.timeScale = _slowMoTimeScale + (unitInterpolation * i);
                 AudioManager.instance.GetAudioMixer().SetFloat("MasterPitch", _slowMoPitch + (unitInterpolation * i));
-                yield return new WaitForSecondsRealtime(_interpolationDuration/_interpolationSegments);
+                yield return new WaitForSecondsRealtime(_interpolationDurationAtStart/_interpolationSegmentsAtStart);
             }
 
             Time.timeScale = _slowMoTimeScale;
@@ -81,20 +87,20 @@ namespace DLLF
             // without losing progression
             // If the cor of _slowMoBack is already over, it will not restart
             // To restart the endend cor, StartCoroutine(Coroutine())
-            StartCoroutine(_slowMoBack);
+            //StartCoroutine(_slowMoBack);
 
             Time.timeScale = _originalTimeScale;
         }
 
         public IEnumerator SlowMoBackInterpolation()
         {
-            float unitInterpolation = (_originalTimeScale - _slowMoTimeScale) / _interpolationSegments;
+            float unitInterpolation = (_originalTimeScale - _slowMoTimeScale) / _interpolationSegmentsAtEnd;
 
-            for (int i = (int)_interpolationSegments; i > 0; i--)
+            for (int i = (int)_interpolationSegmentsAtEnd; i > 0; i--)
             {
                 Time.timeScale = _slowMoTimeScale + (unitInterpolation * i);
                 AudioManager.instance.GetAudioMixer().SetFloat("MasterPitch", _slowMoPitch + (unitInterpolation * i));
-                yield return new WaitForSecondsRealtime(_interpolationDuration / _interpolationSegments);
+                yield return new WaitForSecondsRealtime(_interpolationDurationAtEnd / _interpolationSegmentsAtEnd);
             }
 
             Time.timeScale = _originalTimeScale;
