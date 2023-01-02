@@ -138,6 +138,7 @@ public class LevelSelectionMenu : MonoBehaviour
         {
             if (_eventSystem.currentSelectedGameObject == _doubleArrowLeftButton)
             {
+                AudioManager.instance?.PlayClickMenuSFX();
                 ClickedDoubleArrowLeftButton();
             }
         }
@@ -145,6 +146,7 @@ public class LevelSelectionMenu : MonoBehaviour
         {
             if (_eventSystem.currentSelectedGameObject == _doubleArrowRightButton)
             {
+                AudioManager.instance?.PlayClickMenuSFX();
                 ClickedDoubleArrowRightButton();
             }
         }
