@@ -127,6 +127,7 @@ public class TutorialScript : MonoBehaviour
     {
         _imageForTutorialGameObject.SetActive(false);
         _textForTutorial.text = "";
+        _coverImageForTutorialGameObject.SetActive(false);
         yield return new WaitForSeconds(0.5f);
         StartCoroutine(part14());
     }
@@ -135,7 +136,6 @@ public class TutorialScript : MonoBehaviour
     {
         _imageForTutorial.sprite = _tutorialImages[3];
         _imageForTutorialGameObject.SetActive(true);
-        _coverImageForTutorialGameObject.SetActive(false);
         _textForTutorial.text = "Be careful! Here there is an hole, so why don't you try to drag now a platform to avoid Luke to fall?";
         yield return new WaitForSeconds(5.5f);
         StartCoroutine(part15());
