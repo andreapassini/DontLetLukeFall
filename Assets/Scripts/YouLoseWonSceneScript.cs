@@ -14,6 +14,9 @@ public class YouLoseWonSceneScript : MonoBehaviour
     [SerializeField] private Text _youLoseWonText; // A text with the written "You won!" or "You lose!"
     [SerializeField] private Text _secondaryText; // A text with the written something as "You've completed the level aaa!"
     [SerializeField] private GameObject _buttonNextLevel; // This button could not be shown in case you lose
+    [SerializeField] private Animator _animatorImageEmojy; // The animator that controls the image emojy to show an image of Luke that you won or lose
+    [SerializeField] private GameObject _imageArrowNextLevel1; // 1 of the 2 images to decorate the button next level
+    [SerializeField] private GameObject _imageArrowNextLevel2; // 1 of the 2 images to decorate the button next level
     
     [SerializeField] private GameObject _loaderCanvas; // The loading screen
     [SerializeField] private Image _progressBar; // The progress bar in the loading screen
@@ -36,10 +39,15 @@ public class YouLoseWonSceneScript : MonoBehaviour
         if (GameManager.Instance.LevelToPlayIsTheLastOne())
         {
             _buttonNextLevel.SetActive(false);
+            _imageArrowNextLevel1.SetActive(false);
+            _imageArrowNextLevel2.SetActive(false);
         }
         if (GameManager.Instance.state == GameState.Lose)
         {
             _youLoseWonText.text = "You lose!";
+            _animatorImageEmojy.SetTrigger("showInsteadAnimationYouLose");
+            _imageArrowNextLevel1.SetActive(false);
+            _imageArrowNextLevel2.SetActive(false);
             int numberLevelToShow = GameManager.Instance.GetLevelToPlay() - 1;
             string numberLevelToShowString = "" + numberLevelToShow + "";
             if (numberLevelToShow == 0)
