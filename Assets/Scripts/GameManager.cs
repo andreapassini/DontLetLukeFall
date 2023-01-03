@@ -151,7 +151,10 @@ public class GameManager : MonoBehaviour
 
     private void HandleSelectionLevel()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("LevelSelectionMenu");
+
+        AudioManager.instance.StopAllAudioSources();
+        AudioManager.instance.PlayIntro();
     }
 
     private void HandlePlaying() // show the scene with the level to play
@@ -167,27 +170,31 @@ public class GameManager : MonoBehaviour
         }
         TextFileManager.AddWitchLevelYouStartPlaying();
 
-        _audioManager.PauseAllBackgroundMusics();
-        _audioManager.PlayBackgroundMusic();
+        AudioManager.instance.StopAllAudioSources();
+        AudioManager.instance.PlayBackgroundMusic();
     }
 
     private void LoadYouLoseWonScene()
     {
         SceneManager.LoadScene("YouLoseWon");
+        AudioManager.instance.StopAllAudioSources();
+        AudioManager.instance.PlayIntro();
     }
 
     private void HandleLose() // Show the screen you lose
     {
         LoadYouLoseWonScene();
         TextFileManager.AddThatYouLostALevel();
-        _audioManager.PauseAllBackgroundMusics();
+        AudioManager.instance.StopAllAudioSources();
+        AudioManager.instance.PlayIntro();
     }
-    
+
     private void HandleWin() // Show the screen you won
     {
         LoadYouLoseWonScene();
         TextFileManager.AddThatYouWonALevel();
-        _audioManager.PauseAllBackgroundMusics();
+        AudioManager.instance.StopAllAudioSources();
+        AudioManager.instance.PlayIntro();
     }
 
 }
