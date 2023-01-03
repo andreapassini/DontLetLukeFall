@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Level 2
   m_EditorClassIdentifier: 
   levelNumber: 3
-  image: {fileID: 21300000, guid: b9e556afebf714daa918e9e21cf0abd9, type: 3}
+  image: {fileID: 21300000, guid: ec2ec909e40714a8f828eba12938ca00, type: 3}
