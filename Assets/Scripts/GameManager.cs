@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
     {
         _audioManager = AudioManager.instance;
 
-        UpdateGameState(GameState.SelectionLevel); // Setting the initial state
+        UpdateGameState(GameState.MainMenu); // Setting the initial state
     }
 
     private void Update()
@@ -105,6 +105,9 @@ public class GameManager : MonoBehaviour
         
         switch (newState)
         {
+            case GameState.MainMenu:
+                HandleMainMenu();
+                break;
             case GameState.SelectionLevel:
                 HandleSelectionLevel();
                 break;
@@ -157,6 +160,14 @@ public class GameManager : MonoBehaviour
         AudioManager.instance.PlayIntro();
     }
 
+    private void HandleMainMenu()
+    {
+        SceneManager.LoadScene("LevelSelectionMenu");
+
+        AudioManager.instance.StopAllAudioSources();
+        AudioManager.instance.PlayIntro();
+    }
+
     private void HandlePlaying() // show the scene with the level to play
     {
         if (_levelToPlay == 1)
@@ -201,6 +212,7 @@ public class GameManager : MonoBehaviour
 
 public enum GameState // The possible states of the game
 {
+    MainMenu,
     SelectionLevel,
     Playing,
     Lose,
