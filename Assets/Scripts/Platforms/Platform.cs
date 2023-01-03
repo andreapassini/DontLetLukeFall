@@ -46,11 +46,16 @@ namespace DLLF
             if (col.gameObject.layer == _playerPlatformLayer)
             {
                 Platform platform = col.gameObject.GetComponent<Platform>();
-                if (platform != null || action != ActionType.Null)
+                if (platform != null && action != ActionType.Null)
                 {
                     if (platform.spawnTime < spawnTime)
                     {
                         platform.action = action;
+                        SpriteRenderer[] spriteRenderers = platform.GetComponentsInChildren<SpriteRenderer>();
+                        foreach (SpriteRenderer renderer in spriteRenderers)
+                        {
+                            renderer.color = new Color(255, 0, 0);
+                        }
                     }
                 }
             }
