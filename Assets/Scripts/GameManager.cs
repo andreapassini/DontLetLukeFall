@@ -8,6 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Cysharp.Threading.Tasks;
 
 public class GameManager : MonoBehaviour
 {
@@ -84,7 +85,7 @@ public class GameManager : MonoBehaviour
 
         do
         {
-            await Task.Delay(100);
+            await UniTask.Delay(100);
             _targetForProgressBar = scene.progress;
             _targetForProgressBar = 1.0f * (_targetForProgressBar / 0.9f);
             if (_targetForProgressBar > 1.0f)
