@@ -31,7 +31,10 @@ namespace DLLF
         void Start()
         {
             _levelActionsManager.Begin(_levelActionsSequence);
-            _levelPlatformBar.EnqueuePlatforms(_levelPlatformSequence);
+            if (_levelPlatformBar != null)
+            {
+                _levelPlatformBar.EnqueuePlatforms(_levelPlatformSequence);
+            }
         }
 
         public ActionsSequence GetLevelActionsSequence()
