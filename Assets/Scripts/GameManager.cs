@@ -168,6 +168,14 @@ public class GameManager : MonoBehaviour
         AudioManager.instance.PlayIntro();
     }
 
+    private void HandleMainMenu()
+    {
+        SceneManager.LoadScene("LevelSelectionMenu");
+
+        AudioManager.instance.StopAllAudioSources();
+        AudioManager.instance.PlayIntro();
+    }
+
     private void HandlePlaying() // show the scene with the level to play
     {
         if (_levelToPlay == 1)

@@ -86,7 +86,7 @@ public class YouLoseWonSceneScript : MonoBehaviour
     
     public void GoToMenu() // Return to main menu
     {
-        GameManager.Instance.UpdateGameState(GameState.SelectionLevel);
+        GameManager.Instance.UpdateGameState(GameState.MainMenu);
     }
     
 }
