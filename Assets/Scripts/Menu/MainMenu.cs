@@ -32,21 +32,25 @@ public class MainMenu : MonoBehaviour
     
     public void GoToLevelSelectionMenu() // Go to level selection menu
     {
+        AudioManager.instance.PlayClickMenuSFX();
         _scriptForTransitionsBetweenMenuScenes.AnimationEndTransitionBetweenMenuScenes("LevelSelectionMenu");
     }
 
     public void GoToSettings() // Go to settings menu
     {
+        AudioManager.instance.PlayClickMenuSFX();
         _scriptForTransitionsBetweenMenuScenes.AnimationEndTransitionBetweenMenuScenes("SettingMenu");
     }
     
     public void GoToSendFeedback() // Go to send feedback menu
     {
+        AudioManager.instance.PlayClickMenuSFX();
         _scriptForTransitionsBetweenMenuScenes.AnimationEndTransitionBetweenMenuScenes("SendFeedbackMenu");
     }
 
     public void QuitGame() // Exit from the game
     {
+        AudioManager.instance.PlayClickMenuSFX();
         Debug.Log("QUIT");
         Application.Quit();
     }

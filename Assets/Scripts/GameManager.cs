@@ -151,7 +151,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleSelectionLevel()
     {
-        SceneManager.LoadScene("LevelSelectionMenu");
+        SceneManager.LoadScene("MainMenu");
 
         AudioManager.instance.StopAllAudioSources();
         AudioManager.instance.PlayIntro();
