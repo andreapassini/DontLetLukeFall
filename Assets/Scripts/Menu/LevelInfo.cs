@@ -8,6 +8,7 @@ namespace DLLF
     
         public int levelNumber; // the number of the level (numbers should be starting from 1, so: 1, 2, 3, ...)
         public Sprite image; // an image representing a level
-    
+        public string levelTitle; // the title of the level
+
     }
 }
