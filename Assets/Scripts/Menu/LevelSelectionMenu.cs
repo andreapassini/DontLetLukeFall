@@ -20,6 +20,7 @@ public class LevelSelectionMenu : MonoBehaviour
     [SerializeField] private GameObject _doubleArrowRightButton; // The button to scroll right between levels
     [SerializeField] private GameObject[] _imageLevelButtons; // The three selectable images
     [SerializeField] private Image[] _imagesLevels; // The three images of the three levels
+    [SerializeField] private Text[] _levelTitleTexts; // The text files for the titles of the levels
     [SerializeField] private Text _pageNumberText; // A text to show the page number
     
     [SerializeField] private GameObject _loaderCanvas; // The loading screen
@@ -81,14 +82,17 @@ public class LevelSelectionMenu : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             _imagesLevels[i].enabled = true;
+            _levelTitleTexts[i].enabled = true;
             if ((_page * 3) + i >= totalNumberOfLevels)
             {
                 _imagesLevels[i].enabled = false;
+                _levelTitleTexts[i].enabled = false;
                 _imageLevelButtons[i].SetActive(false);
             }
             else
             {
                 _imagesLevels[i].sprite = _levelsInfo.levelInfos[(_page * 3) + i].image;
+                _levelTitleTexts[i].text = _levelsInfo.levelInfos[(_page * 3) + i].levelTitle;
             }
         }
         if (needToSelectLastImageLevelAvailable)
