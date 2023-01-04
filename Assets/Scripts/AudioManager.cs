@@ -56,12 +56,12 @@ public class AudioManager : MonoBehaviour
             s.source.outputAudioMixerGroup = _audioMixerGroup.audioMixer.FindMatchingGroups(outputMixer)[0]; // Assignment of the sound to an audio mixer group
         }
 
-        CheckMenu();
+        //CheckMenu();
     }
 
     private void Update()
     {
-        CheckMenu();
+        //CheckMenu();
     }
 
     #region Play
@@ -191,6 +191,24 @@ public class AudioManager : MonoBehaviour
             {
                 el.UnPause();
             }
+        }
+    }
+
+    public void StopAllBackgroundMusics()
+	{
+        AudioSource[] audioSources = GetComponents<AudioSource>();
+        foreach (var el in audioSources) {
+            if (el.outputAudioMixerGroup.name == "BackgroundMusic") {
+                el.Stop();
+            }
+        }
+    }
+
+    public void StopAllAudioSources()
+	{
+        AudioSource[] audioSources = GetComponents<AudioSource>();
+        foreach (var el in audioSources) {
+            el.Stop();
         }
     }
     

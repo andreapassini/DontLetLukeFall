@@ -1191,6 +1191,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 754613056}
     m_Modifications:
+    - target: {fileID: 4946249321143037549, guid: a7fa909d10ce043b09514524942f56a3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946249322256011106, guid: a7fa909d10ce043b09514524942f56a3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4946249322720862956, guid: a7fa909d10ce043b09514524942f56a3, type: 3}
       propertyPath: m_Name
       value: PauseMenuPrefab

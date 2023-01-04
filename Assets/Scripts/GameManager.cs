@@ -8,6 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Cysharp.Threading.Tasks;
 
 public class GameManager : MonoBehaviour
 {
@@ -47,7 +48,7 @@ public class GameManager : MonoBehaviour
     {
         _audioManager = AudioManager.instance;
 
-        UpdateGameState(GameState.SelectionLevel); // Setting the initial state
+        UpdateGameState(GameState.MainMenu); // Setting the initial state
     }
 
     private void Update()
@@ -84,7 +85,7 @@ public class GameManager : MonoBehaviour
 
         do
         {
-            await Task.Delay(100);
+            await UniTask.Delay(100);
             _targetForProgressBar = scene.progress;
             _targetForProgressBar = 1.0f * (_targetForProgressBar / 0.9f);
             if (_targetForProgressBar > 1.0f)
@@ -104,6 +105,9 @@ public class GameManager : MonoBehaviour
         
         switch (newState)
         {
+            case GameState.MainMenu:
+                HandleMainMenu();
+                break;
             case GameState.SelectionLevel:
                 HandleSelectionLevel();
                 break;
@@ -150,7 +154,18 @@ public class GameManager : MonoBehaviour
 
     private void HandleSelectionLevel()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("LevelSelectionMenu");
+
+        AudioManager.instance.StopAllAudioSources();
+        AudioManager.instance.PlayIntro();
+    }
+
+    private void HandleMainMenu()
+    {
+        SceneManager.LoadScene("LevelSelectionMenu");
+
+        AudioManager.instance.StopAllAudioSources();
+        AudioManager.instance.PlayIntro();
     }
 
     private void HandlePlaying() // show the scene with the level to play
@@ -166,33 +181,38 @@ public class GameManager : MonoBehaviour
         }
         TextFileManager.AddWitchLevelYouStartPlaying();
 
-        _audioManager.PauseAllBackgroundMusics();
-        _audioManager.PlayBackgroundMusic();
+        AudioManager.instance.StopAllAudioSources();
+        AudioManager.instance.PlayBackgroundMusic();
     }
 
     private void LoadYouLoseWonScene()
     {
         SceneManager.LoadScene("YouLoseWon");
+        AudioManager.instance.StopAllAudioSources();
+        AudioManager.instance.PlayIntro();
     }
 
     private void HandleLose() // Show the screen you lose
     {
         LoadYouLoseWonScene();
         TextFileManager.AddThatYouLostALevel();
-        _audioManager.PauseAllBackgroundMusics();
+        AudioManager.instance.StopAllAudioSources();
+        AudioManager.instance.PlayIntro();
     }
-    
+
     private void HandleWin() // Show the screen you won
     {
         LoadYouLoseWonScene();
         TextFileManager.AddThatYouWonALevel();
-        _audioManager.PauseAllBackgroundMusics();
+        AudioManager.instance.StopAllAudioSources();
+        AudioManager.instance.PlayIntro();
     }
 
 }
 
 public enum GameState // The possible states of the game
 {
+    MainMenu,
     SelectionLevel,
     Playing,
     Lose,
