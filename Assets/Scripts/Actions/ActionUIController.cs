@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using MoreMountains.Feedbacks;
 
 public class ActionUIController : MonoBehaviour
 {
@@ -79,8 +80,8 @@ public class ActionUIController : MonoBehaviour
 
     private void ShowExplosionChangeActionAnimation()
     {
-        _explosionChangeActionAnimator.enabled = true;
-        _explosionChangeActionAnimator.SetTrigger("animationExplosionChangeAction");
+        //_explosionChangeActionAnimator.enabled = true;
+        //_explosionChangeActionAnimator.SetTrigger("animationExplosionChangeAction");
     }
 
     public void LoadActionSequence(List<Sprite> actionsSprites, float durationOfTheFirstAction) 
