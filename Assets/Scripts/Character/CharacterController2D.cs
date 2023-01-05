@@ -300,7 +300,7 @@ namespace DLLF {
 
         private void CalculateJump() {
             // Jump if: grounded or within coyote threshold || sufficient jump buffer
-            if (MovementRequest.Jump && CanUseCoyote || HasBufferedJump) {
+            if (MovementRequest.Jump) {
                 _currentVerticalSpeed = _jumpHeight;
                 _endedJumpEarly = false;
                 _coyoteUsable = false;

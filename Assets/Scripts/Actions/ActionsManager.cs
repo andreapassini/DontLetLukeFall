@@ -115,7 +115,6 @@ namespace DLLF
                 yield return new WaitForSeconds(timeToComplete);
             }
 
-            Debug.Log("Actions sequence end");
             _actionUIController.StopSequence();
         }
 
@@ -124,7 +123,6 @@ namespace DLLF
         [ContinuousAction(ActionType.Crouch)]
         private float Crouch()
         {
-            Debug.Log("Activating Crouch");
             _crouching = true;
             _speed = movementParams.CrouchSpeed;
             return GetTime(movementParams.UnitsCoveredPerAction, _speed);
@@ -133,7 +131,6 @@ namespace DLLF
 		[ImmediateAction(ActionType.Jump)]
         private float Jump()
         {
-            Debug.Log("Activating Jump");
             _jump = true;
             // if it is running it will cover more units
             return GetTime(movementParams.GetUnitToCoverForJump(_isRunning), _speed);
@@ -143,7 +140,6 @@ namespace DLLF
         [ContinuousAction(ActionType.WalkRight)]
         private float WalkRight()
         {
-            Debug.Log("Activating WalkRight");
 
             _speed = movementParams.WalkSpeed;
             _isRunning = false;
@@ -155,7 +151,6 @@ namespace DLLF
         [ContinuousAction(ActionType.WalkLeft)]
         private float WalkLeft()
         {
-            Debug.Log("Activating WalkLeft");
 
             _speed = -movementParams.WalkSpeed;
             _isRunning = false;
@@ -168,7 +163,6 @@ namespace DLLF
         [ContinuousAction(ActionType.RunRight)]
         private float RunRight()
         {
-            Debug.Log("Activating RunRight");
 
             _speed = movementParams.RunSpeed;
             _isRunning = true;
@@ -181,7 +175,6 @@ namespace DLLF
         [ContinuousAction(ActionType.RunLeft)]
         private float RunLeft()
         {
-            Debug.Log("Activating RunLeft");
 
             _speed = -movementParams.RunSpeed;
             _isRunning = true;
@@ -192,7 +185,6 @@ namespace DLLF
         [ImmediateAction(ActionType.Stop)]
         private float Stop()
         {
-            Debug.Log("Activating Stop");
 
 
             _speed = 0;
@@ -205,7 +197,6 @@ namespace DLLF
         [ImmediateAction(ActionType.Die)]
         private float Die()
         {
-            Debug.Log("Activating Die");
 
 
             _speed = 0;
@@ -222,7 +213,6 @@ namespace DLLF
         
         public void animationDeath() // This method is to play the death animation when Luke die (fall)
         {
-            Debug.Log("Luke has fallen");
             _speed = 0;
             _isRunning = false;
             _crouching = false;
@@ -232,7 +222,6 @@ namespace DLLF
         
         public void animationWon() // This method is to play an animation when Luke arrive to the end of the level
         {
-            Debug.Log("Luke has won");
             Stop();
             _needToContinueWithTheActionSequence = false;
             _actionUIController.StopSequence();
