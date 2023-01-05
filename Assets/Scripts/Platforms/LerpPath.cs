@@ -15,6 +15,7 @@ public class LerpPath : MonoBehaviour
     [SerializeField]
     private float _waitingTime = 0;
     private float _timer = 0;
+    private bool _isTriggered = false;
     private void Awake()
     {
         _timer = _waitingTime;
@@ -23,27 +24,41 @@ public class LerpPath : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        _time += Time.deltaTime * _speed * _speed / Vector2.Distance(_path[_actualTarget],_path[_nextTarget]);
-        if (_time < 1)
+        if (_isTriggered)
         {
-            transform.position = Vector3.Lerp(_path[_actualTarget] + _offset, _path[_nextTarget] + _offset, _time);
-        }
-        else
-        {
-            if (_waitingTime <= 0)
+            _time += Time.deltaTime * _speed * _speed / Vector2.Distance(_path[_actualTarget], _path[_nextTarget]);
+            if (_time < 1)
             {
-                _waitingTime = _timer;
-                _time = 0;
-                _actualTarget = _actualTarget != _path.Count - 1 ? _actualTarget + 1 : 0;
-                _nextTarget = _nextTarget != _path.Count - 1 ? _nextTarget + 1 : 0;
+                transform.position = Vector3.Lerp(_path[_actualTarget] + _offset, _path[_nextTarget] + _offset, _time);
             }
             else
             {
-                _waitingTime -= Time.deltaTime;
-                Debug.Log(_waitingTime);
+                if (_waitingTime <= 0)
+                {
+                    _waitingTime = _timer;
+                    _time = 0;
+                    _actualTarget = _actualTarget != _path.Count - 1 ? _actualTarget + 1 : 0;
+                    _nextTarget = _nextTarget != _path.Count - 1 ? _nextTarget + 1 : 0;
+                }
+                else
+                {
+                    _waitingTime -= Time.deltaTime;
+                    Debug.Log(_waitingTime);
+                }
             }
         }
-        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag.Equals("Player"))
+        {
+            Invoke("StartMoving", 0.1f);
+        }
+    }
+
+    private void StartMoving()
+    {
+        _isTriggered = true;
     }
 }
