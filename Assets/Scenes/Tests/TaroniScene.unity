@@ -1254,6 +1254,10 @@ PrefabInstance:
       propertyPath: _levelActionsSequence
       value: 
       objectReference: {fileID: 11400000, guid: 8b384fea4dd827e4bbf4ea05bfe99298, type: 2}
+    - target: {fileID: 6729434161784164172, guid: 05f403bb8ff6ef44ca49e693d786d65a, type: 3}
+      propertyPath: _levelPlatformSequence
+      value: 
+      objectReference: {fileID: 11400000, guid: eade37d34e031d140b9be3942bd534d4, type: 2}
     - target: {fileID: 6729434161784164173, guid: 05f403bb8ff6ef44ca49e693d786d65a, type: 3}
       propertyPath: m_RootOrder
       value: 4
