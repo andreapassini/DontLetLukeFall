@@ -49,26 +49,7 @@ public class SettingMenu : MonoBehaviour
         {
             _soundEffectsSlider.value = _maxSliderValue;
         }
-        // This part of the script is to change the color of the sliders when navigating on them
-        if (_eventSystem.currentSelectedGameObject != null)
-        {
-            if (_eventSystem.currentSelectedGameObject.name == _backgroundMusicSlider.name && _fillBackgroundMusicSlider.color != _selectionSliderColor)
-            {
-                _oldColor = _fillBackgroundMusicSlider.color;
-                _fillBackgroundMusicSlider.color = _selectionSliderColor;
-            } else if (_eventSystem.currentSelectedGameObject.name != _backgroundMusicSlider.name && _fillBackgroundMusicSlider.color == _selectionSliderColor)
-            {
-                _fillBackgroundMusicSlider.color = _oldColor;
-            }
-            if (_eventSystem.currentSelectedGameObject.name == _soundEffectsSlider.name && _fillSoundEffectsSlider.color != _selectionSliderColor)
-            {
-                _oldColor = _fillSoundEffectsSlider.color;
-                _fillSoundEffectsSlider.color = _selectionSliderColor;
-            } else if (_eventSystem.currentSelectedGameObject.name != _soundEffectsSlider.name && _fillSoundEffectsSlider.color == _selectionSliderColor)
-            {
-                _fillSoundEffectsSlider.color = _oldColor;
-            }
-        }
+        
         // Select an element when starting to navigate with keyboard
         if (Input.anyKeyDown && !(Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2)))
         {
