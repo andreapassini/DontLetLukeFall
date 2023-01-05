@@ -43,7 +43,6 @@ public class LerpPath : MonoBehaviour
                 else
                 {
                     _waitingTime -= Time.deltaTime;
-                    Debug.Log(_waitingTime);
                 }
             }
         }
