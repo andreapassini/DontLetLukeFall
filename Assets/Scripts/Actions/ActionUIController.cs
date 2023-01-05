@@ -24,6 +24,8 @@ public class ActionUIController : MonoBehaviour
     
     private Animator _explosionChangeActionAnimator;
 
+    private MMF_Player _actionBarFeedback;
+
     private void Awake()
     {
         foreach (var el in _displayActionImages) // starting fixings
@@ -35,6 +37,8 @@ public class ActionUIController : MonoBehaviour
         UpdateBarAmount(0f);
         _explosionChangeActionAnimator = _imageExplosionChangeAction.GetComponent<Animator>();
         _explosionChangeActionAnimator.enabled = false;
+
+        _actionBarFeedback = GetComponent<MMF_Player>();
     }
 
     private void Update()
@@ -82,6 +86,9 @@ public class ActionUIController : MonoBehaviour
     {
         //_explosionChangeActionAnimator.enabled = true;
         //_explosionChangeActionAnimator.SetTrigger("animationExplosionChangeAction");
+        _actionBarFeedback ??= GetComponent<MMF_Player>();
+
+        _actionBarFeedback.PlayFeedbacks();
     }
 
     public void LoadActionSequence(List<Sprite> actionsSprites, float durationOfTheFirstAction) 
