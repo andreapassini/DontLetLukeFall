@@ -8,7 +8,6 @@ public class MovingPlatform : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Player"))
         {
-            Debug.Log("enter");
             collision.gameObject.transform.SetParent(gameObject.transform, true);
         }
     }
@@ -17,7 +16,6 @@ public class MovingPlatform : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Player"))
         {
-            Debug.Log("exit");
             collision.gameObject.transform.parent = null;
         }
     }
