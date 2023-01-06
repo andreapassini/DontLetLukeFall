@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 namespace DLLF
@@ -23,6 +24,9 @@ namespace DLLF
         private LevelManager levelManager;
         private AudioManager _audioManager;
 
+        [SerializeField] private Image _imageBar;
+        private float _fillUnit;
+
         private void Awake()
         {
             if (_platformSlots.Length == 0)
@@ -39,6 +43,9 @@ namespace DLLF
 		private void Start()
 		{
             _audioManager = AudioManager.instance;
+
+            _fillUnit = _cooldownNewPlatform;
+            _imageBar.fillAmount = 0f;
         }
 
 		// Update is called once per frame
@@ -54,6 +61,8 @@ namespace DLLF
                 else
                 {
                     _timer += Time.deltaTime;
+
+                    UpdateBarAmount(_timer / _fillUnit);
                 }
             }
             else
@@ -69,6 +78,8 @@ namespace DLLF
             _platformSlots.Where(s => s.isEmpty).First().GeneratePlatform(selectedPlatform);
 
             AudioManager.instance.PlayNewPlatfromSFX();
+
+            _imageBar.fillAmount = 0f;
         }
 
         private bool AllSlotFull()
@@ -122,6 +133,11 @@ namespace DLLF
             CreateNewPlatform();
             CreateNewPlatform();
             PlatformUI.SetPregeneratedPlatform(3);
+        }
+
+        private void UpdateBarAmount(float percentage)
+        {
+            _imageBar.fillAmount = percentage;
         }
     }
 }
