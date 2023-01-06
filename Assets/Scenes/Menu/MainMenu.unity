@@ -678,12 +678,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   color1: {r: 0, g: 0, b: 0, a: 0.3882353}
   color2: {r: 0, g: 0, b: 0, a: 0}
-  speed: 0.2
-  size: 21
+  speed: 0.47
+  size: 30
   skew: 0
   shear: 5
-  fade: 1
-  contrast: 3.7
+  fade: 0
+  contrast: 3
   sortingLayer: -208993635
   orderInLayer: 0
 --- !u!23 &402611697
@@ -1417,7 +1417,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 0}
+  m_BackGroundColor: {r: 0.16037738, g: 0.16037738, b: 0.16037738, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

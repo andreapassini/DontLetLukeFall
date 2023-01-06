@@ -53,13 +53,13 @@ Material:
     - _BumpFace: 0
     - _BumpOutline: 0
     - _ColorMask: 15
-    - _Contrast: 3.7
+    - _Contrast: 3
     - _CullMode: 0
     - _Diffuse: 0.5
     - _FaceDilate: 0.1
     - _FaceUVSpeedX: 0
     - _FaceUVSpeedY: 0
-    - _Fade: 1
+    - _Fade: 0
     - _GlowInner: 0.05
     - _GlowOffset: 0
     - _GlowOuter: 0.05
@@ -82,10 +82,10 @@ Material:
     - _ShaderFlags: 0
     - _Sharpness: 0
     - _Shear: 5
-    - _Size: 21
+    - _Size: 30
     - _Skew: 0
     - _SpecularPower: 2
-    - _Speed: 0.2
+    - _Speed: 0.47
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
