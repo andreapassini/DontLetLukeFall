@@ -32,6 +32,9 @@ namespace DLLF
         [SerializeField]
         private float _minDistanceFromPlayer=2f;
 
+        [SerializeField]
+        private float _waitPlatformInteraction = 5f;
+
         private void Awake()
         {
             _rectTransform = GetComponent<RectTransform>();
@@ -133,7 +136,7 @@ namespace DLLF
 
         IEnumerator RestartPlatformInteraction()
         {
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(_waitPlatformInteraction);
             _canvasGroup.blocksRaycasts=true;
         }
 
