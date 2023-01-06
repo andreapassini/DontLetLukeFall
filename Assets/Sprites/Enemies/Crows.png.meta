@@ -42,12 +42,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 256
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -101,9 +101,219 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Crows_0
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 730
+        width: 543
+        height: 807
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 198.5, y: -244.5}
+        - {x: 143.5, y: -215.5}
+        - {x: 225.5, y: -89.5}
+        - {x: 271.5, y: 64.5}
+        - {x: 271.5, y: 305.5}
+        - {x: 205.5, y: 403.5}
+        - {x: -209.5, y: 403.5}
+        - {x: -271.5, y: 228.5}
+        - {x: -271.5, y: -254.5}
+        - {x: -138.5, y: -403.5}
+        - {x: 256.5, y: -403.5}
+        - {x: 271.5, y: -354.5}
+        - {x: 271.5, y: -300.5}
+      - - {x: 262.5, y: -103.5}
+        - {x: 263.5, y: -106.5}
+        - {x: 266.5, y: -106.5}
+        - {x: 268.5, y: -104.5}
+        - {x: 267.5, y: -101.5}
+        - {x: 264.5, y: -101.5}
+      - - {x: 255.5, y: 116.5}
+        - {x: 259.5, y: 112.5}
+        - {x: 264.5, y: 112.5}
+        - {x: 268.5, y: 114.5}
+        - {x: 268.5, y: 120.5}
+        - {x: 267.5, y: 125.5}
+        - {x: 258.5, y: 125.5}
+        - {x: 255.5, y: 121.5}
+      - - {x: -269.5, y: 403.5}
+        - {x: -267.5, y: 398.5}
+        - {x: -264.5, y: 397.5}
+        - {x: -261.5, y: 397.5}
+        - {x: -256.5, y: 401.5}
+        - {x: -256.5, y: 403.5}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 347a5d40297ae724685559de22f967c2
+      internalID: -979461847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crows_1
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 1206
+        width: 700
+        height: 779
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 57, y: 385.5}
+        - {x: -240, y: 385.5}
+        - {x: -350, y: 323.5}
+        - {x: -350, y: 270.5}
+        - {x: -202, y: -389.5}
+        - {x: -18, y: -389.5}
+        - {x: 350, y: -60.5}
+        - {x: 350, y: 218.5}
+        - {x: 298, y: 329.5}
+      - - {x: -111, y: -45.5}
+        - {x: -106, y: -38.5}
+        - {x: -108, y: -41.5}
+        - {x: -113, y: -47.5}
+        - {x: -111, y: -46.5}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48c163e181fb6d248aa30814456806a1
+      internalID: -247860144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crows_2
+      rect:
+        serializedVersion: 2
+        x: 1299
+        y: 1183
+        width: 641
+        height: 806
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -238.5, y: 403}
+        - {x: -306.5, y: 218}
+        - {x: -320.5, y: 107}
+        - {x: -320.5, y: -312}
+        - {x: -124.5, y: -403}
+        - {x: 121.5, y: -403}
+        - {x: 320.5, y: -196}
+        - {x: 320.5, y: 157}
+        - {x: 24.5, y: 403}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05e8e240d2b450643b61c6338e522a40
+      internalID: -1120503862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crows_3
+      rect:
+        serializedVersion: 2
+        x: 1241
+        y: 94
+        width: 718
+        height: 722
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -224, y: 361}
+        - {x: -234, y: 360}
+        - {x: -359, y: 304}
+        - {x: -359, y: 39}
+        - {x: -209, y: -361}
+        - {x: 70, y: -361}
+        - {x: 359, y: 168}
+        - {x: 359, y: 361}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a60aecfeb3a343f4d90e7fd5d7291789
+      internalID: -381769275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crows_4
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 161
+        width: 704
+        height: 938
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -185, y: 432}
+        - {x: -189, y: 418}
+        - {x: -189, y: 413}
+        - {x: -189, y: 415}
+        - {x: -211, y: 451}
+        - {x: -226, y: 469}
+        - {x: -281, y: 469}
+        - {x: -311, y: 407}
+        - {x: -311, y: -77}
+        - {x: -287, y: -389}
+        - {x: -195, y: -469}
+        - {x: 169, y: -469}
+        - {x: 352, y: -352}
+        - {x: 352, y: -22}
+        - {x: -166, y: 444}
+      - - {x: 19, y: -349}
+        - {x: 17, y: -347}
+        - {x: 14, y: -346}
+        - {x: 20, y: -340}
+        - {x: 24, y: -346}
+        - {x: 25, y: -353}
+      - - {x: -189, y: 49}
+        - {x: -193, y: 52}
+        - {x: -193, y: 55}
+        - {x: -192, y: 56}
+        - {x: -191, y: 51}
+        - {x: -188, y: 47}
+        - {x: -187, y: 47}
+        - {x: -187, y: 48}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7dbdccbb6d4a0142a7e1bd0c15591d8
+      internalID: -1243832679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -114,7 +324,12 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Crows_3: -381769275
+      Crows_2: -1120503862
+      Crows_0: -979461847
+      Crows_1: -247860144
+      Crows_4: -1243832679
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

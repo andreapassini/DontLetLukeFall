@@ -11,30 +11,42 @@ public class YouLoseWonSceneScript : MonoBehaviour
     
     [SerializeField] private GameObject _buttonToFirstSelect; // Button to first select when starting to navigate with keyboard
     [SerializeField] private EventSystem _eventSystem; // The event system to witch attach this script
-    [SerializeField] private Text _youLoseWonText; // A text with the written "You won!" or "You lose!"
     [SerializeField] private Text _secondaryText; // A text with the written something as "You've completed the level aaa!"
     [SerializeField] private GameObject _buttonNextLevel; // This button could not be shown in case you lose
     [SerializeField] private Animator _animatorImageEmojy; // The animator that controls the image emojy to show an image of Luke that you won or lose
     [SerializeField] private GameObject _imageArrowNextLevel1; // 1 of the 2 images to decorate the button next level
-    [SerializeField] private GameObject _imageArrowNextLevel2; // 1 of the 2 images to decorate the button next level
+    [SerializeField] private GameObject _imageArrowNextLevel2; 
+    // 1 of the 2 images to decorate the button next level
+
+    [SerializeField] private GameObject _loseEnemyBackground;
+    [SerializeField] private GameObject _winEnemyBackground;
+    [SerializeField] private Camera _camera;
     
     [SerializeField] private GameObject _loaderCanvas; // The loading screen
     [SerializeField] private Image _progressBar; // The progress bar in the loading screen
-    
+
+    private Color _winBackground = new Color(0.64f, 0.64f, 0.64f);
+    private Color _loseBackground = new Color(0.32f, 0.32f, 0.32f);
+
     private void Start()
     {
         PauseMenu.gameIsPaused = false;
         _buttonNextLevel.SetActive(true);
         if (GameManager.Instance.state == GameState.Win)
         {
-            _youLoseWonText.text = "You won!";
+            _winEnemyBackground.SetActive(true);
+            _camera.backgroundColor = _winBackground;
             int numberLevelToShow = GameManager.Instance.GetLevelToPlay() - 1;
-            string numberLevelToShowString = "" + numberLevelToShow + "";
+            string numberLevelToShowString = "";
             if (numberLevelToShow == 0)
             {
                 numberLevelToShowString = "tutorial";
             }
-            _secondaryText.text = "You've completed the level " + numberLevelToShowString + "!";
+            else
+            {
+                numberLevelToShowString = "Level " + numberLevelToShow;
+            }
+            _secondaryText.text = numberLevelToShowString + " completed!";
         }
         if (GameManager.Instance.LevelToPlayIsTheLastOne())
         {
@@ -44,17 +56,22 @@ public class YouLoseWonSceneScript : MonoBehaviour
         }
         if (GameManager.Instance.state == GameState.Lose)
         {
-            _youLoseWonText.text = "You lose!";
+            _camera.backgroundColor = _loseBackground;
+            _loseEnemyBackground.SetActive(true);
             _animatorImageEmojy.SetTrigger("showInsteadAnimationYouLose");
             _imageArrowNextLevel1.SetActive(false);
             _imageArrowNextLevel2.SetActive(false);
             int numberLevelToShow = GameManager.Instance.GetLevelToPlay() - 1;
-            string numberLevelToShowString = "" + numberLevelToShow + "";
+            string numberLevelToShowString = "";
             if (numberLevelToShow == 0)
             {
                 numberLevelToShowString = "tutorial";
             }
-            _secondaryText.text = "You've not completed the level " + numberLevelToShowString + "!";
+            else
+            {
+                numberLevelToShowString = "Level " + numberLevelToShow;
+            }
+            _secondaryText.text = numberLevelToShowString + " failed!";
             _buttonNextLevel.SetActive(false);
         }
     }
