@@ -2060,7 +2060,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3645141131543775294, guid: c6eea62c71274914cb8c40a051a25ce0, type: 3}
       propertyPath: managedReferences[8960907115845386254].AllowAdditivePlays
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3645141131543775294, guid: c6eea62c71274914cb8c40a051a25ce0, type: 3}
       propertyPath: managedReferences[8960907115845386254].AnimateScaleTarget
