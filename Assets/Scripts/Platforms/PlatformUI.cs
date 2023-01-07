@@ -56,7 +56,7 @@ namespace DLLF
                 _isWithEffect = true;
                 foreach (Image renderer in _spriteRenderersUI)
                 {
-                    renderer.color = new Color(255, 0, 0);
+                    renderer.color = new Color(0.5176471f, 0.9098039f, 0.9803922f,renderer.color.a);
                 }
             }
             if(_pregeneratedPlatform > 0)
@@ -86,7 +86,7 @@ namespace DLLF
                 SpriteRenderer[] spriteRenderers = _spawnedPlatform.GetComponentsInChildren<SpriteRenderer>();
                 foreach (SpriteRenderer renderer in spriteRenderers)
                 {
-                    renderer.color = new Color(255, 0, 0);
+                    renderer.color = new Color(0.5176471f, 0.9098039f, 0.9803922f, renderer.color.a);
                 }
                 
                 //randomize the effect of the platform
