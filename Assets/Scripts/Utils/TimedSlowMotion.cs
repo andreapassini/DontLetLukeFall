@@ -54,6 +54,8 @@ namespace DLLF
             Debug.Log("Activating slow mo");
             _slowMoBack = SlowMoBackInterpolation();
             StartCoroutine(StartTimedSlowMo());
+
+            //StartSlowMoFeel();
         }
 
         private IEnumerator StartTimedSlowMo()
@@ -64,12 +66,12 @@ namespace DLLF
 
             for (int i = (int)_interpolationSegmentsAtStart; i > 0; i--)
             {
-                Time.timeScale = _slowMoTimeScale + (unitInterpolation * i);
+                //Time.timeScale = _slowMoTimeScale + (unitInterpolation * i);
                 AudioManager.instance.GetAudioMixer().SetFloat("MasterPitch", _slowMoPitch + (unitInterpolation * i));
                 yield return new WaitForSecondsRealtime(_interpolationDurationAtStart/_interpolationSegmentsAtStart);
             }
 
-            Time.timeScale = _slowMoTimeScale;
+            //Time.timeScale = _slowMoTimeScale;
             AudioManager.instance.GetAudioMixer().SetFloat("MasterPitch", _slowMoPitch);
 
             yield return new WaitForSecondsRealtime(_slowMoDuration);
@@ -80,7 +82,6 @@ namespace DLLF
 
         public void DeactivateSlowMotion()
         {
-            //StopCoroutine(nameof(StartTimedSlowMo));
             StopCoroutine(StartTimedSlowMo());
 
             // With IEnumerator ref, we can stop coroutine and keep its progression/steps/state
@@ -90,7 +91,8 @@ namespace DLLF
             // To restart the endend cor, StartCoroutine(Coroutine())
             StartCoroutine(_slowMoBack);
 
-            Time.timeScale = _originalTimeScale;
+            //Time.timeScale = _originalTimeScale;
+            //StopSlowMoFeel();
             _slowMoFeedback?.StopFeedbacks();
         }
 
@@ -98,14 +100,14 @@ namespace DLLF
         {
             float unitInterpolation = (_originalTimeScale - _slowMoTimeScale) / _interpolationSegmentsAtEnd;
 
-            for (int i = (int)_interpolationSegmentsAtEnd; i > 0; i--)
+            for (int i = 0; i > (int)_interpolationSegmentsAtEnd; i++)
             {
-                Time.timeScale = _slowMoTimeScale + (unitInterpolation * i);
+                //Time.timeScale = _slowMoTimeScale + (unitInterpolation * i);
                 AudioManager.instance.GetAudioMixer().SetFloat("MasterPitch", _slowMoPitch + (unitInterpolation * i));
                 yield return new WaitForSecondsRealtime(_interpolationDurationAtEnd / _interpolationSegmentsAtEnd);
             }
 
-            Time.timeScale = _originalTimeScale;
+            //Time.timeScale = _originalTimeScale;
             AudioManager.instance.GetAudioMixer().SetFloat("MasterPitch", _masterPitch);
 
             _slowMoFeedback?.StopFeedbacks();
@@ -113,8 +115,18 @@ namespace DLLF
 
         private void OnDestroy()
         {
-            Time.timeScale = _originalTimeScale;
+            //Time.timeScale = _originalTimeScale;
             AudioManager.instance.GetAudioMixer().SetFloat("MasterPitch", _masterPitch);
+            _slowMoFeedback?.StopFeedbacks();
+        }
+
+        private void StartSlowMoFeel()
+        {
+            _slowMoFeedback?.PlayFeedbacks();
+        }
+
+        private void StopSlowMoFeel()
+        {
             _slowMoFeedback?.StopFeedbacks();
         }
     }

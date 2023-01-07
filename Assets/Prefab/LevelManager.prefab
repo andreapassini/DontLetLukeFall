@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6729434161784164173}
   - component: {fileID: 6729434161784164172}
   - component: {fileID: 1152539698}
+  - component: {fileID: 3123656379812874710}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -65,11 +66,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _slowMoMultiplier: 0.1
   _slowMoDuration: 2
-  _interpolationDurationAtStart: 0.15
+  _interpolationDurationAtStart: 0.05
   _interpolationSegmentsAtStart: 25
-  _interpolationDurationAtEnd: 0.15
+  _interpolationDurationAtEnd: 0.05
   _interpolationSegmentsAtEnd: 25
   _slowMoFeedback: {fileID: 5118800170640875350}
+--- !u!114 &3123656379812874710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6729434161784164175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f7de9ef06f04864391a928af29f4b46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NormalTimescale: 1
+  DefaultLerpSpeed: 1
+  DefaultLerpTimescale: 0
+  CurrentTimeScale: 1
+  TargetTimeScale: 1
+  LerpTimescale: 1
+  LerpSpeed: 0
+  TestButton: 0
 --- !u!1001 &6690253020880192087
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -137,7 +158,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3372053377720996609, guid: e5266d45b10077c4ca400f7c07428465, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e5266d45b10077c4ca400f7c07428465, type: 3}
 --- !u!1 &6287871672454456419 stripped
 GameObject:
@@ -194,24 +216,25 @@ MonoBehaviour:
         m_Calls: []
   DebugActive: 0
   FeedbacksList:
-  - rid: 8960907124978221071
-  - rid: 8960907124978221072
-  - rid: 8960907124978221073
-  - rid: 8960907124978221074
-  - rid: 8960907124978221075
-  - rid: 8960907124978221076
-  - rid: 8960907124978221077
+  - rid: 2257073238108274700
+  - rid: 2257073238108274701
+  - rid: 2257073238108274702
+  - rid: 2257073238108274703
+  - rid: 2257073238108274704
+  - rid: 2257073238108274705
+  - rid: 2257073238108274706
+  - rid: 2257073238108274707
   KeepPlayModeChanges: 0
   PerformanceMode: 0
   ForceStopFeedbacksOnDisable: 1
   references:
     version: 2
     RefIds:
-    - rid: 8960907124978221071
+    - rid: 2257073238108274700
       type: {class: MMF_CinemachineImpulse, ns: MoreMountains.FeedbacksForThirdParty, asm: MoreMountains.Feedbacks.Cinemachine}
       data:
         Active: 1
-        UniqueID: -396363742
+        UniqueID: 1957969518
         Label: Cinemachine Impulse
         Channel: 0
         Chance: 100
@@ -325,11 +348,11 @@ MonoBehaviour:
           m_PropagationSpeed: 343
         Velocity: {x: 0.5, y: 0.5, z: 0.5}
         ClearImpulseOnStop: 1
-    - rid: 8960907124978221072
+    - rid: 2257073238108274701
       type: {class: MMF_ChromaticAberration_URP, ns: MoreMountains.FeedbacksForThirdParty, asm: MoreMountains.Feedbacks.URP}
       data:
         Active: 1
-        UniqueID: -1260045593
+        UniqueID: 1271400339
         Label: Chromatic Aberration URP
         Channel: 0
         Chance: 100
@@ -396,11 +419,11 @@ MonoBehaviour:
           m_RotationOrder: 4
         Amplitude: 1
         RelativeIntensity: 1
-    - rid: 8960907124978221073
+    - rid: 2257073238108274702
       type: {class: MMF_LensDistortion_URP, ns: MoreMountains.FeedbacksForThirdParty, asm: MoreMountains.Feedbacks.URP}
       data:
         Active: 0
-        UniqueID: 1058956307
+        UniqueID: 1037262479
         Label: Lens Distortion URP
         Channel: 0
         Chance: 100
@@ -466,11 +489,11 @@ MonoBehaviour:
           m_RotationOrder: 4
         RemapIntensityZero: 0
         RemapIntensityOne: 0.5
-    - rid: 8960907124978221074
+    - rid: 2257073238108274703
       type: {class: MMF_Vignette_URP, ns: MoreMountains.FeedbacksForThirdParty, asm: MoreMountains.Feedbacks.URP}
       data:
         Active: 1
-        UniqueID: -1851370903
+        UniqueID: 675167108
         Label: Vignette URP
         Channel: 0
         Chance: 100
@@ -536,11 +559,11 @@ MonoBehaviour:
         RemapIntensityZero: 0
         RemapIntensityOne: 1
         RelativeIntensity: 1
-    - rid: 8960907124978221075
+    - rid: 2257073238108274704
       type: {class: MMF_FilmGrain_URP, ns: MoreMountains.FeedbacksForThirdParty, asm: MoreMountains.Feedbacks.URP}
       data:
         Active: 1
-        UniqueID: -484889885
+        UniqueID: -300307461
         Label: Film Grain URP
         Channel: 0
         Chance: 100
@@ -606,11 +629,11 @@ MonoBehaviour:
         RemapIntensityZero: 0
         RemapIntensityOne: 1
         RelativeIntensity: 1
-    - rid: 8960907124978221076
+    - rid: 2257073238108274705
       type: {class: MMF_Bloom_URP, ns: MoreMountains.FeedbacksForThirdParty, asm: MoreMountains.Feedbacks.URP}
       data:
         Active: 1
-        UniqueID: -888088907
+        UniqueID: 1938547774
         Label: Bloom URP
         Channel: 0
         Chance: 100
@@ -711,11 +734,11 @@ MonoBehaviour:
           m_RotationOrder: 4
         RemapThresholdZero: 0
         RemapThresholdOne: 0
-    - rid: 8960907124978221077
+    - rid: 2257073238108274706
       type: {class: MMF_Sound, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks.MMTools}
       data:
         Active: 0
-        UniqueID: 724759328
+        UniqueID: -29934778
         Label: Sound
         Channel: 0
         Chance: 100
@@ -755,6 +778,43 @@ MonoBehaviour:
         MinPitch: 1
         MaxPitch: 1
         SfxAudioMixerGroup: {fileID: 24300002, guid: 802dbd0e3604c4cbcb26ce8f5e6a5aab, type: 2}
+    - rid: 2257073238108274707
+      type: {class: MMF_TimescaleModifier, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
+      data:
+        Active: 1
+        UniqueID: -1190656643
+        Label: Timescale Modifier
+        Channel: 0
+        Chance: 100
+        DisplayColor: {r: 0, g: 0, b: 0, a: 1}
+        Timing:
+          TimescaleMode: 0
+          ExcludeFromHoldingPauses: 0
+          ContributeToTotalDuration: 1
+          InitialDelay: 0
+          CooldownDuration: 0
+          InterruptsOnStop: 1
+          NumberOfRepeats: 0
+          RepeatForever: 0
+          DelayBetweenRepeats: 1
+          MMFeedbacksDirectionCondition: 0
+          PlayDirection: 0
+          ConstantIntensity: 0
+          UseIntensityInterval: 0
+          IntensityIntervalMin: 0
+          IntensityIntervalMax: 0
+          Sequence: {fileID: 0}
+          TrackID: 0
+          Quantized: 0
+          TargetBPM: 120
+        Owner: {fileID: 5118800170640875350}
+        DebugActive: 0
+        Mode: 0
+        TimeScale: 0.1
+        TimeScaleDuration: 2
+        TimeScaleLerp: 0
+        TimeScaleLerpSpeed: 1
+        ResetTimescaleOnStop: 1
 --- !u!4 &9086870060736343903 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2504988204593982728, guid: e5266d45b10077c4ca400f7c07428465, type: 3}
