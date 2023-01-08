@@ -14296,6 +14296,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1419723087183648731, guid: e6df969786534f24bbc83ece6706f959, type: 3}
+      propertyPath: _sizeGridX
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 1419723087183648731, guid: e6df969786534f24bbc83ece6706f959, type: 3}
       propertyPath: _sizeGridY
       value: 200
       objectReference: {fileID: 0}
