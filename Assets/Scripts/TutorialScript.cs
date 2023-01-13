@@ -64,7 +64,7 @@ public class TutorialScript : MonoBehaviour
     IEnumerator part6()
     {
         _actionUI.SetActive(true);
-        _imageForTutorial.sprite = _tutorialImages[0];
+        _imageForTutorial.sprite = _tutorialImages[1];
         _imageForTutorialGameObject.SetActive(true);
         _textForTutorial.text = "This is Action Ul, a bar where you can see witch action Luke will perform";
         yield return new WaitForSeconds(4);

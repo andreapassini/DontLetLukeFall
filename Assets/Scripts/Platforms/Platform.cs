@@ -54,7 +54,7 @@ namespace DLLF
                         SpriteRenderer[] spriteRenderers = platform.GetComponentsInChildren<SpriteRenderer>();
                         foreach (SpriteRenderer renderer in spriteRenderers)
                         {
-                            renderer.color = new Color(255, 0, 0);
+                            renderer.color = new Color(0.5176471f, 0.9098039f, 0.9803922f, renderer.color.a);
                         }
                     }
                 }
