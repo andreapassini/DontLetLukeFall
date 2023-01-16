@@ -34,7 +34,7 @@ namespace DLLF
 		[SerializeField]
         private MMF_Player _slowMoFeedback;
 
-        private IEnumerator _slowMoBack;
+        //private IEnumerator _slowMoBack;
         
         void Awake()
         {
@@ -52,8 +52,8 @@ namespace DLLF
         public void ActivateSlowMotion()
         {
             Debug.Log("Activating slow mo");
-            _slowMoBack = SlowMoBackInterpolation();
-            StartCoroutine(StartTimedSlowMo());
+            //_slowMoBack = SlowMoBackInterpolation();
+            StartCoroutine("StartTimedSlowMo");
 
             //StartSlowMoFeel();
         }
@@ -77,19 +77,20 @@ namespace DLLF
             yield return new WaitForSecondsRealtime(_slowMoDuration);
 
             Debug.Log("Deactivating slow mo");
-            StartCoroutine(_slowMoBack);
+            //StartCoroutine(_slowMoBack);
+            StartCoroutine(SlowMoBackInterpolation());
         } 
 
         public void DeactivateSlowMotion()
         {
-            StopCoroutine(StartTimedSlowMo());
-
+            StopCoroutine("StartTimedSlowMo");
             // With IEnumerator ref, we can stop coroutine and keep its progression/steps/state
             // so when we call start again using IEnumerator ref, we restart from the stopped state
             // without losing progression
             // If the cor of _slowMoBack is already over, it will not restart
             // To restart the endend cor, StartCoroutine(Coroutine())
-            StartCoroutine(_slowMoBack);
+            //StartCoroutine(_slowMoBack);
+            StartCoroutine(SlowMoBackInterpolation());
 
             //Time.timeScale = _originalTimeScale;
             //StopSlowMoFeel();
@@ -99,7 +100,6 @@ namespace DLLF
         public IEnumerator SlowMoBackInterpolation()
         {
             float unitInterpolation = (_originalTimeScale - _slowMoTimeScale) / _interpolationSegmentsAtEnd;
-
             for (int i = 0; i > (int)_interpolationSegmentsAtEnd; i++)
             {
                 //Time.timeScale = _slowMoTimeScale + (unitInterpolation * i);
