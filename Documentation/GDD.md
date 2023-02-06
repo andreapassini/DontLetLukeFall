@@ -369,6 +369,11 @@ When the player will drop a platform (**trigger**) over a platform (or multiple 
 ![PlatfromCombination](https://user-images.githubusercontent.com/71270277/195996132-1011af5f-effb-4ee1-84ba-ca5c7c9e15a9.png)
 
 
+#### Slow-Motion
+While moving a platform time will slow allowing the player to place platform in an easier way.
+- The slow-motion effect will start when a platform is selected from the platform UI.
+- The slow-motion duration will be of 2 seconds
+Its goal is to make the game easier for the player but also to encourage a more dynamic playstyle, making placing platform while the player is in the middle of an action the best way to play the game and discouraging the player to have a more static and planned way of playing.
 ### Actions
 
 Actions determine the behavior of Luke.
