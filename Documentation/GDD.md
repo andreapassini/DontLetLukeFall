@@ -288,6 +288,16 @@ All the inclined plane will be substituted with a 1x1 block. The movement script
 	Vertical actions do not affect horizontal actions
 	Horizontal actions do not affect vertical actions
 
+Platform used in the game:
+
+![[LongMidPlat.png]]
+![[LongPlat.png]]
+![[Lplat.png]]
+![[RampPlat.png]]
+![[ShortPlat.png]]
+![[TPlat.png]]
+![[Wall.png]]
+
 
 ### **Environmental Platforms**
 - Horizontal Platforms
