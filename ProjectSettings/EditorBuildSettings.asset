@@ -59,4 +59,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Level10.unity
     guid: 266c18d0853fc8044acaf1b3ee69b4fc
+  - enabled: 1
+    path: Assets/Scenes/Menu/SplashScreen.unity
+    guid: 26799962984f1e0409477a01894d54df
   m_configObjects: {}
