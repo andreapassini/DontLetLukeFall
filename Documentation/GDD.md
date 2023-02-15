@@ -210,8 +210,8 @@ Don't Let Luke Fall, place platforms in the right position and help him escape t
 ## Gameplay Synopsis
 Don't Let Luke Fall is a 2D Platformer game within a dark environment and a tense mood.
 Luke has been trapped, by the Darkness, into one of his own nightmares, the only way for him to wake up is to reach the end of the level where a light will awake him.
-You will be able to foresee the next 3 moves of Luke, each will last for 5 seconds. Based on this information place one of the 3 platforms at your disposal in the right position.
-After being positioned a new platform will appear in the slot with a slight dealy.
+You will be able to foresee the next 5 moves of Luke, each will last for 5 seconds. Based on this information place one of the 3 platforms at your disposal in the right position.
+After being positioned a new platform will appear in the slot with a slight delay.
 <br>
 # Gameplay
 
@@ -222,7 +222,7 @@ His goal is to reach the end of the level, where a bright light will awake him.
 
 You will be able to place platforms in real time, preventing Luke to fall and allowing him to reach the end of the level.
 
-You will be able to foresee the next 3 actions that Luke will perform.
+You will be able to foresee the next 5 actions that Luke will perform.
 <br>
 ## Resources
 
@@ -323,6 +323,9 @@ Platform used in the game:
 
 <br>
 ## Core Mechanics
+
+
+
 ### Platform Positioning
 
 The player will be able to drag a platform from the UI and drop it inside the game in real time.
@@ -340,7 +343,7 @@ While moving:
 
 ##### **Character**
 
-Player will not be able to place platform over the character outline. In case the player will drop a platform on the siluette of the character this platform will endup at the feet of Luke.
+Player will not be able to place platform over the character outline. In case the player will drop a platform on the silhouette of the character this platform will end-up at the feet of Luke.
 
 
 ![OverlappingCharacter](https://user-images.githubusercontent.com/71270277/195995184-d583f2f0-a416-4294-8b86-85a1d1355461.png)
@@ -371,9 +374,9 @@ Player will be able to place a platform over one or more Environmental Platform
 
 #### Platform Combination
 
-When the player will drop a platform (**trigger**) over a platform (or multiple platforms) he previously placed (**base**), the platforms will combine toghter resulting in a platfrom characterized by:
+When the player will drop a platform (**trigger**) over a platform (or multiple platforms) he previously placed (**base**), the platforms will combine together resulting in a platform characterized by:
  - **Outline** = **merge** of the outline of **trigger** and **base** 
- -  **Color** = **trigger** 
+ - **Color** = **trigger** 
  - **Effect** = **trigger**
 
 ![PlatfromCombination](https://user-images.githubusercontent.com/71270277/195996132-1011af5f-effb-4ee1-84ba-ca5c7c9e15a9.png)
@@ -384,6 +387,8 @@ While moving a platform time will slow allowing the player to place platform in 
 - The slow-motion effect will start when a platform is selected from the platform UI.
 - The slow-motion duration will be of 2 seconds
 Its goal is to make the game easier for the player but also to encourage a more dynamic playstyle, making placing platform while the player is in the middle of an action the best way to play the game and discouraging the player to have a more static and planned way of playing.
+
+
 ### Actions
 
 Actions determine the behavior of Luke.
@@ -450,13 +455,13 @@ Actions can also be divided into 2 groups, based on with axis they affect:
 	
 	##### **Cayote Time**
 	
-	Luke will execute jump even if he left the platfrom where he was standing few istants before.
+	Luke will execute jump even if he left the platform where he was standing few instants before.
 	
 	![JumpFunctionExt](https://user-images.githubusercontent.com/71270277/196027739-b21b2288-e77e-4c1f-9c37-4dddb9490cf8.png)
 	
 	##### **Jump Buffer**
 	
-	When the jump action start and Luke is still in the air, if the charter land on a platfrom few istants after the action start Luke will execute a jump anyway.
+	When the jump action start and Luke is still in the air, if the charter land on a platform few instants after the action start Luke will execute a jump anyway.
 	
 	##### **Edge Detection**
 	
@@ -480,10 +485,6 @@ Actions can also be divided into 2 groups, based on with axis they affect:
 	This will allow Luke to pass through narrow passages/holes
 	
 	When **Crouch** effect **ends** and Luke is still in a **narrow passage/hole**, Luke will keep being crouch until the end of the **passage/hole**, other actions will fire but if they are vertical, they will not affect Luke's behavior
-	
-	When **Crouch** is **active** and a **Jump action** is fired, Luke will:
-	- Crouch-Jumping?
-	- Standing and then Jumping?
 
 - #### Stop
 	**Time-Limited**
@@ -514,7 +515,7 @@ Every action will last for 5 seconds, then the next action in line will be trigg
 
 ### Time Flow
 
-In-Game time will slowd down, in respect to real-time, in 2 circumstances:
+In-Game time will slow down, in respect to real-time, in 2 circumstances:
 - Action Ending
 - Action Starting
 
@@ -526,7 +527,7 @@ In-Game time will slowd down, in respect to real-time, in 2 circumstances:
 <br>
 ## Camera
 
-Draggin PLatfrom will stop camera movement
+Dragging Platform will stop camera movement
 
 #### Run Right
 
