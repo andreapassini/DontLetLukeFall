@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
     {
         _audioManager = AudioManager.instance;
 
-        UpdateGameState(GameState.Intro); // Setting the initial state
+        UpdateGameState(GameState.SplashScreen); // Setting the initial state
     }
 
     private void Update()
@@ -105,6 +105,9 @@ public class GameManager : MonoBehaviour
         
         switch (newState)
         {
+            case GameState.SplashScreen:
+                HandleSplashScreen();
+                break;
             case GameState.Intro:
                 HandleIntro();
                 break;
@@ -129,7 +132,12 @@ public class GameManager : MonoBehaviour
 
         OnGameStateChanged?.Invoke(newState);
     }
-    
+
+    private void HandleSplashScreen()
+    {
+        SceneManager.LoadScene("SplashScreen");
+    }
+
     public int GetLevelToPlay()
     {
         return _levelToPlay;
@@ -155,7 +163,7 @@ public class GameManager : MonoBehaviour
         _levelToPlay++;
     }
 
-    private void HandleIntro()
+    public void HandleIntro()
     {
         SceneManager.LoadScene("Intro");
     }
@@ -220,6 +228,7 @@ public class GameManager : MonoBehaviour
 
 public enum GameState // The possible states of the game
 {
+    SplashScreen,
     Intro,
     MainMenu,
     SelectionLevel,

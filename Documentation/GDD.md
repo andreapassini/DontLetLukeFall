@@ -1,126 +1,3 @@
-
-## Questions
-
-**Crouch and Jump**
-What happen if Luke is crouched and a Jump action is fired?
-<br>
-# Bugs
-
-## Step Jump not working
-https://www.youtube.com/watch?v=-9709suYI0E&ab_channel=ChrisVooren
-at 2:20 => 20:35
-
-## Placing platform on top of Luke block Luke's movement
-
-https://www.youtube.com/watch?v=-9709suYI0E&ab_channel=ChrisVooren
-at 0:50 => 1:10
-
-## Click on platform not working (MacOS)
-
-https://www.youtube.com/watch?v=wOkPIB0-DuI&ab_channel=TommasoSacchetti
-at 1:31
-
-# Prototype Feedbacks
-
-## Full Screen in Browser
-
-Someone wasn't able to play it in full screen while staying the browser
-
-## Random Platforms
-
-Having completely random platforms make the game unreliable
-
-## Tutorial
-
-Add a tutorial in game and also in settings some information about controls and how to play
-
-## Level Overview
-
-Having a Level Overview may help player to prepare a fast strategy for solving the level.
-
-
-## Level Slow Start
-
-A delay at the start of the level may help the player getting ready for the action.
-
-
-## Camera and Platform Positioning
-
-The fact that the camera is following Luke, do not make placing platform easy and intuitive
-
-Camera too zoomed-in 
-
-## Luke Speed and platform length
-
-Luke speed and platform length make the game too frenetic
-
-
-## Action UI
-
-Luke's actions are not very clear and Luke's behavior is hard to predict since the game is frenetic.
-
-
-## Player Platforms too neat Luke
-
-Luke can get stucked in platforms
-
-
-# TO DO
-
-## WebGL Tutorial => Andrea Taroni
-## Loading screen rework artwork => Carlo Ambrogi
-## Win or Lose UI artwork rework => Carlo Ambrogi
-## Level Selection UI => Carlo Ambrogi
-## Action UI rework => Carlo Ambrogi
-## Fix platform not moving with standing cursor => Luca Finoia
-## Preview UI  => Luca Finoia
-## Moving platforms  => Luca Finoia
-## Level 7 not stop action at start => Andrea Passini
-## Audio in menus => Andrea Passini
-## SFX Button Menus => Carlo Ambrogi
-## Level 8 => Andrea Taroni
-## Level 9  => Luca Finoia
-## Level 10 => Andrea Passini
-
-
-
-
-
---------------------------
-Polishing
-## Action Trigger Visual Effect
-## Placing Platform Visual Effect
-## Slow-mo Visual Effect
-## End Level Transition
-## Death Visual Effect
-
-
---------------------------
-
-## Update Intro with new Sprites => Andrea Passini
-
-## Background => Andrea Passini
-Remove background and leave a skybox white-gray, as the intro
-
-## Player Platforms sorting layer
-Player Platforms should be rendered on top of the environmental platforms
-
-## Animate enemies
-## Add Package Feel
-
-
-## Create level 7
-## Create level 8
-## Create level 9
-## Create level 10
-
-
-
-# Deadlines
-
-![Scadenze](https://user-images.githubusercontent.com/71270277/198230350-f5aa6e99-eb36-4697-acf2-6da03e2db9c1.png)
-
-
 # Game Design Document - Don't Let Luke Fall
 
 ## Concept
@@ -174,25 +51,35 @@ Player Platforms should be rendered on top of the environmental platforms
 
 ### Andrea Passini
 - Game Design Document
-- Levels ( 1 to 5 )
+- Levels ( 1 to 5, 10)
 - Itch.io Page (https://polimi-game-collective.itch.io/dont-let-luke-fall)
 - Animating Enemies
 - Platforms sprites
 - Background Sprites
 - Environment Sprites
+- Action UI
+- Slow-motion logic
+- Game Feel and Juice
 
 ### Luca Taroni
 - Action Logic
 - Character Controller
 - Level Manager
+- Animating Enemies
+- Slow-motion logic
+- Menu UI
+- Level 8
 
 ### Luca Finoia
 - Platform Logic
 - Platform UI
 - Camera
+- Action UI
+- Level 7, 9
 
 ### Carlo Ambrogi
 - Action UI
+- Menu UI
 - Sound Integration
 - Starting Menu
 - Game Manager
@@ -221,8 +108,8 @@ Don't Let Luke Fall, place platforms in the right position and help him escape t
 ## Gameplay Synopsis
 Don't Let Luke Fall is a 2D Platformer game within a dark environment and a tense mood.
 Luke has been trapped, by the Darkness, into one of his own nightmares, the only way for him to wake up is to reach the end of the level where a light will awake him.
-You will be able to forsee the next 3 moves of Luke, each will last for 5 seconds. Based on this information place one of the 3 platforms at your disposal in the right position.
-After being positioned a new platform will appear in the slot with a slight dealy.
+You will be able to foresee the next 5 moves of Luke, each will last for 5 seconds. Based on this information place one of the 3 platforms at your disposal in the right position.
+After being positioned a new platform will appear in the slot with a slight delay.
 <br>
 # Gameplay
 
@@ -233,7 +120,7 @@ His goal is to reach the end of the level, where a bright light will awake him.
 
 You will be able to place platforms in real time, preventing Luke to fall and allowing him to reach the end of the level.
 
-You will be able to foresee the next 3 actions that Luke will perform.
+You will be able to foresee the next 5 actions that Luke will perform.
 <br>
 ## Resources
 
@@ -245,7 +132,10 @@ You will be able to foresee the next 3 actions that Luke will perform.
 Luke's Actions:
 - **Instantaneous**
 	- Jump
-	-  Walk Left
+	- Dash
+
+- **Continuous**
+	- Walk Left
 	- Walk Right
 
 - **Time-Limited**
@@ -255,6 +145,11 @@ Luke's Actions:
 	- Crouch
 
 ### Player Platforms
+
+Maximum surface for a platform is 3 x 3 (Unity unit)
+
+All the inclined plane will be substituted with a 1x1 block. The movement script allow the player to overcome small cubes (1x1) producing a better and more consistent behaviour.
+
 - #### *Main Platforms*
 	![[Platforms.png]]
 	- Short Horizontal Platform
@@ -282,7 +177,7 @@ Luke's Actions:
 	
 	4. **Shortcut** (De-Sync with "no-time related actions") 
 		The **platform action** will start when Luke is touching the special platform.
-		Platform Actions will only be **instantaneus actions** (**impulse actions**) or **Continuous Actions**,
+		Platform Actions will only be **instantaneous actions** (**impulse actions**) or **Continuous Actions**,
 		to avoid any synch-desynch misconceptions.
 	
 	**Where it will be shown on the UI**
@@ -291,12 +186,22 @@ Luke's Actions:
 	Vertical actions do not affect horizontal actions
 	Horizontal actions do not affect vertical actions
 
+Platform used in the game:
+
+![[LongMidPlat.png]]
+![[LongPlat.png]]
+![[Lplat.png]]
+![[RampPlat.png]]
+![[ShortPlat.png]]
+![[TPlat.png]]
+![[Wall.png]]
+
 
 ### **Environmental Platforms**
 - Horizontal Platforms
 - Ramps
 - Walls
-- Destroyable Platfroms 
+- Destroyable Platforms 
 
 ### **Harmful Obstacles**
 - Dark Flood
@@ -316,6 +221,9 @@ Luke's Actions:
 
 <br>
 ## Core Mechanics
+
+
+
 ### Platform Positioning
 
 The player will be able to drag a platform from the UI and drop it inside the game in real time.
@@ -333,7 +241,7 @@ While moving:
 
 ##### **Character**
 
-Player will not be able to place platform over the character outline. In case the player will drop a platform on the siluette of the character this platform will endup at the feet of Luke.
+Player will not be able to place platform over the character outline. In case the player will drop a platform on the silhouette of the character this platform will end-up at the feet of Luke.
 
 
 ![OverlappingCharacter](https://user-images.githubusercontent.com/71270277/195995184-d583f2f0-a416-4294-8b86-85a1d1355461.png)
@@ -364,12 +272,19 @@ Player will be able to place a platform over one or more Environmental Platform
 
 #### Platform Combination
 
-When the player will drop a platform (**trigger**) over a platform (or multiple platforms) he previously placed (**base**), the platforms will combine toghter resulting in a platfrom characterized by:
+When the player will drop a platform (**trigger**) over a platform (or multiple platforms) he previously placed (**base**), the platforms will combine together resulting in a platform characterized by:
  - **Outline** = **merge** of the outline of **trigger** and **base** 
- -  **Color** = **trigger** 
+ - **Color** = **trigger** 
  - **Effect** = **trigger**
 
 ![PlatfromCombination](https://user-images.githubusercontent.com/71270277/195996132-1011af5f-effb-4ee1-84ba-ca5c7c9e15a9.png)
+
+
+#### Slow-Motion
+While moving a platform time will slow allowing the player to place platform in an easier way.
+- The slow-motion effect will start when a platform is selected from the platform UI.
+- The slow-motion duration will be of 2 seconds
+Its goal is to make the game easier for the player but also to encourage a more dynamic playstyle, making placing platform while the player is in the middle of an action the best way to play the game and discouraging the player to have a more static and planned way of playing.
 
 
 ### Actions
@@ -438,13 +353,13 @@ Actions can also be divided into 2 groups, based on with axis they affect:
 	
 	##### **Cayote Time**
 	
-	Luke will execute jump even if he left the platfrom where he was standing few istants before.
+	Luke will execute jump even if he left the platform where he was standing few instants before.
 	
 	![JumpFunctionExt](https://user-images.githubusercontent.com/71270277/196027739-b21b2288-e77e-4c1f-9c37-4dddb9490cf8.png)
 	
 	##### **Jump Buffer**
 	
-	When the jump action start and Luke is still in the air, if the charter land on a platfrom few istants after the action start Luke will execute a jump anyway.
+	When the jump action start and Luke is still in the air, if the charter land on a platform few instants after the action start Luke will execute a jump anyway.
 	
 	##### **Edge Detection**
 	
@@ -468,10 +383,6 @@ Actions can also be divided into 2 groups, based on with axis they affect:
 	This will allow Luke to pass through narrow passages/holes
 	
 	When **Crouch** effect **ends** and Luke is still in a **narrow passage/hole**, Luke will keep being crouch until the end of the **passage/hole**, other actions will fire but if they are vertical, they will not affect Luke's behavior
-	
-	When **Crouch** is **active** and a **Jump action** is fired, Luke will:
-	- Crouch-Jumping?
-	- Standing and then Jumping?
 
 - #### Stop
 	**Time-Limited**
@@ -479,8 +390,8 @@ Actions can also be divided into 2 groups, based on with axis they affect:
 
 #### Obstacle Avoidance
 
-What height will Luke be able to overcome? = 1 vertical unit
-What lenght will Luke be able to overpass? = 1 horizontal unit
+What height will Luke be able to overcome = 1 vertical unit
+What length will Luke be able to overpass = 1 horizontal unit
 
 ### Luke's Actions
 
@@ -490,8 +401,6 @@ They represent the fixed future behavior of Luke.
 ### Platform Actions
 
 Platform actions are Actions that will trigger when Luke will pass over a special platform.
-
-**How Luke's Actions and Platform Actions will affect each other?**
 
 ### Platform Spawn
 
@@ -504,7 +413,7 @@ Every action will last for 5 seconds, then the next action in line will be trigg
 
 ### Time Flow
 
-In-Game time will slowd down, in respect to real-time, in 2 circumstances:
+In-Game time will slow down, in respect to real-time, in 2 circumstances:
 - Action Ending
 - Action Starting
 
@@ -513,12 +422,10 @@ In-Game time will slowd down, in respect to real-time, in 2 circumstances:
 
 
 
-
-
 <br>
 ## Camera
 
-Draggin PLatfrom will stop camera movement
+Dragging Platform will stop camera movement
 
 #### Run Right
 
@@ -527,12 +434,6 @@ Draggin PLatfrom will stop camera movement
 #### Run Left
 
 ![CameraRunLeft](https://user-images.githubusercontent.com/71270277/196243602-c5c9e492-7523-43ad-9561-a2fe7302313e.png)
-
-#### Jump
-#### Landing
-
-Shake
-
 
 <br>
 <br>
@@ -567,8 +468,22 @@ https://opengameart.org/
 
 # Interfaces
 
-
 ![UI](https://user-images.githubusercontent.com/71270277/196240380-787152ab-e3e2-49a6-a55f-5653f49a73dd.png)
+
+## Action UI
+
+The UI will present 5 actions: 
+ - It needs to be clear which is the action that is being played
+	 - the UI of the action that is being played needs to show how much time is left for that action to end
+ - the UI needs to give the feel of time passing at well defined interval
+	 - moving actions
+	 - animating actions UI
+
+## Platform UI
+
+The UI will present 3 platforms:
+- It needs to be clear which platform I am moving and placing
+- It needs to be clear when a new platform is spawning
 
 ![StartingMenu](https://user-images.githubusercontent.com/71270277/198277355-21028ab3-23ed-458d-8722-682783c6031b.png)
 ![Options](https://user-images.githubusercontent.com/71270277/198280012-097387dc-49cc-402c-aa96-9cfd48913a1c.png)
@@ -725,3 +640,55 @@ Mass of multiple bodies, they can be both humans or monsters
 #### Luke Death
 
 ### Environmental Effects
+
+
+# Prototype Feedbacks
+
+## Full Screen in Browser
+
+Someone wasn't able to play it in full screen while staying the browser
+
+## Random Platforms
+
+Having completely random platforms make the game unreliable
+
+## Tutorial
+
+Add a tutorial in game and also in settings some information about controls and how to play
+
+## Level Overview
+
+Having a Level Overview may help player to prepare a fast strategy for solving the level.
+
+
+## Level Slow Start
+
+A delay at the start of the level may help the player getting ready for the action.
+
+
+## Camera and Platform Positioning
+
+The fact that the camera is following Luke, do not make placing platform easy and intuitive
+
+Camera too zoomed-in
+
+## Luke Speed and platform length
+
+Luke speed and platform length make the game too frenetic
+
+
+## Action UI
+
+Luke's actions are not very clear and Luke's behavior is hard to predict since the game is frenetic.
+
+
+## Player Platforms too neat Luke
+
+Luke can get stuck in platforms
+
+
+
+
+# Deadlines
+
+![Scadenze](https://user-images.githubusercontent.com/71270277/198230350-f5aa6e99-eb36-4697-acf2-6da03e2db9c1.png)
