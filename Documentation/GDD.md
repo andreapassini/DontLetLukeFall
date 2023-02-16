@@ -1,105 +1,3 @@
-
-# Prototype Feedbacks
-
-## Full Screen in Browser
-
-Someone wasn't able to play it in full screen while staying the browser
-
-## Random Platforms
-
-Having completely random platforms make the game unreliable
-
-## Tutorial
-
-Add a tutorial in game and also in settings some information about controls and how to play
-
-## Level Overview
-
-Having a Level Overview may help player to prepare a fast strategy for solving the level.
-
-
-## Level Slow Start
-
-A delay at the start of the level may help the player getting ready for the action.
-
-
-## Camera and Platform Positioning
-
-The fact that the camera is following Luke, do not make placing platform easy and intuitive
-
-Camera too zoomed-in 
-
-## Luke Speed and platform length
-
-Luke speed and platform length make the game too frenetic
-
-
-## Action UI
-
-Luke's actions are not very clear and Luke's behavior is hard to predict since the game is frenetic.
-
-
-## Player Platforms too neat Luke
-
-Luke can get stucked in platforms
-
-
-# TO DO
-
-## WebGL Tutorial => Andrea Taroni
-## Loading screen rework artwork => Carlo Ambrogi
-## Win or Lose UI artwork rework => Carlo Ambrogi
-## Level Selection UI => Carlo Ambrogi
-## Action UI rework => Carlo Ambrogi
-## Fix platform not moving with standing cursor => Luca Finoia
-## Preview UI  => Luca Finoia
-## Moving platforms  => Luca Finoia
-## Level 7 not stop action at start => Andrea Passini
-## Audio in menus => Andrea Passini
-## SFX Button Menus => Carlo Ambrogi
-## Level 8 => Andrea Taroni
-## Level 9  => Luca Finoia
-## Level 10 => Andrea Passini
-
-
-
-
-
---------------------------
-Polishing
-## Action Trigger Visual Effect
-## Placing Platform Visual Effect
-## Slow-mo Visual Effect
-## End Level Transition
-## Death Visual Effect
-
-
---------------------------
-
-## Update Intro with new Sprites => Andrea Passini
-
-## Background => Andrea Passini
-Remove background and leave a skybox white-gray, as the intro
-
-## Player Platforms sorting layer
-Player Platforms should be rendered on top of the environmental platforms
-
-## Animate enemies
-## Add Package Feel
-
-
-## Create level 7
-## Create level 8
-## Create level 9
-## Create level 10
-
-
-
-# Deadlines
-
-![Scadenze](https://user-images.githubusercontent.com/71270277/198230350-f5aa6e99-eb36-4697-acf2-6da03e2db9c1.png)
-
-
 # Game Design Document - Don't Let Luke Fall
 
 ## Concept
@@ -742,3 +640,55 @@ Mass of multiple bodies, they can be both humans or monsters
 #### Luke Death
 
 ### Environmental Effects
+
+
+# Prototype Feedbacks
+
+## Full Screen in Browser
+
+Someone wasn't able to play it in full screen while staying the browser
+
+## Random Platforms
+
+Having completely random platforms make the game unreliable
+
+## Tutorial
+
+Add a tutorial in game and also in settings some information about controls and how to play
+
+## Level Overview
+
+Having a Level Overview may help player to prepare a fast strategy for solving the level.
+
+
+## Level Slow Start
+
+A delay at the start of the level may help the player getting ready for the action.
+
+
+## Camera and Platform Positioning
+
+The fact that the camera is following Luke, do not make placing platform easy and intuitive
+
+Camera too zoomed-in
+
+## Luke Speed and platform length
+
+Luke speed and platform length make the game too frenetic
+
+
+## Action UI
+
+Luke's actions are not very clear and Luke's behavior is hard to predict since the game is frenetic.
+
+
+## Player Platforms too neat Luke
+
+Luke can get stuck in platforms
+
+
+
+
+# Deadlines
+
+![Scadenze](https://user-images.githubusercontent.com/71270277/198230350-f5aa6e99-eb36-4697-acf2-6da03e2db9c1.png)
