@@ -62,7 +62,22 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Menu/SplashScreen.unity
     guid: 26799962984f1e0409477a01894d54df
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Tests/PassiniScene.unity
     guid: bd2f347c6b039414fa74ec99e7fdca8d
+  - enabled: 0
+    path: Assets/Scenes/Tests/LevelTrailer.unity
+    guid: e41b7b385fa6a124ab4c2b0f30786a72
+  - enabled: 0
+    path: Assets/Scenes/Tests/Level4_Trailer.unity
+    guid: 75472ddf28fc25946bbf79ab0baa355b
+  - enabled: 0
+    path: Assets/Scenes/Tests/Level5_Trailer.unity
+    guid: 5a996cb8696c64f44980528fac7b1cfe
+  - enabled: 0
+    path: Assets/Scenes/Tests/Level7_Trailer.unity
+    guid: 936eae0b4bdee6b4ca5d40eeb3c014a4
+  - enabled: 1
+    path: Assets/Scenes/Tests/Level8_Trailer.unity
+    guid: 029e94095b1b2b84aa5307d315698f05
   m_configObjects: {}
