@@ -29,6 +29,9 @@ public class GameManager : MonoBehaviour
     public static event Action<GameState> OnGameStateChanged;
 
     private AudioManager _audioManager;
+    
+    public delegate void OnLevelStart(String levelName);
+    public static event OnLevelStart onLevelStart;
 
     private void Awake()
     {
@@ -194,6 +197,7 @@ public class GameManager : MonoBehaviour
         {
             int levelToPlayNameScene = _levelToPlay - 1;
             GameManager.Instance.LoadScene("Level" + levelToPlayNameScene);
+            onLevelStart?.Invoke("Level" + levelToPlayNameScene);
         }
         TextFileManager.AddWitchLevelYouStartPlaying();
 

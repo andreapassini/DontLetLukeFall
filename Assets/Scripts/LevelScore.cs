@@ -21,6 +21,7 @@ namespace DLLF
         {
             // Load from PlayerPref
             EventManager.StartListening(LevelManager.OnLevelCompletedEventName, CalculateScore);
+            GameManager.onLevelStart += StartLevel;
         }
 
         public static LevelScore GetInstance()
@@ -33,15 +34,17 @@ namespace DLLF
             return instance;
         }
 
-        public void ResetScore()
+        private void ResetScore()
         {
             _levelDuration = 0.0f;
             _usedPlatforms = 0;
         }
 
-        public void StartLevel()
+        private void StartLevel(String lvlName)
         {
+            ResetScore();
             _startingTime = Time.time;
+            this.levelName = lvlName;
         }
 
         public void EndLevel()
