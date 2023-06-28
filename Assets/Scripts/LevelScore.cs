@@ -22,6 +22,8 @@ namespace DLLF
             // Load from PlayerPref
             EventManager.StartListening(LevelManager.OnLevelCompletedEventName, CalculateScore);
             GameManager.onLevelStart += StartLevel;
+
+            _scores = new Dictionary<string, float>();
         }
 
         public static LevelScore GetInstance()
@@ -69,12 +71,16 @@ namespace DLLF
                     _scores[levelName] = currentScore;
                     
                     // Store to PlayerPref
-                    
+                    PlayerPrefs.SetFloat(levelName, currentScore);
+                    PlayerPrefs.Save();
                 }
             }
             else
             {
                 _scores.Add(levelName, currentScore);
+                // Store to PlayerPref
+                PlayerPrefs.SetFloat(levelName, currentScore);
+                PlayerPrefs.Save();
             }
         }
 
@@ -84,6 +90,13 @@ namespace DLLF
             if (_scores.TryGetValue(levelName, out previousScore))
             {
                 return previousScore;
+            }
+            
+            if(PlayerPrefs.HasKey(levelName))
+            {
+                float savedScore = PlayerPrefs.GetFloat(levelName);
+                _scores.Add(levelName, savedScore);
+                return savedScore;
             }
 
             return float.MaxValue;

@@ -3372,6 +3372,7 @@ GameObject:
   - component: {fileID: 1401404707}
   - component: {fileID: 1401404706}
   - component: {fileID: 1401404709}
+  - component: {fileID: 1401404710}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -3470,6 +3471,18 @@ MonoBehaviour:
   _loaderCanvas: {fileID: 560098719}
   _progressBar: {fileID: 560098718}
   _scriptForTransitionsBetweenMenuScenes: {fileID: 215747660}
+--- !u!114 &1401404710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401404705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 946aab15242e5ba4a9d885e436fbfa55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1405891033
 PrefabInstance:
   m_ObjectHideFlags: 0
