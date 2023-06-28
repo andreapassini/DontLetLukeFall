@@ -25,6 +25,7 @@ namespace DLLF
             spawnTime = Time.time;
             
             // Counter++
+            LevelScore.GetInstance().IncrementUsedPlatforms();
         }
 
         private void OnTriggerEnter2D(Collider2D col)

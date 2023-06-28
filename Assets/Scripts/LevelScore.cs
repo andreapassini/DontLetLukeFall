@@ -12,22 +12,28 @@ namespace DLLF
         private float _levelDuration;
         private int _usedPlatforms;
         public float PlatfromWeight = 1.0f;
+        
+        public int lastScore;
+        private bool _newBestScore = false;
+        
         private float _startingTime;
         private String levelName;
 
-        private Dictionary<String, float> _scores;
+        private Dictionary<String, int> _scores;
         
         private LevelScore()
         {
             // Load from PlayerPref
-            EventManager.StartListening(LevelManager.OnLevelCompletedEventName, CalculateScore);
+            GameManager.onLevelComplete += CalculateScore;
             GameManager.onLevelStart += StartLevel;
 
-            _scores = new Dictionary<string, float>();
+            _scores = new Dictionary<string, int>();
         }
 
         public static LevelScore GetInstance()
         {
+            PlayerPrefs.DeleteAll();
+            
             if (instance == null)
             {
                 instance = new LevelScore();
@@ -38,6 +44,7 @@ namespace DLLF
 
         private void ResetScore()
         {
+            _newBestScore = false;
             _levelDuration = 0.0f;
             _usedPlatforms = 0;
         }
@@ -62,31 +69,37 @@ namespace DLLF
         // Called by endLevel event
         private void CalculateScore()
         {
-            float previousScore;
+            EndLevel();
             float currentScore = _levelDuration + PlatfromWeight * (_usedPlatforms);
+            lastScore = (int)currentScore;
+            
+            int previousScore;
             if (_scores.TryGetValue(levelName, out previousScore))
             {
                 if (currentScore < previousScore)
                 {
-                    _scores[levelName] = currentScore;
+                    _scores[levelName] = (int)currentScore;
+                    _newBestScore = true;
                     
                     // Store to PlayerPref
-                    PlayerPrefs.SetFloat(levelName, currentScore);
+                    PlayerPrefs.SetInt(levelName, (int)currentScore);
                     PlayerPrefs.Save();
                 }
             }
             else
             {
-                _scores.Add(levelName, currentScore);
+                _scores.Add(levelName, (int)currentScore);
+                _newBestScore = true;
+
                 // Store to PlayerPref
-                PlayerPrefs.SetFloat(levelName, currentScore);
+                PlayerPrefs.SetInt(levelName, (int)currentScore);
                 PlayerPrefs.Save();
             }
         }
 
         public float GetScore(String levelName)
         {
-            float previousScore;
+            int previousScore;
             if (_scores.TryGetValue(levelName, out previousScore))
             {
                 return previousScore;
@@ -94,12 +107,22 @@ namespace DLLF
             
             if(PlayerPrefs.HasKey(levelName))
             {
-                float savedScore = PlayerPrefs.GetFloat(levelName);
+                int savedScore = PlayerPrefs.GetInt(levelName);
                 _scores.Add(levelName, savedScore);
                 return savedScore;
             }
 
             return float.MaxValue;
+        }
+
+        public float GetLastScore()
+        {
+            return lastScore;
+        }
+
+        public bool GetLastBestScore()
+        {
+            return _newBestScore;
         }
     }
 }

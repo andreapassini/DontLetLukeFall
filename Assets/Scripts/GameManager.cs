@@ -32,6 +32,10 @@ public class GameManager : MonoBehaviour
     
     public delegate void OnLevelStart(String levelName);
     public static event OnLevelStart onLevelStart;
+    
+    public delegate void OnLevelComplete();
+    public static event OnLevelComplete onLevelComplete;
+
 
     private void Awake()
     {
@@ -222,6 +226,9 @@ public class GameManager : MonoBehaviour
 
     private void HandleWin() // Show the screen you won
     {
+        int levelToPlayNameScene = _levelToPlay - 1;
+        onLevelComplete?.Invoke();
+        
         LoadYouLoseWonScene();
         TextFileManager.AddThatYouWonALevel();
         AudioManager.instance.StopAllAudioSources();
