@@ -23,6 +23,9 @@ namespace DLLF
         {
             _actionsManager = FindObjectOfType<ActionsManager>();
             spawnTime = Time.time;
+            
+            // Counter++
+            LevelScore.GetInstance().IncrementUsedPlatforms();
         }
 
         private void OnTriggerEnter2D(Collider2D col)

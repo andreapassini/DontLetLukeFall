@@ -65,6 +65,7 @@ namespace DLLF
                 Debug.Log("You've missed to connect the panel for the ending level transition");
                 GameManager.Instance.UpdateGameState(GameState.Win);
             }
+            
             _levelActionsManager.animationWon(); // play an animation that Luke has won
             StartCoroutine(GoToShowYouVeWon());
         }
